@@ -4,7 +4,6 @@
 __pycache__/
 *.py[cod]
 .pytest_cache/
-.ruff_cache/
 *.egg-info/
 .venv/
 venv/
@@ -16,4 +15,3 @@ logs/*
 !data/processed/.gitkeep
 !data/manifests/.gitkeep
 !logs/.gitkeep
-

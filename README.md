@@ -11,7 +11,7 @@ pip install -e '.[dev]'
 cp .env.example .env
 ```
 
-Put the private key in `.env` as `IMPORTYETI_API_KEY`. Never commit `.env`. The API key is sent only in the `IYApiKey` request header and is never logged.
+Put the private key in `.env` as `IMPORTYETI_API_KEY`. The API key is sent only in the `IYApiKey` request header and is never logged.
 
 ## Run
 
@@ -39,7 +39,6 @@ The CLI uses the documented `GET /v1.0/powerquery/us-import/bols` route, `compan
 
 ```bash
 pytest
-ruff check .
 ```
 
 Tests must use mocked API responses and never spend live credits.
@@ -47,4 +46,3 @@ Tests must use mocked API responses and never spend live credits.
 ## Coverage and limitations
 
 An extraction represents only records returned by the exact ImportYeti queries recorded in its manifest. It must not be described as Dyson's entire global supply chain. ImportYeti documents US and Mexico datasets, but this foundation intentionally targets the US-import BOL endpoint. The API publishes no fixed request-rate limit; transient 429/5xx responses are retried with bounded exponential backoff. API credit availability and search/account restrictions remain external prerequisites.
-

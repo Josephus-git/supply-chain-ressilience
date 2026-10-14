@@ -28,24 +28,4 @@ class Settings:
             raise ConfigurationError(
                 "IMPORTYETI_API_KEY is required. Set it in a local .env file."
             )
-
-        def positive(name: str, default: str, cast):
-            try:
-                value = cast(os.getenv(name, default))
-            except ValueError as exc:
-                raise ConfigurationError(f"{name} must be numeric") from exc
-            if value <= 0:
-                raise ConfigurationError(f"{name} must be positive")
-            return value
-
-        return cls(
-            api_key=api_key,
-            base_url=os.getenv("IMPORTYETI_BASE_URL", cls.base_url).rstrip("/"),
-            page_size=positive("IMPORTYETI_PAGE_SIZE", "100", int),
-            max_retries=positive("IMPORTYETI_MAX_RETRIES", "4", int),
-            timeout_seconds=positive("IMPORTYETI_TIMEOUT_SECONDS", "30", float),
-            retry_base_seconds=positive(
-                "IMPORTYETI_RETRY_BASE_SECONDS", "1", float
-            ),
-        )
-
+        return cls(api_key=api_key)

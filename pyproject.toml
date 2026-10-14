@@ -10,7 +10,7 @@ requires-python = ">=3.10"
 dependencies = ["python-dotenv>=1.0", "requests>=2.31"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0", "ruff>=0.6"]
+dev = ["pytest>=8.0"]
 
 [project.scripts]
 dyson-extract = "dyson_supply_chain.cli:main"
@@ -21,8 +21,3 @@ where = ["src"]
 [tool.pytest.ini_options]
 pythonpath = ["src"]
 testpaths = ["tests"]
-
-[tool.ruff]
-line-length = 88
-target-version = "py310"
-
