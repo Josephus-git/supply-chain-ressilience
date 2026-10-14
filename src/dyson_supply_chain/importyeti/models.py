@@ -11,7 +11,7 @@ class ResponseFormatError(ValueError):
 @dataclass(frozen=True)
 class BOLPage:
     records: list[dict[str, Any]]
-    total_count: int
+    total_count: int | None
     raw: dict[str, Any]
     request_cost: float | int | None = None
     credits_remaining: float | int | None = None
@@ -19,12 +19,17 @@ class BOLPage:
     @classmethod
     def from_response(cls, payload: dict[str, Any]) -> "BOLPage":
         data = payload.get("data")
-        if not isinstance(data, dict) or not isinstance(data.get("data"), list):
-            raise ResponseFormatError("Expected PowerQuery data.data to be a list")
-        total = data.get("totalCount")
-        if not isinstance(total, int) or total < 0:
-            raise ResponseFormatError("Expected non-negative integer data.totalCount")
-        records = [row for row in data["data"] if isinstance(row, dict)]
+        if isinstance(data, list):
+            rows = data
+            total = payload.get("totalCount")
+        elif isinstance(data, dict) and isinstance(data.get("data"), list):
+            rows = data["data"]
+            total = data.get("totalCount")
+        else:
+            raise ResponseFormatError("Expected data to be a list or an object containing a data list")
+        if total is not None and (not isinstance(total, int) or total < 0):
+            raise ResponseFormatError("Expected totalCount to be a non-negative integer when present")
+        records = [row for row in rows if isinstance(row, dict)]
         return cls(records, total, payload, payload.get("requestCost"), payload.get("creditsRemaining"))
 
 
@@ -46,4 +51,3 @@ class ExtractionStats:
     deduplicated: int = 0
     pages: int = 0
     errors: list[str] = field(default_factory=list)
-

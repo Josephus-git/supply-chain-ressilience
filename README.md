@@ -24,16 +24,16 @@ dyson-extract --dry-run
 Run a small sample first:
 
 ```bash
-dyson-extract --max-pages 1 --product-description 'Dyson'
+dyson-extract --max-pages 1
 ```
 
 Run the configured extraction:
 
 ```bash
-dyson-extract --company 'Dyson'
+dyson-extract --company-slug dyson
 ```
 
-The CLI uses the documented `GET /v1.0/powerquery/us-import/bols` route, `company` and optional `product_description`/date filters, and offset pagination. Raw response envelopes are written to `data/raw`, normalized rows to `data/processed`, manifests to `data/manifests`, and logs to `logs`. These outputs are ignored by Git.
+The CLI uses `GET /v1.0/company/{company}/bols`, where `company` is an ImportYeti URL slug, not a display or legal name. It defaults to the Dyson profile slug `dyson`; override it with `--company-slug` when needed. The endpoint's `page_size`/`offset` pagination is followed until the final page, and optional `--start-date`/`--end-date` filters use `mm/dd/yyyy`. Raw response envelopes are written to `data/raw`, normalized rows to `data/processed`, manifests to `data/manifests`, and logs to `logs`. These outputs are ignored by Git.
 
 ## Tests
 

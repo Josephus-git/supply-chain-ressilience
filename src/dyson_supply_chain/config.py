@@ -15,7 +15,7 @@ class ConfigurationError(ValueError):
 class Settings:
     api_key: str
     base_url: str = "https://data.importyeti.com"
-    page_size: int = 100
+    page_size: int = 50
     max_retries: int = 4
     timeout_seconds: float = 30.0
     retry_base_seconds: float = 1.0

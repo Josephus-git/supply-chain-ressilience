@@ -3,6 +3,7 @@
 import logging
 import time
 from typing import Any
+from urllib.parse import quote
 
 import requests
 
@@ -16,7 +17,7 @@ class ImportYetiError(RuntimeError):
 
 
 class ImportYetiClient:
-    endpoint = "/v1.0/powerquery/us-import/bols"
+    endpoint = "/v1.0/company/{company}/bols"
 
     def __init__(self, settings: Settings, session: requests.Session | None = None):
         self.settings = settings
@@ -24,8 +25,14 @@ class ImportYetiClient:
 
     def search_bols(self, params: dict[str, Any]) -> dict[str, Any]:
         request_params = dict(params)
+        company_slug = request_params.pop("company_slug", None)
+        if not isinstance(company_slug, str) or not company_slug.strip():
+            raise ImportYetiError("A company URL slug is required")
         headers = {"IYApiKey": self.settings.api_key, "Accept": "application/json"}
-        url = f"{self.settings.base_url}{self.endpoint}"
+        url = (
+            f"{self.settings.base_url}/v1.0/company/"
+            f"{quote(company_slug.strip(), safe='-_')}/bols"
+        )
         for attempt in range(self.settings.max_retries + 1):
             try:
                 response = self.session.get(
@@ -61,4 +68,3 @@ class ImportYetiClient:
         delay = self.settings.retry_base_seconds * (2**attempt)
         LOGGER.warning("Retrying ImportYeti request after %s in %.1fs", reason, delay)
         time.sleep(delay)
-

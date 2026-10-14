@@ -17,7 +17,11 @@ def iter_pages(
         params = {**filters, "page_size": page_size, "offset": offset}
         page = BOLPage.from_response(fetch(params))
         yield offset, page
-        if offset + len(page.records) >= page.total_count or not page.records:
+        if not page.records:
+            break
+        if page.total_count is not None:
+            if offset + len(page.records) >= page.total_count:
+                break
+        elif len(page.records) < page_size:
             break
         offset += len(page.records)
-

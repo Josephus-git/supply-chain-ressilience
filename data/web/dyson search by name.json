@@ -1,0 +1,22 @@
+{
+  "requestCost": 0,
+  "creditsRemaining": 95,
+  "data": [
+    {
+      "title": "Dyson",
+      "countryCode": "US",
+      "type": "company",
+      "address": "Chicago, Il 60607, Us",
+      "totalShipments": 13985,
+      "mostRecentShipment": "05/10/2026",
+      "topSuppliers": [
+        "Kinpo Electronics Philippines",
+        "Syarikat Sin Kwang Plastic Industri",
+        "Flextronics Shah Alam",
+        "Meiban Technologies Malaysia Sdn"
+      ],
+      "key": "company/dyson"
+    }
+  ],
+  "executionTime": "12ms"
+}

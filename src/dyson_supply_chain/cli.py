@@ -11,9 +11,11 @@ from .logging_config import configure_logging
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Extract documented ImportYeti US-import BOL records")
-    parser.add_argument("--company", default="Dyson", help="Documented company filter value")
-    parser.add_argument("--product-description", help="Optional documented product_description filter")
+    parser = argparse.ArgumentParser(description="Extract ImportYeti US-import BOL records for a company")
+    parser.add_argument(
+        "--company-slug", "--company", dest="company_slug", default="dyson",
+        help="ImportYeti company URL slug (not a display or legal name)",
+    )
     parser.add_argument("--start-date", help="mm/dd/yyyy")
     parser.add_argument("--end-date", help="mm/dd/yyyy")
     parser.add_argument("--max-pages", type=int, help="Bounded sample mode")
@@ -21,9 +23,7 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="Validate configuration and print filters")
     args = parser.parse_args()
     settings = Settings.from_env()
-    filters = {"company": args.company}
-    if args.product_description:
-        filters["product_description"] = args.product_description
+    filters = {"company_slug": args.company_slug}
     if args.start_date:
         filters["start_date"] = args.start_date
     if args.end_date:
@@ -40,4 +40,3 @@ def main() -> int:
     )
     print(f"{manifest['status']}: {manifest['stats']}")
     return 0
-

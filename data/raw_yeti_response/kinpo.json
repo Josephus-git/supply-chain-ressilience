@@ -1,0 +1,153 @@
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 94.6,
+  "data": {
+    "data": [
+      {
+        "bol_number": "DMALMNLA37331",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "CMDUGHC0343936",
+        "has_master_data": false,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "09/23/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/02/2015",
+        "entry_port_geocode": {
+          "lat": 33.7315,
+          "lon": -118.265
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 60607 Us",
+        "containers": [
+          {
+            "id": "TCNU2826126",
+            "size": "4000*900*800",
+            "type": "45G0",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "PP",
+            "description": "Hair Styler",
+            "mark": "Delivery To:??Expeditors??12000 N 132Nd Ave??Surprise??Az??85379-3316??Usa??P3??Usa??Pallet No:1- 42"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "PH"
+          },
+          "location": {
+            "lat": 12.879721,
+            "lon": 121.774017
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13972,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": false,
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Los Angeles, Ca",
+        "entry_port_code": "2704",
+        "supplier_name": "Kinpo Electronics Philippines Inc",
+        "supplier_basename": "Kinpo Electronics Philippines",
+        "supplier_address": "Lot 11 H Y Dimacali Avenue Fpip Ii-Sez Brgy Sta Anastacia City Of Sto Tomas Ph 63432338888",
+        "supplier_link": "/supplier/kinpo-electronics-philippines",
+        "supplier_country": "Philippines",
+        "supplier_country_code": "PH",
+        "supplier_address_country": "Philippines",
+        "supplier_address_country_code": "PH",
+        "supplier_total_shipments": 3563,
+        "supplier_main_phone_number": "+63432338888",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [],
+          "phone_numbers": [
+            "+63432338888"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/23/2026",
+        "marks_numbers": "Delivery Expeditors Ave Surprise Usa Usa Pallet",
+        "marks_numbers_raw": "Delivery To:??Expeditors??12000 N 132Nd Ave??Surprise??Az??85379-3316??Usa??P3??Usa??Pallet No:1- 42",
+        "supplier_website": null,
+        "exit_port": "Ning Bo",
+        "exit_port_code": "57020",
+        "hs_code": "851632",
+        "hs_code_description": "Other hairdressing apparatus",
+        "full_hs_code_description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Electric instantaneous or storage water heaters and immersion heaters; electric space heating apparatus and soil heating apparatus; electrothermic hairdressing apparatus (for example, hair dryers, hair curlers, curling tong heaters) and hand dryers; electric flatirons; other electrothermic appliances of a kind used for domestic purposes; electric heating resistors, other than those of heading 8545; parts thereof ; Electrothermic hairdressing or hand-drying apparatus ; Other hairdressing apparatus",
+        "product_description": "Hair Styler",
+        "product_description_raw": "Hair Styler",
+        "hts_codes": [],
+        "carrier_scac_code": "DMAL - Dhl Express",
+        "company_scac_codes_diversity": 1.74,
+        "company_scac_codes_diversity_normalized": 0.49,
+        "supplier_scac_codes_diversity": 2.22,
+        "supplier_scac_codes_diversity_normalized": 0.64,
+        "vessel_code": "9351139",
+        "vessel_country_code": "MT",
+        "vessel_name": "Cma Cgm Virginia",
+        "estimated_arrival_date": "20260921",
+        "teu": "2.12",
+        "quantity": "3024",
+        "quantity_unit": "CTN",
+        "weight": 12418,
+        "notify_party_name": "Livingston International Brokerage",
+        "notify_party_address": "150 E Pierce Rd Ste 500 Itasca Il 60143 Us 16306163036",
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": "US",
+        "notify_party_contact_info": {
+          "emails": [],
+          "phone_numbers": [
+            "+16306163036"
+          ]
+        },
+        "notify_party_contact_info_exists": true,
+        "container_types": [
+          {
+            "type": "45G0",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Openings at one end or both ends"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "exx00",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": "7680.76",
+        "shipping_rate": {
+          "route": "Asia,Pacific",
+          "ticker": "XSICFEUW",
+          "booking_date": "2026-08-24"
+        },
+        "place_of_receipt": "Manila",
+        "cif": "0",
+        "company_china_concentration": 22.44,
+        "company_shipments_12m": 3717,
+        "supplier_company_shipments_12m": 856,
+        "supplier_company_yoy": 280.44,
+        "supplier_company_shipments_12_24m": 225,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2252,
+        "company_teu_6m": 3892,
+        "company_teu_12m": 7097,
+        "supplier_teu_3m": 331,
+        "supplier_teu_6m": 744,
+        "supplier_teu_12m": 1765,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 1044
+  },
+  "executionTime": "54ms"
+}
