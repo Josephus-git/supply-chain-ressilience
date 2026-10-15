@@ -1,2 +1,0 @@
-"""ImportYeti API integration."""
-
