@@ -1,0 +1,4331 @@
+[
+    {
+  "requestCost": 0.1,
+  "creditsRemaining": 81.8,
+  "data": {
+    "data": [
+      {
+        "bol_number": null,
+        "bol_type": "R",
+        "inbond_type": null,
+        "master_bol_number": "MAEU274666502",
+        "has_master_data": false,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "09/27/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 33.7315,
+          "lon": -118.265
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 606542801 Us 18446791647 Us Logistics Dyson Com",
+        "containers": [
+          {
+            "id": "UETU8144644",
+            "size": "4000*900*800",
+            "type": "45G1",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "CY",
+            "description": "Of Fan Hs Code 841451 Pallet Free All Freightprepaid Including Destination Charges",
+            "mark": null
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "CN"
+          },
+          "location": {
+            "lat": 35.86166,
+            "lon": 104.195397
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13982,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": true,
+        "company_contact_info": {
+          "emails": [
+            "us.logistics@dyson.com"
+          ],
+          "phone_numbers": [
+            "18446791647"
+          ]
+        },
+        "company_contact_info_most_recent_found": "09/27/2026",
+        "company_website": "dyson.com",
+        "corporate_info_exists": true,
+        "entry_port": "Los Angeles, Ca",
+        "entry_port_code": "2704",
+        "supplier_name": "Vs Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 102246 Jalan Murni 12 Kawasan P Senai Na 81400 My 6075973399 Vs18Shipping Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "China",
+        "supplier_country_code": "CN",
+        "supplier_address_country": "China",
+        "supplier_address_country_code": "CN",
+        "supplier_total_shipments": 2990,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "vs18shipping@vs-i.com"
+          ],
+          "phone_numbers": [
+            "6075973399"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/27/2026",
+        "marks_numbers": "",
+        "marks_numbers_raw": "",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Ning Bo",
+        "exit_port_code": "57020",
+        "hs_code": "841451",
+        "hs_code_description": "Table, floor, wall, window, ceiling or roof fans, with a self-contained electric motor of an output not exceeding 125 W",
+        "full_hs_code_description": "Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Air or vacuum pumps, air or other gas compressors and fans; ventilating or recycling hoods incorporating a fan, whether or not fitted with filters; gas-tight biological safety cabinets, whether or not fitted with filters; parts thereof ; Fans ; Table, floor, wall, window, ceiling or roof fans, with a self-contained electric motor of an output not exceeding 125 W",
+        "product_description": "Fan Pallet Free All Freightprepaid Including Destination Charges",
+        "product_description_raw": "Of Fan Hs Code 841451 Pallet Free All Freightprepaid Including Destination Charges",
+        "hts_codes": [],
+        "carrier_scac_code": "MAEU - Maersk Line",
+        "company_scac_codes_diversity": 1.74,
+        "company_scac_codes_diversity_normalized": 0.49,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9349552",
+        "vessel_country_code": "US",
+        "vessel_name": "Missouri Express",
+        "estimated_arrival_date": "20260927",
+        "teu": "2.12",
+        "quantity": "910",
+        "quantity_unit": "CTN",
+        "weight": 2786,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "45G1",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Passive vents at upper part of cargo space"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "636e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": "7732.700000000001",
+        "shipping_rate": {
+          "route": "Asia,Pacific",
+          "ticker": "XSICFEUW",
+          "booking_date": "2026-08-28"
+        },
+        "place_of_receipt": "Johor Bahru",
+        "cif": "0",
+        "company_china_concentration": 22.55,
+        "company_shipments_12m": 3659,
+        "supplier_company_shipments_12m": 230,
+        "supplier_company_yoy": 784.62,
+        "supplier_company_shipments_12_24m": 26,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ssl",
+        "company_teu_3m": 1722,
+        "company_teu_6m": 3395,
+        "company_teu_12m": 6417,
+        "supplier_teu_3m": 256,
+        "supplier_teu_6m": 590,
+        "supplier_teu_12m": 1184,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "63ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 81.7,
+  "data": {
+    "data": [
+      {
+        "bol_number": "DSVFJHB0074795",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "HLCUKUL260784934",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "09/16/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 36.924,
+          "lon": -76.36736
+        },
+        "exit_port_geocode": {
+          "lat": 1.3855,
+          "lon": 103.541
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il Illinois Il 60607 Us",
+        "containers": [
+          {
+            "id": "BEAU4543913",
+            "size": "4000*900*800",
+            "type": "45G0",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "CY",
+            "description": "Of Hair Stylerhs Code: 8516.32.000021 Plastic Palletall Freight Prepaid Including Destination Charges",
+            "mark": "Nil"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "MY"
+          },
+          "location": {
+            "lat": 4.210484,
+            "lon": 101.975766
+          }
+        },
+        "company_address_geocode": {
+          "address_components": {
+            "city": "Chicago",
+            "country": "US",
+            "county": "Cook County",
+            "formatted_street": "W Fulton St",
+            "number": "1330",
+            "predirectional": "W",
+            "state": "IL",
+            "street": "Fulton",
+            "suffix": "St",
+            "zip": "60607"
+          },
+          "formatted_address": "1330 W Fulton St, Fl 5, Chicago, IL 60607",
+          "location": {
+            "lat": 41.887151,
+            "lon": -87.66015
+          }
+        },
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13972,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": false,
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Norfolk, Va.",
+        "entry_port_code": "1401",
+        "supplier_name": "V S Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 86556 Jalan Murni 12 Murni Industrial Estate Johor My Cp Tan 605973468 Eddietan Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Malaysia",
+        "supplier_country_code": "MY",
+        "supplier_address_country": "Malaysia",
+        "supplier_address_country_code": "MY",
+        "supplier_total_shipments": 2986,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "eddietan@vs-i.com"
+          ],
+          "phone_numbers": []
+        },
+        "supplier_contact_info_most_recent_found": "09/16/2026",
+        "marks_numbers": "Nil",
+        "marks_numbers_raw": "Nil",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Tanjung Pelepas",
+        "exit_port_code": "55750",
+        "hs_code": "851632",
+        "hs_code_description": "Other hairdressing apparatus",
+        "full_hs_code_description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Electric instantaneous or storage water heaters and immersion heaters; electric space heating apparatus and soil heating apparatus; electrothermic hairdressing apparatus (for example, hair dryers, hair curlers, curling tong heaters) and hand dryers; electric flatirons; other electrothermic appliances of a kind used for domestic purposes; electric heating resistors, other than those of heading 8545; parts thereof ; Electrothermic hairdressing or hand-drying apparatus ; Other hairdressing apparatus",
+        "product_description": "Hair Stylerhs Plastic Palletall Including Destination Charges",
+        "product_description_raw": "Of Hair Stylerhs Code: 8516.32.000021 Plastic Palletall Freight Prepaid Including Destination Charges",
+        "hts_codes": [],
+        "carrier_scac_code": "DSVF - Dsv Ocean Transport",
+        "company_scac_codes_diversity": 1.74,
+        "company_scac_codes_diversity_normalized": 0.49,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9461051",
+        "vessel_country_code": "DE",
+        "vessel_name": "Dortmund Express",
+        "estimated_arrival_date": "20260917",
+        "teu": "2.12",
+        "quantity": "1740",
+        "quantity_unit": "CTN",
+        "weight": 6057,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "45G0",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Openings at one end or both ends"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "361e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": null,
+        "shipping_rate": {
+          "route": "Asia,Transatlantic",
+          "ticker": null,
+          "booking_date": "2026-08-17"
+        },
+        "place_of_receipt": "Tanjung Pelepas",
+        "cif": "0",
+        "company_china_concentration": 22.44,
+        "company_shipments_12m": 3717,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 816,
+        "supplier_company_shipments_12_24m": 25,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2252,
+        "company_teu_6m": 3892,
+        "company_teu_12m": 7097,
+        "supplier_teu_3m": 370,
+        "supplier_teu_6m": 687,
+        "supplier_teu_12m": 1282,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "61ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 81.6,
+  "data": {
+    "data": [
+      {
+        "bol_number": null,
+        "bol_type": "R",
+        "inbond_type": null,
+        "master_bol_number": "MAEU271277516",
+        "has_master_data": false,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "08/29/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 33.7315,
+          "lon": -118.265
+        },
+        "exit_port_geocode": {
+          "lat": 30.6137,
+          "lon": 122.0694
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 606542801 Us 18446791647 Us Logistics Dyson Com",
+        "containers": [
+          {
+            "id": "MRSU7317586",
+            "size": "4000*900*800",
+            "type": "45G1",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "CY",
+            "description": "Of Air Purifier Hs Code 842139 Pallet Free All Freight Prepaid Including Destination Charges",
+            "mark": null
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "CN"
+          },
+          "location": {
+            "lat": 35.86166,
+            "lon": 104.195397
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": true,
+        "company_contact_info": {
+          "emails": [
+            "us.logistics@dyson.com"
+          ],
+          "phone_numbers": [
+            "18446791647"
+          ]
+        },
+        "company_contact_info_most_recent_found": "09/15/2026",
+        "company_website": "dyson.com",
+        "corporate_info_exists": true,
+        "entry_port": "Los Angeles, Ca",
+        "entry_port_code": "2704",
+        "supplier_name": "Vs Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 102246 Jalan Murni 12 Kawasan P Senai Na 81400 My 6075973399 Vs18Shipping Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "China",
+        "supplier_country_code": "CN",
+        "supplier_address_country": "China",
+        "supplier_address_country_code": "CN",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "vs18shipping@vs-i.com"
+          ],
+          "phone_numbers": [
+            "6075973399"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/05/2026",
+        "marks_numbers": "",
+        "marks_numbers_raw": "",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Yangshan",
+        "exit_port_code": "57037",
+        "hs_code": "842139",
+        "hs_code_description": "Other",
+        "full_hs_code_description": "Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Centrifuges, including centrifugal dryers; filtering or purifying machinery and apparatus, for liquids or gases; parts thereof ; Filtering or purifying machinery and apparatus for gases ; Other",
+        "product_description": "Air Purifier Pallet Free All Including Destination Charges",
+        "product_description_raw": "Of Air Purifier Hs Code 842139 Pallet Free All Freight Prepaid Including Destination Charges",
+        "hts_codes": [],
+        "carrier_scac_code": "MAEU - Maersk Line",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9359038",
+        "vessel_country_code": "HK",
+        "vessel_name": "Gustav Maersk",
+        "estimated_arrival_date": "20260825",
+        "teu": "2.12",
+        "quantity": "1026",
+        "quantity_unit": "CTN",
+        "weight": 7417,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "45G1",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Passive vents at upper part of cargo space"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "630e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": "6309.12",
+        "shipping_rate": {
+          "route": "Asia,Pacific",
+          "ticker": "XSICFEUW",
+          "booking_date": "2026-07-30"
+        },
+        "place_of_receipt": "Johor Bahru",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ssl",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "40ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 81.5,
+  "data": {
+    "data": [
+      {
+        "bol_number": null,
+        "bol_type": "R",
+        "inbond_type": null,
+        "master_bol_number": "MAEU272660035",
+        "has_master_data": false,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "08/23/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 40.7,
+          "lon": -74.15
+        },
+        "exit_port_geocode": {
+          "lat": 1.3855,
+          "lon": 103.541
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor C Chicago Il 606542801 Us 18446791647 Us Logistics Dyson Com",
+        "containers": [
+          {
+            "id": "MRSU2176166",
+            "size": "4000*900*800",
+            "type": "45G1",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "CY",
+            "description": "Of Fan Heater Hs Code 851629 Pallet Free All Freight Prepaid Including Destination Charges",
+            "mark": null
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "MY"
+          },
+          "location": {
+            "lat": 4.210484,
+            "lon": 101.975766
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": true,
+        "company_contact_info": {
+          "emails": [
+            "us.logistics@dyson.com"
+          ],
+          "phone_numbers": [
+            "18446791647"
+          ]
+        },
+        "company_contact_info_most_recent_found": "09/15/2026",
+        "company_website": "dyson.com",
+        "corporate_info_exists": true,
+        "entry_port": "Newark, Nj",
+        "entry_port_code": "4601",
+        "supplier_name": "Vs Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 102246 Jalan Murni 12 Kawasan P Senai Na 81400 My 6075973399 Vs18Shipping Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Malaysia",
+        "supplier_country_code": "MY",
+        "supplier_address_country": "Malaysia",
+        "supplier_address_country_code": "MY",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "vs18shipping@vs-i.com"
+          ],
+          "phone_numbers": [
+            "6075973399"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/05/2026",
+        "marks_numbers": "",
+        "marks_numbers_raw": "",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Tanjung Pelepas",
+        "exit_port_code": "55750",
+        "hs_code": "851629",
+        "hs_code_description": "Other",
+        "full_hs_code_description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Electric instantaneous or storage water heaters and immersion heaters; electric space heating apparatus and soil heating apparatus; electrothermic hairdressing apparatus (for example, hair dryers, hair curlers, curling tong heaters) and hand dryers; electric flatirons; other electrothermic appliances of a kind used for domestic purposes; electric heating resistors, other than those of heading 8545; parts thereof ; Electric space heating apparatus and electric soil heating apparatus ; Other",
+        "product_description": "Fan Heater Pallet Free All Including Destination Charges",
+        "product_description_raw": "Of Fan Heater Hs Code 851629 Pallet Free All Freight Prepaid Including Destination Charges",
+        "hts_codes": [],
+        "carrier_scac_code": "MAEU - Maersk Line",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9613018",
+        "vessel_country_code": "DE",
+        "vessel_name": "Ludwigshafen Express",
+        "estimated_arrival_date": "20260823",
+        "teu": "2.12",
+        "quantity": "2744",
+        "quantity_unit": "CTN",
+        "weight": 9988,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "45G1",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Passive vents at upper part of cargo space"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "628e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": null,
+        "shipping_rate": {
+          "route": "Asia,Transatlantic",
+          "ticker": null,
+          "booking_date": "2026-07-24"
+        },
+        "place_of_receipt": "Johor Bahru",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ssl",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "64ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 81.4,
+  "data": {
+    "data": [
+      {
+        "bol_number": "CHSL556916540JHB",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "ONEYJHBG15993700",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "08/17/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 33.7315,
+          "lon": -118.265
+        },
+        "exit_port_geocode": {
+          "lat": 1.259366,
+          "lon": 103.7544
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 60607 Us",
+        "containers": [
+          {
+            "id": "TRHU4276613",
+            "size": "4000*900*800",
+            "type": "45G1",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "CY",
+            "description": "1026 Cartons Of Air Purifier Hs Code 842139 Pallet Free All Freight Prepaid Including Destination Charges Forkseal No Chrmy00003 Shipment Door To Door",
+            "mark": "No Marks And Numbers"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "MY"
+          },
+          "location": {
+            "lat": 4.210484,
+            "lon": 101.975766
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": false,
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Los Angeles, Ca",
+        "entry_port_code": "2704",
+        "supplier_name": "V S Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 102246 Jalan Murni 12 Kawasan Perindustrian Murni Senai 01 81400 My",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Malaysia",
+        "supplier_country_code": "MY",
+        "supplier_address_country": "Malaysia",
+        "supplier_address_country_code": "MY",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": false,
+        "marks_numbers": "Marks Numbers",
+        "marks_numbers_raw": "No Marks And Numbers",
+        "supplier_website": null,
+        "exit_port": "Singapore",
+        "exit_port_code": "55976",
+        "hs_code": "842139",
+        "hs_code_description": "Other",
+        "full_hs_code_description": "Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Centrifuges, including centrifugal dryers; filtering or purifying machinery and apparatus, for liquids or gases; parts thereof ; Filtering or purifying machinery and apparatus for gases ; Other",
+        "product_description": "Air Purifier Pallet Free All Including Destination Charges Forkseal Chrmy Door Door",
+        "product_description_raw": "1026 Cartons Of Air Purifier Hs Code 842139 Pallet Free All Freight Prepaid Including Destination Charges Forkseal No Chrmy00003 Shipment Door To Door",
+        "hts_codes": [],
+        "carrier_scac_code": "CHSL - C. H. Robinson",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9462718",
+        "vessel_country_code": "TW",
+        "vessel_name": "Ym Unanimity",
+        "estimated_arrival_date": "20260812",
+        "teu": "2.12",
+        "quantity": "1026",
+        "quantity_unit": "PKG",
+        "weight": 7709,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "45G1",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Passive vents at upper part of cargo space"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "086e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": "6948.3",
+        "shipping_rate": {
+          "route": "Asia,Pacific",
+          "ticker": "XSICFEUW",
+          "booking_date": "2026-07-18"
+        },
+        "place_of_receipt": "Senai My",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "20ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 81.3,
+  "data": {
+    "data": [
+      {
+        "bol_number": "DSVFJHB0072732",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "HLCUKUL260532678",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "08/09/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 40.7,
+          "lon": -74.15
+        },
+        "exit_port_geocode": {
+          "lat": 1.259366,
+          "lon": 103.7544
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il Illinois Il 60607 Us",
+        "containers": [
+          {
+            "id": "CAAU2400793",
+            "size": "2000*806*800",
+            "type": "2210",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "HH",
+            "description": "Of Fan Heaterhs Code: 8516.29.0000Pallet Free",
+            "mark": "Nil"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "SG"
+          },
+          "location": {
+            "lat": 1.352083,
+            "lon": 103.819836
+          }
+        },
+        "company_address_geocode": {
+          "address_components": {
+            "city": "Chicago",
+            "country": "US",
+            "county": "Cook County",
+            "formatted_street": "W Fulton St",
+            "number": "1330",
+            "predirectional": "W",
+            "state": "IL",
+            "street": "Fulton",
+            "suffix": "St",
+            "zip": "60607"
+          },
+          "formatted_address": "1330 W Fulton St, Fl 5, Chicago, IL 60607",
+          "location": {
+            "lat": 41.887151,
+            "lon": -87.66015
+          }
+        },
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": false,
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Newark, Nj",
+        "entry_port_code": "4601",
+        "supplier_name": "V S Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 86556 Jalan Murni 12 Murni Industrial Estate Johor My Cp Tan 605973468 Eddietan Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Singapore",
+        "supplier_country_code": "SG",
+        "supplier_address_country": "Singapore",
+        "supplier_address_country_code": "SG",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "eddietan@vs-i.com"
+          ],
+          "phone_numbers": []
+        },
+        "supplier_contact_info_most_recent_found": "09/16/2026",
+        "marks_numbers": "Nil",
+        "marks_numbers_raw": "Nil",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Singapore",
+        "exit_port_code": "55976",
+        "hs_code": "851629",
+        "hs_code_description": "Other",
+        "full_hs_code_description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Electric instantaneous or storage water heaters and immersion heaters; electric space heating apparatus and soil heating apparatus; electrothermic hairdressing apparatus (for example, hair dryers, hair curlers, curling tong heaters) and hand dryers; electric flatirons; other electrothermic appliances of a kind used for domestic purposes; electric heating resistors, other than those of heading 8545; parts thereof ; Electric space heating apparatus and electric soil heating apparatus ; Other",
+        "product_description": "Fan Heaterhs Pallet Free",
+        "product_description_raw": "Of Fan Heaterhs Code: 8516.29.0000Pallet Free",
+        "hts_codes": [],
+        "carrier_scac_code": "DSVF - Dsv Ocean Transport",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9447897",
+        "vessel_country_code": "LR",
+        "vessel_name": "Tempanos",
+        "estimated_arrival_date": "20260725",
+        "teu": "1.0",
+        "quantity": "1209",
+        "quantity_unit": "CTN",
+        "weight": 4401,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "2210",
+            "length": "20ft",
+            "width_x_height": "8ft x 8ft 6in",
+            "group": "General Purpose Container (with ventilation)",
+            "desc": "Passive vents at upper part of cargo space - Total vent cross-section area < 25 cm2/m of nominal container length."
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "2522e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": null,
+        "shipping_rate": {
+          "route": "Asia,Transatlantic",
+          "ticker": null,
+          "booking_date": "2026-07-10"
+        },
+        "place_of_receipt": "Singapore",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "67ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 81.2,
+  "data": {
+    "data": [
+      {
+        "bol_number": "DMALJHBA37194",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "HDMUKULM18319800",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "07/27/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 33.7315,
+          "lon": -118.265
+        },
+        "exit_port_geocode": {
+          "lat": 1.259366,
+          "lon": 103.7544
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 60607 Us",
+        "containers": [
+          {
+            "id": "HMMU4966559",
+            "size": "4000*900*800",
+            "type": "45G0",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "PP",
+            "description": "550727044|519311-01/Hp11 Purifier H",
+            "mark": null
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "SG"
+          },
+          "location": {
+            "lat": 1.352083,
+            "lon": 103.819836
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": false,
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Los Angeles, Ca",
+        "entry_port_code": "2704",
+        "supplier_name": "V S Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 102246 Jalan Murni 12 Kawasan Perindustrian Murni Senai My 6075973399",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Singapore",
+        "supplier_country_code": "SG",
+        "supplier_address_country": "Singapore",
+        "supplier_address_country_code": "SG",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [],
+          "phone_numbers": [
+            "+6075973399"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/15/2026",
+        "marks_numbers": "",
+        "marks_numbers_raw": "",
+        "supplier_website": null,
+        "exit_port": "Singapore",
+        "exit_port_code": "55976",
+        "hs_code": "851629",
+        "hs_code_description": "Other",
+        "full_hs_code_description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Electric instantaneous or storage water heaters and immersion heaters; electric space heating apparatus and soil heating apparatus; electrothermic hairdressing apparatus (for example, hair dryers, hair curlers, curling tong heaters) and hand dryers; electric flatirons; other electrothermic appliances of a kind used for domestic purposes; electric heating resistors, other than those of heading 8545; parts thereof ; Electric space heating apparatus and electric soil heating apparatus ; Other",
+        "product_description": "Purifier",
+        "product_description_raw": "550727044|519311-01/Hp11 Purifier H",
+        "hts_codes": [],
+        "carrier_scac_code": "DMAL - Dhl Express",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9560352",
+        "vessel_country_code": "PA",
+        "vessel_name": "Seattle Bridge",
+        "estimated_arrival_date": "20260726",
+        "teu": "2.12",
+        "quantity": "1026",
+        "quantity_unit": "CTN",
+        "weight": 7417,
+        "notify_party_name": "Livingston International Brokerage",
+        "notify_party_address": "150 E Pierce Rd Ste 500 Itasca Il 60143 Us 16306163036",
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": "US",
+        "notify_party_contact_info": {
+          "emails": [],
+          "phone_numbers": [
+            "+16306163036"
+          ]
+        },
+        "notify_party_contact_info_exists": true,
+        "container_types": [
+          {
+            "type": "45G0",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Openings at one end or both ends"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "0104e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": "6315.4800000000005",
+        "shipping_rate": {
+          "route": "Asia,Pacific",
+          "ticker": "XSICFEUW",
+          "booking_date": "2026-06-27"
+        },
+        "place_of_receipt": "Pasir Gudang, Joh",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "67ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 81.1,
+  "data": {
+    "data": [
+      {
+        "bol_number": null,
+        "bol_type": "R",
+        "inbond_type": null,
+        "master_bol_number": "MAEU270596816",
+        "has_master_data": false,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "07/15/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 33.7315,
+          "lon": -118.265
+        },
+        "exit_port_geocode": {
+          "lat": 30.6137,
+          "lon": 122.0694
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 606542801 Us 18446791647 Us Logistics Dyson Com",
+        "containers": [
+          {
+            "id": "CAAU7912534",
+            "size": "4000*900*800",
+            "type": "45G1",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "CY",
+            "description": "Of Air Purifier Hs Code 842139 Pallet Free All Freight Prepaid Including Destination Charges",
+            "mark": null
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "CN"
+          },
+          "location": {
+            "lat": 35.86166,
+            "lon": 104.195397
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": true,
+        "company_contact_info": {
+          "emails": [
+            "us.logistics@dyson.com"
+          ],
+          "phone_numbers": [
+            "18446791647"
+          ]
+        },
+        "company_contact_info_most_recent_found": "09/15/2026",
+        "company_website": "dyson.com",
+        "corporate_info_exists": true,
+        "entry_port": "Los Angeles, Ca",
+        "entry_port_code": "2704",
+        "supplier_name": "Vs Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 102246 Jalan Murni 12 Kawasan P Senai Na 81400 My 6075973399 Vs18Shipping Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "China",
+        "supplier_country_code": "CN",
+        "supplier_address_country": "China",
+        "supplier_address_country_code": "CN",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "vs18shipping@vs-i.com"
+          ],
+          "phone_numbers": [
+            "6075973399"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/05/2026",
+        "marks_numbers": "",
+        "marks_numbers_raw": "",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Yangshan",
+        "exit_port_code": "57037",
+        "hs_code": "842139",
+        "hs_code_description": "Other",
+        "full_hs_code_description": "Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Centrifuges, including centrifugal dryers; filtering or purifying machinery and apparatus, for liquids or gases; parts thereof ; Filtering or purifying machinery and apparatus for gases ; Other",
+        "product_description": "Air Purifier Pallet Free All Including Destination Charges",
+        "product_description_raw": "Of Air Purifier Hs Code 842139 Pallet Free All Freight Prepaid Including Destination Charges",
+        "hts_codes": [],
+        "carrier_scac_code": "MAEU - Maersk Line",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9359014",
+        "vessel_country_code": "HK",
+        "vessel_name": "Gunde Maersk",
+        "estimated_arrival_date": "20260715",
+        "teu": "2.12",
+        "quantity": "810",
+        "quantity_unit": "CTN",
+        "weight": 7168,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "45G1",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Passive vents at upper part of cargo space"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "625e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": "5049.84",
+        "shipping_rate": {
+          "route": "Asia,Pacific",
+          "ticker": "XSICFEUW",
+          "booking_date": "2026-06-15"
+        },
+        "place_of_receipt": "Johor Bahru",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ssl",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "26ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 81,
+  "data": {
+    "data": [
+      {
+        "bol_number": null,
+        "bol_type": "R",
+        "inbond_type": null,
+        "master_bol_number": "MAEU270237833",
+        "has_master_data": false,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "07/06/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 40.7,
+          "lon": -74.15
+        },
+        "exit_port_geocode": {
+          "lat": 1.3855,
+          "lon": 103.541
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 606542801 Us 18446791647 Us Logistics Dyson Com",
+        "containers": [
+          {
+            "id": "BEAU6362600",
+            "size": "4000*900*800",
+            "type": "45G1",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "CY",
+            "description": "Of Vacuum Cleaner Hs Code 85081100 Pallet Free All Freight Prepaid Including Destination Charges",
+            "mark": null
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "MY"
+          },
+          "location": {
+            "lat": 4.210484,
+            "lon": 101.975766
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": true,
+        "company_contact_info": {
+          "emails": [
+            "us.logistics@dyson.com"
+          ],
+          "phone_numbers": [
+            "18446791647"
+          ]
+        },
+        "company_contact_info_most_recent_found": "09/15/2026",
+        "company_website": "dyson.com",
+        "corporate_info_exists": true,
+        "entry_port": "Newark, Nj",
+        "entry_port_code": "4601",
+        "supplier_name": "Vs Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 102246 Jalan Murni 12 Kawasan P Senai Na 81400 My 6075973399 Vs18Shipping Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Malaysia",
+        "supplier_country_code": "MY",
+        "supplier_address_country": "Malaysia",
+        "supplier_address_country_code": "MY",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "vs18shipping@vs-i.com"
+          ],
+          "phone_numbers": [
+            "6075973399"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/05/2026",
+        "marks_numbers": "",
+        "marks_numbers_raw": "",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Tanjung Pelepas",
+        "exit_port_code": "55750",
+        "hs_code": "850811",
+        "hs_code_description": "Of a power not exceeding 1,500 W and having a dust bag or other receptacle capacity not exceeding 20 l",
+        "full_hs_code_description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Vacuum cleaners; parts thereof ; With self-contained electric motor ; Of a power not exceeding 1,500 W and having a dust bag or other receptacle capacity not exceeding 20 l",
+        "product_description": "Vacuum Cleaner Pallet Free All Including Destination Charges",
+        "product_description_raw": "Of Vacuum Cleaner Hs Code 85081100 Pallet Free All Freight Prepaid Including Destination Charges",
+        "hts_codes": [],
+        "carrier_scac_code": "MAEU - Maersk Line",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9501368",
+        "vessel_country_code": "LR",
+        "vessel_name": "Shanghai Express",
+        "estimated_arrival_date": "20260706",
+        "teu": "2.12",
+        "quantity": "1036",
+        "quantity_unit": "CTN",
+        "weight": 11201,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "45G1",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Passive vents at upper part of cargo space"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "622e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": null,
+        "shipping_rate": {
+          "route": "Asia,Transatlantic",
+          "ticker": null,
+          "booking_date": "2026-06-06"
+        },
+        "place_of_receipt": "Johor Bahru",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ssl",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "51ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 80.9,
+  "data": {
+    "data": [
+      {
+        "bol_number": null,
+        "bol_type": "R",
+        "inbond_type": null,
+        "master_bol_number": "MAEU269772642",
+        "has_master_data": false,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "06/26/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 33.7315,
+          "lon": -118.265
+        },
+        "exit_port_geocode": {
+          "lat": 30.6137,
+          "lon": 122.0694
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 606542801 Us 18446791647 Us Logistics Dyson Com",
+        "containers": [
+          {
+            "id": "SEKU6973490",
+            "size": "4000*900*800",
+            "type": "45G1",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "CY",
+            "description": "Of Air Purifier Hs Code 842139 Pallet Free All Freight Prepaid Including Destination Charges",
+            "mark": null
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "CN"
+          },
+          "location": {
+            "lat": 35.86166,
+            "lon": 104.195397
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": true,
+        "company_contact_info": {
+          "emails": [
+            "us.logistics@dyson.com"
+          ],
+          "phone_numbers": [
+            "18446791647"
+          ]
+        },
+        "company_contact_info_most_recent_found": "09/15/2026",
+        "company_website": "dyson.com",
+        "corporate_info_exists": true,
+        "entry_port": "Los Angeles, Ca",
+        "entry_port_code": "2704",
+        "supplier_name": "Vs Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 102246 Jalan Murni 12 Kawasan P Senai Na 81400 My 6075973399 Vs18Shipping Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "China",
+        "supplier_country_code": "CN",
+        "supplier_address_country": "China",
+        "supplier_address_country_code": "CN",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "vs18shipping@vs-i.com"
+          ],
+          "phone_numbers": [
+            "6075973399"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/05/2026",
+        "marks_numbers": "",
+        "marks_numbers_raw": "",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Yangshan",
+        "exit_port_code": "57037",
+        "hs_code": "842139",
+        "hs_code_description": "Other",
+        "full_hs_code_description": "Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Centrifuges, including centrifugal dryers; filtering or purifying machinery and apparatus, for liquids or gases; parts thereof ; Filtering or purifying machinery and apparatus for gases ; Other",
+        "product_description": "Air Purifier Pallet Free All Including Destination Charges",
+        "product_description_raw": "Of Air Purifier Hs Code 842139 Pallet Free All Freight Prepaid Including Destination Charges",
+        "hts_codes": [],
+        "carrier_scac_code": "MAEU - Maersk Line",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9359038",
+        "vessel_country_code": "HK",
+        "vessel_name": "Gustav Maersk",
+        "estimated_arrival_date": "20260624",
+        "teu": "2.12",
+        "quantity": "810",
+        "quantity_unit": "CTN",
+        "weight": 7168,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "45G1",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Passive vents at upper part of cargo space"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "622e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": "3443.94",
+        "shipping_rate": {
+          "route": "Asia,Pacific",
+          "ticker": "XSICFEUW",
+          "booking_date": "2026-05-27"
+        },
+        "place_of_receipt": "Johor Bahru",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ssl",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "20ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 80.8,
+  "data": {
+    "data": [
+      {
+        "bol_number": "DSVFJHB0071927",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "ONEYSING19494801",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "06/15/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 33.7315,
+          "lon": -118.265
+        },
+        "exit_port_geocode": {
+          "lat": 1.259366,
+          "lon": 103.7544
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il Illinois Il 60607 Us",
+        "containers": [
+          {
+            "id": "ONEU6854791",
+            "size": null,
+            "type": "Not Specified",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": null,
+            "description": "974775-01/Universal Stand Bk Retail",
+            "mark": "974775-01??"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "SG"
+          },
+          "location": {
+            "lat": 1.352083,
+            "lon": 103.819836
+          }
+        },
+        "company_address_geocode": {
+          "address_components": {
+            "city": "Chicago",
+            "country": "US",
+            "county": "Cook County",
+            "formatted_street": "W Fulton St",
+            "number": "1330",
+            "predirectional": "W",
+            "state": "IL",
+            "street": "Fulton",
+            "suffix": "St",
+            "zip": "60607"
+          },
+          "formatted_address": "1330 W Fulton St, Fl 5, Chicago, IL 60607",
+          "location": {
+            "lat": 41.887151,
+            "lon": -87.66015
+          }
+        },
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": false,
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Los Angeles, Ca",
+        "entry_port_code": "2704",
+        "supplier_name": "V S Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 86556 Jalan Murni 12 Murni Industrial Estate Johor My Cp Tan 605973468 Eddietan Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Singapore",
+        "supplier_country_code": "SG",
+        "supplier_address_country": "Singapore",
+        "supplier_address_country_code": "SG",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "eddietan@vs-i.com"
+          ],
+          "phone_numbers": []
+        },
+        "supplier_contact_info_most_recent_found": "09/16/2026",
+        "marks_numbers": "",
+        "marks_numbers_raw": "974775-01??",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Singapore",
+        "exit_port_code": "55976",
+        "hs_code": "392690",
+        "hs_code_description": "Other",
+        "full_hs_code_description": "Plastics and articles thereof ; Other articles of plastics and articles of other materials of headings 3901 to 3914 ; Other",
+        "product_description": "Universal Stand Retail",
+        "product_description_raw": "974775-01/Universal Stand Bk Retail",
+        "hts_codes": [],
+        "carrier_scac_code": "DSVF - Dsv Ocean Transport",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9664885",
+        "vessel_country_code": "LR",
+        "vessel_name": "Ym Modesty",
+        "estimated_arrival_date": "20260614",
+        "teu": "0.02",
+        "quantity": "100",
+        "quantity_unit": "CTN",
+        "weight": 334,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "Not Specified",
+            "length": null,
+            "width_x_height": null,
+            "group": "Not Specified",
+            "desc": null
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "078e",
+        "alibaba_link": false,
+        "lcl_adjusted": true,
+        "lcl": true,
+        "shipping_cost": "29.63",
+        "shipping_rate": {
+          "route": "Asia,Pacific",
+          "ticker": "XSICFEUW",
+          "booking_date": "2026-05-16"
+        },
+        "place_of_receipt": "Singapore",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 13,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "24ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 80.7,
+  "data": {
+    "data": [
+      {
+        "bol_number": "DSVFJHB0071875",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "HLCUKUL260439920",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "06/08/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 40.7,
+          "lon": -74.15
+        },
+        "exit_port_geocode": {
+          "lat": 1.3855,
+          "lon": 103.541
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il Illinois Il 60607 Us",
+        "containers": [
+          {
+            "id": "HLBU2037209",
+            "size": "4000*900*800",
+            "type": "4510",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "HH",
+            "description": "Of Air Purifierhs Code: 842139Pallet Free",
+            "mark": "Nil??"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "MY"
+          },
+          "location": {
+            "lat": 4.210484,
+            "lon": 101.975766
+          }
+        },
+        "company_address_geocode": {
+          "address_components": {
+            "city": "Chicago",
+            "country": "US",
+            "county": "Cook County",
+            "formatted_street": "W Fulton St",
+            "number": "1330",
+            "predirectional": "W",
+            "state": "IL",
+            "street": "Fulton",
+            "suffix": "St",
+            "zip": "60607"
+          },
+          "formatted_address": "1330 W Fulton St, Fl 5, Chicago, IL 60607",
+          "location": {
+            "lat": 41.887151,
+            "lon": -87.66015
+          }
+        },
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": false,
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Newark, Nj",
+        "entry_port_code": "4601",
+        "supplier_name": "V S Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 86556 Jalan Murni 12 Murni Industrial Estate Johor My Cp Tan 605973468 Eddietan Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Malaysia",
+        "supplier_country_code": "MY",
+        "supplier_address_country": "Malaysia",
+        "supplier_address_country_code": "MY",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "eddietan@vs-i.com"
+          ],
+          "phone_numbers": []
+        },
+        "supplier_contact_info_most_recent_found": "09/16/2026",
+        "marks_numbers": "Nil",
+        "marks_numbers_raw": "Nil??",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Tanjung Pelepas",
+        "exit_port_code": "55750",
+        "hs_code": "842139",
+        "hs_code_description": "Other",
+        "full_hs_code_description": "Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Centrifuges, including centrifugal dryers; filtering or purifying machinery and apparatus, for liquids or gases; parts thereof ; Filtering or purifying machinery and apparatus for gases ; Other",
+        "product_description": "Air Purifierhs Pallet Free",
+        "product_description_raw": "Of Air Purifierhs Code: 842139Pallet Free",
+        "hts_codes": [],
+        "carrier_scac_code": "DSVF - Dsv Ocean Transport",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9501356",
+        "vessel_country_code": "DE",
+        "vessel_name": "Hong Kong Express",
+        "estimated_arrival_date": "20260608",
+        "teu": "2.12",
+        "quantity": "1026",
+        "quantity_unit": "CTN",
+        "weight": 7709,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "4510",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (with ventilation)",
+            "desc": "Passive vents at upper part of cargo space - Total vent cross-section area < 25 cm2/m of nominal container length."
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "618e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": null,
+        "shipping_rate": {
+          "route": "Asia,Transatlantic",
+          "ticker": null,
+          "booking_date": "2026-05-09"
+        },
+        "place_of_receipt": "Tanjung Pelepas",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "23ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 80.6,
+  "data": {
+    "data": [
+      {
+        "bol_number": "PYMNJHB267064101",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "CMDUSIJ0567857",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "05/19/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 33.7315,
+          "lon": -118.265
+        },
+        "exit_port_geocode": {
+          "lat": 31.38144,
+          "lon": 121.601
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 60607 Us",
+        "containers": [
+          {
+            "id": "CMAU6143718",
+            "size": "4000*900*800",
+            "type": "45G0",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "PH",
+            "description": "Of Vacuum Cleaner Hs Code: 85081100 Pallet Free All Freight Prepaid Including Destination Charges Ceva Hbl : Jhb267064101",
+            "mark": "As Addressed"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "CN"
+          },
+          "location": {
+            "lat": 35.86166,
+            "lon": 104.195397
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": false,
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Los Angeles, Ca",
+        "entry_port_code": "2704",
+        "supplier_name": "V S Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 86556 Jalan Murni 12 Taman Perindustrian Murni Senai Jo 81400 My Msliong",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "China",
+        "supplier_country_code": "CN",
+        "supplier_address_country": "China",
+        "supplier_address_country_code": "CN",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": false,
+        "marks_numbers": "Addressed",
+        "marks_numbers_raw": "As Addressed",
+        "supplier_website": null,
+        "exit_port": "Shanghai",
+        "exit_port_code": "57035",
+        "hs_code": "850811",
+        "hs_code_description": "Of a power not exceeding 1,500 W and having a dust bag or other receptacle capacity not exceeding 20 l",
+        "full_hs_code_description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Vacuum cleaners; parts thereof ; With self-contained electric motor ; Of a power not exceeding 1,500 W and having a dust bag or other receptacle capacity not exceeding 20 l",
+        "product_description": "Vacuum Cleaner Pallet Free All Including Destination Charges Ceva Hbl Jhb Scac Pymn",
+        "product_description_raw": "Of Vacuum Cleaner Hs Code: 85081100 Pallet Free All Freight Prepaid Including Destination Charges Ceva Hbl : Jhb267064101 Scac Code : Pymn",
+        "hts_codes": [],
+        "carrier_scac_code": "PYMN - Pyramid Lines Singapore Pte Ltd",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9351141",
+        "vessel_country_code": "MT",
+        "vessel_name": "Cma Cgm New Jersey",
+        "estimated_arrival_date": "20260518",
+        "teu": "2.12",
+        "quantity": "1740",
+        "quantity_unit": "CTN",
+        "weight": 12170,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "45G0",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Openings at one end or both ends"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "0gvmk",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": "2973.3",
+        "shipping_rate": {
+          "route": "Asia,Pacific",
+          "ticker": "XSICFEUW",
+          "booking_date": "2026-04-19"
+        },
+        "place_of_receipt": "Johor Bahru",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "19ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 80.5,
+  "data": {
+    "data": [
+      {
+        "bol_number": "PYMNJHB267063779",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "CMDUSIJ0565078",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "05/19/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 33.7315,
+          "lon": -118.265
+        },
+        "exit_port_geocode": {
+          "lat": 31.38144,
+          "lon": 121.601
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 60607 Us",
+        "containers": [
+          {
+            "id": "TRHU8687382",
+            "size": "4000*900*800",
+            "type": "45G0",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "PH",
+            "description": "Sv58 -A Dyson Cyclone V10 (Nic/Irn/Cpr) Us (Vacuum Cleaner) Hts Code : 8508110000 Tmc : 544214614 Ceva Hbl : Jhb267063779 Scac Code : Pymn",
+            "mark": "Po: 9504275419/10 So: Dyg103520 Sku: 626429-01"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "CN"
+          },
+          "location": {
+            "lat": 35.86166,
+            "lon": 104.195397
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": false,
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Los Angeles, Ca",
+        "entry_port_code": "2704",
+        "supplier_name": "V S Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 86556 Jalan Murni 12 Taman Perindustrian Murni Senai Jo 81400 My Msliong",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "China",
+        "supplier_country_code": "CN",
+        "supplier_address_country": "China",
+        "supplier_address_country_code": "CN",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": false,
+        "marks_numbers": "Dyg",
+        "marks_numbers_raw": "Po: 9504275419/10 So: Dyg103520 Sku: 626429-01",
+        "supplier_website": null,
+        "exit_port": "Shanghai",
+        "exit_port_code": "57035",
+        "hs_code": "850811",
+        "hs_code_description": "Of a power not exceeding 1,500 W and having a dust bag or other receptacle capacity not exceeding 20 l",
+        "full_hs_code_description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Vacuum cleaners; parts thereof ; With self-contained electric motor ; Of a power not exceeding 1,500 W and having a dust bag or other receptacle capacity not exceeding 20 l",
+        "product_description": "Dyson Cyclone Nic Irn Cpr Vacuum Cleaner Tmc Ceva Hbl Jhb Scac Pymn",
+        "product_description_raw": "Sv58 -A Dyson Cyclone V10 (Nic/Irn/Cpr) Us (Vacuum Cleaner) Hts Code : 8508110000 Tmc : 544214614 Ceva Hbl : Jhb267063779 Scac Code : Pymn",
+        "hts_codes": [],
+        "carrier_scac_code": "PYMN - Pyramid Lines Singapore Pte Ltd",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9351141",
+        "vessel_country_code": "MT",
+        "vessel_name": "Cma Cgm New Jersey",
+        "estimated_arrival_date": "20260518",
+        "teu": "2.12",
+        "quantity": "1180",
+        "quantity_unit": "CTN",
+        "weight": 6962,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "45G0",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Openings at one end or both ends"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "0gvmk",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": "2973.3",
+        "shipping_rate": {
+          "route": "Asia,Pacific",
+          "ticker": "XSICFEUW",
+          "booking_date": "2026-04-19"
+        },
+        "place_of_receipt": "Johor Bahru",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "19ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 80.4,
+  "data": {
+    "data": [
+      {
+        "bol_number": "DSVFJHB9070390",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "HLCUKUL260318101",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "04/28/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 40.7,
+          "lon": -74.15
+        },
+        "exit_port_geocode": {
+          "lat": 1.3855,
+          "lon": 103.541
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il Illinois Il 60607 Us",
+        "containers": [
+          {
+            "id": "UETU2293511",
+            "size": "2000*806*800",
+            "type": "2210",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "HH",
+            "description": "Of Universal Stand",
+            "mark": "Nil"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "MY"
+          },
+          "location": {
+            "lat": 4.210484,
+            "lon": 101.975766
+          }
+        },
+        "company_address_geocode": {
+          "address_components": {
+            "city": "Chicago",
+            "country": "US",
+            "county": "Cook County",
+            "formatted_street": "W Fulton St",
+            "number": "1330",
+            "predirectional": "W",
+            "state": "IL",
+            "street": "Fulton",
+            "suffix": "St",
+            "zip": "60607"
+          },
+          "formatted_address": "1330 W Fulton St, Fl 5, Chicago, IL 60607",
+          "location": {
+            "lat": 41.887151,
+            "lon": -87.66015
+          }
+        },
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": false,
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Newark, Nj",
+        "entry_port_code": "4601",
+        "supplier_name": "V S Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 86556 Jalan Murni 12 Murni Industrial Estate Johor My Cp Tan 605973468 Eddietan Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Malaysia",
+        "supplier_country_code": "MY",
+        "supplier_address_country": "Malaysia",
+        "supplier_address_country_code": "MY",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "eddietan@vs-i.com"
+          ],
+          "phone_numbers": []
+        },
+        "supplier_contact_info_most_recent_found": "09/16/2026",
+        "marks_numbers": "Nil",
+        "marks_numbers_raw": "Nil",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Tanjung Pelepas",
+        "exit_port_code": "55750",
+        "hs_code": "392690",
+        "hs_code_description": "Other",
+        "full_hs_code_description": "Plastics and articles thereof ; Other articles of plastics and articles of other materials of headings 3901 to 3914 ; Other",
+        "product_description": "Universal Stand",
+        "product_description_raw": "Of Universal Stand",
+        "hts_codes": [],
+        "carrier_scac_code": "DSVF - Dsv Ocean Transport",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9447847",
+        "vessel_country_code": "PT",
+        "vessel_name": "Madrid Express",
+        "estimated_arrival_date": "20260427",
+        "teu": "1.0",
+        "quantity": "209",
+        "quantity_unit": "CTN",
+        "weight": 647,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "2210",
+            "length": "20ft",
+            "width_x_height": "8ft x 8ft 6in",
+            "group": "General Purpose Container (with ventilation)",
+            "desc": "Passive vents at upper part of cargo space - Total vent cross-section area < 25 cm2/m of nominal container length."
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "612e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": null,
+        "shipping_rate": {
+          "route": "Asia,Transatlantic",
+          "ticker": null,
+          "booking_date": "2026-03-29"
+        },
+        "place_of_receipt": "Tanjung Pelepas",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "14ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 80.3,
+  "data": {
+    "data": [
+      {
+        "bol_number": "PYMNJHB267063590",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "CMDUSIJ0561499",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "03/31/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 33.7315,
+          "lon": -118.265
+        },
+        "exit_port_geocode": {
+          "lat": 31.38144,
+          "lon": 121.601
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 60607 Us",
+        "containers": [
+          {
+            "id": "TCNU3338213",
+            "size": "4000*900*800",
+            "type": "45G0",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "PH",
+            "description": "Of Fan Hs Code: Pallet Free All Freight Prepaid Including Destination Charges Ceva Hbl : Jhb",
+            "mark": "As Addressed"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "CN"
+          },
+          "location": {
+            "lat": 35.86166,
+            "lon": 104.195397
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": false,
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Los Angeles, Ca",
+        "entry_port_code": "2704",
+        "supplier_name": "V S Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 86556 Jalan Murni 12 Taman Perindustrian Murni Senai Jo 81400 My Msliong",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "China",
+        "supplier_country_code": "CN",
+        "supplier_address_country": "China",
+        "supplier_address_country_code": "CN",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": false,
+        "marks_numbers": "Addressed",
+        "marks_numbers_raw": "As Addressed",
+        "supplier_website": null,
+        "exit_port": "Shanghai",
+        "exit_port_code": "57035",
+        "hs_code": "850811",
+        "hs_code_description": "Of a power not exceeding 1,500 W and having a dust bag or other receptacle capacity not exceeding 20 l",
+        "full_hs_code_description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Vacuum cleaners; parts thereof ; With self-contained electric motor ; Of a power not exceeding 1,500 W and having a dust bag or other receptacle capacity not exceeding 20 l",
+        "product_description": "Fan Pallet Free All Including Destination Charges Ceva Hbl Jhb Scac Pymn",
+        "product_description_raw": "Of Fan Hs Code: Pallet Free All Freight Prepaid Including Destination Charges Ceva Hbl : Jhb Scac Code : Pymn",
+        "hts_codes": [],
+        "carrier_scac_code": "PYMN - Pyramid Lines Singapore Pte Ltd",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9351139",
+        "vessel_country_code": "MT",
+        "vessel_name": "Cma Cgm Virginia",
+        "estimated_arrival_date": "20260406",
+        "teu": "2.12",
+        "quantity": "2250",
+        "quantity_unit": "CTN",
+        "weight": 7025,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "45G0",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Openings at one end or both ends"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "0gvm8",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": "1951.46",
+        "shipping_rate": {
+          "route": "Asia,Pacific",
+          "ticker": "XSICFEUW",
+          "booking_date": "2026-03-01"
+        },
+        "place_of_receipt": "Johor Bahru",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "16ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 80.2,
+  "data": {
+    "data": [
+      {
+        "bol_number": "DSVFJHB9069508",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "ONEYSING01722700",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "03/24/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 33.7485,
+          "lon": -118.2055
+        },
+        "exit_port_geocode": {
+          "lat": 1.259366,
+          "lon": 103.7544
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 W Fulton St Chicago Il 60607 113 Us 13124695950",
+        "containers": [
+          {
+            "id": "ONEU1810785",
+            "size": null,
+            "type": "Not Specified",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": null,
+            "description": "-/Universal Stand Bk Retail",
+            "mark": "974775-01??"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "SG"
+          },
+          "location": {
+            "lat": 1.352083,
+            "lon": 103.819836
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": true,
+        "company_contact_info": {
+          "emails": [],
+          "phone_numbers": [
+            "+13124695950"
+          ]
+        },
+        "company_contact_info_most_recent_found": "09/03/2026",
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Long Beach, Ca",
+        "entry_port_code": "2709",
+        "supplier_name": "V S Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 86556 Jalan Murni 12 Murni Industrial Estate Johor My Cp Tan 605973468 Eddietan Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Singapore",
+        "supplier_country_code": "SG",
+        "supplier_address_country": "Singapore",
+        "supplier_address_country_code": "SG",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "eddietan@vs-i.com"
+          ],
+          "phone_numbers": []
+        },
+        "supplier_contact_info_most_recent_found": "09/16/2026",
+        "marks_numbers": "",
+        "marks_numbers_raw": "974775-01??",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Singapore",
+        "exit_port_code": "55976",
+        "hs_code": "851690",
+        "hs_code_description": "Parts",
+        "full_hs_code_description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Electric instantaneous or storage water heaters and immersion heaters; electric space heating apparatus and soil heating apparatus; electrothermic hairdressing apparatus (for example, hair dryers, hair curlers, curling tong heaters) and hand dryers; electric flatirons; other electrothermic appliances of a kind used for domestic purposes; electric heating resistors, other than those of heading 8545; parts thereof ; Parts",
+        "product_description": "Universal Stand Retail",
+        "product_description_raw": "-/Universal Stand Bk Retail",
+        "hts_codes": [],
+        "carrier_scac_code": "DSVF - Dsv Ocean Transport",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9869215",
+        "vessel_country_code": "LR",
+        "vessel_name": "Hmm Raon",
+        "estimated_arrival_date": "20260316",
+        "teu": "0.01",
+        "quantity": "84",
+        "quantity_unit": "CTN",
+        "weight": 274,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "Not Specified",
+            "length": null,
+            "width_x_height": null,
+            "group": "Not Specified",
+            "desc": null
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "023e",
+        "alibaba_link": false,
+        "lcl_adjusted": true,
+        "lcl": true,
+        "shipping_cost": "9.235",
+        "shipping_rate": {
+          "route": "Asia,Pacific",
+          "ticker": "XSICFEUW",
+          "booking_date": "2026-02-22"
+        },
+        "place_of_receipt": "Singapore",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 18,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "16ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 80.1,
+  "data": {
+    "data": [
+      {
+        "bol_number": null,
+        "bol_type": "IR",
+        "inbond_type": "61 – IT: Immediate Transportation",
+        "master_bol_number": "MAEU263201732",
+        "has_master_data": false,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "03/04/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 40.7,
+          "lon": -74.15
+        },
+        "exit_port_geocode": {
+          "lat": 1.3855,
+          "lon": 103.541
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor C Chicago Il 606542801 Us 18446791647 Us Logistics Dyson Com",
+        "containers": [
+          {
+            "id": "MRKU9198082",
+            "size": "2000*806*800",
+            "type": "22G1",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "CY",
+            "description": "Of Fan Heater Hs Code .. Pallet Fre E All Freight Prepaid Including Destination Charges",
+            "mark": null
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "MY"
+          },
+          "location": {
+            "lat": 4.210484,
+            "lon": 101.975766
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": true,
+        "company_contact_info": {
+          "emails": [
+            "us.logistics@dyson.com"
+          ],
+          "phone_numbers": [
+            "18446791647"
+          ]
+        },
+        "company_contact_info_most_recent_found": "09/15/2026",
+        "company_website": "dyson.com",
+        "corporate_info_exists": true,
+        "entry_port": "Newark, Nj",
+        "entry_port_code": "4601",
+        "supplier_name": "Vs Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 102246 Jalan Murni 12 Kawasan P Senai Na 81400 My 6075973399 Vs18Shipping Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Malaysia",
+        "supplier_country_code": "MY",
+        "supplier_address_country": "Malaysia",
+        "supplier_address_country_code": "MY",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "vs18shipping@vs-i.com"
+          ],
+          "phone_numbers": [
+            "6075973399"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/05/2026",
+        "marks_numbers": "",
+        "marks_numbers_raw": "",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Tanjung Pelepas",
+        "exit_port_code": "55750",
+        "hs_code": "851629",
+        "hs_code_description": "Other",
+        "full_hs_code_description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Electric instantaneous or storage water heaters and immersion heaters; electric space heating apparatus and soil heating apparatus; electrothermic hairdressing apparatus (for example, hair dryers, hair curlers, curling tong heaters) and hand dryers; electric flatirons; other electrothermic appliances of a kind used for domestic purposes; electric heating resistors, other than those of heading 8545; parts thereof ; Electric space heating apparatus and electric soil heating apparatus ; Other",
+        "product_description": "Fan Heater Pallet Fre All Including Destination Charges",
+        "product_description_raw": "Of Fan Heater Hs Code .. Pallet Fre E All Freight Prepaid Including Destination Charges",
+        "hts_codes": [],
+        "carrier_scac_code": "MAEU - Maersk Line",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9612997",
+        "vessel_country_code": "DE",
+        "vessel_name": "Antwerpen Express",
+        "estimated_arrival_date": "20260302",
+        "teu": "1.0",
+        "quantity": "1080",
+        "quantity_unit": "CTN",
+        "weight": 3931,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "22G1",
+            "length": "20ft",
+            "width_x_height": "8ft x 8ft 6in",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Passive vents at upper part of cargo space"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "604e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": null,
+        "shipping_rate": {
+          "route": "Asia,Transatlantic",
+          "ticker": null,
+          "booking_date": "2026-02-02"
+        },
+        "place_of_receipt": "Johor Bahru",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ssl",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": "Cincinnati-Lawrenceburg",
+        "us_clearing_district_code": "4102"
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "16ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 80,
+  "data": {
+    "data": [
+      {
+        "bol_number": null,
+        "bol_type": "IR",
+        "inbond_type": "61 – IT: Immediate Transportation",
+        "master_bol_number": "MAEU262175667",
+        "has_master_data": false,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "02/13/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 40.7,
+          "lon": -74.15
+        },
+        "exit_port_geocode": {
+          "lat": 1.3855,
+          "lon": 103.541
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 606542801 Us 18446791647 Us Logistics Dyson Com",
+        "containers": [
+          {
+            "id": "GCXU5557901",
+            "size": "4000*900*800",
+            "type": "45G1",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "CY",
+            "description": "Of Air Purifier Hs Code Pallet Free Al L Freight Prepaid Including Destination Charges",
+            "mark": null
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "MY"
+          },
+          "location": {
+            "lat": 4.210484,
+            "lon": 101.975766
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": true,
+        "company_contact_info": {
+          "emails": [
+            "us.logistics@dyson.com"
+          ],
+          "phone_numbers": [
+            "18446791647"
+          ]
+        },
+        "company_contact_info_most_recent_found": "09/15/2026",
+        "company_website": "dyson.com",
+        "corporate_info_exists": true,
+        "entry_port": "Newark, Nj",
+        "entry_port_code": "4601",
+        "supplier_name": "Vs Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 102246 Jalan Murni 12 Kawasan P Senai Na 81400 My 6075973399 Vs18Shipping Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Malaysia",
+        "supplier_country_code": "MY",
+        "supplier_address_country": "Malaysia",
+        "supplier_address_country_code": "MY",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "vs18shipping@vs-i.com"
+          ],
+          "phone_numbers": [
+            "6075973399"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/05/2026",
+        "marks_numbers": "",
+        "marks_numbers_raw": "",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Tanjung Pelepas",
+        "exit_port_code": "55750",
+        "hs_code": "842139",
+        "hs_code_description": "Other",
+        "full_hs_code_description": "Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Centrifuges, including centrifugal dryers; filtering or purifying machinery and apparatus, for liquids or gases; parts thereof ; Filtering or purifying machinery and apparatus for gases ; Other",
+        "product_description": "Air Purifier Pallet Free Including Destination Charges",
+        "product_description_raw": "Of Air Purifier Hs Code Pallet Free Al L Freight Prepaid Including Destination Charges",
+        "hts_codes": [],
+        "carrier_scac_code": "MAEU - Maersk Line",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9687576",
+        "vessel_country_code": "LR",
+        "vessel_name": "Cisnes",
+        "estimated_arrival_date": "20260209",
+        "teu": "2.12",
+        "quantity": "1026",
+        "quantity_unit": "CTN",
+        "weight": 7417,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "45G1",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Passive vents at upper part of cargo space"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "601e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": null,
+        "shipping_rate": {
+          "route": "Asia,Transatlantic",
+          "ticker": null,
+          "booking_date": "2026-01-14"
+        },
+        "place_of_receipt": "Johor Bahru",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ssl",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": "Cincinnati-Lawrenceburg",
+        "us_clearing_district_code": "4102"
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "17ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 79.9,
+  "data": {
+    "data": [
+      {
+        "bol_number": "DSVFJHB9065975",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "HLCUKUL251134335",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "02/02/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 40.7,
+          "lon": -74.15
+        },
+        "exit_port_geocode": {
+          "lat": 1.3855,
+          "lon": 103.541
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il Illinois Il 60607 Us",
+        "containers": [
+          {
+            "id": "HAMU4014964",
+            "size": "4000*900*800",
+            "type": "4510",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "HH",
+            "description": "Of Hair Styler Spareshs Code: Plasti C Pallet - Pcs",
+            "mark": "Nil??"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "MY"
+          },
+          "location": {
+            "lat": 4.210484,
+            "lon": 101.975766
+          }
+        },
+        "company_address_geocode": {
+          "address_components": {
+            "city": "Chicago",
+            "country": "US",
+            "county": "Cook County",
+            "formatted_street": "W Fulton St",
+            "number": "1330",
+            "predirectional": "W",
+            "state": "IL",
+            "street": "Fulton",
+            "suffix": "St",
+            "zip": "60607"
+          },
+          "formatted_address": "1330 W Fulton St, Fl 5, Chicago, IL 60607",
+          "location": {
+            "lat": 41.887151,
+            "lon": -87.66015
+          }
+        },
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": false,
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Newark, Nj",
+        "entry_port_code": "4601",
+        "supplier_name": "V S Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 86556 Jalan Murni 12 Murni Industrial Estate Johor My Cp Tan 605973468 Eddietan Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Malaysia",
+        "supplier_country_code": "MY",
+        "supplier_address_country": "Malaysia",
+        "supplier_address_country_code": "MY",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "eddietan@vs-i.com"
+          ],
+          "phone_numbers": []
+        },
+        "supplier_contact_info_most_recent_found": "09/16/2026",
+        "marks_numbers": "Nil",
+        "marks_numbers_raw": "Nil??",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Tanjung Pelepas",
+        "exit_port_code": "55750",
+        "hs_code": "851690",
+        "hs_code_description": "Parts",
+        "full_hs_code_description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Electric instantaneous or storage water heaters and immersion heaters; electric space heating apparatus and soil heating apparatus; electrothermic hairdressing apparatus (for example, hair dryers, hair curlers, curling tong heaters) and hand dryers; electric flatirons; other electrothermic appliances of a kind used for domestic purposes; electric heating resistors, other than those of heading 8545; parts thereof ; Parts",
+        "product_description": "Hair Styler Spareshs Plasti Pallet",
+        "product_description_raw": "Of Hair Styler Spareshs Code: Plasti C Pallet - Pcs",
+        "hts_codes": [],
+        "carrier_scac_code": "DSVF - Dsv Ocean Transport",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9447861",
+        "vessel_country_code": "DK",
+        "vessel_name": "Rome Express",
+        "estimated_arrival_date": "20260202",
+        "teu": "2.12",
+        "quantity": "1692",
+        "quantity_unit": "CTN",
+        "weight": 4012,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "4510",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (with ventilation)",
+            "desc": "Passive vents at upper part of cargo space - Total vent cross-section area < 25 cm2/m of nominal container length."
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "552e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": null,
+        "shipping_rate": {
+          "route": "Asia,Transatlantic",
+          "ticker": null,
+          "booking_date": "2026-01-03"
+        },
+        "place_of_receipt": "Tanjung Pelepas",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "15ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 79.8,
+  "data": {
+    "data": [
+      {
+        "bol_number": "MZLY25PJA0005059",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "MAEU261218376",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "01/19/2026",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 40.7,
+          "lon": -74.15
+        },
+        "exit_port_geocode": {
+          "lat": 1.3855,
+          "lon": 103.541
+        },
+        "company_name": "Dyson B2B Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 W Fulton St 5Th Floor Chicago Il 60607 112 Us 13127209026 Us Logistics Dyson Com",
+        "containers": [
+          {
+            "id": "MRKU0664467",
+            "size": "4000*806*800",
+            "type": "42G1",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": null,
+            "description": "Hair Styler Spares",
+            "mark": "Lcl/Lcl ??Tmc532027058 / S25Spja0005059 ?? ??Delivery Address: ??Ups (West Chester, Oh) ??8779 Le Saint Dr ??West Chester ??Oh 45014 Usa ??"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "MY"
+          },
+          "location": {
+            "lat": 4.210484,
+            "lon": 101.975766
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": true,
+        "company_contact_info": {
+          "emails": [
+            "us.logistics@dyson.com"
+          ],
+          "phone_numbers": [
+            "+13127209026"
+          ]
+        },
+        "company_contact_info_most_recent_found": "09/15/2026",
+        "company_website": "dyson.com",
+        "corporate_info_exists": true,
+        "entry_port": "Newark, Nj",
+        "entry_port_code": "4601",
+        "supplier_name": "Vs Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 102246 Jalan Murni 12 Kawasan Perindustrian Murni Senai My 6075973399 Ycliong Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Malaysia",
+        "supplier_country_code": "MY",
+        "supplier_address_country": "Malaysia",
+        "supplier_address_country_code": "MY",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "ycliong@vs-i.com"
+          ],
+          "phone_numbers": [
+            "+6075973399"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/15/2026",
+        "marks_numbers": "Lcl Lcl Tmc Spja Delivery Address Ups West Chester Saint West Chester Usa",
+        "marks_numbers_raw": "Lcl/Lcl ??Tmc532027058 / S25Spja0005059 ?? ??Delivery Address: ??Ups (West Chester, Oh) ??8779 Le Saint Dr ??West Chester ??Oh 45014 Usa ??",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Tanjung Pelepas",
+        "exit_port_code": "55750",
+        "hs_code": "851690",
+        "hs_code_description": "Parts",
+        "full_hs_code_description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Electric instantaneous or storage water heaters and immersion heaters; electric space heating apparatus and soil heating apparatus; electrothermic hairdressing apparatus (for example, hair dryers, hair curlers, curling tong heaters) and hand dryers; electric flatirons; other electrothermic appliances of a kind used for domestic purposes; electric heating resistors, other than those of heading 8545; parts thereof ; Parts",
+        "product_description": "Hair Styler Spares",
+        "product_description_raw": "Hair Styler Spares",
+        "hts_codes": [],
+        "carrier_scac_code": "MZLY - Maersk Logistics & Services Intl A/S",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9501344",
+        "vessel_country_code": "DE",
+        "vessel_name": "Basle Express",
+        "estimated_arrival_date": "20260119",
+        "teu": "2.0",
+        "quantity": "114",
+        "quantity_unit": "CTN",
+        "weight": 270,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "42G1",
+            "length": "40ft",
+            "width_x_height": "8ft x 8ft 6in",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Passive vents at upper part of cargo space"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "550e",
+        "alibaba_link": false,
+        "lcl_adjusted": true,
+        "lcl": false,
+        "shipping_cost": null,
+        "shipping_rate": {
+          "route": "Asia,Transatlantic",
+          "ticker": null,
+          "booking_date": "2025-12-20"
+        },
+        "place_of_receipt": "Tanjung Pelepas",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 16,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "17ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 79.7,
+  "data": {
+    "data": [
+      {
+        "bol_number": "MZLY25PJA0002980",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "MAEU258950182",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "11/19/2025",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 33.7315,
+          "lon": -118.265
+        },
+        "exit_port_geocode": {
+          "lat": 31.38144,
+          "lon": 121.601
+        },
+        "company_name": "Dyson B2B Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 W Fulton St 5Th Floor Chicago Il 60607 112 Us 13127209026 Us Logistics Dyson Com",
+        "containers": [
+          {
+            "id": "MNBU0277581",
+            "size": "4000*900*800",
+            "type": "45R1",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "PP",
+            "description": "Table/ Floor Lighting",
+            "mark": "Lcl/Lcl ??Tmc525424473 / S25Spja0002980 ?? ??Delivery Address : ??Ups (Mira Loma) Cox ??11991 Landon Dr ??Mira Loma, Ca 91752-4000 ??Usa ??"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "MY"
+          },
+          "location": {
+            "lat": 4.210484,
+            "lon": 101.975766
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": true,
+        "company_contact_info": {
+          "emails": [
+            "us.logistics@dyson.com"
+          ],
+          "phone_numbers": [
+            "+13127209026"
+          ]
+        },
+        "company_contact_info_most_recent_found": "09/15/2026",
+        "company_website": "dyson.com",
+        "corporate_info_exists": true,
+        "entry_port": "Los Angeles, Ca",
+        "entry_port_code": "2704",
+        "supplier_name": "Vs Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 102246 Jalan Murni 12 Kawasan Perindustrian Murni Senai My 6075973399 Ycliong Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Malaysia",
+        "supplier_country_code": "MY",
+        "supplier_address_country": "Malaysia",
+        "supplier_address_country_code": "MY",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "ycliong@vs-i.com"
+          ],
+          "phone_numbers": [
+            "+6075973399"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/15/2026",
+        "marks_numbers": "Lcl Lcl Tmc Spja Delivery Address Ups Mira Loma Cox Landon Mira Loma Usa",
+        "marks_numbers_raw": "Lcl/Lcl ??Tmc525424473 / S25Spja0002980 ?? ??Delivery Address : ??Ups (Mira Loma) Cox ??11991 Landon Dr ??Mira Loma, Ca 91752-4000 ??Usa ??",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Shanghai",
+        "exit_port_code": "57035",
+        "hs_code": "940521",
+        "hs_code_description": "Designed for use solely with light-emitting diode (LED) light sources",
+        "full_hs_code_description": "Furniture; bedding, mattresses, mattress supports, cushions and similar stuffed furnishings; lamps and lighting fittings, not elsewhere specified or included; illuminated sign illuminated nameplates and the like; prefabricated buildings ; Luminaires and lighting fittings including searchlights and spotlights and parts thereof, not elsewhere specified or included; illuminated signs, illuminated nameplates and the like, having a permanently fixed light source, and parts thereof not elsewhere specified or included ; Electric table, desk, bedside or floor-standing luminaires ; Designed for use solely with light-emitting diode (LED) light sources",
+        "product_description": "Table Floor Lighting",
+        "product_description_raw": "Table/ Floor Lighting",
+        "hts_codes": [],
+        "carrier_scac_code": "MZLY - Maersk Logistics & Services Intl A/S",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9359040",
+        "vessel_country_code": "HK",
+        "vessel_name": "Guthorm Maersk",
+        "estimated_arrival_date": "20251119",
+        "teu": "2.12",
+        "quantity": "120",
+        "quantity_unit": "CTN",
+        "weight": 733,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "45R1",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "Thermal Container",
+            "desc": "Mechanically refrigerated and heated"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "543e",
+        "alibaba_link": false,
+        "lcl_adjusted": true,
+        "lcl": false,
+        "shipping_cost": "2011.88",
+        "shipping_rate": {
+          "route": "Asia,Pacific",
+          "ticker": "XSICFEUW",
+          "booking_date": "2025-10-20"
+        },
+        "place_of_receipt": "Tanjung Pelepas",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 13,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "20ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 79.6,
+  "data": {
+    "data": [
+      {
+        "bol_number": null,
+        "bol_type": "R",
+        "inbond_type": null,
+        "master_bol_number": "MAEU258550306",
+        "has_master_data": false,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "10/22/2025",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 33.7315,
+          "lon": -118.265
+        },
+        "exit_port_geocode": {
+          "lat": 30.6137,
+          "lon": 122.0694
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 606542801 Us 18446791647 Us Logistics Dyson Com",
+        "containers": [
+          {
+            "id": "GCXU2540248",
+            "size": "2000*806*800",
+            "type": "22G1",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "CY",
+            "description": "Of Tablefloor Lighting Hs Code . . Plastic Pallet All Freight Prepaid Including Destination Charges",
+            "mark": null
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "CN"
+          },
+          "location": {
+            "lat": 35.86166,
+            "lon": 104.195397
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": true,
+        "company_contact_info": {
+          "emails": [
+            "us.logistics@dyson.com"
+          ],
+          "phone_numbers": [
+            "18446791647"
+          ]
+        },
+        "company_contact_info_most_recent_found": "09/15/2026",
+        "company_website": "dyson.com",
+        "corporate_info_exists": true,
+        "entry_port": "Los Angeles, Ca",
+        "entry_port_code": "2704",
+        "supplier_name": "Vs Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 102246 Jalan Murni 12 Kawasan P Senai Na 81400 My 6075973399 Ycliong Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "China",
+        "supplier_country_code": "CN",
+        "supplier_address_country": "China",
+        "supplier_address_country_code": "CN",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "ycliong@vs-i.com"
+          ],
+          "phone_numbers": [
+            "6075973399"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/05/2026",
+        "marks_numbers": "",
+        "marks_numbers_raw": "",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Yangshan",
+        "exit_port_code": "57037",
+        "hs_code": "940360",
+        "hs_code_description": "Other wooden furniture",
+        "full_hs_code_description": "Furniture; bedding, mattresses, mattress supports, cushions and similar stuffed furnishings; lamps and lighting fittings, not elsewhere specified or included; illuminated sign illuminated nameplates and the like; prefabricated buildings ; Other furniture and parts thereof ; Other wooden furniture",
+        "product_description": "Tablefloor Lighting Plastic Pallet All Including Destination Charges",
+        "product_description_raw": "Of Tablefloor Lighting Hs Code . . Plastic Pallet All Freight Prepaid Including Destination Charges",
+        "hts_codes": [],
+        "carrier_scac_code": "MAEU - Maersk Line",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9342528",
+        "vessel_country_code": "SG",
+        "vessel_name": "Maersk Algol",
+        "estimated_arrival_date": "20251022",
+        "teu": "1.0",
+        "quantity": "128",
+        "quantity_unit": "CTN",
+        "weight": 1580,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "22G1",
+            "length": "20ft",
+            "width_x_height": "8ft x 8ft 6in",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Passive vents at upper part of cargo space"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "539e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": "1014.5",
+        "shipping_rate": {
+          "route": "Asia,Pacific",
+          "ticker": "XSICFEUW",
+          "booking_date": "2025-09-22"
+        },
+        "place_of_receipt": "Johor Bahru",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ssl",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "16ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 79.5,
+  "data": {
+    "data": [
+      {
+        "bol_number": "DSVFJHB9064759",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "HLCUKUL250816230",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "09/29/2025",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 40.7,
+          "lon": -74.15
+        },
+        "exit_port_geocode": {
+          "lat": 1.3855,
+          "lon": 103.541
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il Illinois Il 60607 Us",
+        "containers": [
+          {
+            "id": "HLBU2663959",
+            "size": "4000*900*800",
+            "type": "45G0",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "CY",
+            "description": "Of Fan Heater/Air Purifierhs Code: Pallet Freeams Hbl No: Jhb",
+            "mark": "Nil??"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "MY"
+          },
+          "location": {
+            "lat": 4.210484,
+            "lon": 101.975766
+          }
+        },
+        "company_address_geocode": {
+          "address_components": {
+            "city": "Chicago",
+            "country": "US",
+            "county": "Cook County",
+            "formatted_street": "W Fulton St",
+            "number": "1330",
+            "predirectional": "W",
+            "state": "IL",
+            "street": "Fulton",
+            "suffix": "St",
+            "zip": "60607"
+          },
+          "formatted_address": "1330 W Fulton St, Fl 5, Chicago, IL 60607",
+          "location": {
+            "lat": 41.887151,
+            "lon": -87.66015
+          }
+        },
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": false,
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Newark, Nj",
+        "entry_port_code": "4601",
+        "supplier_name": "V S Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 86556 Jalan Murni 12 Murni Industrial Estate Johor My Cp Tan 605973468 Eddietan Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Malaysia",
+        "supplier_country_code": "MY",
+        "supplier_address_country": "Malaysia",
+        "supplier_address_country_code": "MY",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "eddietan@vs-i.com"
+          ],
+          "phone_numbers": []
+        },
+        "supplier_contact_info_most_recent_found": "09/16/2026",
+        "marks_numbers": "Nil",
+        "marks_numbers_raw": "Nil??",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Tanjung Pelepas",
+        "exit_port_code": "55750",
+        "hs_code": "842139",
+        "hs_code_description": "Other",
+        "full_hs_code_description": "Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Centrifuges, including centrifugal dryers; filtering or purifying machinery and apparatus, for liquids or gases; parts thereof ; Filtering or purifying machinery and apparatus for gases ; Other",
+        "product_description": "Fan Heater Air Purifierhs Pallet Freeams Hbl Jhb",
+        "product_description_raw": "Of Fan Heater/Air Purifierhs Code: Pallet Freeams Hbl No: Jhb",
+        "hts_codes": [],
+        "carrier_scac_code": "DSVF - Dsv Ocean Transport",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9525869",
+        "vessel_country_code": "LR",
+        "vessel_name": "Ain Snan Express",
+        "estimated_arrival_date": "20250929",
+        "teu": "2.12",
+        "quantity": "1026",
+        "quantity_unit": "CTN",
+        "weight": 7417,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "45G0",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Openings at one end or both ends"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "533e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": null,
+        "shipping_rate": {
+          "route": "Asia,Transatlantic",
+          "ticker": null,
+          "booking_date": "2025-08-30"
+        },
+        "place_of_receipt": "Tanjung Pelepas",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "28ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 79.4,
+  "data": {
+    "data": [
+      {
+        "bol_number": null,
+        "bol_type": "R",
+        "inbond_type": null,
+        "master_bol_number": "MAEU254466758",
+        "has_master_data": false,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "09/13/2025",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 33.7485,
+          "lon": -118.2055
+        },
+        "exit_port_geocode": {
+          "lat": 24.50318,
+          "lon": 118.0293
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 606542801 Us 18446791647 Us Logistics Dyson Com",
+        "containers": [
+          {
+            "id": "TRHU4425506",
+            "size": "4000*900*800",
+            "type": "45G1",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "CY",
+            "description": "Of Fan Heaterair Purifier Hs Code Pallet Free All Freight Prepaid Including Destination Charges",
+            "mark": null
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "CN"
+          },
+          "location": {
+            "lat": 35.86166,
+            "lon": 104.195397
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": true,
+        "company_contact_info": {
+          "emails": [
+            "us.logistics@dyson.com"
+          ],
+          "phone_numbers": [
+            "18446791647"
+          ]
+        },
+        "company_contact_info_most_recent_found": "09/15/2026",
+        "company_website": "dyson.com",
+        "corporate_info_exists": true,
+        "entry_port": "Long Beach, Ca",
+        "entry_port_code": "2709",
+        "supplier_name": "Vs Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 102246 Jalan Murni 12 Kawasan P Senai Na 81400 My 6075973399 Ycliong Vs I Com",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "China",
+        "supplier_country_code": "CN",
+        "supplier_address_country": "China",
+        "supplier_address_country_code": "CN",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [
+            "ycliong@vs-i.com"
+          ],
+          "phone_numbers": [
+            "6075973399"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/05/2026",
+        "marks_numbers": "",
+        "marks_numbers_raw": "",
+        "supplier_website": "vs-i.com",
+        "exit_port": "Xiamen",
+        "exit_port_code": "57069",
+        "hs_code": "842139",
+        "hs_code_description": "Other",
+        "full_hs_code_description": "Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Centrifuges, including centrifugal dryers; filtering or purifying machinery and apparatus, for liquids or gases; parts thereof ; Filtering or purifying machinery and apparatus for gases ; Other",
+        "product_description": "Fan Heaterair Purifier Pallet Free All Including Destination Charges",
+        "product_description_raw": "Of Fan Heaterair Purifier Hs Code Pallet Free All Freight Prepaid Including Destination Charges",
+        "hts_codes": [],
+        "carrier_scac_code": "MAEU - Maersk Line",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9320685",
+        "vessel_country_code": "LR",
+        "vessel_name": "Ute",
+        "estimated_arrival_date": "20250913",
+        "teu": "2.12",
+        "quantity": "810",
+        "quantity_unit": "CTN",
+        "weight": 7168,
+        "notify_party_name": null,
+        "notify_party_address": null,
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": null,
+        "notify_party_contact_info_exists": false,
+        "container_types": [
+          {
+            "type": "45G1",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Passive vents at upper part of cargo space"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "535e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": "2027.7800000000002",
+        "shipping_rate": {
+          "route": "Asia,Pacific",
+          "ticker": "XSICFEUW",
+          "booking_date": "2025-08-14"
+        },
+        "place_of_receipt": "Johor Bahru",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 1,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ssl",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "19ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 79.3,
+  "data": {
+    "data": [
+      {
+        "bol_number": "DMALJHBA30575",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "ONEYPKGF03121400",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "05/06/2025",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 40.7,
+          "lon": -74.15
+        },
+        "exit_port_geocode": {
+          "lat": 1.259366,
+          "lon": 103.7544
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 60607 Us",
+        "containers": [
+          {
+            "id": "CAIU9494457",
+            "size": "4000*900*800",
+            "type": "45G0",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": null,
+            "description": "Table/Floor Lighting",
+            "mark": "Lcl/Lcl??Tmc504764472 / Jhba30575????Delivery Address:??Ups (Walton, Ky) Dyson Inc??41 Logistics Blvd??Walton, Ky 41094-9392??Usa??"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "SG"
+          },
+          "location": {
+            "lat": 1.352083,
+            "lon": 103.819836
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": false,
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Newark, Nj",
+        "entry_port_code": "4601",
+        "supplier_name": "V S Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 86556 Murni Industrial Estate Jalan Murni 12 Taman Perindustrian Murni Senai My 6075973399",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Singapore",
+        "supplier_country_code": "SG",
+        "supplier_address_country": "Singapore",
+        "supplier_address_country_code": "SG",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [],
+          "phone_numbers": [
+            "+6075973399"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/15/2026",
+        "marks_numbers": "Lcl Lcl Tmc Jhba Delivery Address Ups Walton Dyson Logistics Blvd Walton Usa",
+        "marks_numbers_raw": "Lcl/Lcl??Tmc504764472 / Jhba30575????Delivery Address:??Ups (Walton, Ky) Dyson Inc??41 Logistics Blvd??Walton, Ky 41094-9392??Usa??",
+        "supplier_website": null,
+        "exit_port": "Singapore",
+        "exit_port_code": "55976",
+        "hs_code": "940521",
+        "hs_code_description": "Designed for use solely with light-emitting diode (LED) light sources",
+        "full_hs_code_description": "Furniture; bedding, mattresses, mattress supports, cushions and similar stuffed furnishings; lamps and lighting fittings, not elsewhere specified or included; illuminated sign illuminated nameplates and the like; prefabricated buildings ; Luminaires and lighting fittings including searchlights and spotlights and parts thereof, not elsewhere specified or included; illuminated signs, illuminated nameplates and the like, having a permanently fixed light source, and parts thereof not elsewhere specified or included ; Electric table, desk, bedside or floor-standing luminaires ; Designed for use solely with light-emitting diode (LED) light sources",
+        "product_description": "Table Floor Lighting",
+        "product_description_raw": "Table/Floor Lighting",
+        "hts_codes": [],
+        "carrier_scac_code": "DMAL - Dhl Express",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9784776",
+        "vessel_country_code": "JP",
+        "vessel_name": "One Wren",
+        "estimated_arrival_date": "20250423",
+        "teu": "2.12",
+        "quantity": "40",
+        "quantity_unit": "CTN",
+        "weight": 244,
+        "notify_party_name": "Livingston International Brokerage",
+        "notify_party_address": "150 E Pierce Rd Ste 500 Itasca Il 60143 Us 16306163036",
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": "US",
+        "notify_party_contact_info": {
+          "emails": [],
+          "phone_numbers": [
+            "+16306163036"
+          ]
+        },
+        "notify_party_contact_info_exists": true,
+        "container_types": [
+          {
+            "type": "45G0",
+            "length": "40ft",
+            "width_x_height": "8ft x 9ft",
+            "group": "General Purpose Container (no ventilation)",
+            "desc": "Openings at one end or both ends"
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "026e",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": false,
+        "shipping_cost": null,
+        "shipping_rate": {
+          "route": "Asia,Transatlantic",
+          "ticker": null,
+          "booking_date": "2025-04-06"
+        },
+        "place_of_receipt": "Singapore",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 9,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "19ms"
+},
+{
+  "requestCost": 0.1,
+  "creditsRemaining": 79.2,
+  "data": {
+    "data": [
+      {
+        "bol_number": "DMALJHBA28797",
+        "bol_type": "H",
+        "inbond_type": null,
+        "master_bol_number": "MAEU247086506",
+        "has_master_data": true,
+        "company_manifest_confidentiality": true,
+        "arrival_date": "01/08/2025",
+        "company_first_shipment_date": "01/02/2015",
+        "supplier_first_shipment_date": "01/03/2015",
+        "entry_port_geocode": {
+          "lat": 40.7,
+          "lon": -74.15
+        },
+        "exit_port_geocode": {
+          "lat": 1.3855,
+          "lon": 103.541
+        },
+        "company_name": "Dyson Inc",
+        "company_basename": "Dyson",
+        "company_address": "1330 West Fulton Street 5Th Floor Chicago Il 60607 Us",
+        "containers": [
+          {
+            "id": "MRSU4753631",
+            "size": null,
+            "type": "Not Specified",
+            "load_status": "L",
+            "load_status_info": "Loaded - The container has cargo and will be delivered locally",
+            "service_type": "PP",
+            "description": "Hair Clip",
+            "mark": "Lcl/Lcl Tmc492639328 / Jhba28797 Delivery Address : Ups (Walton, Ky) Dyson Inc 41 Logistics Blvd Walton, Ky 41094-9392 Usa"
+          }
+        ],
+        "containers_count": 1,
+        "supplier_address_geocode": {
+          "address_components": {
+            "country": "MY"
+          },
+          "location": {
+            "lat": 4.210484,
+            "lon": 101.975766
+          }
+        },
+        "company_address_geocode": {},
+        "company_link": "/company/dyson",
+        "company_country": "United States",
+        "company_country_code": "US",
+        "company_total_shipments": 13863,
+        "company_main_phone_number": "+18446791647",
+        "company_contact_info_exists": false,
+        "company_website": null,
+        "corporate_info_exists": true,
+        "entry_port": "Newark, Nj",
+        "entry_port_code": "4601",
+        "supplier_name": "V S Industrial Berhad",
+        "supplier_basename": "Vs Industrial Berhad",
+        "supplier_address": "Ptd 86556 Murni Industrial Estate Jalan Murni 12 Taman Perindustrian Murni Senai My 6075973399",
+        "supplier_link": "/supplier/vs-industrial-berhad",
+        "supplier_country": "Malaysia",
+        "supplier_country_code": "MY",
+        "supplier_address_country": "Malaysia",
+        "supplier_address_country_code": "MY",
+        "supplier_total_shipments": 2974,
+        "supplier_main_phone_number": "+6075973399",
+        "supplier_contact_info_exists": true,
+        "supplier_contact_info": {
+          "emails": [],
+          "phone_numbers": [
+            "+6075973399"
+          ]
+        },
+        "supplier_contact_info_most_recent_found": "09/15/2026",
+        "marks_numbers": "Lcl Lcl Tmc Jhba Delivery Address Ups Walton Dyson Logistics Blvd Walton Usa",
+        "marks_numbers_raw": "Lcl/Lcl Tmc492639328 / Jhba28797 Delivery Address : Ups (Walton, Ky) Dyson Inc 41 Logistics Blvd Walton, Ky 41094-9392 Usa",
+        "supplier_website": null,
+        "exit_port": "Tanjung Pelepas",
+        "exit_port_code": "55750",
+        "hs_code": "851632",
+        "hs_code_description": "Other hairdressing apparatus",
+        "full_hs_code_description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Electric instantaneous or storage water heaters and immersion heaters; electric space heating apparatus and soil heating apparatus; electrothermic hairdressing apparatus (for example, hair dryers, hair curlers, curling tong heaters) and hand dryers; electric flatirons; other electrothermic appliances of a kind used for domestic purposes; electric heating resistors, other than those of heading 8545; parts thereof ; Electrothermic hairdressing or hand-drying apparatus ; Other hairdressing apparatus",
+        "product_description": "Hair Clip",
+        "product_description_raw": "Hair Clip",
+        "hts_codes": [],
+        "carrier_scac_code": "DMAL - Dhl Express",
+        "company_scac_codes_diversity": 1.72,
+        "company_scac_codes_diversity_normalized": 0.48,
+        "supplier_scac_codes_diversity": 2.54,
+        "supplier_scac_codes_diversity_normalized": 0.63,
+        "vessel_code": "9698654",
+        "vessel_country_code": "MH",
+        "vessel_name": "San Francisca",
+        "estimated_arrival_date": "20250110",
+        "teu": "0.01",
+        "quantity": "40",
+        "quantity_unit": "CTN",
+        "weight": 255,
+        "notify_party_name": "Livingston International Brokerage",
+        "notify_party_address": "150 E Pierce Rd Ste 500 Itasca Il 60143 Us 16306163036",
+        "notify_party_address_geocode": {},
+        "notify_party_country_code": "US",
+        "notify_party_contact_info": {
+          "emails": [],
+          "phone_numbers": [
+            "+16306163036"
+          ]
+        },
+        "notify_party_contact_info_exists": true,
+        "container_types": [
+          {
+            "type": "Not Specified",
+            "length": null,
+            "width_x_height": null,
+            "group": "Not Specified",
+            "desc": null
+          }
+        ],
+        "internal_supplier": false,
+        "voyage": "447w",
+        "alibaba_link": false,
+        "lcl_adjusted": false,
+        "lcl": true,
+        "shipping_cost": null,
+        "shipping_rate": {
+          "route": "Asia,Transatlantic",
+          "ticker": null,
+          "booking_date": "2024-12-09"
+        },
+        "place_of_receipt": "Tanjung Pelepas",
+        "cif": "0",
+        "company_china_concentration": 22.85,
+        "company_shipments_12m": 3703,
+        "supplier_company_shipments_12m": 229,
+        "supplier_company_yoy": 1045,
+        "supplier_company_shipments_12_24m": 20,
+        "house_bols_count": 10,
+        "uflpa_company": false,
+        "uflpa_supplier": false,
+        "ssl_or_ff": "ff",
+        "company_teu_3m": 2032,
+        "company_teu_6m": 3673,
+        "company_teu_12m": 6878,
+        "supplier_teu_3m": 333,
+        "supplier_teu_6m": 650,
+        "supplier_teu_12m": 1245,
+        "us_clearing_district_name": null,
+        "us_clearing_district_code": null
+      }
+    ],
+    "totalCount": 256
+  },
+  "executionTime": "16ms"
+}
+
+]
