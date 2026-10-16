@@ -1,0 +1,1 @@
+MATCH (n) WHERE n.buyer_basename = "Dyson" RETURN n
