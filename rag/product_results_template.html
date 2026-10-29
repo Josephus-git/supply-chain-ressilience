@@ -13,7 +13,9 @@
     .result-heading { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
     .rank { color: #d8a7ff; font-weight: bold; }
     .score { color: #9be7b1; }
-    pre { white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; color: #e8eaed; line-height: 1.5; }
+    .field { margin-top: 14px; }
+    .label { color: #a8dadc; font-size: 0.85rem; font-weight: bold; margin-bottom: 5px; }
+    .value { white-space: pre-wrap; overflow-wrap: anywhere; color: #e8eaed; line-height: 1.5; }
   </style>
 </head>
 <body>
@@ -45,11 +47,24 @@
         score.className = 'score';
         score.textContent = `Similarity: ${result.score.toFixed(4)}`;
 
-        const content = document.createElement('pre');
-        content.textContent = result.content;
+        const hsDescription = document.createElement('div');
+        hsDescription.className = 'field';
+        hsDescription.innerHTML = '<div class="label">Full HS code description</div>';
+        const hsValue = document.createElement('div');
+        hsValue.className = 'value';
+        hsValue.textContent = result.full_hs_code_description || 'Not available';
+        hsDescription.appendChild(hsValue);
+
+        const productDescription = document.createElement('div');
+        productDescription.className = 'field';
+        productDescription.innerHTML = '<div class="label">Product description</div>';
+        const productValue = document.createElement('div');
+        productValue.className = 'value';
+        productValue.textContent = result.product_description || 'Not available';
+        productDescription.appendChild(productValue);
 
         heading.append(rank, score);
-        card.append(heading, content);
+        card.append(heading, hsDescription, productDescription);
         resultsContainer.appendChild(card);
       });
     }

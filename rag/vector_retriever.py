@@ -1,4 +1,5 @@
 import os
+from ast import literal_eval
 import json
 from pathlib import Path
 
@@ -22,23 +23,20 @@ driver = GraphDatabase.driver(
 )
 
 # Create embedder
-# This must match the model used to create the Product.embedding vectors.
 embedder = OpenAIEmbeddings(model="text-embedding-3-small")
 
 # Create retriever
 retriever = VectorRetriever(
     driver,
     neo4j_database=os.getenv("NEO4J_DATABASE"),
-    # This is the Neo4j vector index name, not the node property name.
     index_name="embedding",
     embedder=embedder,
     return_properties=["product_description", "full_hs_code_description"],
 )
 
-# Search for similar products
-
-query_text = "air purifier"  
-top_k = 5  
+# Search for a product with vague description
+query_text = "equipment used to filter and purify air in buildings"
+top_k = 5
 
 
 result = retriever.search(query_text=query_text, top_k=top_k)
@@ -47,7 +45,12 @@ results_data = [
     {
         "rank": rank,
         "score": item.metadata["score"],
-        "content": item.content,
+        "full_hs_code_description": literal_eval(item.content).get(
+            "full_hs_code_description", ""
+        ),
+        "product_description": literal_eval(item.content).get(
+            "product_description", ""
+        ),
     }
     for rank, item in enumerate(result.items, start=1)
 ]

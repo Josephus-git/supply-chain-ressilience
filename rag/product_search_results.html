@@ -13,7 +13,9 @@
     .result-heading { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
     .rank { color: #d8a7ff; font-weight: bold; }
     .score { color: #9be7b1; }
-    pre { white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; color: #e8eaed; line-height: 1.5; }
+    .field { margin-top: 14px; }
+    .label { color: #a8dadc; font-size: 0.85rem; font-weight: bold; margin-bottom: 5px; }
+    .value { white-space: pre-wrap; overflow-wrap: anywhere; color: #e8eaed; line-height: 1.5; }
   </style>
 </head>
 <body>
@@ -22,8 +24,8 @@
   <main id="results"></main>
 
   <script>
-    const query = "air purifier";
-    const results = [{"rank": 1, "score": 0.6748315095901489, "content": "{'full_hs_code_description': 'Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Air or vacuum pumps, air or other gas compressors and fans; ventilating or recycling hoods incorporating a fan, whether or not fitted with filters; gas-tight biological safety cabinets, whether or not fitted with filters; parts thereof ; Fans ; Other', 'product_description': 'Hand Dryer'}"}, {"rank": 2, "score": 0.6702495813369751, "content": "{'full_hs_code_description': 'Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Electrical apparatus for switching or protecting electrical circuits, or for making connections to or in electrical circuits (for example, switches, relays, fuses, surge suppressors, plugs, sockets, lamp-holders and other connectors, junction boxes), for a voltage not exceeding 1,000 V; connectors for optical fibers, optical fiber bundles or cables ; Other switches', 'product_description': 'Activated Carbon Filter Retail'}"}, {"rank": 3, "score": 0.6674314737319946, "content": "{'full_hs_code_description': 'Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Air or vacuum pumps, air or other gas compressors and fans; ventilating or recycling hoods incorporating a fan, whether or not fitted with filters; gas-tight biological safety cabinets, whether or not fitted with filters; parts thereof ; Fans ; Table, floor, wall, window, ceiling or roof fans, with a self-contained electric motor of an output not exceeding 125 W', 'product_description': 'Fan Pallet Free All Freightprepaid Including Destination Charges'}"}, {"rank": 4, "score": 0.6673250198364258, "content": "{'full_hs_code_description': 'Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Air or vacuum pumps, air or other gas compressors and fans; ventilating or recycling hoods incorporating a fan, whether or not fitted with filters; gas-tight biological safety cabinets, whether or not fitted with filters; parts thereof ; Parts', 'product_description': 'Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare'}"}, {"rank": 5, "score": 0.6565345525741577, "content": "{'full_hs_code_description': 'Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Vacuum cleaners; parts thereof ; With self-contained electric motor ; Of a power not exceeding 1,500 W and having a dust bag or other receptacle capacity not exceeding 20 l', 'product_description': 'Electronics Spare Accessories Vacuum Cleaner Spare'}"}];
+    const query = "equipment used to filter and purify air in buildings";
+    const results = [{"rank": 1, "score": 0.6944602131843567, "full_hs_code_description": "Electrical machinery and equipment and parts thereof; sound recorders and reproducers, television image and sound recorders and reproducers, and parts and accessories of such articles ; Electrical apparatus for switching or protecting electrical circuits, or for making connections to or in electrical circuits (for example, switches, relays, fuses, surge suppressors, plugs, sockets, lamp-holders and other connectors, junction boxes), for a voltage not exceeding 1,000 V; connectors for optical fibers, optical fiber bundles or cables ; Other switches", "product_description": "Activated Carbon Filter Retail"}, {"rank": 2, "score": 0.6821166276931763, "full_hs_code_description": "Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Air or vacuum pumps, air or other gas compressors and fans; ventilating or recycling hoods incorporating a fan, whether or not fitted with filters; gas-tight biological safety cabinets, whether or not fitted with filters; parts thereof ; Fans ; Other", "product_description": "Hand Dryer"}, {"rank": 3, "score": 0.6717211604118347, "full_hs_code_description": "Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Air or vacuum pumps, air or other gas compressors and fans; ventilating or recycling hoods incorporating a fan, whether or not fitted with filters; gas-tight biological safety cabinets, whether or not fitted with filters; parts thereof ; Parts", "product_description": "Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare"}, {"rank": 4, "score": 0.6664375066757202, "full_hs_code_description": "Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Air or vacuum pumps, air or other gas compressors and fans; ventilating or recycling hoods incorporating a fan, whether or not fitted with filters; gas-tight biological safety cabinets, whether or not fitted with filters; parts thereof ; Fans ; Table, floor, wall, window, ceiling or roof fans, with a self-contained electric motor of an output not exceeding 125 W", "product_description": "Fan Pallet Free All Freightprepaid Including Destination Charges"}, {"rank": 5, "score": 0.6596056222915649, "full_hs_code_description": "Nuclear reactors, boilers, machinery and mechanical appliances; parts thereof ; Machines and mechanical appliances having individual functions, not specified or included elsewhere in this chapter; parts thereof ; Parts", "product_description": "Electrostatic Filter Retail Ceva Hbl Jhb Scac Pymn"}];
     document.querySelector('#query').textContent = `Query: ${query}`;
 
     const resultsContainer = document.querySelector('#results');
@@ -45,11 +47,24 @@
         score.className = 'score';
         score.textContent = `Similarity: ${result.score.toFixed(4)}`;
 
-        const content = document.createElement('pre');
-        content.textContent = result.content;
+        const hsDescription = document.createElement('div');
+        hsDescription.className = 'field';
+        hsDescription.innerHTML = '<div class="label">Full HS code description</div>';
+        const hsValue = document.createElement('div');
+        hsValue.className = 'value';
+        hsValue.textContent = result.full_hs_code_description || 'Not available';
+        hsDescription.appendChild(hsValue);
+
+        const productDescription = document.createElement('div');
+        productDescription.className = 'field';
+        productDescription.innerHTML = '<div class="label">Product description</div>';
+        const productValue = document.createElement('div');
+        productValue.className = 'value';
+        productValue.textContent = result.product_description || 'Not available';
+        productDescription.appendChild(productValue);
 
         heading.append(rank, score);
-        card.append(heading, content);
+        card.append(heading, hsDescription, productDescription);
         resultsContainer.appendChild(card);
       });
     }
