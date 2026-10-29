@@ -5,6 +5,7 @@ import os
 from dotenv import load_dotenv
 from neo4j import GraphDatabase
 from neo4j_graphrag.embeddings.openai import OpenAIEmbeddings
+from neo4j_graphrag.indexes import create_vector_index
 
 load_dotenv()
 
@@ -37,6 +38,15 @@ def update_product_embeddings() -> int:
 
     try:
         driver.verify_connectivity()
+        create_vector_index(
+            driver,
+            name="embedding",
+            label="Product",
+            embedding_property="embedding",
+            dimensions=1536,
+            similarity_fn="cosine",
+            neo4j_database=os.environ["NEO4J_DATABASE"],
+        )
         records, _, _ = driver.execute_query(
             """
             MATCH (product:Product)
