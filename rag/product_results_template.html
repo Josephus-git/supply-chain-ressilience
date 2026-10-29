@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Product search results</title>
+  <style>
+    :root { color-scheme: dark; font-family: Arial, sans-serif; }
+    body { max-width: 960px; margin: 0 auto; padding: 32px; background: #202124; color: #f1f3f4; }
+    h1 { margin-bottom: 8px; }
+    .query { color: #a8dadc; margin-bottom: 24px; }
+    .result-card { background: #2b2d31; border: 1px solid #45474d; border-radius: 10px; padding: 18px; margin: 14px 0; }
+    .result-heading { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+    .rank { color: #d8a7ff; font-weight: bold; }
+    .score { color: #9be7b1; }
+    pre { white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; color: #e8eaed; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <h1>Product search results</h1>
+  <div class="query" id="query"></div>
+  <main id="results"></main>
+
+  <script>
+    const query = __QUERY__;
+    const results = __RESULTS_JSON__;
+    document.querySelector('#query').textContent = `Query: ${query}`;
+
+    const resultsContainer = document.querySelector('#results');
+    if (results.length === 0) {
+      resultsContainer.textContent = 'No matching products found.';
+    } else {
+      results.forEach((result) => {
+        const card = document.createElement('article');
+        card.className = 'result-card';
+
+        const heading = document.createElement('div');
+        heading.className = 'result-heading';
+
+        const rank = document.createElement('span');
+        rank.className = 'rank';
+        rank.textContent = `#${result.rank}`;
+
+        const score = document.createElement('span');
+        score.className = 'score';
+        score.textContent = `Similarity: ${result.score.toFixed(4)}`;
+
+        const content = document.createElement('pre');
+        content.textContent = result.content;
+
+        heading.append(rank, score);
+        card.append(heading, content);
+        resultsContainer.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
