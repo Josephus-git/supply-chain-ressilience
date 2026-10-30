@@ -71,8 +71,6 @@ retriever = VectorCypherRetriever(
 # Change these values while testing.
 query_text = "vacuum cleaner"
 departure_port = "Tanjung Pelepas"
-# The port filter is applied after vector search, so search a wider candidate
-# pool before narrowing the results to shipments from the requested port.
 top_k = 50
 
 # Create the LLM and GraphRAG pipeline.
