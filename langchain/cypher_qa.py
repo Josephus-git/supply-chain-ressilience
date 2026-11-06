@@ -66,7 +66,7 @@ cypher_prompt = PromptTemplate(
     input_variables=["schema", "question"], template=cypher_template
 ).partial(schema=custom_schema_text)
 
-# Create the Cypher QA chain with the updated prompt
+# Create the Cypher Question Answering (QA) chain with the updated prompt
 cypher_qa = GraphCypherQAChain.from_llm(
     graph=graph,
     llm=model,
