@@ -1,0 +1,20 @@
+Node Properties:
+- `Shipment` {shipment_id, bol_number, bol_type, arrival_date, estimated_arrival_date, quantity, weight, teu, cif, place_of_receipt, voyage, shipping_cost}
+- `Supplier` {supplier_id, supplier_name, supplier_country_code, supplier_basename, supplier_total_shipments, supplier_country, supplier_address_country_code, supplier_address}
+- `Buyer` {buyer_id, buyer_name, buyer_country_code, uflpa_buyer, buyer_address, buyer_country, buyer_basename, buyer_total_shipments}
+- `Entry Port` {entry_port_id, entry_port, entry_port_code, entry_port_lat, entry_port_lon}
+- `Exit Port` {exit_port_id, exit_port, exit_port_code, exit_port_lat, exit_port_lon}
+- `Carrier` {carrier_code, carrier_name, carrier_id}
+- `Vessel` {vessel_id, vessel_name, vessel_country_code, vessel_code}
+- `Product` {product_id, hs_code, product_description, hs_code_description, full_hs_code_description, embedding}
+- `ParentCompany` {company_number, canonical_name, status, jurisdiction, company_type, parent_holding, verification_status, updated_at, extra_notes}
+
+Relationships:
+- (:Supplier)-[:SUPPLIES]->(:Shipment)
+- (:Shipment)-[:CONSIGNED_TO]->(:Buyer)
+- (:Shipment)-[:CONTAINS]->(:Product)
+- (:Shipment)-[:DEPARTS_FROM]->(:Exit Port)
+- (:Shipment)-[:ARRIVES_AT]->(:Entry Port)
+- (:Shipment)-[:CARRIED_BY]->(:Carrier)
+- (:Shipment)-[:TRANSPORTED_ON]->(:Vessel)
+- (:Supplier)-[:OWNED_BY]->(:ParentCompany)
