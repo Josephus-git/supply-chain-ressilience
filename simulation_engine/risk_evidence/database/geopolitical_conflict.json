@@ -12,7 +12,100 @@
     "related_evidence_ids": [],
     "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
     "verification_status": null,
-    "limitations": []
+    "limitations": [],
+    "search_window": {"start": null, "end": null, "basis": null, "note": null}
   },
-  "records": []
+  "records": [
+    {
+      "evidence_id": "GEO-2025-TW-001",
+      "affected_countries": [{"country_code": "TW", "country_name": "Taiwan"}],
+      "affected_area": "Waters around Taiwan and, separately, a shipping restriction off northern Zhejiang, China",
+      "event_start": "2025-04-01",
+      "event_end": null,
+      "conflict_description": "China conducted military exercises around Taiwan on 1 April; on 2 April its military described separate Strait Thunder-2025A live-fire drills in the East China Sea against simulated port and energy targets.",
+      "reported_supply_chain_effect": "Reuters reported a China Maritime Safety Administration shipping exclusion zone off northern Zhejiang until the night of 3 April. Taiwan had not reported travel disruption, and its state refiner said LNG imports were unaffected.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.rappler.com/world/asia-pacific/china-holds-live-fire-drills-escalation-taiwan-exercises-april-2-2025/",
+        "publisher": "Reuters via Rappler",
+        "published_at": "2025-04-02",
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Redistribution terms not verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_source_reviewed_official_notice_unverified",
+      "limitations": [
+        "Taiwan's defence ministry said on 1 April that it did not know when the exercises would end; no overall event end is established.",
+        "The shipping exclusion zone was more than 500 km from Taiwan and is not evidence that the Taiwan Strait or any Taiwan port was closed.",
+        "The April 1 drills and Strait Thunder-2025A were reported as distinct activities; they are grouped as related military activity, not assumed to be one continuous named exercise.",
+        "No affected case-study shipment, supplier, route, or quantifiable delay is established. The report explicitly states that no Taiwan travel disruption was reported at the time."
+      ],
+      "search_window": {
+        "start": "2025-04-01",
+        "end": "2025-04-03",
+        "basis": "observation_period",
+        "note": "Search range covers the reported exercise dates and the scheduled Zhejiang shipping exclusion; it does not establish a continuous exercise or its end."
+      }
+    },
+    {
+      "evidence_id": "GEO-2025-TW-002",
+      "affected_countries": [{"country_code": "TW", "country_name": "Taiwan"}],
+      "affected_area": "Taiwan and the Taipei flight information region",
+      "event_start": "2025-12-29",
+      "event_end": null,
+      "conflict_description": "China began Justice Mission 2025 military exercises around Taiwan on 29 December, including announced live-fire exercises on 30 December.",
+      "reported_supply_chain_effect": "Taiwan's Civil Aviation Administration estimated more than 100,000 international passengers would be affected and announced cancellation of 68 Kinmen and 16 Matsu domestic flights. International delays and rerouting were anticipated on 30 December.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.cna.com.tw/news/ahel/202512290276.aspx",
+        "publisher": "Central News Agency",
+        "published_at": "2025-12-29",
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Redistribution terms not verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_source_reviewed_official_statement_attributed",
+      "limitations": [
+        "International passenger and flight impacts are advance estimates, not measured outcomes; the cancellation figures concern passenger flights, not identified cargo shipments.",
+        "The 30 December exercise window does not establish the end of all associated military activity.",
+        "The source does not establish a commercial port closure, a supplier-specific impact, or the disruption of a particular cargo booking.",
+        "A related report is https://www.taiwannews.com.tw/news/6273591; it cites the same civil aviation information and is not independent confirmation."
+      ],
+      "search_window": {
+        "start": "2025-12-29",
+        "end": "2025-12-30",
+        "basis": "observation_period",
+        "note": "Dates cover the reported exercise start and the announced flight restriction window, not a confirmed end to all military activity."
+      }
+    },
+    {
+      "evidence_id": "GEO-2026-SG-001",
+      "affected_countries": [{"country_code": "SG", "country_name": "Singapore"}],
+      "affected_area": "Strait of Hormuz and Singapore marine fuel supply",
+      "event_start": "2026-02-28",
+      "event_end": null,
+      "conflict_description": "The Middle East conflict escalated on 28 February 2026; the International Energy Agency reported a near halt in tanker movements through the Strait of Hormuz.",
+      "reported_supply_chain_effect": "Bloomberg reported on 5 March, citing unnamed people familiar with private discussions, that Singapore marine fuel suppliers were fulfilling only part of agreed orders because they had received less fuel from their own suppliers.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.worldoil.com/news/2026/3/5/asia-oil-crunch-deepens-as-middle-east-conflict-disrupts-fuel-supplies/",
+        "publisher": "Bloomberg via World Oil",
+        "published_at": "2026-03-05",
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Redistribution terms not verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_source_reviewed_unnamed_sources",
+      "limitations": [
+        "The conflict began in the Middle East, not Singapore; Singapore is included for the reported downstream fuel-supply effect.",
+        "The IEA's account at https://www.iea.org/reports/oil-market-report-march-2026 dates the outbreak of hostilities to 28 February; it does not establish an end date for the conflict or fuel-supply disruption.",
+        "The Singapore report relies on unnamed sources and does not identify affected orders, individual suppliers, volumes, or end dates.",
+        "This is not evidence that Singapore port closed or that a case-study supplier or shipment was affected.",
+        "Any connection to energy or freight records must be reviewed to avoid counting the same effect twice."
+      ],
+      "search_window": {
+        "start": "2026-02-28",
+        "end": "2026-03-05",
+        "basis": "observation_period",
+        "note": "Search range spans the reported outbreak of hostilities to the fuel-supply report date; it is not a confirmed disruption end or proof of continuous shortage."
+      }
+    }
+  ]
 }

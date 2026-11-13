@@ -483,6 +483,83 @@
           "sha256": "569696679674efde8328ab9415d0fc77ca05260ce462caa2d4e27a0c9200752c"
         }
       ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory search for conflict or military activity during the study period with documented relevance to study-country transport, trade or fuel supply. Include contextual incidents without a proven case-study shipment only when the reported effects and uncertainties are explicitly distinguished.",
+      "sources_searched": [
+        {
+          "url": "https://www.rappler.com/world/asia-pacific/china-launches-military-drills-around-taiwan-april-1-2025/",
+          "outcome": "Reviewed Reuters reporting that drills around Taiwan began 1 April 2025 and their end was not known."
+        },
+        {
+          "url": "https://www.rappler.com/world/asia-pacific/china-holds-live-fire-drills-escalation-taiwan-exercises-april-2-2025/",
+          "outcome": "Included Reuters reporting of the related 2 April drills and Zhejiang shipping exclusion; report said Taiwan had not reported travel disruption."
+        },
+        {
+          "url": "https://www.cna.com.tw/news/ahel/202512290276.aspx",
+          "outcome": "Included reporting of Taiwan aviation authority's forecast disruption and domestic flight cancellations for 30 December 2025."
+        },
+        {
+          "url": "https://www.taiwannews.com.tw/news/6273591",
+          "outcome": "Reviewed later reporting citing the same aviation authority information; not independent confirmation."
+        },
+        {
+          "url": "https://www.cnbc.com/2025/12/29/china-launches-war-games-around-taiwan-as-island-vows-to-defend-democracy.html",
+          "outcome": "Reviewed Reuters reporting on the December exercises and flight forecasts."
+        },
+        {
+          "url": "https://www.worldoil.com/news/2026/3/5/asia-oil-crunch-deepens-as-middle-east-conflict-disrupts-fuel-supplies/",
+          "outcome": "Included Bloomberg's attributed report on partial fulfilment of some Singapore marine fuel orders; underlying sources are unnamed."
+        },
+        {
+          "url": "https://www.iea.org/reports/oil-market-report-march-2026",
+          "outcome": "Reviewed IEA reporting dating the outbreak of Middle East hostilities and describing the near halt of Hormuz tanker movements."
+        },
+        {
+          "url": "https://www.straitstimes.com/business/shipping-disruption-from-middle-east-crisis-reaches-ports-in-asia-including-singapore",
+          "outcome": "Reviewed contrasting reports of increased vessel waiting and PSA Singapore's statement that its port was not experiencing congestion due to the conflict; no port-congestion record included."
+        },
+        {
+          "url": "https://www.mpa.gov.sg/media-centre/details/no-7-of-2026-advisory-for-srs-operating-in-the-strait-of-hormuz-persian-gulf-gulf-of-oman-arabian-sea-red-sea-and-gulf-of-aden",
+          "outcome": "Reviewed advisory landing page dated 28 February 2026; its full advisory text was not available in the fetched page."
+        },
+        {
+          "url": "https://www.maritime.dot.gov/msci/2026-013-red-sea-bab-el-mandeb-strait-gulf-aden-arabian-sea-and-somali-basin-houthi-attacks",
+          "outcome": "Direct retrieval returned HTTP 403; not used as evidence."
+        }
+      ],
+      "known_coverage_gaps": [
+        "Exploratory research is not exhaustive across conflicts, study countries, companies, routes, languages or dates.",
+        "No record establishes an effect on a selected supplier, shipment or graph route; an absence of matches is not evidence of no impact.",
+        "The April Zhejiang maritime restriction is distant from Taiwan; it does not establish a Taiwan Strait closure or Taiwan shipment delay.",
+        "December flight estimates are forecasts and domestic passenger cancellations do not establish cargo disruption.",
+        "Singapore fuel-supply reporting relies on unnamed sources; the conflict's or disruption's end is not established.",
+        "No separate Malaysia, Philippines, United States or China effect was independently reviewed and included. Countries participating in an event are not necessarily affected supply-chain locations.",
+        "Related geopolitical, port, vessel, route and cost records require review to avoid double counting. These records are not probabilities."
+      ],
+      "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise attributed factual summaries and links, not full articles.",
+      "review_method": "Manually read accessible reports, distinguish military activity and advisory dates from observed or forecast commercial effects, retain unknown end dates, and label search windows as candidate-retrieval aids rather than proof of continuous disruption. File hashes describe working files at this review and must be refreshed when those files change.",
+      "created_at": "2026-11-13",
+      "files": [
+        {
+          "path": "geopolitical_conflict.json",
+          "sha256": "1586dd1a8a9f73d63a1dc3e9981d6ab12d45d911a229323afbf027999a00b2c7"
+        }
+      ]
     }
   ]
 }
