@@ -12,9 +12,21 @@
     "disruption_type": null,
     "reported_effect": null,
     "related_evidence_ids": [],
-    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "source": {
+      "url": null,
+      "publisher": null,
+      "published_at": null,
+      "retrieved_at": null,
+      "licence_notes": null
+    },
     "verification_status": null,
-    "limitations": []
+    "limitations": [],
+    "search_window": {
+      "start": null,
+      "end": null,
+      "basis": null,
+      "note": null
+    }
   },
   "records": [
     {
@@ -41,7 +53,13 @@
         "The hold end date, shipment delay and impact on the selected suppliers are not established.",
         "Wan Hai Lines is identified as the reporting company; its precise contractual role for any shipment is unverified.",
         "No graph entity or shipment match has been reviewed."
-      ]
+      ],
+      "search_window": {
+        "start": "2025-10-25",
+        "end": "2025-10-25",
+        "basis": "event_date",
+        "note": "Reported collision date; duration of the hold is unknown."
+      }
     },
     {
       "evidence_id": "VESSEL-2025-MY-001",
@@ -67,7 +85,13 @@
         "The incident end date, cause, cargo damage and shipment delays are unconfirmed by this source.",
         "Charterer does not necessarily mean carrier for an individual shipment.",
         "No case-study supplier or shipment is identified; no graph match has been reviewed."
-      ]
+      ],
+      "search_window": {
+        "start": "2025-11-07",
+        "end": "2025-11-07",
+        "basis": "event_date",
+        "note": "Reported fire date; incident end is unknown."
+      }
     },
     {
       "evidence_id": "VESSEL-2025-US-001",
@@ -92,7 +116,13 @@
         "The NTSB states that its information is preliminary and subject to change.",
         "Four days describes firefighting, not a confirmed shipment delay or complete incident duration.",
         "The source does not establish a case-study supplier, shipment, or contractual carrier match."
-      ]
+      ],
+      "search_window": {
+        "start": "2025-11-21",
+        "end": "2025-11-21",
+        "basis": "event_date",
+        "note": "Reported fire start date; overall incident end is unknown."
+      }
     },
     {
       "evidence_id": "VESSEL-2026-TW-001",
@@ -100,7 +130,7 @@
       "reported_vessel": "Zeal Lumos",
       "country_code": "TW",
       "country_name": "Taiwan",
-      "event_start": null,
+      "event_start": "2026-04-01",
       "event_end": null,
       "disruption_type": "vessel collision",
       "reported_effect": "A report attributed to The Maritime Executive describes Zeal Lumos contacting the berthed Haian Opus at a Taiwan port, with four containers falling into the water. Zeal Lumos returned to berth and port operations later resumed.",
@@ -112,13 +142,19 @@
         "retrieved_at": "2026-11-13",
         "licence_notes": "Licence and redistribution terms not verified; concise attributed factual summary and link only."
       },
-      "verification_status": "secondary_source_reviewed_primary_source_unverified",
+      "verification_status": "official_event_date_reviewed_secondary_effects",
       "limitations": [
-        "The source attributes its account to another report; the underlying report and official incident record were not independently reviewed.",
-        "The article does not specify the incident date or port name; publication date is not used as the event date.",
+        "The collision date is confirmed by the Taiwan Transportation Safety Board at https://www.ttsb.gov.tw/english/18609/28176/49882/post; vessel and port operational details are from secondary reporting.",
+        "The official incident summary does not establish an incident end date; the precise duration of port or vessel disruption remains unknown.",
         "Charterer does not necessarily mean carrier for an individual shipment.",
         "No case-study supplier, shipment, or graph entity match is established."
-      ]
+      ],
+      "search_window": {
+        "start": "2026-04-01",
+        "end": "2026-04-01",
+        "basis": "event_date",
+        "note": "Collision date established by the Taiwan Transportation Safety Board; incident end is unknown."
+      }
     },
     {
       "evidence_id": "VESSEL-2026-PH-001",
@@ -144,7 +180,13 @@
         "The incident end date and any shipment delay are not established.",
         "The initial 46 containers were reported empty; the source does not establish case-study cargo loss.",
         "Registration does not establish the carrier for a particular shipment; no graph match has been reviewed."
-      ]
+      ],
+      "search_window": {
+        "start": "2026-09-03",
+        "end": "2026-09-03",
+        "basis": "event_date",
+        "note": "Reported date containers were lost; incident end is unknown."
+      }
     },
     {
       "evidence_id": "VESSEL-2026-STRAIT-001",
@@ -170,7 +212,13 @@
         "The carrier advisory returned HTTP 403 and was not reviewed directly.",
         "The country of the actual incident is not verified; the intended Malaysian port does not establish the incident jurisdiction.",
         "Incident end date, cargo delay, case-study supplier impact and graph matches are unknown."
-      ]
+      ],
+      "search_window": {
+        "start": "2026-08-23",
+        "end": "2026-08-23",
+        "basis": "event_date",
+        "note": "Reported fire date; incident end is unknown."
+      }
     }
   ]
 }

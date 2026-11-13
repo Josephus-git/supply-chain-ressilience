@@ -179,6 +179,12 @@ The JSON templates provide field guides; no lookup has been implemented yet.
 For incidents, use event start/end dates and document missing or uncertain
 dates. Publication and retrieval dates are separate. This historical period
 alone is not enough to establish a reliable annual event probability.
+For candidate retrieval, records may additionally carry a `search_window`
+with inclusive dates, a labelled basis and an explanatory note. A report or
+claim date and a month expanded to calendar bounds are search aids, not
+verified incident intervals. A window outside the query does not prove that
+an incident did not overlap it; actual event endpoints remain null when
+unknown. See the [database instructions](./simulation_engine/risk_evidence/README.md).
 
 Tariff rules are different: collect applicable rules whose effective
 intervals **overlap** the case-study period, including rules that began
@@ -339,9 +345,11 @@ hashes describe only the state at the time they were calculated.
    IDs. Preserve actual shipment associations and dates.
 2. Validate and load a specific evidence version, identified by version and hashes.
 3. Find candidates by relevant entity ID, country, product, location, and
-   date as appropriate. Resolve ambiguous names, geographic precision, and
-   missing fields explicitly; do not infer a transit chokepoint from ports
-   alone.
+   date as appropriate. Surface the `search_window` basis and separate
+   report-date or approximate candidates from verified event overlap; avoid
+   treating unknown dates as proof of non-overlap. Resolve ambiguous names,
+   geographic precision, and missing fields explicitly; do not infer a transit
+   chokepoint from ports alone.
 4. Review matches and preserve the matching basis. Show possible or
    unassessable matches separately from verified matches.
 5. Construct a scoped scenario with evidence IDs and explicit probability,

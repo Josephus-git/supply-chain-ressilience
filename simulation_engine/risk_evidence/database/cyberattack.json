@@ -12,9 +12,21 @@
     "incident_type": null,
     "reported_operational_impact": null,
     "related_evidence_ids": [],
-    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "source": {
+      "url": null,
+      "publisher": null,
+      "published_at": null,
+      "retrieved_at": null,
+      "licence_notes": null
+    },
     "verification_status": null,
-    "limitations": []
+    "limitations": [],
+    "search_window": {
+      "start": null,
+      "end": null,
+      "basis": null,
+      "note": null
+    }
   },
   "records": [
     {
@@ -43,7 +55,13 @@
         "The reported organisation has not been matched to a Neo4j entity or to any case-study supplier name or facility.",
         "Other reports examined reference the same attacker claim; they do not independently confirm a breach.",
         "This allegation must not be used as a confirmed cyberattack, supplier disruption, or probability estimate."
-      ]
+      ],
+      "search_window": {
+        "start": "2026-09-21",
+        "end": "2026-09-21",
+        "basis": "claim_date",
+        "note": "Date of the alleged listing, not a confirmed attack date or incident interval."
+      }
     }
   ]
 }

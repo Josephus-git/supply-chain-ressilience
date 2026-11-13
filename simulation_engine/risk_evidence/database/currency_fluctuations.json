@@ -12,9 +12,21 @@
     "ending_rate": null,
     "reported_change_percent": null,
     "related_evidence_ids": [],
-    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "source": {
+      "url": null,
+      "publisher": null,
+      "published_at": null,
+      "retrieved_at": null,
+      "licence_notes": null
+    },
     "verification_status": null,
-    "limitations": []
+    "limitations": [],
+    "search_window": {
+      "start": null,
+      "end": null,
+      "basis": null,
+      "note": null
+    }
   },
   "records": [
     {
@@ -41,7 +53,13 @@
         "The percentage is calculated from two observations, not reported by the Federal Reserve; it is a change in yuan per US dollar, not the inverse currency return.",
         "The endpoints do not describe the intervening rate path or volatility; archived releases may not reflect subsequent data revisions.",
         "Reference rates do not establish any selected supplier's invoicing currency, conversion rate, hedging, or actual cost impact."
-      ]
+      ],
+      "search_window": {
+        "start": "2025-01-02",
+        "end": "2026-09-30",
+        "basis": "observation_period",
+        "note": "Comparison interval between two rate observations; does not establish a continuous rate path."
+      }
     },
     {
       "evidence_id": "FX-2025-2026-USD-MYR-001",
@@ -67,7 +85,13 @@
         "The percentage is calculated from two observations, not reported by the Federal Reserve; it is a change in ringgit per US dollar, not the inverse currency return.",
         "The endpoints do not describe the intervening rate path or volatility; archived releases may not reflect subsequent data revisions.",
         "Reference rates do not establish any selected supplier's invoicing currency, conversion rate, hedging, or actual cost impact."
-      ]
+      ],
+      "search_window": {
+        "start": "2025-01-02",
+        "end": "2026-09-30",
+        "basis": "observation_period",
+        "note": "Comparison interval between two rate observations; does not establish a continuous rate path."
+      }
     },
     {
       "evidence_id": "FX-2025-2026-USD-SGD-001",
@@ -93,7 +117,13 @@
         "The percentage is calculated from two observations, not reported by the Federal Reserve; it is a change in Singapore dollars per US dollar, not the inverse currency return.",
         "The endpoints do not describe the intervening rate path or volatility; archived releases may not reflect subsequent data revisions.",
         "Reference rates do not establish any selected supplier's invoicing currency, conversion rate, hedging, or actual cost impact."
-      ]
+      ],
+      "search_window": {
+        "start": "2025-01-02",
+        "end": "2026-09-30",
+        "basis": "observation_period",
+        "note": "Comparison interval between two rate observations; does not establish a continuous rate path."
+      }
     },
     {
       "evidence_id": "FX-2025-2026-USD-TWD-001",
@@ -119,7 +149,13 @@
         "The percentage is calculated from two observations, not reported by the Federal Reserve; it is a change in New Taiwan dollars per US dollar, not the inverse currency return.",
         "The endpoints do not describe the intervening rate path or volatility; archived releases may not reflect subsequent data revisions.",
         "Reference rates do not establish any selected supplier's invoicing currency, conversion rate, hedging, or actual cost impact."
-      ]
+      ],
+      "search_window": {
+        "start": "2025-01-02",
+        "end": "2026-09-30",
+        "basis": "observation_period",
+        "note": "Comparison interval between two rate observations; does not establish a continuous rate path."
+      }
     },
     {
       "evidence_id": "FX-2025-2026-USD-PHP-001",
@@ -146,7 +182,13 @@
         "The percentage is calculated from two observations, not reported by BSP; it is a change in pesos per US dollar, not the inverse currency return.",
         "The endpoints do not describe the intervening rate path or volatility; the BSP web tables can be updated.",
         "BSP rates use a different source and convention from the Federal Reserve rates; reference rates do not establish supplier invoicing, hedging, or actual cost impact."
-      ]
+      ],
+      "search_window": {
+        "start": "2025-01-31",
+        "end": "2026-09-30",
+        "basis": "observation_period",
+        "note": "Comparison interval between two rate observations; does not establish a continuous rate path."
+      }
     }
   ]
 }

@@ -126,12 +126,12 @@
         "None of these records establishes an empirical delay distribution, probability, supplier impact, or temporal overlap with a specific shipment."
       ],
       "licence_notes": "Source permissions and redistribution terms have not been verified. Store only concise attributed factual summaries and source links; do not redistribute full reports.",
-      "review_method": "Manually read each included source or identified reproduction, preserve its attribution and precise reported scope, distinguish publication dates from incident dates and observed durations from thresholds or expectations, and leave supplier matches unassigned. File hashes describe the working files as of this review and must be refreshed when those files change.",
+      "review_method": "Manually read each included source or identified reproduction, preserve its attribution and precise reported scope, distinguish publication dates from incident dates and observed durations from thresholds or expectations, and leave supplier matches unassigned. File hashes describe the working files as of this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals.",
       "created_at": "2026-11-13",
       "files": [
         {
           "path": "border_customs_delays.json",
-          "sha256": "1f592e0402f78f856f8d33c36507f642e0b8d64bf95534b55397237773bfed17"
+          "sha256": "b834fc781f9dd78a3a276b30f5b7fb259a95e3c36da4709c28afe4837f288394"
         },
         {
           "path": "entity_matches.json",
@@ -144,12 +144,30 @@
       "coverage_start": "2025-01-01",
       "coverage_end": "2026-09-30",
       "countries": [
-        {"country_code": "SG", "country_name": "Singapore"},
-        {"country_code": "MY", "country_name": "Malaysia"},
-        {"country_code": "PH", "country_name": "Philippines"},
-        {"country_code": "US", "country_name": "United States"},
-        {"country_code": "TW", "country_name": "Taiwan"},
-        {"country_code": "CN", "country_name": "China"}
+        {
+          "country_code": "SG",
+          "country_name": "Singapore"
+        },
+        {
+          "country_code": "MY",
+          "country_name": "Malaysia"
+        },
+        {
+          "country_code": "PH",
+          "country_name": "Philippines"
+        },
+        {
+          "country_code": "US",
+          "country_name": "United States"
+        },
+        {
+          "country_code": "TW",
+          "country_name": "Taiwan"
+        },
+        {
+          "country_code": "CN",
+          "country_name": "China"
+        }
       ],
       "supplier_ids": [],
       "product_codes": [],
@@ -195,6 +213,14 @@
         {
           "url": "https://www.mpa.gov.sg/media-centre/details/fire-onboard-singapore-registered-container-vessel-wan-hai-503-off-indian-coast",
           "outcome": "Identified a Singapore-registered vessel incident off India; excluded because registration alone does not establish an incident in a study country."
+        },
+        {
+          "url": "https://www.ttsb.gov.tw/english/18609/28176/49882/post",
+          "outcome": "Official Taiwan investigation confirms the Zeal Lumos collision date as 1 April 2026."
+        },
+        {
+          "url": "https://maritime-executive.com/article/boxship-departing-taiwan-clips-docked-ship-sending-containers-into-harbor",
+          "outcome": "Reviewed the original secondary report identifying Kaohsiung and describing the collision and port response."
         }
       ],
       "known_coverage_gaps": [
@@ -202,17 +228,17 @@
         "No incident was verified as affecting a selected supplier, shipment, or graph entity; an empty match list is not proof of no impact.",
         "No Singapore-located incident is included; vessel registration alone does not establish incident location.",
         "Most reports do not establish an end date, actual shipment delay, or vessel identity match to graph records.",
-        "Taiwan and Malaysia secondary reports need original-source review; the PETRA carrier advisory was inaccessible.",
+        "The Taiwan collision date was checked against an official source; operational details and the Malaysia secondary report still need original-source review. The PETRA carrier advisory was inaccessible.",
         "Vessel charterer, owner, operator, flag, and contractual carrier are distinct; reported names must not be equated without review.",
         "Records are not calibrated event probabilities and may overlap with future port disruption, cargo loss, or natural hazard evidence."
       ],
       "licence_notes": "Source permissions and redistribution terms have not been verified. Store only concise attributed factual summaries and source links; do not redistribute full reports.",
-      "review_method": "Manually read the linked reports; distinguish incident location from vessel flag, stated incident dates from publication dates, and fire or response duration from shipment delay. Attribute secondary claims and leave entity matches unassigned. File hashes describe working files at this review and must be refreshed when those files change.",
+      "review_method": "Manually read the linked reports; distinguish incident location from vessel flag, stated incident dates from publication dates, and fire or response duration from shipment delay. Attribute secondary claims and leave entity matches unassigned. File hashes describe working files at this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals.",
       "created_at": "2026-11-13",
       "files": [
         {
           "path": "carrier_vessel_disruption.json",
-          "sha256": "f6d3ecf2650d99089ce78d5fc31fdb3b5704d006b88bb385244adf8e87de5409"
+          "sha256": "1dddc65d4507aff0616e2f29a55422f3926a1f673292047ee440eaf4a829a776"
         },
         {
           "path": "entity_matches.json",
@@ -225,12 +251,30 @@
       "coverage_start": "2025-01-01",
       "coverage_end": "2026-09-30",
       "countries": [
-        {"country_code": "SG", "country_name": "Singapore"},
-        {"country_code": "MY", "country_name": "Malaysia"},
-        {"country_code": "PH", "country_name": "Philippines"},
-        {"country_code": "US", "country_name": "United States"},
-        {"country_code": "TW", "country_name": "Taiwan"},
-        {"country_code": "CN", "country_name": "China"}
+        {
+          "country_code": "SG",
+          "country_name": "Singapore"
+        },
+        {
+          "country_code": "MY",
+          "country_name": "Malaysia"
+        },
+        {
+          "country_code": "PH",
+          "country_name": "Philippines"
+        },
+        {
+          "country_code": "US",
+          "country_name": "United States"
+        },
+        {
+          "country_code": "TW",
+          "country_name": "Taiwan"
+        },
+        {
+          "country_code": "CN",
+          "country_name": "China"
+        }
       ],
       "supplier_ids": [],
       "product_codes": [],
@@ -271,12 +315,12 @@
         "No reviewed entity or shipment matches are established."
       ],
       "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise numerical observations and source links, not complete source files.",
-      "review_method": "Manually compare the published country-labelled source tables and Philippine bulletin, record dates and quote direction, and calculate the percent change as (ending rate / starting rate - 1) * 100 rounded to two decimals. The source field points to the end observation; start sources are documented in the records and manifest. File hashes describe working files at this review and must be refreshed when those files change.",
+      "review_method": "Manually compare the published country-labelled source tables and Philippine bulletin, record dates and quote direction, and calculate the percent change as (ending rate / starting rate - 1) * 100 rounded to two decimals. The source field points to the end observation; start sources are documented in the records and manifest. File hashes describe working files at this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals.",
       "created_at": "2026-11-13",
       "files": [
         {
           "path": "currency_fluctuations.json",
-          "sha256": "8245e206da5bc4e96db0e635d27bea19c44eacd1a3b0b336bf51a98117d72a30"
+          "sha256": "a7a8faed0f92528b5fcdf854413095cb8b947bdd20dfffb06901173631918fc2"
         },
         {
           "path": "entity_matches.json",
@@ -289,12 +333,30 @@
       "coverage_start": "2025-01-01",
       "coverage_end": "2026-09-30",
       "countries": [
-        {"country_code": "SG", "country_name": "Singapore"},
-        {"country_code": "MY", "country_name": "Malaysia"},
-        {"country_code": "PH", "country_name": "Philippines"},
-        {"country_code": "US", "country_name": "United States"},
-        {"country_code": "TW", "country_name": "Taiwan"},
-        {"country_code": "CN", "country_name": "China"}
+        {
+          "country_code": "SG",
+          "country_name": "Singapore"
+        },
+        {
+          "country_code": "MY",
+          "country_name": "Malaysia"
+        },
+        {
+          "country_code": "PH",
+          "country_name": "Philippines"
+        },
+        {
+          "country_code": "US",
+          "country_name": "United States"
+        },
+        {
+          "country_code": "TW",
+          "country_name": "Taiwan"
+        },
+        {
+          "country_code": "CN",
+          "country_name": "China"
+        }
       ],
       "supplier_ids": [],
       "product_codes": [],
@@ -334,12 +396,107 @@
         "The record does not support a probability estimate or establish the scope of any hypothetical compromise."
       ],
       "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise references and attributed claims, not full source text or sensitive data.",
-      "review_method": "Manually read accessible vendor and legal reports, record the source's explicit alleged status, retain unknown incident fields as null, and do not infer identity matches or operational effects. The record documents a claim rather than a verified attack. File hashes describe working files at this review and must be refreshed when those files change.",
+      "review_method": "Manually read accessible vendor and legal reports, record the source's explicit alleged status, retain unknown incident fields as null, and do not infer identity matches or operational effects. The record documents a claim rather than a verified attack. File hashes describe working files at this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals.",
       "created_at": "2026-11-13",
       "files": [
         {
           "path": "cyberattack.json",
-          "sha256": "d21d0ee129218698f0bf52344710f0891da9c6e659d0ddc4e1cb9f84d6681078"
+          "sha256": "294b755242481b4509dcb52ccf5c77a7d929ef0c8fd68bcc39a8885ae0db887e"
+        },
+        {
+          "path": "entity_matches.json",
+          "sha256": "b51684ef883234517828872d315f0449bcebb95c38dcff96b1a00e64b6490ddb"
+        }
+      ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {
+          "country_code": "SG",
+          "country_name": "Singapore"
+        },
+        {
+          "country_code": "MY",
+          "country_name": "Malaysia"
+        },
+        {
+          "country_code": "PH",
+          "country_name": "Philippines"
+        },
+        {
+          "country_code": "US",
+          "country_name": "United States"
+        },
+        {
+          "country_code": "TW",
+          "country_name": "Taiwan"
+        },
+        {
+          "country_code": "CN",
+          "country_name": "China"
+        }
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory manual collection of specific increases in fuel, electricity and container freight rates during the study period in or between study countries. Include source-reported market and customer scope; residential benchmarks and route indices are contextual evidence, not supplier costs.",
+      "sources_searched": [
+        {
+          "url": "https://www.mof.gov.my/portal/en/news/press-release/retail-price/retail-price-of-diesel-raised-by-3-sen-from-10-july-2025-to-16-july-2025",
+          "outcome": "Included official Peninsular Malaysia diesel price increase for July 2025."
+        },
+        {
+          "url": "https://www.mof.gov.my/portal/en/news/press-citations/ron97-unsubsidised-ron95-retail-prices-rise-by-60-sen-peninsular-diesel-up-80-sen-mof",
+          "outcome": "Included Bernama reporting of the finance ministry's March 2026 diesel increase and noted land-logistics subsidy conditions."
+        },
+        {
+          "url": "https://paultan.org/2026/03/18/malaysian-fuel-prices-march-19-25-2026-ron97-up-70-sen-to-rm4-55-per-litre-diesel-up-80-sen-rm4-72-litre/",
+          "outcome": "Reviewed previous week's March 2026 retail diesel price."
+        },
+        {
+          "url": "https://www.meralco.com.ph/media/advisories/higher-rates-july-2025",
+          "outcome": "Included the utility's June-to-July 2025 typical residential rate increase, not an industrial rate."
+        },
+        {
+          "url": "https://www.channelnewsasia.com/singapore/electricity-tariffs-prices-rates-gas-q3-july-september-6202481",
+          "outcome": "Included Singapore's reported Q3 2026 regulated household electricity tariff and prior-quarter difference."
+        },
+        {
+          "url": "https://www.ema.gov.sg/news-events/news/media-releases/2026/Higher-Electricity-and-Town-Gas-Tariffs-for-July-September-2026",
+          "outcome": "Official regulator page returned an automated-access challenge; not directly reviewed."
+        },
+        {
+          "url": "https://gcaptain.com/transpacific-freight-rates-surge-amid-trump-tariff-turmoil/",
+          "outcome": "Included the reported Drewry Shanghai-to-Los Angeles spot freight assessment and rounded weekly change."
+        },
+        {
+          "url": "https://www.ajot.com/news/drewry-world-container-index-29-may",
+          "outcome": "Reviewed the previous week's Drewry route assessment."
+        },
+        {
+          "url": "https://carplus.my/2025/07/02/3-july-9-july-malaysia-fuel-price-update-3-sen-drop-for-ron97-and-diesel/",
+          "outcome": "Reviewed the 3 to 9 July 2025 baseline diesel price and effective period."
+        }
+      ],
+      "known_coverage_gaps": [
+        "Exploratory research is not exhaustive across dates, fuels, energy customers, routes, countries, and languages.",
+        "No supplier invoice, electricity contract, fuel eligibility, freight booking, consumption, or actual increased expense was verified.",
+        "Electricity benchmarks are residential; they must not be used as industrial rates without independent evidence.",
+        "The freight observation is a China-to-US spot index and does not establish an observed shipment route or actual rate paid.",
+        "Malaysia's subsidised diesel schemes and regional price differences mean the retail rate cannot be assumed for land logistics.",
+        "Dates indicate published effective periods or assessment dates; exact monthly billing dates and source publication dates remain unknown where null.",
+        "Overlap with currency, tariff, geopolitical, or carrier evidence requires review to avoid double counting."
+      ],
+      "licence_notes": "Source permissions and index redistribution terms have not been independently verified. Store concise attributed factual observations and links, not full source text or copyrighted index datasets.",
+      "review_method": "Manually read the accessible source pages, retain currency, unit, dates and market/customer scope, and calculate percentage change from baseline and observed rates where the source does not report it. Keep the Drewry-reported rounded 57 percent distinct from the approximately 57.20 percent calculated from displayed prices. File hashes describe working files at this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals.",
+      "created_at": "2026-11-13",
+      "files": [
+        {
+          "path": "energy_transport_cost_increase.json",
+          "sha256": "569696679674efde8328ab9415d0fc77ca05260ce462caa2d4e27a0c9200752c"
         },
         {
           "path": "entity_matches.json",

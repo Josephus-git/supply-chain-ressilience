@@ -23,7 +23,13 @@
       "licence_notes": null
     },
     "verification_status": null,
-    "limitations": []
+    "limitations": [],
+    "search_window": {
+      "start": null,
+      "end": null,
+      "basis": null,
+      "note": null
+    }
   },
   "records": [
     {
@@ -54,7 +60,13 @@
         "The start and end dates of the condition are not stated; the publication date is not an event date.",
         "The report does not identify any case-study supplier or establish that a specific shipment was affected.",
         "No graph entity or shipment match has been reviewed."
-      ]
+      ],
+      "search_window": {
+        "start": "2026-03-21",
+        "end": "2026-03-21",
+        "basis": "report_date",
+        "note": "Publication date of a report about an ongoing condition; event onset and end are unknown."
+      }
     },
     {
       "evidence_id": "CUSTOMS-2025-PH-001",
@@ -83,7 +95,13 @@
         "Publication date, event start and event end could not be verified; the memorandum date is not an incident start date.",
         "The source describes manifest submission delays, not a measured shipment clearance delay.",
         "No case-study supplier, shipment, specific border location, or graph match is established."
-      ]
+      ],
+      "search_window": {
+        "start": "2025-09-24",
+        "end": "2025-09-24",
+        "basis": "document_date",
+        "note": "Date of the customs memorandum cited by the report; not the onset or end of the system limitation."
+      }
     },
     {
       "evidence_id": "CUSTOMS-2026-PH-001",
@@ -112,7 +130,13 @@
         "Three days is a clearance threshold, not the additional delay for any shipment.",
         "The onset and end of congestion are unknown; the reported 2026 figure is not a dated incident interval.",
         "The report does not identify any case-study supplier or establish that a specific shipment was affected."
-      ]
+      ],
+      "search_window": {
+        "start": "2026-06-25",
+        "end": "2026-06-25",
+        "basis": "report_date",
+        "note": "Publication date of the congestion report; onset and end are unknown."
+      }
     },
     {
       "evidence_id": "CUSTOMS-2025-US-001",
@@ -140,7 +164,13 @@
         "The official GovDelivery page did not expose the bulletin body to the fetch tool; the record is based on a third-party reproduction.",
         "The bulletin does not state when the incident began or ended, nor a duration for any shipment delay.",
         "Notification delays do not by themselves establish that goods or a case-study supplier were delayed."
-      ]
+      ],
+      "search_window": {
+        "start": "2025-04-28",
+        "end": "2025-04-28",
+        "basis": "report_date",
+        "note": "CBP bulletin date reporting delays; start and end are unknown."
+      }
     },
     {
       "evidence_id": "CUSTOMS-2025-US-002",
@@ -169,7 +199,13 @@
         "The bulletin does not state when the incident began or ended, nor a duration for any shipment delay.",
         "It is not established whether this issue is independent of the April notification delays.",
         "Notification delays do not by themselves establish that goods or a case-study supplier were delayed."
-      ]
+      ],
+      "search_window": {
+        "start": "2025-05-07",
+        "end": "2025-05-07",
+        "basis": "report_date",
+        "note": "CBP bulletin date reporting delays; start and end are unknown."
+      }
     },
     {
       "evidence_id": "CUSTOMS-2025-US-003",
@@ -197,7 +233,13 @@
         "The record is based on a third-party reproduction of the CBP bulletin.",
         "The bulletin does not state the incident start time; backlog clearance was an expectation, not a confirmed completion time.",
         "The duration and impact on any specific shipment or case-study supplier are not established."
-      ]
+      ],
+      "search_window": {
+        "start": "2025-07-03",
+        "end": "2025-07-03",
+        "basis": "report_date",
+        "note": "CBP bulletin date reporting corrected issues; backlog clearance was an expectation and event onset is unknown."
+      }
     }
   ]
 }

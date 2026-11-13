@@ -80,6 +80,12 @@ API can expose the same functionality to a frontend. An MCP server may be
 added as a thin adapter for MCP-compatible clients; it is not required for
 the engine or web API.
 
+Evidence `search_window` dates are retrieval aids with an explicit basis, not
+necessarily incident start or end dates. The application must distinguish
+report-date, claim-date and approximate candidates from verified temporal
+overlaps, and surface unknown event dates rather than treating a search window
+as proof of impact.
+
 The existing [mcp_client.py](./langchain/mcp_client.py) targets an external
 Apify service and is not the local simulation engine.
 

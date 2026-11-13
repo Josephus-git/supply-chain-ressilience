@@ -27,6 +27,19 @@ than treating templates as evidence.
   entries have been recorded. Neither implies zero risk or a clean supplier.
 - Use ISO 8601 dates (`YYYY-MM-DD`). Record event dates, publication dates,
   retrieval dates, and tariff effective dates separately; do not infer them.
+- Populated risk files use `search_window` with inclusive `start` and `end`
+  dates, a `basis` and an explanatory `note` for date-based candidate
+  retrieval. `event_date` means a known event date; `report_date` or
+  `document_date` identifies when a source reported an issue, not when it
+  began or ended; `claim_date` identifies an unverified claim. An
+  `observation_period` is a comparison window, not continuous observations;
+  `month_approximation` expands a reported month to calendar dates for
+  searching only. A window is not a verified incident interval, and its
+  absence outside a query is not proof of no overlap.
+- Future retrieval must return the window's basis and note, distinguish
+  candidates from verified temporal matches, and not treat missing event
+  endpoints as zero-duration events or definitive non-overlaps. Search-window
+  dates are indexing aids, not inferred event dates or impact probabilities.
 - Store a verified country name alongside its ISO 3166-1 alpha-2 code where
   available (for example, `Malaysia` and `MY`). Use `null` for an unknown
   name or code; do not guess. For multiple countries, use an array of objects
