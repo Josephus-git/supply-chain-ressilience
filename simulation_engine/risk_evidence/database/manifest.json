@@ -219,6 +219,70 @@
           "sha256": "b51684ef883234517828872d315f0449bcebb95c38dcff96b1a00e64b6490ddb"
         }
       ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Initial comparison of USD against the five non-US study currencies using two published observations within the study period. Federal Reserve pairs use 2 January 2025 and 30 September 2026; the Philippine peso comparison uses 31 January 2025 and 30 September 2026.",
+      "sources_searched": [
+        {
+          "url": "https://www.federalreserve.gov/releases/h10/20250106/",
+          "outcome": "Reviewed 2 January 2025 H.10 observations for CNY, MYR, SGD and TWD."
+        },
+        {
+          "url": "https://www.federalreserve.gov/releases/h10/20261005/",
+          "outcome": "Reviewed 30 September 2026 H.10 observations for the same four currencies."
+        },
+        {
+          "url": "https://www.federalreserve.gov/releases/h10/about.htm",
+          "outcome": "Reviewed H.10 rate definition and caveat that archived releases may not reflect subsequent revisions."
+        },
+        {
+          "url": "https://www.bsp.gov.ph/statistics/external/tab12_pus_data.aspx",
+          "outcome": "Reviewed Philippine peso per US dollar end-of-period rates for January 2025 and September 2026."
+        },
+        {
+          "url": "https://www.bsp.gov.ph/Lists/RERB/Attachments/1959/31Jan2025.pdf",
+          "outcome": "Reviewed the 31 January 2025 Philippine reference bulletin for the start rate."
+        },
+        {
+          "url": "https://www.bsp.gov.ph/statistics/external/day99_data.aspx",
+          "outcome": "Reviewed the 30 September 2026 Philippine daily rate."
+        }
+      ],
+      "known_coverage_gaps": [
+        "Two endpoint rates per pair do not provide daily paths, volatility, a probability distribution, or the largest intra-period moves.",
+        "The peso comparison has a later start date and a different source and rate convention than the Federal Reserve pairs.",
+        "The percentage change is calculated from the displayed rates; it is not directly reported by either central bank.",
+        "Archived H.10 releases are not revised; the Philippine web tables may change, and source conditions remain unverified.",
+        "USD is a reference comparison only; shipment invoicing, supplier exposure, hedging, conversion costs and actual losses have not been verified.",
+        "No reviewed entity or shipment matches are established."
+      ],
+      "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise numerical observations and source links, not complete source files.",
+      "review_method": "Manually compare the published country-labelled source tables and Philippine bulletin, record dates and quote direction, and calculate the percent change as (ending rate / starting rate - 1) * 100 rounded to two decimals. The source field points to the end observation; start sources are documented in the records and manifest. File hashes describe working files at this review and must be refreshed when those files change.",
+      "created_at": "2026-11-13",
+      "files": [
+        {
+          "path": "currency_fluctuations.json",
+          "sha256": "8245e206da5bc4e96db0e635d27bea19c44eacd1a3b0b336bf51a98117d72a30"
+        },
+        {
+          "path": "entity_matches.json",
+          "sha256": "b51684ef883234517828872d315f0449bcebb95c38dcff96b1a00e64b6490ddb"
+        }
+      ]
     }
   ]
 }
