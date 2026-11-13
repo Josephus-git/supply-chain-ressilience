@@ -283,6 +283,69 @@
           "sha256": "b51684ef883234517828872d315f0449bcebb95c38dcff96b1a00e64b6490ddb"
         }
       ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory public-source search for specific cyber incidents or explicitly labelled claims concerning the case-study company names during the study period. An unverified claim is recorded as a claim, not a confirmed incident; general advisories and events outside the period are excluded.",
+      "sources_searched": [
+        {
+          "url": "https://socradar.io/data-breach/flex-ltd-metaencryptor-ransomware-2026/",
+          "outcome": "Reviewed and recorded an explicitly alleged ransomware-group listing naming Flex Ltd. The publisher warns that such claims may not be independently verified."
+        },
+        {
+          "url": "https://www.classaction.org/data-breach-lawsuits/flex-september-2026",
+          "outcome": "Reviewed legal investigation discussing the same unconfirmed attacker claim; not independent confirmation."
+        },
+        {
+          "url": "https://www.dexpose.io/metaencryptor-strikes-global-tech-leader-flex-ltd/",
+          "outcome": "Reviewed a second report of the same attacker claim, not independent confirmation of a breach."
+        },
+        {
+          "url": "https://www.breachsense.com/breaches/flex-data-breach/",
+          "outcome": "Reviewed a separate listing that explicitly states the threat-actor claim was not verified. Other exposure counts on the page are not necessarily related and were not recorded."
+        },
+        {
+          "url": "https://www.csa.gov.sg/resources/ransomware-portal/",
+          "outcome": "Identified general ransomware information; excluded because it does not establish a case-study supplier incident."
+        },
+        {
+          "url": "https://mycert.org.my/portal/advisory?id=MA-1479.072026",
+          "outcome": "Identified general ransomware advisory in search results; not used as evidence of a case-study supplier incident."
+        }
+      ],
+      "known_coverage_gaps": [
+        "Searches were exploratory, not exhaustive across names, aliases, languages, regulators, and public disclosures.",
+        "The single recorded Flex listing is an unverified attacker allegation, not a confirmed incident; multiple reports may share the same underlying claim.",
+        "No selected supplier, facility, incident date, affected service, shipment, or operational impact was verified or matched to Neo4j.",
+        "No other confirmed case-study supplier cyberattack was identified in the targeted searches; this is not evidence that none occurred.",
+        "The record does not support a probability estimate or establish the scope of any hypothetical compromise."
+      ],
+      "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise references and attributed claims, not full source text or sensitive data.",
+      "review_method": "Manually read accessible vendor and legal reports, record the source's explicit alleged status, retain unknown incident fields as null, and do not infer identity matches or operational effects. The record documents a claim rather than a verified attack. File hashes describe working files at this review and must be refreshed when those files change.",
+      "created_at": "2026-11-13",
+      "files": [
+        {
+          "path": "cyberattack.json",
+          "sha256": "d21d0ee129218698f0bf52344710f0891da9c6e659d0ddc4e1cb9f84d6681078"
+        },
+        {
+          "path": "entity_matches.json",
+          "sha256": "b51684ef883234517828872d315f0449bcebb95c38dcff96b1a00e64b6490ddb"
+        }
+      ]
     }
   ]
 }

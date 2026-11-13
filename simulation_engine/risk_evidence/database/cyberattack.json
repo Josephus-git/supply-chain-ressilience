@@ -16,5 +16,34 @@
     "verification_status": null,
     "limitations": []
   },
-  "records": []
+  "records": [
+    {
+      "evidence_id": "CYBER-CLAIM-2026-001",
+      "reported_organisation": "Flex Ltd",
+      "country_code": null,
+      "country_name": null,
+      "affected_service": null,
+      "event_start": null,
+      "event_end": null,
+      "incident_type": "unverified ransomware-group allegation",
+      "reported_operational_impact": null,
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://socradar.io/data-breach/flex-ltd-metaencryptor-ransomware-2026/",
+        "publisher": "SOCRadar",
+        "published_at": "2026-09-21",
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Redistribution terms not independently verified; only a concise reference to the claim and source link are retained."
+      },
+      "verification_status": "unverified_attacker_claim_source_reviewed",
+      "limitations": [
+        "SOCRadar labels the report alleged and says leak-site claims may not be independently verified or reflect confirmed breaches; a listing does not establish that an attack or breach occurred.",
+        "The publication and alleged listing date is not a verified incident start date. Any incident end date is also unknown.",
+        "No affected facility, country of incident, service, operational impact, or shipment has been verified.",
+        "The reported organisation has not been matched to a Neo4j entity or to any case-study supplier name or facility.",
+        "Other reports examined reference the same attacker claim; they do not independently confirm a breach.",
+        "This allegation must not be used as a confirmed cyberattack, supplier disruption, or probability estimate."
+      ]
+    }
+  ]
 }
