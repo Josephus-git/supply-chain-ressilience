@@ -138,6 +138,87 @@
           "sha256": "b51684ef883234517828872d315f0449bcebb95c38dcff96b1a00e64b6490ddb"
         }
       ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory manual collection of specific carrier or cargo-vessel incidents reported in or relevant to the study jurisdictions during the study period. The Strait of Malacca fire is included because a later report identifies Port Klang as the intended inspection location; incident jurisdiction is unverified. Supplier names were searched, but contextual incidents are not treated as supplier matches.",
+      "sources_searched": [
+        {
+          "url": "https://www.mpa.gov.sg/media-centre/details/collision-involving-singapore-registered-container-vessel-in-guangzhou--china",
+          "outcome": "Included an official report on WAN HAI A17's collision off Guangzhou."
+        },
+        {
+          "url": "https://www.imarinenews.com/29091.html",
+          "outcome": "Included reporting of the Kyparissia fire and Maersk's statement."
+        },
+        {
+          "url": "https://www.ntsb.gov/investigations/Pages/DCA26FM003.aspx",
+          "outcome": "Included preliminary official investigation information on the ONE HENRY HUDSON fire."
+        },
+        {
+          "url": "https://lafd.org/news/lafd-and-partner-agencies-battle-container-ship-fire-one-henry-hudson",
+          "outcome": "Reviewed first-responder reporting on the same ONE HENRY HUDSON fire."
+        },
+        {
+          "url": "https://www.indexbox.io/blog/port-operations-resume-after-zeal-lumos-container-ship-incident/",
+          "outcome": "Included attributed reporting on the Zeal Lumos collision in Taiwan."
+        },
+        {
+          "url": "https://portcalls.com/46-empty-containers-fall-off-ship-at-hamilo-point-in-batangas/",
+          "outcome": "Included reporting attributed to the Philippine Coast Guard concerning Span Asia 39."
+        },
+        {
+          "url": "https://www.mightyshipping.com/en/blog/2026-08-26-cma-cgm-petra-malacca-fire",
+          "outcome": "Included attributed reporting of the CMA CGM PETRA fire and its intended inspection at Port Klang."
+        },
+        {
+          "url": "https://www.cma-cgm.com/local/kenya/news/241/cma-cgm-petra-i-customer-advisory-2-advisory-no-2-kilima-service-m-v-cma-cgm-petra-voy-no-0k13nw1ma-",
+          "outcome": "Direct retrieval of the carrier advisory returned HTTP 403; not independently reviewed."
+        },
+        {
+          "url": "https://www.ttsb.gov.tw/english/16051/16113/16114/50501/post",
+          "outcome": "Reviewed official investigation of general cargo ship Xin Feng; excluded from this initial set because a connection to the selected study shipments was not established."
+        },
+        {
+          "url": "https://www.mpa.gov.sg/media-centre/details/fire-onboard-singapore-registered-container-vessel-wan-hai-503-off-indian-coast",
+          "outcome": "Identified a Singapore-registered vessel incident off India; excluded because registration alone does not establish an incident in a study country."
+        }
+      ],
+      "known_coverage_gaps": [
+        "Exploratory research is not exhaustive across suppliers, vessels, languages, dates, carriers, or jurisdictions.",
+        "No incident was verified as affecting a selected supplier, shipment, or graph entity; an empty match list is not proof of no impact.",
+        "No Singapore-located incident is included; vessel registration alone does not establish incident location.",
+        "Most reports do not establish an end date, actual shipment delay, or vessel identity match to graph records.",
+        "Taiwan and Malaysia secondary reports need original-source review; the PETRA carrier advisory was inaccessible.",
+        "Vessel charterer, owner, operator, flag, and contractual carrier are distinct; reported names must not be equated without review.",
+        "Records are not calibrated event probabilities and may overlap with future port disruption, cargo loss, or natural hazard evidence."
+      ],
+      "licence_notes": "Source permissions and redistribution terms have not been verified. Store only concise attributed factual summaries and source links; do not redistribute full reports.",
+      "review_method": "Manually read the linked reports; distinguish incident location from vessel flag, stated incident dates from publication dates, and fire or response duration from shipment delay. Attribute secondary claims and leave entity matches unassigned. File hashes describe working files at this review and must be refreshed when those files change.",
+      "created_at": "2026-11-13",
+      "files": [
+        {
+          "path": "carrier_vessel_disruption.json",
+          "sha256": "f6d3ecf2650d99089ce78d5fc31fdb3b5704d006b88bb385244adf8e87de5409"
+        },
+        {
+          "path": "entity_matches.json",
+          "sha256": "b51684ef883234517828872d315f0449bcebb95c38dcff96b1a00e64b6490ddb"
+        }
+      ]
     }
   ]
 }
