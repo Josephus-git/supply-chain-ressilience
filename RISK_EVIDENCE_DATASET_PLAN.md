@@ -31,13 +31,11 @@ Current file-based database and optional historical-copy layout:
 simulation_engine/risk_evidence/
   database/
     manifest.json
-    entity_matches.json
     <risk-factor>.json
   snapshots/
     <snapshot-id>/
       manifest.json
       <risk-factor>.json
-      entity_matches.json
 ```
 
 There is a working file for each of the 18 selected risk factors. Add
@@ -63,7 +61,7 @@ references and separately documented provenance.
 Use JSON files first. Move to a database only if scale, query performance,
 collaboration, or operational requirements justify it. Neo4j remains a valid
 later option; keeping the evidence separate does not prevent linking records
-to graph entity IDs through a reviewed matching table.
+to graph entity IDs through a future reviewed matching process.
 
 ## 3. Research scope and dates
 
@@ -313,23 +311,12 @@ conditions are sufficiently supported; otherwise report an incomplete
 assessment. Legal applicability and interpretation need authoritative
 verification; this is decision support, not customs advice.
 
-### Entity match
+### Future entity matching
 
-```json
-{
-  "evidence_id": "FLOOD-001",
-  "entity_type": "departure_port",
-  "graph_entity_id": "P1",
-  "match_status": "possible",
-  "basis": "Reported flooding near the port; operational impact unconfirmed.",
-  "reviewed_at": "2026-01-12"
-}
-```
-
-Define allowed match states such as `verified`, `possible`, and `rejected`,
-with review provenance. A verified identity or location match does not prove
-the incident affected a shipment. Preserve original evidence separately from
-derived matches and explicitly scoped scenario assumptions.
+If matching is implemented, distinguish verified, possible, and rejected
+matches and preserve their review provenance. A verified identity or location
+match does not prove the incident affected a shipment. Preserve original
+evidence separately from derived matches and scenario assumptions.
 
 ### Study and experiment manifest
 

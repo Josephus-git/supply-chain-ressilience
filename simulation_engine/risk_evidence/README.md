@@ -9,8 +9,8 @@ collecting reports.
 
 ## Layout
 
-- `database/`: the working evidence files for the 18 selected risk factors,
-  plus the study manifest and reviewed entity matches.
+- `database/`: the working evidence files for the 18 selected risk factors
+  and the study manifest.
 - `snapshots/<snapshot-id>/`: optional historical copies, not the working
   files. Existing snapshots are retained as previously collected.
 
@@ -58,9 +58,9 @@ than treating templates as evidence.
 - `related_evidence_ids` links a cause and its reported effects, such as a
   flood and a resulting port closure. It does not imply they should be
   counted as independent disruptions.
-- Use the entity match template to record reviewed links to Neo4j IDs,
-  including uncertain and rejected matches. A location or identity match
-  alone does not prove that a shipment was affected.
+- A location or identity match alone does not prove that a shipment was
+  affected. Any future matching must distinguish reviewed links from
+  uncertain or rejected ones.
 - Store observed facts and their provenance here. Simulation probabilities
   and impact assumptions belong in separately labelled scenario inputs; an
   incident report does not automatically establish a probability.
