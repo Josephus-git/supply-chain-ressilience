@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "product_quality_compliance",
+  "record_template": {
+    "evidence_id": null,
+    "reported_supplier": null,
+    "country_code": null,
+    "country_name": null,
+    "product_description": null,
+    "product_code": null,
+    "event_start": null,
+    "event_end": null,
+    "issue_or_standard": null,
+    "reported_effect": null,
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": []
+  },
+  "records": []
+}

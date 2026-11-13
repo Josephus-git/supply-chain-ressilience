@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "currency_fluctuations",
+  "record_template": {
+    "evidence_id": null,
+    "base_currency": null,
+    "quote_currency": null,
+    "rate_definition": null,
+    "observation_start": null,
+    "observation_end": null,
+    "starting_rate": null,
+    "ending_rate": null,
+    "reported_change_percent": null,
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": []
+  },
+  "records": []
+}

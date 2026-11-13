@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "border_customs_delays",
+  "records": [
+    {
+      "evidence_id": "CUSTOMS-PILOT-001",
+      "border_or_customs_location": "Pengerang Port, Johor",
+      "country_code": "MY",
+      "country_name": "Malaysia",
+      "event_start": null,
+      "event_end": null,
+      "cause": "A maritime industry executive attributed delays to limited customs operating hours and the absence of a full-time customs presence.",
+      "reported_delay": {"value": null, "unit": null},
+      "reported_effect": "The executive reported that documentation processes could take 8 to 10 hours and that vessels sometimes waited for clearance, affecting sailing schedules and increasing costs.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.malaymail.com/news/malaysia/2026/03/21/roundtheclock-customs-needed-at-pengerang-port-as-it-faces-eightto10hour-clearance-delays-says-maritime-expert/213377",
+        "publisher": "Malay Mail, reporting Bernama",
+        "published_at": "2026-03-21",
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Licence and redistribution terms not verified; only a concise attributed factual summary and link are retained."
+      },
+      "verification_status": "source_reviewed_claim_not_independently_verified",
+      "limitations": [
+        "The report attributes the claims to an industry executive; it does not independently verify them.",
+        "The 8-to-10-hour figure is a reported documentation processing duration, not a measured excess delay.",
+        "The start and end dates of the condition are not stated; the publication date is not an event date.",
+        "The report does not identify any case-study supplier or establish that a specific shipment was affected.",
+        "No graph entity or shipment match has been reviewed."
+      ]
+    }
+  ]
+}

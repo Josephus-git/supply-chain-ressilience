@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "natural_hazards",
+  "record_template": {
+    "evidence_id": null,
+    "hazard_type": null,
+    "event_start": null,
+    "event_end": null,
+    "location": {"label": null, "country_code": null, "country_name": null, "latitude": null, "longitude": null, "affected_area": null},
+    "reported_effect": null,
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": []
+  },
+  "records": []
+}

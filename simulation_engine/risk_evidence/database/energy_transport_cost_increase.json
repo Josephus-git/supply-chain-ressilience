@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "energy_or_transport_cost_increase",
+  "record_template": {
+    "evidence_id": null,
+    "cost_type": null,
+    "affected_countries": [{"country_code": null, "country_name": null}],
+    "reported_route_or_market": null,
+    "observation_start": null,
+    "observation_end": null,
+    "baseline": {"value": null, "unit": null, "currency": null, "date": null},
+    "observed": {"value": null, "unit": null, "currency": null, "date": null},
+    "reported_change_percent": null,
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": []
+  },
+  "records": []
+}

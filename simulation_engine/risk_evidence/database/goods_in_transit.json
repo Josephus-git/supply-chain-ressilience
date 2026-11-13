@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "goods_in_transit_loss_theft_or_damage",
+  "record_template": {
+    "evidence_id": null,
+    "incident_type": null,
+    "reported_shipment": null,
+    "reported_carrier": null,
+    "location": null,
+    "country_code": null,
+    "country_name": null,
+    "event_start": null,
+    "event_end": null,
+    "reported_loss_or_damage": null,
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": []
+  },
+  "records": []
+}

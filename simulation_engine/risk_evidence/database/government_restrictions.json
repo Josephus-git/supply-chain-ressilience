@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "government_restrictions",
+  "record_template": {
+    "evidence_id": null,
+    "issuing_country_code": null,
+    "issuing_country_name": null,
+    "affected_countries": [{"country_code": null, "country_name": null}],
+    "reported_organisation": null,
+    "product_classification": {"system": null, "code": null},
+    "restriction_type": null,
+    "effective_from": null,
+    "effective_to": null,
+    "conditions_and_exclusions": [],
+    "reported_effect": null,
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": []
+  },
+  "records": []
+}

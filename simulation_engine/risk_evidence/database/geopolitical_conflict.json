@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "geopolitical_conflict",
+  "record_template": {
+    "evidence_id": null,
+    "affected_countries": [{"country_code": null, "country_name": null}],
+    "affected_area": null,
+    "event_start": null,
+    "event_end": null,
+    "conflict_description": null,
+    "reported_supply_chain_effect": null,
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": []
+  },
+  "records": []
+}

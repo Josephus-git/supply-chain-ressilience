@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "carrier_vessel_disruption",
+  "record_template": {
+    "evidence_id": null,
+    "reported_carrier": null,
+    "reported_vessel": null,
+    "country_code": null,
+    "country_name": null,
+    "event_start": null,
+    "event_end": null,
+    "disruption_type": null,
+    "reported_effect": null,
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": []
+  },
+  "records": []
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "supplier_financial_distress",
+  "record_template": {
+    "evidence_id": null,
+    "reported_supplier": null,
+    "country_code": null,
+    "country_name": null,
+    "observation_date": null,
+    "distress_indicator": null,
+    "reported_operational_impact": null,
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": []
+  },
+  "records": []
+}

@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0",
+  "template_type": "study_manifest",
+  "records": [
+    {
+      "snapshot_id": "border-customs-research-2026-11-13",
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory manual search for customs, cargo release, or manifest-processing delays reported during the study period in the six study countries, plus targeted searches for named suppliers. Include reviewed official bulletins or attributed reports when their actual scope is clear. Publication in the study period alone does not establish that an event began or ended within it.",
+      "sources_searched": [
+        {
+          "url": "https://www.malaymail.com/news/malaysia/2026/03/21/roundtheclock-customs-needed-at-pengerang-port-as-it-faces-eightto10hour-clearance-delays-says-maritime-expert/213377",
+          "outcome": "Included an attributed report of Malaysia vessel documentation delays."
+        },
+        {
+          "url": "https://www.bernama.com/bm/news.php?id=2536385",
+          "outcome": "Reviewed the same Malaysian industry executive's account; not independent corroboration."
+        },
+        {
+          "url": "https://portcalls.com/boc-suspends-hefty-penalties-for-late-manifest-submission/",
+          "outcome": "Included reporting of Philippine manifest-submission delays attributed to E2M limitations."
+        },
+        {
+          "url": "https://customs.gov.ph/wp-content/uploads/2025/10/2025-61-OCOM-MEMO.pdf",
+          "outcome": "Direct retrieval of the official Philippine memorandum returned HTTP 403; not independently reviewed."
+        },
+        {
+          "url": "https://context.ph/2026/06/25/pcci-warns-naia-cargo-delays-threaten-electronics-competitiveness/",
+          "outcome": "Included attributed Philippine airport cargo clearance statistics and concerns."
+        },
+        {
+          "url": "https://portcalls.com/manilas-cargo-crisis-capacity-crunch-at-the-airport/",
+          "outcome": "Reviewed related airport congestion reporting; its discussion of the same clearance percentages does not independently establish the statistics."
+        },
+        {
+          "url": "https://csmsbot.com/message/859d9b64-75f5-4c0f-854b-260c9a8482e2",
+          "outcome": "Included third-party reproduction of CBP bulletin 64877951."
+        },
+        {
+          "url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3ddf57f",
+          "outcome": "Official source for bulletin 64877951; fetch returned a page without the bulletin body."
+        },
+        {
+          "url": "https://csmsbot.com/message/8d680a07-a3d5-4edc-b9a9-0018fa90a489",
+          "outcome": "Included third-party reproduction of CBP bulletin 64970723."
+        },
+        {
+          "url": "https://kk-intl.com/2025/05/07/cargo-systems-messaging-service-8/",
+          "outcome": "Reviewed another reproduction of bulletin 64970723; it is not an independent account."
+        },
+        {
+          "url": "https://csmsbot.com/message/5b99f904-b52e-4b4e-b535-fd898f5f35fe",
+          "outcome": "Included third-party reproduction of CBP bulletin 65533265."
+        },
+        {
+          "url": "https://www.mining.com/web/chinese-customs-caution-slows-some-rare-earth-magnet-exports-sources-say/",
+          "outcome": "Possible China lead; direct retrieval returned HTTP 403, so no record was included."
+        },
+        {
+          "url": "https://ask.gov.sg/customs/questions/clz9bs3tp00s4f966jhg6hb59",
+          "outcome": "Search found Singapore contingency guidance, but it does not by itself establish an actual customs-delay incident."
+        }
+      ],
+      "known_coverage_gaps": [
+        "Exploratory, unfrozen research snapshot; searches were not exhaustive across companies, sources, languages, or countries.",
+        "No reviewed, supplier-specific customs-delay report or graph entity match was identified in the targeted searches; this is not evidence that none exists.",
+        "No qualifying Singapore, Taiwan, or China incident was independently reviewed and included. A China lead and the official Philippine memorandum were inaccessible.",
+        "Actual incident start and end dates are unknown for the included records; publication dates are not a substitute for event dates.",
+        "The CBP bulletins concern processing or notification issues and do not establish case-study shipment delays. The April and May notification issues may be related.",
+        "The included industry claims and reproduced bulletins still need primary-source review or independent corroboration where applicable.",
+        "None of these records establishes an empirical delay distribution, probability, supplier impact, or temporal overlap with a specific shipment."
+      ],
+      "licence_notes": "Source permissions and redistribution terms have not been verified. Store only concise attributed factual summaries and source links; do not redistribute full reports.",
+      "review_method": "Manually read each included source or identified reproduction, preserve its attribution and precise reported scope, distinguish publication dates from incident dates and observed durations from thresholds or expectations, and leave supplier matches unassigned. File hashes cover evidence and match files, not this manifest.",
+      "created_at": "2026-11-13",
+      "files": [
+        {
+          "path": "border_customs_delays.json",
+          "sha256": "8036265cf2bda63ac8e0abacce20e8dcb52abfa16d118525d08d7a61fd34f4ec"
+        },
+        {
+          "path": "entity_matches.json",
+          "sha256": "1bd949deb029f72a5637491e92d1b91060140c4d67d38ff262acf0210973e25f"
+        }
+      ]
+    }
+  ]
+}

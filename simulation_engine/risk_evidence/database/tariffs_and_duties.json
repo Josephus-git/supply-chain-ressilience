@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "tariffs_and_duties",
+  "record_template": {
+    "evidence_id": null,
+    "importing_country_code": null,
+    "importing_country_name": null,
+    "origin_country_code": null,
+    "origin_country_name": null,
+    "product_classification": {"system": null, "code": null, "precision_notes": null},
+    "effective_from": null,
+    "effective_to": null,
+    "rate": {"kind": null, "value": null, "unit": null, "currency": null},
+    "conditions_and_exclusions": [],
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": []
+  },
+  "records": []
+}

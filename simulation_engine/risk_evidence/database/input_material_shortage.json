@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "input_material_shortage",
+  "record_template": {
+    "evidence_id": null,
+    "material": null,
+    "reported_supplier": null,
+    "affected_countries": [{"country_code": null, "country_name": null}],
+    "event_start": null,
+    "event_end": null,
+    "reported_effect": null,
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": []
+  },
+  "records": []
+}

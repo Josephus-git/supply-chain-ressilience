@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "supplier_or_route_concentration",
+  "record_template": {
+    "evidence_id": null,
+    "assessment_scope": null,
+    "countries": [{"country_code": null, "country_name": null}],
+    "observation_start": null,
+    "observation_end": null,
+    "measure": {"name": null, "value": null, "unit": null, "definition": null},
+    "reported_entities_or_routes": [],
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": []
+  },
+  "records": []
+}
