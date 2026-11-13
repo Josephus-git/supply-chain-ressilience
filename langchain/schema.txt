@@ -13,7 +13,7 @@ Relationships:
 - (:Supplier)-[:SUPPLIES]->(:Shipment)
 - (:Shipment)-[:CONSIGNED_TO]->(:Buyer)
 - (:Shipment)-[:CONTAINS]->(:Product)
-- (:Shipment)-[:DEPARTS_FROM]->(:Exit Port)
+- (:Shipment)-[:DEPARTED_FROM]->(:Exit Port)
 - (:Shipment)-[:ARRIVES_AT]->(:Entry Port)
 - (:Shipment)-[:CARRIED_BY]->(:Carrier)
 - (:Shipment)-[:TRANSPORTED_ON]->(:Vessel)
