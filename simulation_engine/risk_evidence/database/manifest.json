@@ -929,6 +929,83 @@
           "sha256": "1a8ef7fb1799743ea47ae49d23fd4b3b1eb396989b0e8856166dd2256a534894"
         }
       ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory search for documented natural hazards within the study period in study countries, prioritizing reported or scheduled effects on manufacturing, ports, and freight routes relevant to the supplied product context. Include industry context without requiring a confirmed Dyson shipment; distinguish hazard dates, operational notices and actual recovery.",
+      "sources_searched": [
+        {
+          "url": "https://www.trendforce.com/presscenter/news/20250121-12453.html",
+          "outcome": "Included a preliminary assessment of the Taiwan earthquake and semiconductor fab evacuations, inspections and initial resumption."
+        },
+        {
+          "url": "https://www.worldcargonews.com/news/2025/09/super-typhoon-ragasa-halts-operations-at-hong-kong-and-southern-china-ports/",
+          "outcome": "Included reported Ragasa landfall and attributed Guangdong terminal closures; expected downstream delays remain forecasts."
+        },
+        {
+          "url": "https://www.oocl.com/china/eng/localinformation/localnews/2025/Pages/25Sep2025_02.aspx",
+          "outcome": "Original carrier update returned HTTP 403 and was not reviewed; Guangdong terminal reopening was not established."
+        },
+        {
+          "url": "https://www.unocha.org/publications/report/philippines/philippines-super-typhoon-uwanfung-wong-consolidated-rapid-assessment-report-20-november-2025",
+          "outcome": "Reviewed UN humanitarian account of Typhoon Uwan landfall in Aurora."
+        },
+        {
+          "url": "https://cdnweb-mmt.ictsi.com/s3fs-public/inline-files/2025-MMT-CN048-MMT%20Advisory-Typhoon%20Uwan.pdf",
+          "outcome": "Reviewed the Manila Multipurpose Terminal's scheduled 9 November gate closure and delivery suspension."
+        },
+        {
+          "url": "https://cdnweb-mmt.ictsi.com/s3fs-public/inline-files/2025-MMT-CN050-MMT%20Advisory-%20Super%20Typhoon%20Uwan-Resumption%20of%20Operation.pdf",
+          "outcome": "Reviewed the same terminal's announced 10 November gate and delivery resumption, conditional on vessel movement confirmation."
+        },
+        {
+          "url": "https://www.cma-cgm.com/assets/public/documents/TYPHOON%20ADVISORY%20-%202nd%20Update%20on%20Typhoon%20UWAN_0.pdf",
+          "outcome": "Carrier advisory returned HTTP 403 and was not independently reviewed."
+        },
+        {
+          "url": "https://www.malaymail.com/news/malaysia/2025/12/18/floods-worsen-across-several-states-in-malaysia-as-pahang-records-over-8000-evacuees/202397",
+          "outcome": "Included Bernama reporting of Johor road restrictions during flooding."
+        },
+        {
+          "url": "https://www.evergreen-shipping.us/news/Terminal%20Operations%20%20WINTER%20STORM%20ADVISORY%20TERMINAL.pdf",
+          "outcome": "Reviewed the carrier's 26 January 2026 advisory listing scheduled 27 January gate statuses for selected US terminals."
+        },
+        {
+          "url": "https://www.dosm.gov.my/portal-main/release-content/special-report-on-impact-of-floods-in-malaysia2025",
+          "outcome": "Reviewed annual 2025 flood damage totals for context; they do not establish the duration or losses of the specific December incident."
+        }
+      ],
+      "known_coverage_gaps": [
+        "Searches are exploratory and not exhaustive across hazards, countries, products, locations, dates, languages, or sources. No Singapore-specific event was included; absence does not prove no event.",
+        "The 2025 Taiwan fab impact is a preliminary analyst assessment. No specific case-study facility, supplier, product, or shipment has been verified for any record.",
+        "Ragasa's Guangdong closure is attributed to market sources, its terminal reopening remains unverified, and projected shipping delays are not measured shipment delays.",
+        "The Uwan terminal notices concern Manila Multipurpose Terminal only; announced resumption is not proof of vessel recovery or backlog clearance.",
+        "The Malaysian flood report does not verify road reopening; the US winter advisory lists planned gate statuses subject to change, not confirmed individual shipment impacts.",
+        "Hazard landfall or observation dates, operational milestones, and recovery are distinct; retrieval-only buffers are not observed incident or disruption durations.",
+        "No record establishes supplier-specific loss, probability, complete recovery, or continuous effects throughout its search window."
+      ],
+      "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise attributed factual summaries and source links, not complete articles or advisories.",
+      "review_method": "Manually review accessible humanitarian and industry reports and operational advisories; distinguish observations, preliminary reports, expected impacts and scheduled closures. Record verified hazard anchors without inferring end dates, document operational milestones separately, and use labelled retrieval-only buffers with no hypothetical recovery estimate. Refresh the file hash whenever evidence changes.",
+      "created_at": "2026-11-14",
+      "files": [
+        {
+          "path": "natural_hazards.json",
+          "sha256": "92c35f711198b44606c106c95ae2d6aac2c2eb7b7aa81864dd3fb852e4f1c618"
+        }
+      ]
     }
   ]
 }

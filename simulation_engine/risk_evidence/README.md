@@ -47,6 +47,9 @@ establish what Dyson shipped or what its suppliers used.
   manufacturing and logistics context. A strike's end is not necessarily a
   return to normal production or delivery; disputed operational impacts and
   unverified supply-chain links must remain labelled.
+- Natural hazards: earthquake, flood, typhoon and winter-weather reports
+  provide manufacturing and transport context. Planned gate closures and
+  announced reopenings are not proof of full operational or shipment recovery.
 
 ## Layout
 
