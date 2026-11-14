@@ -1,0 +1,305 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "energy_or_transport_cost_increase",
+  "record_template": {
+    "evidence_id": null,
+    "cost_type": null,
+    "affected_countries": [
+      {
+        "country_code": null,
+        "country_name": null
+      }
+    ],
+    "reported_route_or_market": null,
+    "observation_start": null,
+    "observation_end": null,
+    "baseline": {
+      "value": null,
+      "unit": null,
+      "currency": null,
+      "date": null
+    },
+    "observed": {
+      "value": null,
+      "unit": null,
+      "currency": null,
+      "date": null
+    },
+    "reported_change_percent": null,
+    "related_evidence_ids": [],
+    "source": {
+      "url": null,
+      "publisher": null,
+      "published_at": null,
+      "retrieved_at": null,
+      "licence_notes": null
+    },
+    "verification_status": null,
+    "limitations": [],
+    "search_window": {
+      "start": null,
+      "end": null,
+      "basis": null,
+      "note": null,
+      "anchor_date": null,
+      "anchor_basis": null
+    },
+    "scenario_recovery": null
+  },
+  "records": [
+    {
+      "evidence_id": "COST-2025-MY-DIESEL-001",
+      "cost_type": "retail_diesel",
+      "affected_countries": [
+        {
+          "country_code": "MY",
+          "country_name": "Malaysia"
+        }
+      ],
+      "reported_route_or_market": "Peninsular Malaysia retail diesel",
+      "observation_start": "2025-07-03",
+      "observation_end": "2025-07-10",
+      "baseline": {
+        "value": 2.85,
+        "unit": "litre",
+        "currency": "MYR",
+        "date": "2025-07-03"
+      },
+      "observed": {
+        "value": 2.88,
+        "unit": "litre",
+        "currency": "MYR",
+        "date": "2025-07-10"
+      },
+      "reported_change_percent": 1.05,
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.mof.gov.my/portal/en/news/press-release/retail-price/retail-price-of-diesel-raised-by-3-sen-from-10-july-2025-to-16-july-2025",
+        "publisher": "Malaysia Ministry of Finance",
+        "published_at": "2025-07-09",
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Redistribution terms not independently verified; concise factual observations and source link only."
+      },
+      "verification_status": "official_source_reviewed_change_calculated",
+      "limitations": [
+        "The new retail price applies from 10 to 16 July 2025; the prior price applied from 3 to 9 July according to https://carplus.my/2025/07/02/3-july-9-july-malaysia-fuel-price-update-3-sen-drop-for-ron97-and-diesel/.",
+        "The percentage change was calculated from published prices and rounded to two decimal places, not reported by the ministry.",
+        "Prices in Sabah, Sarawak and Labuan were different. Eligibility for diesel support and the price paid by a specific customer are not established.",
+        "The observation does not establish a supplier's fuel consumption or transport costs."
+      ],
+      "search_window": {
+        "start": "2025-07-03",
+        "end": "2025-07-16",
+        "basis": "observation_period",
+        "note": "Documented applicability periods of the previous and new weekly diesel prices; not a supplier-specific price.",
+        "anchor_date": null,
+        "anchor_basis": null
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "COST-2026-MY-DIESEL-001",
+      "cost_type": "retail_diesel",
+      "affected_countries": [
+        {
+          "country_code": "MY",
+          "country_name": "Malaysia"
+        }
+      ],
+      "reported_route_or_market": "Peninsular Malaysia retail diesel",
+      "observation_start": "2026-03-19",
+      "observation_end": "2026-03-26",
+      "baseline": {
+        "value": 4.72,
+        "unit": "litre",
+        "currency": "MYR",
+        "date": "2026-03-19"
+      },
+      "observed": {
+        "value": 5.52,
+        "unit": "litre",
+        "currency": "MYR",
+        "date": "2026-03-26"
+      },
+      "reported_change_percent": 16.95,
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.mof.gov.my/portal/en/news/press-citations/ron97-unsubsidised-ron95-retail-prices-rise-by-60-sen-peninsular-diesel-up-80-sen-mof",
+        "publisher": "Bernama, reproduced by Malaysia Ministry of Finance",
+        "published_at": null,
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Redistribution terms not independently verified; concise attributed factual observations and source links only."
+      },
+      "verification_status": "reported_official_announcement_reviewed_change_calculated",
+      "limitations": [
+        "The new price applies from 26 March to 1 April 2026. The prior 19 to 25 March price is also reported at https://paultan.org/2026/03/18/malaysian-fuel-prices-march-19-25-2026-ron97-up-70-sen-to-rm4-55-per-litre-diesel-up-80-sen-rm4-72-litre/.",
+        "The percentage change was calculated from the reported prices and rounded to two decimal places.",
+        "The report states that diesel for public transportation and land logistics remained subsidised at MYR 2.15 per litre; eligibility and the price paid by any particular business are not established.",
+        "Prices in Sabah, Sarawak and Labuan differed; this is not evidence of a supplier-specific cost increase."
+      ],
+      "search_window": {
+        "start": "2026-03-19",
+        "end": "2026-04-01",
+        "basis": "observation_period",
+        "note": "Documented applicability periods of the previous and new weekly diesel prices; not a supplier-specific price.",
+        "anchor_date": null,
+        "anchor_basis": null
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "COST-2025-PH-ELECTRICITY-001",
+      "cost_type": "residential_electricity",
+      "affected_countries": [
+        {
+          "country_code": "PH",
+          "country_name": "Philippines"
+        }
+      ],
+      "reported_route_or_market": "Meralco typical residential household rate, June to July 2025",
+      "observation_start": null,
+      "observation_end": null,
+      "baseline": {
+        "value": 12.1552,
+        "unit": "kWh",
+        "currency": "PHP",
+        "date": null
+      },
+      "observed": {
+        "value": 12.6435,
+        "unit": "kWh",
+        "currency": "PHP",
+        "date": null
+      },
+      "reported_change_percent": 4.02,
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.meralco.com.ph/media/advisories/higher-rates-july-2025",
+        "publisher": "Manila Electric Company",
+        "published_at": "2025-07-11",
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Redistribution terms not independently verified; concise factual observations and source link only."
+      },
+      "verification_status": "utility_source_reviewed_change_calculated",
+      "limitations": [
+        "The source compares June and July billing rates but does not state exact effective dates; date fields are null.",
+        "The rate is for a typical residential household, not an industrial or commercial customer.",
+        "The percentage change was calculated from published rates and rounded to two decimal places.",
+        "No supplier electricity contract, consumption, cost, or exposure is established."
+      ],
+      "search_window": {
+        "start": "2025-06-01",
+        "end": "2025-07-31",
+        "basis": "month_approximation",
+        "note": "June and July 2025 billing months expanded to full calendar months only for candidate retrieval; exact billing dates are unknown.",
+        "anchor_date": null,
+        "anchor_basis": null
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "COST-2026-SG-ELECTRICITY-001",
+      "cost_type": "residential_electricity",
+      "affected_countries": [
+        {
+          "country_code": "SG",
+          "country_name": "Singapore"
+        }
+      ],
+      "reported_route_or_market": "Singapore regulated household electricity tariff, before GST",
+      "observation_start": "2026-04-01",
+      "observation_end": "2026-07-01",
+      "baseline": {
+        "value": 0.2727,
+        "unit": "kWh",
+        "currency": "SGD",
+        "date": "2026-04-01"
+      },
+      "observed": {
+        "value": 0.3191,
+        "unit": "kWh",
+        "currency": "SGD",
+        "date": "2026-07-01"
+      },
+      "reported_change_percent": 17.02,
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.channelnewsasia.com/singapore/electricity-tariffs-prices-rates-gas-q3-july-september-6202481",
+        "publisher": "CNA, reporting SP Group and Energy Market Authority",
+        "published_at": null,
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Redistribution terms not independently verified; concise attributed factual observations and source link only."
+      },
+      "verification_status": "secondary_source_reviewed_change_calculated",
+      "limitations": [
+        "The source states that July to September cost 31.91 cents per kWh, 4.64 cents higher than the preceding quarter; the baseline is calculated by subtraction.",
+        "The percentage change is calculated from the rates and rounded to two decimal places. The article's 17 percent refers to the average overall tariff, including non-households.",
+        "The regulated household tariff excludes GST and is not an industrial contract rate. Other retail contracts may differ.",
+        "The official Energy Market Authority page was inaccessible to the fetch tool; no supplier cost or consumption is established."
+      ],
+      "search_window": {
+        "start": "2026-04-01",
+        "end": "2026-09-30",
+        "basis": "observation_period",
+        "note": "Quarterly periods of the compared residential tariffs; not a supplier-specific tariff.",
+        "anchor_date": null,
+        "anchor_basis": null
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "COST-2025-CN-US-FREIGHT-001",
+      "cost_type": "container_freight_spot_index",
+      "affected_countries": [
+        {
+          "country_code": "CN",
+          "country_name": "China"
+        },
+        {
+          "country_code": "US",
+          "country_name": "United States"
+        }
+      ],
+      "reported_route_or_market": "Drewry World Container Index, Shanghai to Los Angeles, 40-foot container",
+      "observation_start": "2025-05-29",
+      "observation_end": "2025-06-05",
+      "baseline": {
+        "value": 3738,
+        "unit": "40-foot container",
+        "currency": "USD",
+        "date": "2025-05-29"
+      },
+      "observed": {
+        "value": 5876,
+        "unit": "40-foot container",
+        "currency": "USD",
+        "date": "2025-06-05"
+      },
+      "reported_change_percent": 57,
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://gcaptain.com/transpacific-freight-rates-surge-amid-trump-tariff-turmoil/",
+        "publisher": "gCaptain, reporting Drewry Supply Chain Advisors",
+        "published_at": null,
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Drewry index redistribution terms not independently verified; only concise attributed figures and links are retained."
+      },
+      "verification_status": "secondary_sources_reviewed",
+      "limitations": [
+        "The prior week's 29 May assessment of USD 3,738 is reported at https://www.ajot.com/news/drewry-world-container-index-29-may. The 5 June reported 57 percent change is rounded; the change calculated from displayed prices is approximately 57.20 percent.",
+        "The index is a route-specific spot market assessment, not an actual quotation, surcharge schedule, contracted rate, or invoice for a selected supplier.",
+        "No selected supplier, shipment, specific service or graph route has been matched to this assessment.",
+        "The article's publication date was not verified; the dates are assessment dates."
+      ],
+      "search_window": {
+        "start": "2025-05-29",
+        "end": "2025-06-05",
+        "basis": "observation_period",
+        "note": "Comparison interval between published price observations; not a continuous price or supplier-cost history.",
+        "anchor_date": null,
+        "anchor_basis": null
+      },
+      "scenario_recovery": null
+    }
+  ]
+}

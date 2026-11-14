@@ -1,0 +1,293 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "carrier_vessel_disruption",
+  "record_template": {
+    "evidence_id": null,
+    "reported_carrier": null,
+    "reported_vessel": null,
+    "country_code": null,
+    "country_name": null,
+    "event_start": null,
+    "event_end": null,
+    "disruption_type": null,
+    "reported_effect": null,
+    "related_evidence_ids": [],
+    "source": {
+      "url": null,
+      "publisher": null,
+      "published_at": null,
+      "retrieved_at": null,
+      "licence_notes": null
+    },
+    "verification_status": null,
+    "limitations": [],
+    "search_window": {
+      "start": null,
+      "end": null,
+      "basis": null,
+      "note": null,
+      "anchor_date": null,
+      "anchor_basis": null
+    },
+    "scenario_recovery": null
+  },
+  "records": [
+    {
+      "evidence_id": "VESSEL-2025-CN-001",
+      "reported_carrier": "Wan Hai Lines",
+      "reported_vessel": "WAN HAI A17",
+      "country_code": "CN",
+      "country_name": "China",
+      "event_start": "2025-10-25",
+      "event_end": null,
+      "disruption_type": "collision",
+      "reported_effect": "The Maritime and Port Authority of Singapore reported a collision off Guangzhou with HAI LI 5, which sank. WAN HAI A17 was held in port to assist the Chinese investigation.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.mpa.gov.sg/media-centre/details/collision-involving-singapore-registered-container-vessel-in-guangzhou--china",
+        "publisher": "Maritime and Port Authority of Singapore",
+        "published_at": null,
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Licence and redistribution terms not verified; concise factual summary and link only."
+      },
+      "verification_status": "official_source_reviewed",
+      "limitations": [
+        "The country is the reported incident location, not the vessel's Singapore flag.",
+        "The hold end date, shipment delay and impact on the selected suppliers are not established.",
+        "Wan Hai Lines is identified as the reporting company; its precise contractual role for any shipment is unverified.",
+        "No graph entity or shipment match has been reviewed."
+      ],
+      "search_window": {
+        "start": "2025-10-25",
+        "end": "2025-11-01",
+        "basis": "scenario_estimate",
+        "note": "Reported collision date; duration of the hold is unknown. Search end also includes the illustrative maximum handling-delay scenario; it is not an observed recovery date.",
+        "anchor_date": "2025-10-25",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": {
+        "severity": "moderate",
+        "min_days": 3,
+        "max_days": 7,
+        "anchor_date": "2025-10-25",
+        "scope": "hypothetical vessel or cargo handling delay",
+        "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
+        "confidence": "low"
+      }
+    },
+    {
+      "evidence_id": "VESSEL-2025-MY-001",
+      "reported_carrier": "Maersk (charterer)",
+      "reported_vessel": "Kyparissia",
+      "country_code": "MY",
+      "country_name": "Malaysia",
+      "event_start": "2025-11-07",
+      "event_end": null,
+      "disruption_type": "fire and explosion",
+      "reported_effect": "A fire and explosion occurred on the Maersk-chartered container ship during unloading at Tanjung Pelepas. Maersk said the full impact on vessel and cargo was not yet known.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.imarinenews.com/29091.html",
+        "publisher": "iMarine",
+        "published_at": null,
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Licence and redistribution terms not verified; concise attributed factual summary and link only."
+      },
+      "verification_status": "secondary_source_reviewed",
+      "limitations": [
+        "The account reports statements from Maersk and the Malaysian fire service; the original statements were not independently reviewed.",
+        "The incident end date, cause, cargo damage and shipment delays are unconfirmed by this source.",
+        "Charterer does not necessarily mean carrier for an individual shipment.",
+        "No case-study supplier or shipment is identified; no graph match has been reviewed."
+      ],
+      "search_window": {
+        "start": "2025-11-07",
+        "end": "2025-11-21",
+        "basis": "scenario_estimate",
+        "note": "Reported fire date; incident end is unknown. Search end also includes the illustrative maximum handling-delay scenario; it is not an observed recovery date.",
+        "anchor_date": "2025-11-07",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": {
+        "severity": "severe",
+        "min_days": 7,
+        "max_days": 14,
+        "anchor_date": "2025-11-07",
+        "scope": "hypothetical vessel or cargo handling delay",
+        "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
+        "confidence": "low"
+      }
+    },
+    {
+      "evidence_id": "VESSEL-2025-US-001",
+      "reported_carrier": null,
+      "reported_vessel": "ONE HENRY HUDSON",
+      "country_code": "US",
+      "country_name": "United States",
+      "event_start": "2025-11-21",
+      "event_end": null,
+      "disruption_type": "onboard fire",
+      "reported_effect": "A fire broke out on the container ship at the Port of Los Angeles. The vessel was moved offshore and firefighting continued for four days, according to the NTSB's preliminary investigation.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.ntsb.gov/investigations/Pages/DCA26FM003.aspx",
+        "publisher": "United States National Transportation Safety Board",
+        "published_at": null,
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Licence and redistribution terms not verified; concise factual summary and link only."
+      },
+      "verification_status": "official_preliminary_source_reviewed",
+      "limitations": [
+        "The NTSB states that its information is preliminary and subject to change.",
+        "Four days describes firefighting, not a confirmed shipment delay or complete incident duration.",
+        "The source does not establish a case-study supplier, shipment, or contractual carrier match."
+      ],
+      "search_window": {
+        "start": "2025-11-21",
+        "end": "2025-12-05",
+        "basis": "scenario_estimate",
+        "note": "Reported fire start date; overall incident end is unknown. Search end also includes the illustrative maximum handling-delay scenario; it is not an observed recovery date.",
+        "anchor_date": "2025-11-21",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": {
+        "severity": "severe",
+        "min_days": 7,
+        "max_days": 14,
+        "anchor_date": "2025-11-21",
+        "scope": "hypothetical vessel or cargo handling delay",
+        "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
+        "confidence": "low"
+      }
+    },
+    {
+      "evidence_id": "VESSEL-2026-TW-001",
+      "reported_carrier": "Ocean Network Express (charterer)",
+      "reported_vessel": "Zeal Lumos",
+      "country_code": "TW",
+      "country_name": "Taiwan",
+      "event_start": "2026-04-01",
+      "event_end": null,
+      "disruption_type": "vessel collision",
+      "reported_effect": "A report attributed to The Maritime Executive describes Zeal Lumos contacting the berthed Haian Opus at a Taiwan port, with four containers falling into the water. Zeal Lumos returned to berth and port operations later resumed.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.indexbox.io/blog/port-operations-resume-after-zeal-lumos-container-ship-incident/",
+        "publisher": "IndexBox, reporting The Maritime Executive",
+        "published_at": "2026-04-04",
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Licence and redistribution terms not verified; concise attributed factual summary and link only."
+      },
+      "verification_status": "official_event_date_reviewed_secondary_effects",
+      "limitations": [
+        "The collision date is confirmed by the Taiwan Transportation Safety Board at https://www.ttsb.gov.tw/english/18609/28176/49882/post; vessel and port operational details are from secondary reporting.",
+        "The official incident summary does not establish an incident end date; the precise duration of port or vessel disruption remains unknown.",
+        "Charterer does not necessarily mean carrier for an individual shipment.",
+        "No case-study supplier, shipment, or graph entity match is established."
+      ],
+      "search_window": {
+        "start": "2026-04-01",
+        "end": "2026-04-04",
+        "basis": "scenario_estimate",
+        "note": "Collision date established by the Taiwan Transportation Safety Board; incident end is unknown. Search end also includes the illustrative maximum handling-delay scenario; it is not an observed recovery date.",
+        "anchor_date": "2026-04-01",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": {
+        "severity": "minor",
+        "min_days": 1,
+        "max_days": 3,
+        "anchor_date": "2026-04-01",
+        "scope": "hypothetical affected container handling delay, not port closure or vessel detention",
+        "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
+        "confidence": "low"
+      }
+    },
+    {
+      "evidence_id": "VESSEL-2026-PH-001",
+      "reported_carrier": "Philippine Span Asia Carrier Corp. (registered owner)",
+      "reported_vessel": "Span Asia 39",
+      "country_code": "PH",
+      "country_name": "Philippines",
+      "event_start": "2026-09-03",
+      "event_end": null,
+      "disruption_type": "containers lost overboard",
+      "reported_effect": "During rough seas near Hamilo Point, Batangas, 46 reportedly empty containers fell overboard. A further container fell at Manila North Anchorage; the coast guard issued navigational warnings and conducted search operations.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://portcalls.com/46-empty-containers-fall-off-ship-at-hamilo-point-in-batangas/",
+        "publisher": "PortCalls, reporting the Philippine Coast Guard",
+        "published_at": null,
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Licence and redistribution terms not verified; concise attributed factual summary and link only."
+      },
+      "verification_status": "secondary_source_reviewed",
+      "limitations": [
+        "The coast guard's original social media statement was not independently reviewed.",
+        "The incident end date and any shipment delay are not established.",
+        "The initial 46 containers were reported empty; the source does not establish case-study cargo loss.",
+        "Registration does not establish the carrier for a particular shipment; no graph match has been reviewed."
+      ],
+      "search_window": {
+        "start": "2026-09-03",
+        "end": "2026-09-10",
+        "basis": "scenario_estimate",
+        "note": "Reported date containers were lost; incident end is unknown. Search end also includes the illustrative maximum handling-delay scenario; it is not an observed recovery date.",
+        "anchor_date": "2026-09-03",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": {
+        "severity": "moderate",
+        "min_days": 3,
+        "max_days": 7,
+        "anchor_date": "2026-09-03",
+        "scope": "hypothetical vessel or container handling delay, not goods loss",
+        "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
+        "confidence": "low"
+      }
+    },
+    {
+      "evidence_id": "VESSEL-2026-STRAIT-001",
+      "reported_carrier": "CMA CGM",
+      "reported_vessel": "CMA CGM PETRA",
+      "country_code": null,
+      "country_name": null,
+      "event_start": "2026-08-23",
+      "event_end": null,
+      "disruption_type": "cargo-hold fire",
+      "reported_effect": "A cargo-hold fire was reported in the Strait of Malacca. A later account of a CMA CGM advisory stated that the vessel was awaiting authorization to berth at Port Klang for inspection on 9 September.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.mightyshipping.com/en/blog/2026-08-26-cma-cgm-petra-malacca-fire",
+        "publisher": "Mighty Shipping, reporting W K Webster and CMA CGM",
+        "published_at": "2026-08-26",
+        "retrieved_at": "2026-11-13",
+        "licence_notes": "Licence and redistribution terms not verified; concise attributed factual summary and link only."
+      },
+      "verification_status": "secondary_source_reviewed_primary_source_unavailable",
+      "limitations": [
+        "The article was revised on 7 October 2026; the later review does not establish the state of individual containers.",
+        "The carrier advisory returned HTTP 403 and was not reviewed directly.",
+        "The country of the actual incident is not verified; the intended Malaysian port does not establish the incident jurisdiction.",
+        "Incident end date, cargo delay, case-study supplier impact and graph matches are unknown."
+      ],
+      "search_window": {
+        "start": "2026-08-23",
+        "end": "2026-09-09",
+        "basis": "scenario_estimate",
+        "note": "The later account reported the vessel awaiting berth authorization on 9 September, beyond the illustrative initial handling-delay scenario. The incident end remains unknown.",
+        "anchor_date": "2026-08-23",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": {
+        "severity": "severe",
+        "min_days": 7,
+        "max_days": 14,
+        "anchor_date": "2026-08-23",
+        "scope": "hypothetical initial cargo handling delay; subsequent detention may be longer",
+        "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
+        "confidence": "low"
+      }
+    }
+  ]
+}

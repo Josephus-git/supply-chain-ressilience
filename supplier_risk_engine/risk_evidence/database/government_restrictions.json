@@ -1,0 +1,235 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "government_restrictions",
+  "record_template": {
+    "evidence_id": null,
+    "issuing_country_code": null,
+    "issuing_country_name": null,
+    "affected_countries": [{"country_code": null, "country_name": null}],
+    "reported_organisation": null,
+    "product_classification": {"system": null, "code": null},
+    "restriction_type": null,
+    "effective_from": null,
+    "effective_to": null,
+    "conditions_and_exclusions": [],
+    "reported_effect": null,
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": [],
+    "search_window": {
+      "start": null,
+      "end": null,
+      "basis": null,
+      "note": null,
+      "anchor_date": null,
+      "anchor_basis": null
+    },
+    "scenario_recovery": null
+  },
+  "records": [
+    {
+      "evidence_id": "RESTRICT-2025-CN-001",
+      "issuing_country_code": "CN",
+      "issuing_country_name": "China",
+      "affected_countries": [{"country_code": "CN", "country_name": "China"}],
+      "reported_organisation": null,
+      "product_classification": {"system": null, "code": null},
+      "restriction_type": "export licensing for selected critical-mineral items and production technology",
+      "effective_from": "2025-02-04",
+      "effective_to": null,
+      "conditions_and_exclusions": [
+        "Announcement No. 10 of 2025 lists specified tungsten, tellurium, bismuth, molybdenum and indium items and associated production technology; descriptions include specific forms, characteristics and thresholds.",
+        "Exporters of listed items must apply for a licence under the applicable export-control rules."
+      ],
+      "reported_effect": "The announcement requires licensing for the specified items; no shipment delay or licence refusal is established by this record.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://aqygzj.mofcom.gov.cn/qdml/art/2025/art_a7ac614d3a784deb8f88700cdadd471c.html",
+        "publisher": "China Ministry of Commerce and General Administration of Customs",
+        "published_at": "2025-02-04",
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Source redistribution terms not verified; concise factual summary and link only."
+      },
+      "verification_status": "official_announcement_reviewed",
+      "limitations": [
+        "The rule covers specific listed items and technical criteria, not every product containing these minerals. It is an export licensing measure, not a blanket export ban.",
+        "The record groups multiple distinct control codes; product_classification is null because no single code describes the full scope.",
+        "No repeal date or complete amendment history has been verified; effective_to is unknown, not a declaration that the original text remained unchanged.",
+        "No case-study product, supplier, shipment, licence decision, or actual impact has been verified."
+      ],
+      "search_window": {
+        "start": "2025-02-04",
+        "end": "2026-09-30",
+        "basis": "study_period_bound",
+        "note": "Search interval starts at the rule's stated effective date and ends at the case-study cutoff; the cutoff is not a verified expiry or proof the original rule remained unchanged.",
+        "anchor_date": "2025-02-04",
+        "anchor_basis": "effective_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "RESTRICT-2025-CN-002",
+      "issuing_country_code": "CN",
+      "issuing_country_name": "China",
+      "affected_countries": [{"country_code": "CN", "country_name": "China"}],
+      "reported_organisation": null,
+      "product_classification": {"system": null, "code": null},
+      "restriction_type": "export licensing for selected rare-earth items",
+      "effective_from": "2025-04-04",
+      "effective_to": null,
+      "conditions_and_exclusions": [
+        "Announcement No. 18 of 2025 lists selected items relating to samarium, gadolinium, terbium, dysprosium, lutetium, scandium and yttrium.",
+        "Specified alloys, compounds, targets and some permanent magnetic materials are listed, including samarium-cobalt permanent magnetic materials and neodymium-iron-boron permanent magnetic materials containing terbium or dysprosium. Exporters must apply for a licence and identify controlled items when declaring goods."
+      ],
+      "reported_effect": "Export licensing and customs declaration requirements apply to the specified controlled items; the announcement does not establish a case-study shipment delay.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://aqygzj.mofcom.gov.cn/flzc/gzjgfxwj/art/2025/art_f3a1432ba20248eca12ff7b91bc73fda.html",
+        "publisher": "China Ministry of Commerce and General Administration of Customs",
+        "published_at": "2025-04-04",
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Source redistribution terms not verified; concise factual summary and link only."
+      },
+      "verification_status": "official_announcement_reviewed",
+      "limitations": [
+        "The controlled items are defined by the announcement's detailed list; this is not a ban on all rare-earth products.",
+        "Multiple control codes and customs reference codes are listed; no single code covers the entire record.",
+        "The announcement does not establish an expiry, subsequent amendments, licence processing time, or any particular rejection.",
+        "The supplied product list includes motors and motorized appliances, but no evidence here establishes their magnet composition or that a finished appliance or component is controlled.",
+        "No case-study supplier, product specification, shipment, destination, or operational impact has been verified."
+      ],
+      "search_window": {
+        "start": "2025-04-04",
+        "end": "2026-09-30",
+        "basis": "study_period_bound",
+        "note": "Search interval starts at the stated effective date and ends at the case-study cutoff; the cutoff is not a verified expiry or proof the original rule remained unchanged.",
+        "anchor_date": "2025-04-04",
+        "anchor_basis": "effective_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "RESTRICT-2025-US-001",
+      "issuing_country_code": "US",
+      "issuing_country_name": "United States",
+      "affected_countries": [{"country_code": "US", "country_name": "United States"}],
+      "reported_organisation": null,
+      "product_classification": {"system": "US ECCN", "code": "3A090"},
+      "restriction_type": "advanced computing integrated circuit due diligence and export licensing controls",
+      "effective_from": "2025-01-16",
+      "effective_to": null,
+      "conditions_and_exclusions": [
+        "The Bureau of Industry and Security rule revises controls and due diligence for certain advanced computing integrated circuits and related transactions.",
+        "The rule is effective 16 January 2025; compliance with the newly revised EAR text was not required until 31 January 2025. Pre-existing requirements are not covered by that grace period.",
+        "Licensing and exceptions depend on the precise item, transaction, parties and regulatory criteria; review the original rule and subsequent amendments."
+      ],
+      "reported_effect": "The rule introduced revised compliance, due-diligence and licensing provisions for covered transactions; no actual case-study shipment delay is established.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.federalregister.gov/documents/full_text/text/2025/01/16/2025-00711.txt",
+        "publisher": "United States Federal Register, Bureau of Industry and Security",
+        "published_at": "2025-01-16",
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Source redistribution terms not verified; concise factual summary and link only."
+      },
+      "verification_status": "official_interim_final_rule_reviewed",
+      "limitations": [
+        "ECCN 3A090 is one relevant classification, not the complete scope of the rule; not every item in that category or every destination has identical requirements.",
+        "Affected country identifies the issuing jurisdiction, not a verified destination or shipment; rules can also apply to covered transactions outside the United States.",
+        "The end date and complete subsequent amendment history were not verified; the study cutoff is not a rule expiry.",
+        "No case-study item classification, transaction, supplier, licence outcome, or delay was verified."
+      ],
+      "search_window": {
+        "start": "2025-01-16",
+        "end": "2026-09-30",
+        "basis": "study_period_bound",
+        "note": "Search interval starts at the interim rule's effective date and ends at the case-study cutoff; compliance dates vary and the cutoff is not a verified expiry.",
+        "anchor_date": "2025-01-16",
+        "anchor_basis": "effective_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "RESTRICT-2025-MY-001",
+      "issuing_country_code": "MY",
+      "issuing_country_name": "Malaysia",
+      "affected_countries": [{"country_code": "MY", "country_name": "Malaysia"}],
+      "reported_organisation": null,
+      "product_classification": {"system": null, "code": null},
+      "restriction_type": "catch-all controls on specified advanced AI chips",
+      "effective_from": "2025-07-14",
+      "effective_to": null,
+      "conditions_and_exclusions": [
+        "A reviewed legal commentary reports that Directive No. 1/2025 covers specified unlisted advanced AI chips and technical criteria under the Strategic Trade Act 2010.",
+        "The commentary states that, effective 14 July 2025, at least 30 days' advance notice is required where a person knows or reasonably suspects a restricted activity, and a permit is required if the authority allows the transaction.",
+        "The same commentary notes uncertainty over whether authorities require notification more broadly; the directive's described scope is not expressly limited to US-origin chips."
+      ],
+      "reported_effect": "The reported directive adds a conditional notification and permit process for covered export, transshipment or transit; no particular case-study transaction or delay is established.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.rahmatlim.com/perspectives/articles/31040/mykh-implements-export-control-measures-on-advanced-ai-chips",
+        "publisher": "Rahmat Lim & Partners",
+        "published_at": "2025-08-14",
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Source redistribution terms not verified; concise attributed summary and link only."
+      },
+      "verification_status": "secondary_legal_commentary_reviewed_primary_directive_unverified",
+      "limitations": [
+        "The official announcement page returned no substantive text in the reviewed fetch; the primary directive and technical annex were not independently reviewed.",
+        "The government statement as reproduced by Bernama describes permits for US-origin chips more broadly; legal commentary distinguishes the directive's restricted-activity trigger and notes implementation uncertainty.",
+        "Multiple category codes and exceptions apply, so no single product classification is recorded. Do not infer the rule applies to all semiconductors or all trade.",
+        "No verified end date, complete amendment history, case-study product, supplier, permit decision or shipment delay is established."
+      ],
+      "search_window": {
+        "start": "2025-07-14",
+        "end": "2026-09-30",
+        "basis": "study_period_bound",
+        "note": "Search interval uses the effective date reported by legal commentary through the case-study cutoff; it does not assert continued unchanged effect or expiry.",
+        "anchor_date": "2025-07-14",
+        "anchor_basis": "effective_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "RESTRICT-2025-SG-001",
+      "issuing_country_code": "SG",
+      "issuing_country_name": "Singapore",
+      "affected_countries": [{"country_code": "SG", "country_name": "Singapore"}],
+      "reported_organisation": null,
+      "product_classification": {"system": null, "code": null},
+      "restriction_type": "strategic goods control list and permit requirements",
+      "effective_from": "2025-12-01",
+      "effective_to": null,
+      "conditions_and_exclusions": [
+        "Legal commentary reports that the Strategic Goods (Control) Order 2025 replaced the 2024 order from 1 December 2025 and updated the list of controlled goods and technology.",
+        "Permit requirements depend on goods meeting the listed technical specifications or applicable catch-all conditions, as well as the transaction type."
+      ],
+      "reported_effect": "The updated order changes the controlled-items list relevant to specified transfers; no particular case-study permit, shipment, or delay was established.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.rajahtannasia.com/viewpoints/strategic-goods-control-legislation-amended-to-update-control-list/",
+        "publisher": "Rajah & Tann Asia",
+        "published_at": "2025-10-03",
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Source redistribution terms not verified; concise factual summary and link only."
+      },
+      "verification_status": "secondary_legal_commentary_reviewed",
+      "limitations": [
+        "The government gazette and Customs circular PDFs could not be independently reviewed through the available fetch; the date and replacement of the 2024 order are attributed to legal commentary.",
+        "Singapore Customs describes its general strategic goods framework; its current page notes an order scheduled for 1 December 2026, outside the case-study period.",
+        "The order lists many products and technical specifications. No single product classification or case-study supplier, shipment, permit decision, or delay is established.",
+        "No verified expiry or complete amendment history is recorded. The study cutoff is not a legal end date."
+      ],
+      "search_window": {
+        "start": "2025-12-01",
+        "end": "2026-09-30",
+        "basis": "study_period_bound",
+        "note": "Search interval uses the effective date reported by legal commentary through the case-study cutoff; it does not assert continued unchanged effect or expiry.",
+        "anchor_date": "2025-12-01",
+        "anchor_basis": "effective_date"
+      },
+      "scenario_recovery": null
+    }
+  ]
+}

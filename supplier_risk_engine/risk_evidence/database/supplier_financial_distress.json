@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "supplier_financial_distress",
+  "record_template": {
+    "evidence_id": null,
+    "reported_supplier": null,
+    "country_code": null,
+    "country_name": null,
+    "observation_date": null,
+    "distress_indicator": null,
+    "reported_operational_impact": null,
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": [],
+    "search_window": {"start": null, "end": null, "basis": null, "note": null, "anchor_date": null, "anchor_basis": null},
+    "scenario_recovery": null
+  },
+  "records": [
+    {
+      "evidence_id": "FINANCE-2025-US-WOLFSPEED-001",
+      "reported_supplier": "Wolfspeed, Inc.",
+      "country_code": "US",
+      "country_name": "United States",
+      "observation_date": "2025-06-30",
+      "distress_indicator": "Voluntary prepackaged Chapter 11 petitions and debt restructuring.",
+      "reported_operational_impact": "Wolfspeed, a silicon-carbide materials and power-device producer, said it was continuing to deliver products and pay vendors during restructuring. It expected its plan to reduce debt by approximately $4.6 billion.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://investor.wolfspeed.com/news/news-details/2025/Wolfspeed-Takes-Next-Step-to-Implement-Restructuring-Support-Agreement-and-Proactively-Strengthen-Capital-Structure/default.aspx", "publisher": "Wolfspeed", "published_at": "2025-06-30", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "company_disclosures_reviewed",
+      "limitations": [
+        "The company announced its emergence from Chapter 11 on 29 September 2025: https://investor.wolfspeed.com/news/news-details/2025/Wolfspeed-Successfully-Completes-Financial-Restructuring-Emerges-as-Financially-Stronger-Company-Well-Positioned-in-Silicon-Carbide-Market/default.aspx. Emergence is a legal milestone, not proof of recovery for every customer or facility.",
+        "Continued deliveries and vendor payments are the company's account; no specific customer shortage, production stoppage or shipment delay is established.",
+        "This is contextual power-semiconductor evidence, not proof that any case-study product uses these components or that Wolfspeed supplies Dyson."
+      ],
+      "search_window": {"start": "2025-06-16", "end": "2025-10-13", "basis": "report_date_buffer", "note": "Starts 14 days before the filing announcement and extends 14 days after announced emergence for retrieval only; not a continuous operational disruption.", "anchor_date": "2025-06-30", "anchor_basis": "document_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "FINANCE-2025-US-KP-001",
+      "reported_supplier": "Klöckner Pentaplast (kp)",
+      "country_code": "US",
+      "country_name": "United States",
+      "observation_date": "2025-11-04",
+      "distress_indicator": "Prepackaged US Chapter 11 process and agreement to reduce funded debt.",
+      "reported_operational_impact": "The packaging and specialty-film producer announced a restructuring targeting approximately EUR 1.3 billion in debt reduction. It said global operations continued without interruption and expected to pay vendors and suppliers in full.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://www.prnewswire.com/news-releases/klockner-pentaplast-enters-agreement-with-key-stakeholders-to-strengthen-financial-position-302604986.html", "publisher": "Klöckner Pentaplast via PR Newswire", "published_at": "2025-11-04", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "company_disclosures_reviewed",
+      "limitations": [
+        "The company announced completion and emergence on 30 January 2026: https://www.prnewswire.com/news-releases/klockner-pentaplast-successfully-completes-financial-restructuring-302675283.html. This does not prove complete recovery for every stakeholder.",
+        "The Chapter 11 process involved kp and certain affiliates; the company stated that its China entities and certain US entities were not included. Do not assign the legal filing to every subsidiary.",
+        "Continuity and supplier-payment expectations are company statements, not independent verification of every order or creditor outcome.",
+        "Packaging provides industry context; no case-study supplier relationship, packaging specification or shipment has been verified."
+      ],
+      "search_window": {"start": "2025-10-21", "end": "2026-02-13", "basis": "report_date_buffer", "note": "Starts 14 days before the restructuring announcement and extends 14 days after announced emergence; retrieval only, not a continuous delivery disruption.", "anchor_date": "2025-11-04", "anchor_basis": "document_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "FINANCE-2025-US-IROBOT-001",
+      "reported_supplier": "iRobot Corporation",
+      "country_code": "US",
+      "country_name": "United States",
+      "observation_date": "2025-12-14",
+      "distress_indicator": "Voluntary prepackaged Chapter 11 process and proposed acquisition by primary contract manufacturer Picea.",
+      "reported_operational_impact": "The Roomba robotic-vacuum company said it and certain affiliates commenced a court-supervised restructuring and expected no disruption to its supply-chain relationships or product support.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://media.irobot.com/2025-12-14-iRobot-Announces-Strategic-Transaction-to-Drive-Long-Term-Growth-Plan", "publisher": "iRobot Corporation", "published_at": "2025-12-14", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "company_disclosures_reviewed",
+      "limitations": [
+        "iRobot announced completion and emergence under Picea ownership on 23 January 2026: https://thecstreet.com/client-news/irobot-completes-court-supervised-transaction-with-picea-enabling-the-next-chapter-of-growth/. This legal milestone does not prove all downstream effects ended.",
+        "Continuity during the process was the company's expectation, not independent verification of every order. No case-study shipment or supply interruption is established.",
+        "iRobot is a different robotic-vacuum brand, not a verified Dyson supplier. Its manufacturer's role and the filing do not establish that Picea itself filed for bankruptcy."
+      ],
+      "search_window": {"start": "2025-11-30", "end": "2026-02-06", "basis": "report_date_buffer", "note": "Starts 14 days before the filing announcement and extends 14 days after announced emergence; retrieval only, not a measured product or shipment disruption.", "anchor_date": "2025-12-14", "anchor_basis": "document_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "FINANCE-2026-US-PRETIUM-001",
+      "reported_supplier": "Pretium Packaging, L.L.C.",
+      "country_code": "US",
+      "country_name": "United States",
+      "observation_date": "2026-01-28",
+      "distress_indicator": "Prepackaged Chapter 11 petitions and restructuring agreement with lenders and sponsor.",
+      "reported_operational_impact": "The rigid-plastic packaging producer announced a proposed restructuring to reduce funded debt by more than $900 million and said it would continue ordinary operations and fulfill vendor obligations.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://www.prnewswire.com/news-releases/pretium-packaging-initiates-comprehensive-capital-structure-optimization-transaction-to-support-continued-growth-302673345.html", "publisher": "Pretium Packaging via PR Newswire", "published_at": "2026-01-28", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "company_disclosures_reviewed",
+      "limitations": [
+        "The company announced completion on 3 March 2026: https://www.prnewswire.com/news-releases/pretium-packaging-successfully-completes-capital-structure-optimization-transaction-well-positioned-for-long-term-growth-302701843.html. The announcement is not proof of a recovery date for every customer.",
+        "The quoted debt reduction and vendor-payment commitments were proposed or anticipated in the initial disclosure, not a measured shipment delay or verified customer outcome.",
+        "Its products provide plastic-packaging context; no case-study product specification, shipment or supplier relationship has been established."
+      ],
+      "search_window": {"start": "2026-01-14", "end": "2026-03-17", "basis": "report_date_buffer", "note": "Starts 14 days before the filing announcement and extends 14 days after the completion announcement; retrieval only, not a measured operational outage.", "anchor_date": "2026-01-28", "anchor_basis": "document_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "FINANCE-2026-MY-VS-001",
+      "reported_supplier": "V.S. Industry Berhad",
+      "country_code": "MY",
+      "country_name": "Malaysia",
+      "observation_date": "2026-09-30",
+      "distress_indicator": "Reported annual net loss and lower cash reserves; financial-pressure indicator, not an insolvency finding.",
+      "reported_operational_impact": "The Star reported a group net loss of RM55.3 million for the year ended 31 July 2026, versus a RM33 million profit in the preceding year; the loss included a RM39.7 million non-cash impairment. The report attributed lower Malaysia-segment sales in part to reduced orders.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://www.thestar.com.my/business/business-news/2026/09/30/vs-industry-slips-into-the-red-in-fy26-on-global-woes", "publisher": "The Star", "published_at": "2026-09-30", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "secondary_report_exchange_filing_attributed",
+      "limitations": [
+        "A reported annual loss and cash decline do not establish insolvency, default, bankruptcy, inability to pay, or a quantified probability of distress. Management described liquidity as strong.",
+        "The reported figures concern the listed group and segments, not automatically any similarly named subsidiary or individual facility. The underlying exchange filing was not independently reviewed.",
+        "The company name appears in the supplied search scope, but no graph entity, current supplier relationship, specific customer's order or affected shipment has been verified.",
+        "The fiscal year end is 31 July; the observation date is the report date, not the onset or end of financial pressure."
+      ],
+      "search_window": {"start": "2026-09-16", "end": "2026-10-14", "basis": "report_date_buffer", "note": "Fourteen days either side of the report date for retrieval only; the range does not measure the duration of a financial condition or operational impact.", "anchor_date": "2026-09-30", "anchor_basis": "report_date"},
+      "scenario_recovery": null
+    }
+  ]
+}

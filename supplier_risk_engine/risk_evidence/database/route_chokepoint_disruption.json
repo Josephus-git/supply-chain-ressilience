@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "route_chokepoint_disruption",
+  "record_template": {
+    "evidence_id": null,
+    "route_or_chokepoint": null,
+    "countries": [{"country_code": null, "country_name": null}],
+    "event_start": null,
+    "event_end": null,
+    "disruption_type": null,
+    "reported_effect": null,
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": [],
+    "search_window": {"start": null, "end": null, "basis": null, "note": null, "anchor_date": null, "anchor_basis": null},
+    "scenario_recovery": null
+  },
+  "records": [
+    {
+      "evidence_id": "ROUTE-2025-SUEZ-001",
+      "route_or_chokepoint": "Red Sea, Bab el-Mandeb and Suez Canal; diversion via Cape of Good Hope",
+      "countries": [],
+      "event_start": null,
+      "event_end": null,
+      "disruption_type": "shipping diversion and reduced canal tonnage",
+      "reported_effect": "UNCTAD reported that ships were rerouting around the Cape of Good Hope and that Suez Canal transit tonnage in early May 2025 remained about 70% below the 2023 average.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://unctad.org/system/files/official-document/rmt2025ch2_en.pdf", "publisher": "UN Trade and Development (UNCTAD)", "published_at": "2025-09-24", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "international_organization_report_reviewed",
+      "limitations": [
+        "The measure is transit tonnage versus the 2023 average, not a 70% reduction in vessel count, a complete canal closure or a shipment delay.",
+        "The disruption began before the study period; its onset, end and conditions outside the early-May observation are not established by this record. The study has not established continuous disruption for every ship or trade.",
+        "This corridor is outside the six study countries but provides route context; the empty countries array does not assert no geographic location or case-study exposure.",
+        "No affected case-study vessel, product, supplier or route has been verified."
+      ],
+      "search_window": {"start": "2025-05-01", "end": "2025-05-31", "basis": "month_approximation", "note": "The calendar month containing the report's early-May observation, for retrieval only; not a verified continuous disruption or recovery period.", "anchor_date": "2025-05-01", "anchor_basis": "observation_period"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "ROUTE-2025-SG-ROBBERY-001",
+      "route_or_chokepoint": "Phillip Channel, eastbound traffic separation lane in Singapore Strait",
+      "countries": [{"country_code": "SG", "country_name": "Singapore"}],
+      "event_start": "2025-07-01",
+      "event_end": null,
+      "disruption_type": "sea robbery incidents and navigational security alert",
+      "reported_effect": "ReCAAP reported three sea robberies on bulk carriers underway in the eastbound lane on 1 July within about three hours. One ship reported loss of engine spare parts; ReCAAP warned of further incidents and advised heightened vigilance.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://www.recaap.org/resources/ck/files/alerts/2025/ReCAAP%20ISC%20IA%2006-2025%20Sea%20Robbery%20Incidents%20in%20Straits%20of%20Malacca%20%20Singapore%20-2%20Jul.pdf", "publisher": "ReCAAP Information Sharing Centre", "published_at": "2025-07-02", "retrieved_at": "2026-11-14", "licence_notes": "ReCAAP permits brief extracts for non-commercial use with acknowledgment; concise attributed summary and source link only."},
+      "verification_status": "regional_maritime_security_alert_reviewed",
+      "limitations": [
+        "The three incidents affected individual bulk carriers and do not establish channel closure, route-wide delays, diverted vessels or impact on container shipments.",
+        "Singapore identifies the named strait and study corridor, not an assertion that the incidents occurred in Singapore territorial waters; no precise jurisdiction has been established.",
+        "The event date describes the reported cluster, not the end of security risk. No case-study vessel, supplier or shipment has been matched."
+      ],
+      "search_window": {"start": "2025-07-01", "end": "2025-07-15", "basis": "event_date_buffer", "note": "The incident date plus 14 days for candidate retrieval only, not a measured security-alert or route-disruption duration.", "anchor_date": "2025-07-01", "anchor_basis": "event_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "ROUTE-2025-TW-DRILLS-001",
+      "route_or_chokepoint": "Waters around Taiwan, including announced live-fire exercise areas",
+      "countries": [{"country_code": "TW", "country_name": "Taiwan"}],
+      "event_start": "2025-12-29",
+      "event_end": null,
+      "disruption_type": "military exercise navigation warnings",
+      "reported_effect": "Taiwan's Maritime and Port Bureau issued navigation warnings on 29 December, advising nearby vessels to stay clear of exercise areas and maintain vigilance. It assessed that ship movements at commercial ports were not expected to be affected.",
+      "related_evidence_ids": ["GEO-2025-TW-002"],
+      "source": {"url": "https://www.motcmpb.gov.tw/Information/Detail/20f3b60b-75aa-4d30-8c21-7502d0d09ea7?NodeId=15&SiteId=1", "publisher": "Taiwan Maritime and Port Bureau", "published_at": "2025-12-29", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "official_navigation_notice_reviewed",
+      "limitations": [
+        "The warning covers designated exercise areas around Taiwan; it does not establish a closure of the Taiwan Strait or any port, actual diversion, cargo delay or observed interruption of commercial port operations.",
+        "Taiwan News reported live-fire zones were announced for 30 December: https://www.taiwannews.com.tw/news/6273637. The exercise end and exact durations of navigational effects are not independently established.",
+        "The linked geopolitical record describes the same exercises from an aviation perspective; avoid double counting. No case-study vessel or route has been matched."
+      ],
+      "search_window": {"start": "2025-12-29", "end": "2026-01-12", "basis": "event_date_buffer", "note": "The exercise and notice date plus 14 days for retrieval only, not a confirmed exercise end or navigation recovery.", "anchor_date": "2025-12-29", "anchor_basis": "event_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "ROUTE-2026-HORMUZ-001",
+      "route_or_chokepoint": "Strait of Hormuz",
+      "countries": [],
+      "event_start": null,
+      "event_end": null,
+      "disruption_type": "severely reduced ship transits during regional conflict",
+      "reported_effect": "UN News reported UNCTAD's estimate that traffic fell from around 130 ships per day before the crisis to single digits in early March 2026, a reduction of more than 95%. It described the strait as severely constrained but not formally closed.",
+      "related_evidence_ids": ["GEO-2026-SG-001"],
+      "source": {"url": "https://www.unognewsroom.org/story/en/3061/unog-news-strait-of-hormuz-report-unctad-19mar2026/9196", "publisher": "UN News / United Nations Office at Geneva", "published_at": "2026-03-23", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "un_report_interview_reviewed",
+      "limitations": [
+        "The observation is a transit-count comparison, not proof of total closure, an individual shipment delay or complete recovery. The precise start and end of the transit disruption are unknown.",
+        "Hormuz is outside the six study countries; the linked record reports an attributed downstream Singapore fuel effect, not a closure of Singapore port or a case-study shipment impact.",
+        "The linked geopolitical record describes the same conflict and a related effect, not an independent event. Oil and gas traffic may be more directly exposed than a given container route."
+      ],
+      "search_window": {"start": "2026-03-01", "end": "2026-03-23", "basis": "observation_period", "note": "Includes the early-March transit observation through the 23 March report; retrieval only, not proof of continuous daily impact or recovery.", "anchor_date": "2026-03-23", "anchor_basis": "report_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "ROUTE-2026-PANAMA-GATUN-001",
+      "route_or_chokepoint": "Panama Canal, Gatun Locks east lane",
+      "countries": [],
+      "event_start": null,
+      "event_end": null,
+      "disruption_type": "scheduled lock maintenance and reduced booking slots",
+      "reported_effect": "A Panama Canal Authority advisory scheduled east-lane maintenance for 7–9 April 2026. It said the west lane would remain available, lockages would take additional time and Panamax booking slots would be reduced to 16; 20 slots were to be reinstated for bookings from 10 April.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://pancanal.com/wp-content/uploads/2026/01/ADV-06-2026-Scheduled-Lane-Outage-at-Gatun-Locks-and-the-Transit-Reservation-System.pdf", "publisher": "Panama Canal Authority", "published_at": "2026-03-19", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "canal_authority_operational_advisory_reviewed",
+      "limitations": [
+        "The advisory is a schedule and booking plan, not confirmation that the maintenance, slot reductions or reinstatement occurred as planned. No actual vessel delay or backlog clearance is established.",
+        "The restriction concerns the Gatun east lane and Panamax booking slots; it does not establish a complete canal closure or identical restrictions for all lock systems.",
+        "Panama is outside the six study countries; the corridor is contextual and no case-study shipment, carrier or route has been verified."
+      ],
+      "search_window": {"start": "2026-03-05", "end": "2026-04-23", "basis": "report_date_buffer", "note": "Fourteen days before the advisory through 14 days after the planned final maintenance date, for retrieval only; not a verified shutdown or recovery period.", "anchor_date": "2026-03-19", "anchor_basis": "document_date"},
+      "scenario_recovery": null
+    }
+  ]
+}

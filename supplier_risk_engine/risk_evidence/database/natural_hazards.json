@@ -1,0 +1,221 @@
+{
+  "schema_version": "1.0",
+  "risk_type": "natural_hazards",
+  "record_template": {
+    "evidence_id": null,
+    "hazard_type": null,
+    "event_start": null,
+    "event_end": null,
+    "location": {"label": null, "country_code": null, "country_name": null, "latitude": null, "longitude": null, "affected_area": null},
+    "reported_effect": null,
+    "related_evidence_ids": [],
+    "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
+    "verification_status": null,
+    "limitations": [],
+    "search_window": {
+      "start": null,
+      "end": null,
+      "basis": null,
+      "note": null,
+      "anchor_date": null,
+      "anchor_basis": null
+    },
+    "scenario_recovery": null
+  },
+  "records": [
+    {
+      "evidence_id": "HAZARD-2025-TW-QUAKE-001",
+      "hazard_type": "earthquake",
+      "event_start": "2025-01-21",
+      "event_end": null,
+      "location": {
+        "label": "Chiayi earthquake; Tainan semiconductor fabs",
+        "country_code": "TW",
+        "country_name": "Taiwan",
+        "latitude": null,
+        "longitude": null,
+        "affected_area": "Southern Taiwan, including Tainan"
+      },
+      "reported_effect": "TrendForce reported that TSMC and UMC Tainan fabs evacuated personnel and shut equipment for inspections after a magnitude 6.4 earthquake; operations began resuming the same morning. Its preliminary assessment reported no critical equipment damage.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.trendforce.com/presscenter/news/20250121-12453.html",
+        "publisher": "TrendForce",
+        "published_at": "2025-01-21",
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Redistribution terms not verified; concise attributed summary and source link only."
+      },
+      "verification_status": "industry_analyst_preliminary_assessment_reviewed",
+      "limitations": [
+        "The analyst's assessment was preliminary; resumed operations do not establish full production recovery, delivery timing, or final damage.",
+        "The quake date is not a verified end date for aftershocks, inspections, or downstream effects.",
+        "The report's discussion of potential TV panel supply tightness is a forecast, not an observed shortage.",
+        "Semiconductor production provides electrical-component context; no case-study supplier, part, facility, or shipment has been matched."
+      ],
+      "search_window": {
+        "start": "2025-01-21",
+        "end": "2025-02-04",
+        "basis": "event_date_buffer",
+        "note": "The earthquake date plus a 14-day retrieval-only buffer; the end is not a measured recovery or impact duration.",
+        "anchor_date": "2025-01-21",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "HAZARD-2025-CN-RAGASA-001",
+      "hazard_type": "typhoon",
+      "event_start": "2025-09-24",
+      "event_end": null,
+      "location": {
+        "label": "Southern China, including Guangdong container terminals",
+        "country_code": "CN",
+        "country_name": "China",
+        "latitude": null,
+        "longitude": null,
+        "affected_area": "Guangdong, including Yantian, Nansha and Shekou"
+      },
+      "reported_effect": "WorldCargo News reported that Super Typhoon Ragasa made landfall in southern China on 24 September and that Guangdong authorities had preemptively closed Yantian, Nansha and Shekou on 22 September, citing market sources. A logistics company expected subsequent delays.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.worldcargonews.com/news/2025/09/super-typhoon-ragasa-halts-operations-at-hong-kong-and-southern-china-ports/",
+        "publisher": "WorldCargo News",
+        "published_at": null,
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Redistribution terms not verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_source_reviewed_market_sources_attributed",
+      "limitations": [
+        "The date is reported southern China landfall, not the storm's formation or its effects in the Philippines or Taiwan. The preventive port closures reportedly started earlier.",
+        "The source reports Hong Kong terminal resumption on 25 September, not verified resumption at each named Guangdong terminal. The storm end, backlog clearance and full operational recovery are unknown.",
+        "The reported three-to-seven-day logistics delay is an expectation, not a measured delay for a specific shipment.",
+        "The original OOCL update at https://www.oocl.com/china/eng/localinformation/localnews/2025/Pages/25Sep2025_02.aspx was inaccessible; no case-study cargo or supplier impact has been verified."
+      ],
+      "search_window": {
+        "start": "2025-09-22",
+        "end": "2025-10-08",
+        "basis": "event_date_buffer",
+        "note": "Starts at the reported preventive closures and extends 14 days after landfall for retrieval only; it is not a verified continuous shutdown or recovery period.",
+        "anchor_date": "2025-09-24",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "HAZARD-2025-PH-UWAN-001",
+      "hazard_type": "typhoon",
+      "event_start": "2025-11-09",
+      "event_end": null,
+      "location": {
+        "label": "Dinalungan, Aurora landfall; Manila Multipurpose Terminal",
+        "country_code": "PH",
+        "country_name": "Philippines",
+        "latitude": null,
+        "longitude": null,
+        "affected_area": "Luzon, including Aurora and Manila"
+      },
+      "reported_effect": "UN OCHA reported that Super Typhoon Uwan (Fung-Wong) made landfall at Dinalungan, Aurora on 9 November. Manila Multipurpose Terminal's 8 November advisory scheduled a 9 November gate closure and delivery suspension; its 10 November advisory announced gate and cargo delivery resumption at 19:00, with vessel movements awaiting pilot confirmation.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.unocha.org/publications/report/philippines/philippines-super-typhoon-uwanfung-wong-consolidated-rapid-assessment-report-20-november-2025",
+        "publisher": "United Nations Office for the Coordination of Humanitarian Affairs",
+        "published_at": "2025-11-20",
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Redistribution terms not verified; concise attributed summary and source links only."
+      },
+      "verification_status": "humanitarian_report_and_terminal_advisories_reviewed",
+      "limitations": [
+        "The 9 November landfall is not the start or end of all storm effects; the hazard end date is unverified.",
+        "The terminal advisories at https://cdnweb-mmt.ictsi.com/s3fs-public/inline-files/2025-MMT-CN048-MMT%20Advisory-Typhoon%20Uwan.pdf and https://cdnweb-mmt.ictsi.com/s3fs-public/inline-files/2025-MMT-CN050-MMT%20Advisory-%20Super%20Typhoon%20Uwan-Resumption%20of%20Operation.pdf concern Manila Multipurpose Terminal only, not all Manila terminals.",
+        "The 9 November suspension was scheduled, and the 10 November resumption was announced. Neither proves full vessel resumption, backlog clearance, or actual delay to an individual shipment.",
+        "No affected case-study shipment, supplier, or route has been verified."
+      ],
+      "search_window": {
+        "start": "2025-11-08",
+        "end": "2025-11-23",
+        "basis": "event_date_buffer",
+        "note": "Includes the terminal's 8 November advisory, 9 November landfall, announced 10 November delivery resumption and a 14-day landfall buffer; not an observed recovery interval.",
+        "anchor_date": "2025-11-09",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "HAZARD-2025-MY-FLOOD-001",
+      "hazard_type": "flooding",
+      "event_start": null,
+      "event_end": null,
+      "location": {
+        "label": "Johor road sections and other Malaysian states",
+        "country_code": "MY",
+        "country_name": "Malaysia",
+        "latitude": null,
+        "longitude": null,
+        "affected_area": "Johor and other flood-affected states including Pahang"
+      },
+      "reported_effect": "Bernama reported on 18 December that flooding restricted sections of roads in Johor: one to a single lane, one to heavy vehicles, and another to light vehicles. The same report described flood evacuations across several states.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.malaymail.com/news/malaysia/2025/12/18/floods-worsen-across-several-states-in-malaysia-as-pahang-records-over-8000-evacuees/202397",
+        "publisher": "Bernama via Malay Mail",
+        "published_at": "2025-12-18",
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Redistribution terms not verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_report_reviewed_authority_statement_attributed",
+      "limitations": [
+        "Road restrictions are attributed to the Johor state disaster management committee; start, reopening and flood end dates are not stated.",
+        "The report does not establish a Port Klang closure, factory shutdown, or a specific freight or case-study shipment delay.",
+        "Flooding in multiple states is context, not proof all locations were affected identically or continuously."
+      ],
+      "search_window": {
+        "start": "2025-12-04",
+        "end": "2026-01-01",
+        "basis": "report_date_buffer",
+        "note": "Fourteen days either side of the report date for retrieval only; it is not a verified flood or road-recovery duration.",
+        "anchor_date": "2025-12-18",
+        "anchor_basis": "report_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "HAZARD-2026-US-WINTER-001",
+      "hazard_type": "severe winter weather",
+      "event_start": null,
+      "event_end": null,
+      "location": {
+        "label": "East Coast container terminals",
+        "country_code": "US",
+        "country_name": "United States",
+        "latitude": null,
+        "longitude": null,
+        "affected_area": "Selected terminals in New Jersey, Maryland and Virginia"
+      },
+      "reported_effect": "Evergreen's 26 January winter-storm advisory listed Maher in Elizabeth, Seagirt in Baltimore, and Richmond Marine Terminal as closed for 27 January, while some other listed terminals were scheduled to open.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.evergreen-shipping.us/news/Terminal%20Operations%20%20WINTER%20STORM%20ADVISORY%20TERMINAL.pdf",
+        "publisher": "Evergreen Shipping Agency",
+        "published_at": "2026-01-26",
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Redistribution terms not verified; concise attributed summary and source link only."
+      },
+      "verification_status": "carrier_operational_advisory_reviewed",
+      "limitations": [
+        "The advisory is a gate schedule for 27 January subject to change, not independent confirmation that every planned closure occurred.",
+        "The storm start and end, terminal reopening and cargo backlog clearance dates are not established by this advisory.",
+        "The advisory has a typographical state error for Baltimore; Seagirt's state is recorded as Maryland rather than the advisory's MA.",
+        "It does not establish disruption at all East Coast terminals, or an affected case-study shipment or supplier."
+      ],
+      "search_window": {
+        "start": "2026-01-12",
+        "end": "2026-02-09",
+        "basis": "report_date_buffer",
+        "note": "Fourteen days either side of the 26 January advisory, including the scheduled 27 January gate statuses; retrieval only, not a verified storm or recovery period.",
+        "anchor_date": "2026-01-26",
+        "anchor_basis": "document_date"
+      },
+      "scenario_recovery": null
+    }
+  ]
+}
