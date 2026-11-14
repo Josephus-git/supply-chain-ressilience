@@ -1104,6 +1104,56 @@
           "sha256": "e35c2956d5f5c5dfea62c0f1efe75804cbdb95b242224dfd921b66843b26ed40"
         }
       ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory search for route chokepoint impacts, security warnings and planned constraints during the study period, prioritizing routes potentially relevant to the six study countries. Include clearly labelled external corridor context without asserting that any case-study shipment used it.",
+      "sources_searched": [
+        {"url": "https://unctad.org/system/files/official-document/rmt2025ch2_en.pdf", "outcome": "Included UNCTAD's early-May Suez transit-tonnage comparison against the 2023 average and reported Cape routing."},
+        {"url": "https://unctad.org/news/maritime-trade-under-pressure-growth-set-stall-2025", "outcome": "Reviewed UNCTAD's summary of its 2025 maritime transport report and route diversion."},
+        {"url": "https://www.recaap.org/resources/ck/files/alerts/2025/ReCAAP%20ISC%20IA%2006-2025%20Sea%20Robbery%20Incidents%20in%20Straits%20of%20Malacca%20%20Singapore%20-2%20Jul.pdf", "outcome": "Included a reviewed security alert on three reported sea robberies in Singapore Strait; no channel closure or route-wide delay inferred."},
+        {"url": "https://www.motcmpb.gov.tw/Information/Detail/20f3b60b-75aa-4d30-8c21-7502d0d09ea7?NodeId=15&SiteId=1", "outcome": "Included Taiwan's navigation warnings and assessment of commercial port movements during military exercises."},
+        {"url": "https://www.taiwannews.com.tw/news/6273637", "outcome": "Reviewed additional reporting on designated live-fire exercise areas and Taiwan's maritime warning."},
+        {"url": "https://www.unognewsroom.org/story/en/3061/unog-news-strait-of-hormuz-report-unctad-19mar2026/9196", "outcome": "Included UNCTAD's early-March comparison of Hormuz vessel transits as reported by UN News; formal closure was not reported."},
+        {"url": "https://unctad.org/publication/strait-hormuz-disruptions-implications-global-trade-and-development", "outcome": "Reviewed UNCTAD's 10 March rapid assessment for disruption context."},
+        {"url": "https://www.iea.org/reports/oil-market-report-march-2026", "outcome": "Reviewed IEA reporting of near-halted tanker movement, also referenced by related geopolitical evidence."},
+        {"url": "https://pancanal.com/wp-content/uploads/2026/01/ADV-06-2026-Scheduled-Lane-Outage-at-Gatun-Locks-and-the-Transit-Reservation-System.pdf", "outcome": "Included the canal authority's planned Gatun east-lane maintenance and Panamax booking limits; implementation not independently confirmed."},
+        {"url": "https://www.gac.com/hot-port-news/scheduled-lane-outage-at-gatun-locks-3", "outcome": "Additional canal notice returned HTTP 403 and was not reviewed."},
+        {"url": "https://www.maersk.com/news/articles/2025/01/24/red-sea-gulf-of-aden-update", "outcome": "Carrier Red Sea update timed out and was not independently reviewed."},
+        {"url": "https://www.maersk.com/news/articles/2025/12/22/developments-in-red-sea-first-trans-suez-sailing", "outcome": "Carrier later update timed out and was not independently reviewed."},
+        {"url": "https://www.mpa.gov.sg/media-centre/details/unauthorised-boarding-of-chemical-tanker-in-singapore-strait", "outcome": "Reviewed an unrelated Singapore Strait boarding notice, which expressly says navigation was not affected; no separate closure record added."}
+      ],
+      "known_coverage_gaps": [
+        "Searches are exploratory and not exhaustive across routes, countries, event types, vessel classes, dates or sources. A missing record is not proof of an unaffected route.",
+        "Suez, Hormuz and Panama are outside the six study countries and are included as unverified route context. Empty incident country arrays do not establish an absence of geography or a case-study match.",
+        "The Singapore Strait label identifies a corridor rather than the jurisdiction of each reported robbery. Neither the robberies nor Taiwan navigation warnings establish route-wide closures or shipment delays.",
+        "The Suez statistic concerns tonnage relative to the 2023 average, not vessel count; the Hormuz statistic concerns ship transits and does not establish a formal closure.",
+        "Gatun maintenance, slot limits and subsequent reinstatement were scheduled, not independently verified as completed. Conditions, recovery dates and impact outside documented observations remain unknown.",
+        "No record verifies an affected case-study vessel, product, shipment or route. Linked geopolitical evidence can describe the same event; avoid double counting.",
+        "Search windows are candidate retrieval aids, not continuous disruption intervals, shipment delays or calibrated recovery estimates."
+      ],
+      "licence_notes": "Source permissions and redistribution terms have not been independently verified except where noted. Store concise attributed factual summaries and source links, not complete notices or articles.",
+      "review_method": "Manually review international organization reports, regional security alerts, a maritime authority notice and a canal booking advisory. Preserve observation periods and distinguish measured traffic from forecasts, security warnings and planned maintenance. Use labelled inclusive retrieval-only windows and link related evidence without inventing route matches or recovery durations. Refresh the file hash whenever evidence changes.",
+      "created_at": "2026-11-14",
+      "files": [
+        {
+          "path": "route_chokepoint_disruption.json",
+          "sha256": "2eabde196b838aa93b0a1a6be7bed36536e685cc6d4e1a602b0bc500e5d86184"
+        }
+      ]
     }
   ]
 }

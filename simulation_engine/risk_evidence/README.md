@@ -60,6 +60,11 @@ establish what Dyson shipped or what its suppliers used.
   product-category context, not evidence that Dyson goods were affected.
   Recall announcement dates do not establish defect onset or remedy completion;
   model numbers in descriptions are not verified graph or customs codes.
+- Route chokepoints: transit statistics, navigation warnings and scheduled
+  canal maintenance cover corridors inside and outside the study countries.
+  An empty country list for an external corridor is not a location or exposure
+  match; warnings and plans do not establish closures or shipment delays.
+  Related geopolitical evidence can describe the same underlying event.
 
 ## Layout
 
