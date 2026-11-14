@@ -3,7 +3,7 @@
 Status: **implementation in progress**. Evidence collection has begun; the
 working files contain reviewed records with documented limitations, not a
 complete or validated dataset. This plan complements the
-[simulation engine plan](./SIMULATION_ENGINE_PLAN.md).
+[supplier risk evidence engine plan](./SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md).
 
 ## 1. Purpose
 
@@ -28,7 +28,7 @@ graph entities only when a match has been verified.
 Current file-based database and optional historical-copy layout:
 
 ```text
-simulation_engine/risk_evidence/
+supplier_risk_engine/risk_evidence/
   database/
     manifest.json
     <risk-factor>.json
@@ -42,7 +42,7 @@ There is a working file for each of the 18 selected risk factors. Add
 reviewed evidence directly to its `records` array and retain the
 `record_template` as a guide, not evidence. Update the working manifest with
 the sources searched, scope and limitations. See
-[the database instructions](./simulation_engine/risk_evidence/README.md).
+[the database instructions](./supplier_risk_engine/risk_evidence/README.md).
 
 The working database is mutable. For each experiment retain an immutable
 version or export and its hashes so results remain reproducible; existing
@@ -209,7 +209,7 @@ search dates. A report or
 claim date and a month expanded to calendar bounds are search aids, not
 verified incident intervals. A window outside the query does not prove that
 an incident did not overlap it; actual event endpoints remain null when
-unknown. See the [database instructions](./simulation_engine/risk_evidence/README.md).
+unknown. See the [database instructions](./supplier_risk_engine/risk_evidence/README.md).
 
 Research documented recovery milestones when available, distinguishing
 route reopening, cargo assessment, recovery and delivery. A milestone does
@@ -218,8 +218,8 @@ Future candidate retrieval should include direct window overlaps and offer a
 caller-configured lookback for unknown-duration event-date anchors. A separate
 forward allowance may find later report-date anchors. Return the anchor type,
 allowances and uncertainty; neither guarantees recall or establishes impact.
-Simulation impact duration is a separate scenario assumption. No lookup is
-implemented yet.
+A retrieval lookback is not an impact duration; any impact duration is a
+separate, explicitly scoped assumption. No lookup is implemented yet.
 
 Records may also contain a separately labelled `scenario_recovery` assumption:
 subjective, low-confidence minor (1–3 days), moderate (3–7 days), or severe
@@ -426,7 +426,7 @@ is sampled once per run, but individual impacts can differ.
 1. **Refine the case-study scope:** verify the selected companies and
    jurisdictions, choose relevant routes and products, and decide the
    historical or future-scenario framing.
-2. **Verify the live graph:** check IDs, dates, actual relationship names,
+2. **Verify the local graph:** check IDs, dates, actual relationship names,
    country/origin fields, port associations, and provenance coverage.
 3. **Choose and document sources:** confirm coverage, permissions, licences,
    and retrieval methods for floods, cyber incidents, and relevant tariffs.
@@ -434,12 +434,12 @@ is sampled once per run, but individual impacts can differ.
    database, documenting sources, gaps and uncertain records.
 5. **Design the matcher:** validate identity, location, temporal overlap,
    and tariff applicability; preserve reviewable matching decisions.
-6. **Connect to the simulation:** convert reviewed evidence to scoped
-   scenarios with explicit assumptions; implement and validate each risk type
+6. **Connect to the engine:** convert reviewed evidence into records the
+   engine can match and retrieve; implement and validate each risk type
    independently rather than promising every category at once.
-7. **Evaluate and version experiment inputs:** test matching quality, scenario
-   reproducibility, uncertainty, and limitations; retain provenance and an
-   immutable version of inputs for each run.
+7. **Evaluate and version experiment inputs:** test matching quality, result
+   reproducibility, and limitations; retain provenance and an immutable version
+   of inputs for each result.
 
 ## 9. Open decisions
 

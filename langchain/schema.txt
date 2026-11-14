@@ -10,11 +10,11 @@ Node Properties:
 - `ParentCompany` {company_number, canonical_name, status, jurisdiction, company_type, parent_holding, verification_status, updated_at, extra_notes}
 
 Relationships:
-- (:Supplier)-[:SUPPLIES]->(:Shipment)
+- (:Supplier)-[:SHIPPED]->(:Shipment)
 - (:Shipment)-[:CONSIGNED_TO]->(:Buyer)
-- (:Shipment)-[:CONTAINS]->(:Product)
+- (:Shipment)-[:CONTAINS_PRODUCT]->(:Product)
 - (:Shipment)-[:DEPARTED_FROM]->(:Exit Port)
-- (:Shipment)-[:ARRIVES_AT]->(:Entry Port)
+- (:Shipment)-[:ARRIVED_AT]->(:Entry Port)
 - (:Shipment)-[:CARRIED_BY]->(:Carrier)
 - (:Shipment)-[:TRANSPORTED_ON]->(:Vessel)
-- (:Supplier)-[:OWNED_BY]->(:ParentCompany)
+- (:Supplier)-[:SUBSIDIARY_OF]->(:ParentCompany)
