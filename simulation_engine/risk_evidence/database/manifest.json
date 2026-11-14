@@ -1286,6 +1286,62 @@
           "sha256": "7ef7391863d4177d51134485a63e3f31c7b31f82af2b229500e7d38fcee58e0a"
         }
       ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory manual collection of selected US import tariff measures affecting study-country origins, prioritizing changing 2025–2026 country rates and a product-specific lithium-ion battery measure. Record separate legal layers, date windows, exact scope and exclusions; do not infer actual origin, classification, duties paid or case-study shipment exposure.",
+      "sources_searched": [
+        {"url": "https://www.whitehouse.gov/presidential-actions/2025/02/imposing-duties-to-address-the-synthetic-opioid-supply-chain-in-the-peoples-republic-of-china/", "outcome": "Reviewed the original China IEEPA 10% duty and start and in-transit conditions."},
+        {"url": "https://www.whitehouse.gov/presidential-actions/2025/03/further-amendment-to-duties-addressing-the-synthetic-opioid-supply-chain-in-the-peoples-republic-of-china/", "outcome": "Reviewed the increase of the China synthetic-opioid duty from 10% to 20%."},
+        {"url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3d52328", "outcome": "Reviewed CBP guidance confirming the China duty's 4 March 2025 increase, exceptions and special in-transit cutoff."},
+        {"url": "https://www.whitehouse.gov/presidential-actions/2025/11/modifying-duties-addressing-the-synthetic-opioid-supply-chain-in-the-peoples-republic-of-china/", "outcome": "Reviewed the change of that separate China duty from 20% to 10% for covered entries from 10 November 2025."},
+        {"url": "https://www.whitehouse.gov/presidential-actions/2025/07/further-modifying-the-reciprocal-tariff-rates/", "outcome": "Reviewed EO 14326 country annex and the default 10% baseline for countries not listed."},
+        {"url": "https://www.whitehouse.gov/wp-content/uploads/2025/07/2025ReciprocalTariffs_7.31.eo_.pdf", "outcome": "Reviewed Annex II's Malaysia, Philippines and Taiwan reciprocal duty provisions and in-transit exception."},
+        {"url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/3ec7b5e", "outcome": "Reviewed CBP guidance for 7 August 2025 rates, exceptions and separate China treatment."},
+        {"url": "https://www.whitehouse.gov/presidential-actions/2026/02/ending-certain-tariff-actions/", "outcome": "Reviewed EO 14389 termination of specified IEEPA duties, which did not terminate Section 301 or Section 232 duties."},
+        {"url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/40b11c9", "outcome": "Reviewed CBP's 24 February 2026 IEEPA collection cutoff; historical liability and refunds are not resolved."},
+        {"url": "https://www.whitehouse.gov/presidential-actions/2026/02/imposing-a-temporary-import-surcharge-to-address-fundamental-international-payments-problems/", "outcome": "Reviewed Section 122 10% surcharge, its effective and scheduled end times and exception categories."},
+        {"url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/40b3b7b", "outcome": "Reviewed CBP Section 122 implementation and entry-specific exemptions."},
+        {"url": "https://ustr.gov/sites/default/files/Section%20301%20Modifications%20Determination%20FRN%20(Sept%2012%202024)%20(FINAL).pdf", "outcome": "Reviewed the USTR 2024 determination and scheduled 2026 25% China-origin lithium-ion battery tariff under 9903.91.06."},
+        {"url": "https://www.govinfo.gov/content/pkg/FR-2024-09-18/html/2024-21217.htm", "outcome": "Reviewed Federal Register publication date and schedule of effective years for the 2024 USTR determination."},
+        {"url": "https://www.govinfo.gov/content/pkg/FR-2026-05-28/html/2026-10571.htm", "outcome": "Reviewed the official account of the Supreme Court's IEEPA decision and the Taiwan agreement's implementation status as of May 2026."},
+        {"url": "https://www.prba.org/press-releases/htsus-2026-li-batteries-10499/", "outcome": "Reviewed reporting that 10-digit battery reporting suffixes changed in 2026; avoid assuming the earlier suffix applies to all later entries."},
+        {"url": "https://ustr.gov/about/policy-offices/press-office/press-releases/2025/november/ustr-extends-exclusions-china-section-301-tariffs-related-forced-technology-transfer-investigation", "outcome": "Reviewed extension of 178 specific China Section 301 exclusions; no particular case-study item was matched."},
+        {"url": "https://ustr.gov/about/policy-offices/press-office/press-releases/2026/july/ustr-takes-action-forced-labor-section-301-investigations", "outcome": "Reviewed the USTR action on 60 economies and the distinction between flat and net-of-MFN rates."},
+        {"url": "https://content.govdelivery.com/accounts/USDHSCBP/bulletins/421d887", "outcome": "Reviewed CBP implementation of the July 2026 Section 301 duties for all five non-US study origins, including Taiwan's conditional rate and exceptions."},
+        {"url": "https://www.whitehouse.gov/wp-content/uploads/2026/07/ANNEX.pdf", "outcome": "Reviewed implementing Chapter 99 headings and exception lists for the July 2026 Section 301 action."},
+        {"url": "https://globalimportblog.bakermckenzie.com/2026/07/24/united-states-new-10-to-12-5-section-301-forced-labor-tariffs-on-over-60-countries-take-effect-july-24-2026-replacing-current-10-section-122-duties/", "outcome": "Reviewed secondary description of Section 122 expiry and transition to the distinct July 2026 Section 301 action."}
+      ],
+      "known_coverage_gaps": [
+        "This is not a comprehensive tariff schedule or legal-history review. April–July 2025 China escalation, earlier reciprocal transitions, foreign retaliatory duties, Section 232 and many commodity-specific rules are not comprehensively recorded.",
+        "No shipment, country of origin, entry time, complete HTSUS classification, exclusion, customs value or actual duty paid is verified. Null origin in the global Section 122 record indicates broad coverage, not that origin is irrelevant to all exclusions.",
+        "Rates are separate legal layers, not all-in rates. Stacking, exclusions and in-transit treatment must be determined for the precise entry; the Taiwan combined-rate target is not an additional flat 10% or an all-duties cap.",
+        "Country-rate dates mark nominal provisions and collection cutoffs, not a finding of legal validity: the Supreme Court held that IEEPA did not authorize the tariffs. Product-specific amendments, litigation and refunds require further review. A null effective end and a study-bounded search window do not prove continuous unchanged legal coverage.",
+        "The July 2026 Section 301 action concerns country-level investigated policies and does not establish forced labor at any named supplier or in any specific product.",
+        "US destination is studied here; trade between other countries, other tariff rates and actual origin determinations remain uncovered."
+      ],
+      "licence_notes": "Store concise factual summaries and source links; verify source permissions before redistributing source documents.",
+      "review_method": "Manually review official orders, annexes, USTR determinations and CBP entry guidance; separately identify legal measures, origin scope, commodity codes, rates, exclusions and date or time boundaries. Retain nulls and explicit limitations when applicability or expiry is unverified. Refresh the evidence-file hash after changes.",
+      "created_at": "2026-11-14",
+      "files": [
+        {
+          "path": "tariffs_and_duties.json",
+          "sha256": "7025925dfabca0557ef4b97a82f86a09079c8ab01e69afb2e9eb56dfa9fc5b2f"
+        }
+      ]
     }
   ]
 }

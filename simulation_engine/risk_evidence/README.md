@@ -80,6 +80,16 @@ establish what Dyson shipped or what its suppliers used.
   and Malacca oil-flow shares are industry context, not proof that a case-study
   component or shipment depends on those sources or routes. These observations
   are not disruption probabilities or continuously measured exposure.
+- Tariffs and duties: records describe selected US measures and dated rate
+  layers, not a complete duty calculation. The Supreme Court held that IEEPA
+  did not authorize the tariffs, and IEEPA collection ended in February 2026;
+  historical liability and refunds require separate review. The temporary
+  Section 122 surcharge and later Section 301 action have
+  separate legal bases and exceptions. Taiwan's July 2026 Section 301 record
+  is a conditional combined-rate target, not a flat additional rate. Check
+  product classification, origin, entry time, exclusions, other applicable
+  duties, later changes and litigation before assessing an actual entry.
+  Null tariff origin means unspecified or broad scope, not an origin match.
 
 ## Layout
 
