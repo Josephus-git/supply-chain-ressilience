@@ -28,8 +28,11 @@
       "start": null,
       "end": null,
       "basis": null,
-      "note": null
-    }
+      "note": null,
+      "anchor_date": null,
+      "anchor_basis": null
+    },
+    "scenario_recovery": null
   },
   "records": [
     {
@@ -62,11 +65,14 @@
         "No graph entity or shipment match has been reviewed."
       ],
       "search_window": {
-        "start": "2026-03-21",
-        "end": "2026-03-21",
-        "basis": "report_date",
-        "note": "Publication date of a report about an ongoing condition; event onset and end are unknown."
-      }
+        "start": "2026-03-07",
+        "end": "2026-04-04",
+        "basis": "report_date_buffer",
+        "note": "Publication date of a report about an ongoing condition; event onset and end are unknown. Retrieval-only buffer of 14 calendar days either side of report_date anchor 2026-03-21; not an incident date or estimated recovery.",
+        "anchor_date": "2026-03-21",
+        "anchor_basis": "report_date"
+      },
+      "scenario_recovery": null
     },
     {
       "evidence_id": "CUSTOMS-2025-PH-001",
@@ -97,11 +103,14 @@
         "No case-study supplier, shipment, specific border location, or graph match is established."
       ],
       "search_window": {
-        "start": "2025-09-24",
-        "end": "2025-09-24",
-        "basis": "document_date",
-        "note": "Date of the customs memorandum cited by the report; not the onset or end of the system limitation."
-      }
+        "start": "2025-09-10",
+        "end": "2025-10-08",
+        "basis": "report_date_buffer",
+        "note": "Date of the customs memorandum cited by the report; not the onset or end of the system limitation. Retrieval-only buffer of 14 calendar days either side of document_date anchor 2025-09-24; not an incident date or estimated recovery.",
+        "anchor_date": "2025-09-24",
+        "anchor_basis": "document_date"
+      },
+      "scenario_recovery": null
     },
     {
       "evidence_id": "CUSTOMS-2026-PH-001",
@@ -132,11 +141,14 @@
         "The report does not identify any case-study supplier or establish that a specific shipment was affected."
       ],
       "search_window": {
-        "start": "2026-06-25",
-        "end": "2026-06-25",
-        "basis": "report_date",
-        "note": "Publication date of the congestion report; onset and end are unknown."
-      }
+        "start": "2026-06-11",
+        "end": "2026-07-09",
+        "basis": "report_date_buffer",
+        "note": "Publication date of the congestion report; onset and end are unknown. Retrieval-only buffer of 14 calendar days either side of report_date anchor 2026-06-25; not an incident date or estimated recovery.",
+        "anchor_date": "2026-06-25",
+        "anchor_basis": "report_date"
+      },
+      "scenario_recovery": null
     },
     {
       "evidence_id": "CUSTOMS-2025-US-001",
@@ -166,11 +178,14 @@
         "Notification delays do not by themselves establish that goods or a case-study supplier were delayed."
       ],
       "search_window": {
-        "start": "2025-04-28",
-        "end": "2025-04-28",
-        "basis": "report_date",
-        "note": "CBP bulletin date reporting delays; start and end are unknown."
-      }
+        "start": "2025-04-14",
+        "end": "2025-05-12",
+        "basis": "report_date_buffer",
+        "note": "CBP bulletin date reporting delays; start and end are unknown. Retrieval-only buffer of 14 calendar days either side of report_date anchor 2025-04-28; not an incident date or estimated recovery.",
+        "anchor_date": "2025-04-28",
+        "anchor_basis": "report_date"
+      },
+      "scenario_recovery": null
     },
     {
       "evidence_id": "CUSTOMS-2025-US-002",
@@ -201,11 +216,14 @@
         "Notification delays do not by themselves establish that goods or a case-study supplier were delayed."
       ],
       "search_window": {
-        "start": "2025-05-07",
-        "end": "2025-05-07",
-        "basis": "report_date",
-        "note": "CBP bulletin date reporting delays; start and end are unknown."
-      }
+        "start": "2025-04-23",
+        "end": "2025-05-21",
+        "basis": "report_date_buffer",
+        "note": "CBP bulletin date reporting delays; start and end are unknown. Retrieval-only buffer of 14 calendar days either side of report_date anchor 2025-05-07; not an incident date or estimated recovery.",
+        "anchor_date": "2025-05-07",
+        "anchor_basis": "report_date"
+      },
+      "scenario_recovery": null
     },
     {
       "evidence_id": "CUSTOMS-2025-US-003",
@@ -235,11 +253,14 @@
         "The duration and impact on any specific shipment or case-study supplier are not established."
       ],
       "search_window": {
-        "start": "2025-07-03",
-        "end": "2025-07-03",
-        "basis": "report_date",
-        "note": "CBP bulletin date reporting corrected issues; backlog clearance was an expectation and event onset is unknown."
-      }
+        "start": "2025-06-19",
+        "end": "2025-07-17",
+        "basis": "report_date_buffer",
+        "note": "CBP bulletin date reporting corrected issues; backlog clearance was an expectation and event onset is unknown. Retrieval-only buffer of 14 calendar days either side of report_date anchor 2025-07-03; not an incident date or estimated recovery.",
+        "anchor_date": "2025-07-03",
+        "anchor_basis": "report_date"
+      },
+      "scenario_recovery": null
     }
   ]
 }

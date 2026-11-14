@@ -25,8 +25,11 @@
       "start": null,
       "end": null,
       "basis": null,
-      "note": null
-    }
+      "note": null,
+      "anchor_date": null,
+      "anchor_basis": null
+    },
+    "scenario_recovery": null
   },
   "records": [
     {
@@ -56,9 +59,20 @@
       ],
       "search_window": {
         "start": "2025-10-25",
-        "end": "2025-10-25",
-        "basis": "event_date",
-        "note": "Reported collision date; duration of the hold is unknown."
+        "end": "2025-11-01",
+        "basis": "scenario_estimate",
+        "note": "Reported collision date; duration of the hold is unknown. Search end also includes the illustrative maximum handling-delay scenario; it is not an observed recovery date.",
+        "anchor_date": "2025-10-25",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": {
+        "severity": "moderate",
+        "min_days": 3,
+        "max_days": 7,
+        "anchor_date": "2025-10-25",
+        "scope": "hypothetical vessel or cargo handling delay",
+        "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
+        "confidence": "low"
       }
     },
     {
@@ -88,9 +102,20 @@
       ],
       "search_window": {
         "start": "2025-11-07",
-        "end": "2025-11-07",
-        "basis": "event_date",
-        "note": "Reported fire date; incident end is unknown."
+        "end": "2025-11-21",
+        "basis": "scenario_estimate",
+        "note": "Reported fire date; incident end is unknown. Search end also includes the illustrative maximum handling-delay scenario; it is not an observed recovery date.",
+        "anchor_date": "2025-11-07",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": {
+        "severity": "severe",
+        "min_days": 7,
+        "max_days": 14,
+        "anchor_date": "2025-11-07",
+        "scope": "hypothetical vessel or cargo handling delay",
+        "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
+        "confidence": "low"
       }
     },
     {
@@ -119,9 +144,20 @@
       ],
       "search_window": {
         "start": "2025-11-21",
-        "end": "2025-11-21",
-        "basis": "event_date",
-        "note": "Reported fire start date; overall incident end is unknown."
+        "end": "2025-12-05",
+        "basis": "scenario_estimate",
+        "note": "Reported fire start date; overall incident end is unknown. Search end also includes the illustrative maximum handling-delay scenario; it is not an observed recovery date.",
+        "anchor_date": "2025-11-21",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": {
+        "severity": "severe",
+        "min_days": 7,
+        "max_days": 14,
+        "anchor_date": "2025-11-21",
+        "scope": "hypothetical vessel or cargo handling delay",
+        "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
+        "confidence": "low"
       }
     },
     {
@@ -151,9 +187,20 @@
       ],
       "search_window": {
         "start": "2026-04-01",
-        "end": "2026-04-01",
-        "basis": "event_date",
-        "note": "Collision date established by the Taiwan Transportation Safety Board; incident end is unknown."
+        "end": "2026-04-04",
+        "basis": "scenario_estimate",
+        "note": "Collision date established by the Taiwan Transportation Safety Board; incident end is unknown. Search end also includes the illustrative maximum handling-delay scenario; it is not an observed recovery date.",
+        "anchor_date": "2026-04-01",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": {
+        "severity": "minor",
+        "min_days": 1,
+        "max_days": 3,
+        "anchor_date": "2026-04-01",
+        "scope": "hypothetical affected container handling delay, not port closure or vessel detention",
+        "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
+        "confidence": "low"
       }
     },
     {
@@ -183,9 +230,20 @@
       ],
       "search_window": {
         "start": "2026-09-03",
-        "end": "2026-09-03",
-        "basis": "event_date",
-        "note": "Reported date containers were lost; incident end is unknown."
+        "end": "2026-09-10",
+        "basis": "scenario_estimate",
+        "note": "Reported date containers were lost; incident end is unknown. Search end also includes the illustrative maximum handling-delay scenario; it is not an observed recovery date.",
+        "anchor_date": "2026-09-03",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": {
+        "severity": "moderate",
+        "min_days": 3,
+        "max_days": 7,
+        "anchor_date": "2026-09-03",
+        "scope": "hypothetical vessel or container handling delay, not goods loss",
+        "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
+        "confidence": "low"
       }
     },
     {
@@ -215,9 +273,20 @@
       ],
       "search_window": {
         "start": "2026-08-23",
-        "end": "2026-08-23",
-        "basis": "event_date",
-        "note": "Reported fire date; incident end is unknown."
+        "end": "2026-09-09",
+        "basis": "scenario_estimate",
+        "note": "The later account reported the vessel awaiting berth authorization on 9 September, beyond the illustrative initial handling-delay scenario. The incident end remains unknown.",
+        "anchor_date": "2026-08-23",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": {
+        "severity": "severe",
+        "min_days": 7,
+        "max_days": 14,
+        "anchor_date": "2026-08-23",
+        "scope": "hypothetical initial cargo handling delay; subsequent detention may be longer",
+        "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
+        "confidence": "low"
       }
     }
   ]

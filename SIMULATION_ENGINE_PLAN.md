@@ -84,7 +84,27 @@ Evidence `search_window` dates are retrieval aids with an explicit basis, not
 necessarily incident start or end dates. The application must distinguish
 report-date, claim-date and approximate candidates from verified temporal
 overlaps, and surface unknown event dates rather than treating a search window
-as proof of impact.
+as proof of impact. Every evidence record must have non-null, valid ISO
+search-window start and end dates in order; a future loader must report and
+reject invalid or incomplete records rather than silently omit them. Template
+placeholders are not evidence.
+
+For unknown-duration incidents, future candidate retrieval should support a
+caller-configured event-date lookback in addition to directly overlapping
+evidence windows; a separate forward allowance can retrieve later report-date
+anchors. Return the anchor, settings and uncertainty. These search allowances
+are not verified disruption lengths, do not guarantee complete recall, and
+must not be used as simulation impact durations without a separate explicit
+scenario assumption. This retrieval is not yet implemented.
+
+The dataset may include optional `scenario_recovery` suggestions: subjective,
+low-confidence handling-delay ranges with scope and anchor. They are not
+verified recovery durations, calibrated probabilities, or evidence of
+supplier impact. A future application must require explicit opt-in, preserve
+the assumptions and anchor in results, distinguish initial handling from full
+recovery or replacement, and avoid double-counting linked incidents. A
+retrieval window or report-date buffer must never be treated as an automatic
+simulation duration.
 
 The existing [mcp_client.py](./langchain/mcp_client.py) targets an external
 Apify service and is not the local simulation engine.

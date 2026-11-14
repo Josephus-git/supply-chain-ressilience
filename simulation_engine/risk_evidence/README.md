@@ -28,7 +28,8 @@ than treating templates as evidence.
 - Use ISO 8601 dates (`YYYY-MM-DD`). Record event dates, publication dates,
   retrieval dates, and tariff effective dates separately; do not infer them.
 - Populated risk files use `search_window` with inclusive `start` and `end`
-  dates, a `basis` and an explanatory `note` for date-based candidate
+  dates, a `basis`, an explanatory `note`, and optional structured
+  `anchor_date` and `anchor_basis` for date-based candidate
   retrieval. `event_date` means a known event date; `report_date` or
   `document_date` identifies when a source reported an issue, not when it
   began or ended; `claim_date` identifies an unverified claim. An
@@ -36,10 +37,48 @@ than treating templates as evidence.
   `month_approximation` expands a reported month to calendar dates for
   searching only. A window is not a verified incident interval, and its
   absence outside a query is not proof of no overlap.
+- Every actual evidence record must have non-null `search_window.start` and
+  `search_window.end` in ISO `YYYY-MM-DD` format, with start on or before
+  end. Use a defensible, labelled retrieval anchor; do not invent dates.
+  If no suitable anchor is available, do not add the item as a completed
+  evidence record until one is found. Template placeholders may remain null:
+  they are not records. A future loader must explicitly report and reject
+  records with missing, invalid, or reversed search dates, not silently skip
+  them. No loader or automated enforcement exists yet.
+- `scenario_estimate` windows include an illustrative scenario end, and can
+  also include later documented milestones. `report_date_buffer` expands a
+  report, document or claim anchor by 14 calendar days in each direction
+  solely for retrieval; it is not an estimated recovery period. The
+  `anchor_basis` distinguishes these dates from an incident date. Neither
+  type proves continuous impact or complete recall.
+- `scenario_recovery`, when non-null, is a low-confidence hypothetical
+  handling-delay assumption with a scope, anchor, severity, minimum and maximum
+  elapsed days. The illustrative subjective buckets are minor 1–3, moderate
+  3–7 and severe 7–14 days; they are not calibrated or inferred recovery
+  observations. Explicitly opt in and review the scope before using one.
+  A null assumption means no estimate, not zero duration. Currency, price,
+  report-only and unverified-claim records have no recovery estimates.
+- A scenario's day range is measured from its own `anchor_date`; it can refer
+  to a later recovery milestone rather than the incident date. It does not
+  imply a total outage, a probability, supplier exposure, or the end of
+  response, shipment replacement or recovery. Known milestones can extend
+  past the scenario range; related records do not represent separate events.
 - Future retrieval must return the window's basis and note, distinguish
   candidates from verified temporal matches, and not treat missing event
   endpoints as zero-duration events or definitive non-overlaps. Search-window
   dates are indexing aids, not inferred event dates or impact probabilities.
+- For a query `[start, end]`, future retrieval should include overlapping
+  documented windows and, when duration is unknown, optionally search known
+  event-date anchors from `start` minus a caller-configured number of days
+  through `end`. Label lookback-only results as assumed candidates, return the
+  configured value and anchor, and never treat the lookback as an observed
+  event duration. For example, a seven-day lookback includes an event on March 3
+  in a March 10 query; it does not prove seven days of disruption.
+- Report-date anchors are not incident dates: provide a separately configured
+  forward report-date search allowance if desired and label those results as
+  report-date candidates. Neither finite allowance guarantees recall. A simulation
+  impact duration must be an explicit, independently scoped scenario
+  assumption, not the retrieval lookback.
 - Store a verified country name alongside its ISO 3166-1 alpha-2 code where
   available (for example, `Malaysia` and `MY`). Use `null` for an unknown
   name or code; do not guess. For multiple countries, use an array of objects
@@ -61,9 +100,10 @@ than treating templates as evidence.
 - A location or identity match alone does not prove that a shipment was
   affected. Any future matching must distinguish reviewed links from
   uncertain or rejected ones.
-- Store observed facts and their provenance here. Simulation probabilities
-  and impact assumptions belong in separately labelled scenario inputs; an
-  incident report does not automatically establish a probability.
+- Store observed facts and their provenance separately from the explicitly
+  labelled, optional `scenario_recovery` assumptions. Simulation probabilities
+  and other impact assumptions belong in scenario inputs; an incident report
+  does not automatically establish a probability.
 - Specify rate units, currency, dates, classification and conditions for
   tariffs and other costs. Supplier country alone does not establish product
   origin or tariff applicability.

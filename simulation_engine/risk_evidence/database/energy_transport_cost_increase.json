@@ -40,8 +40,11 @@
       "start": null,
       "end": null,
       "basis": null,
-      "note": null
-    }
+      "note": null,
+      "anchor_date": null,
+      "anchor_basis": null
+    },
+    "scenario_recovery": null
   },
   "records": [
     {
@@ -88,8 +91,11 @@
         "start": "2025-07-03",
         "end": "2025-07-16",
         "basis": "observation_period",
-        "note": "Documented applicability periods of the previous and new weekly diesel prices; not a supplier-specific price."
-      }
+        "note": "Documented applicability periods of the previous and new weekly diesel prices; not a supplier-specific price.",
+        "anchor_date": null,
+        "anchor_basis": null
+      },
+      "scenario_recovery": null
     },
     {
       "evidence_id": "COST-2026-MY-DIESEL-001",
@@ -135,8 +141,11 @@
         "start": "2026-03-19",
         "end": "2026-04-01",
         "basis": "observation_period",
-        "note": "Documented applicability periods of the previous and new weekly diesel prices; not a supplier-specific price."
-      }
+        "note": "Documented applicability periods of the previous and new weekly diesel prices; not a supplier-specific price.",
+        "anchor_date": null,
+        "anchor_basis": null
+      },
+      "scenario_recovery": null
     },
     {
       "evidence_id": "COST-2025-PH-ELECTRICITY-001",
@@ -182,8 +191,11 @@
         "start": "2025-06-01",
         "end": "2025-07-31",
         "basis": "month_approximation",
-        "note": "June and July 2025 billing months expanded to full calendar months only for candidate retrieval; exact billing dates are unknown."
-      }
+        "note": "June and July 2025 billing months expanded to full calendar months only for candidate retrieval; exact billing dates are unknown.",
+        "anchor_date": null,
+        "anchor_basis": null
+      },
+      "scenario_recovery": null
     },
     {
       "evidence_id": "COST-2026-SG-ELECTRICITY-001",
@@ -229,8 +241,11 @@
         "start": "2026-04-01",
         "end": "2026-09-30",
         "basis": "observation_period",
-        "note": "Quarterly periods of the compared residential tariffs; not a supplier-specific tariff."
-      }
+        "note": "Quarterly periods of the compared residential tariffs; not a supplier-specific tariff.",
+        "anchor_date": null,
+        "anchor_basis": null
+      },
+      "scenario_recovery": null
     },
     {
       "evidence_id": "COST-2025-CN-US-FREIGHT-001",
@@ -280,8 +295,11 @@
         "start": "2025-05-29",
         "end": "2025-06-05",
         "basis": "observation_period",
-        "note": "Comparison interval between published price observations; not a continuous price or supplier-cost history."
-      }
+        "note": "Comparison interval between published price observations; not a continuous price or supplier-cost history.",
+        "anchor_date": null,
+        "anchor_basis": null
+      },
+      "scenario_recovery": null
     }
   ]
 }

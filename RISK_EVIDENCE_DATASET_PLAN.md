@@ -177,12 +177,37 @@ The JSON templates provide field guides; no lookup has been implemented yet.
 For incidents, use event start/end dates and document missing or uncertain
 dates. Publication and retrieval dates are separate. This historical period
 alone is not enough to establish a reliable annual event probability.
-For candidate retrieval, records may additionally carry a `search_window`
-with inclusive dates, a labelled basis and an explanatory note. A report or
+Every evidence record must carry a `search_window` with non-null inclusive ISO
+start and end dates, start on or before end, a labelled basis and an
+explanatory note. Template placeholders are not evidence and may remain
+null. Items without a defensible retrieval anchor cannot be added as completed
+records; a future loader must report and reject missing, invalid or reversed
+search dates. A report or
 claim date and a month expanded to calendar bounds are search aids, not
 verified incident intervals. A window outside the query does not prove that
 an incident did not overlap it; actual event endpoints remain null when
 unknown. See the [database instructions](./simulation_engine/risk_evidence/README.md).
+
+Research documented recovery milestones when available, distinguishing
+route reopening, cargo assessment, recovery and delivery. A milestone does
+not establish continuous disruption or completion of a different activity.
+Future candidate retrieval should include direct window overlaps and offer a
+caller-configured lookback for unknown-duration event-date anchors. A separate
+forward allowance may find later report-date anchors. Return the anchor type,
+allowances and uncertainty; neither guarantees recall or establishes impact.
+Simulation impact duration is a separate scenario assumption. No lookup is
+implemented yet.
+
+Records may also contain a separately labelled `scenario_recovery` assumption:
+subjective, low-confidence minor (1–3 days), moderate (3–7 days), or severe
+(7–14 days) handling scenarios measured from the stated anchor. They are
+illustrative, not calibrated severity estimates or historical observations,
+and must be explicitly opted into after checking scope. The same incident may
+have multiple evidence records but is not multiple independent events.
+Report-only or unverified-claim records have no incident recovery estimate;
+their ±14-day search buffers are retrieval heuristics, not event periods.
+Price and currency comparisons have observation windows, not incident
+recovery durations.
 
 Tariff rules are different: collect applicable rules whose effective
 intervals **overlap** the case-study period, including rules that began

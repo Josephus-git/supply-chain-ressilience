@@ -126,12 +126,12 @@
         "None of these records establishes an empirical delay distribution, probability, supplier impact, or temporal overlap with a specific shipment."
       ],
       "licence_notes": "Source permissions and redistribution terms have not been verified. Store only concise attributed factual summaries and source links; do not redistribute full reports.",
-      "review_method": "Manually read each included source or identified reproduction, preserve its attribution and precise reported scope, distinguish publication dates from incident dates and observed durations from thresholds or expectations, and leave supplier matches unassigned. File hashes describe the working files as of this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals.",
+      "review_method": "Manually read each included source or identified reproduction, preserve its attribution and precise reported scope, distinguish publication dates from incident dates and observed durations from thresholds or expectations, and leave supplier matches unassigned. File hashes describe the working files as of this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals. On 2026-11-14, search windows were expanded using labelled hypothetical recovery scenarios or retrieval-only report-date buffers; these are not verified incident durations. Scenario assumptions require explicit opt-in.",
       "created_at": "2026-11-13",
       "files": [
         {
           "path": "border_customs_delays.json",
-          "sha256": "b834fc781f9dd78a3a276b30f5b7fb259a95e3c36da4709c28afe4837f288394"
+          "sha256": "5947e33543b275f01c35c92fb286bf1e73fc0290e26d9a976a5bff238b291fa8"
         }
       ]
     },
@@ -229,12 +229,12 @@
         "Records are not calibrated event probabilities and may overlap with future port disruption, cargo loss, or natural hazard evidence."
       ],
       "licence_notes": "Source permissions and redistribution terms have not been verified. Store only concise attributed factual summaries and source links; do not redistribute full reports.",
-      "review_method": "Manually read the linked reports; distinguish incident location from vessel flag, stated incident dates from publication dates, and fire or response duration from shipment delay. Attribute secondary claims and leave entity matches unassigned. File hashes describe working files at this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals.",
+      "review_method": "Manually read the linked reports; distinguish incident location from vessel flag, stated incident dates from publication dates, and fire or response duration from shipment delay. Attribute secondary claims and leave entity matches unassigned. File hashes describe working files at this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals. On 2026-11-14, search windows were expanded using labelled hypothetical recovery scenarios or retrieval-only report-date buffers; these are not verified incident durations. Scenario assumptions require explicit opt-in.",
       "created_at": "2026-11-13",
       "files": [
         {
           "path": "carrier_vessel_disruption.json",
-          "sha256": "1dddc65d4507aff0616e2f29a55422f3926a1f673292047ee440eaf4a829a776"
+          "sha256": "170c4b64ee0c4ef13d755b713def88c6fc1b961b0cfc09e5b4b57f104cd2bbf4"
         }
       ]
     },
@@ -307,12 +307,12 @@
         "No reviewed entity or shipment matches are established."
       ],
       "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise numerical observations and source links, not complete source files.",
-      "review_method": "Manually compare the published country-labelled source tables and Philippine bulletin, record dates and quote direction, and calculate the percent change as (ending rate / starting rate - 1) * 100 rounded to two decimals. The source field points to the end observation; start sources are documented in the records and manifest. File hashes describe working files at this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals.",
+      "review_method": "Manually compare the published country-labelled source tables and Philippine bulletin, record dates and quote direction, and calculate the percent change as (ending rate / starting rate - 1) * 100 rounded to two decimals. The source field points to the end observation; start sources are documented in the records and manifest. File hashes describe working files at this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals. On 2026-11-14, search windows were expanded using labelled hypothetical recovery scenarios or retrieval-only report-date buffers; these are not verified incident durations. Scenario assumptions require explicit opt-in.",
       "created_at": "2026-11-13",
       "files": [
         {
           "path": "currency_fluctuations.json",
-          "sha256": "a7a8faed0f92528b5fcdf854413095cb8b947bdd20dfffb06901173631918fc2"
+          "sha256": "18af3762e931498d3fc2c26d12b2f69fba9b42556f56259073390ce6c0d4a5ed"
         }
       ]
     },
@@ -384,12 +384,12 @@
         "The record does not support a probability estimate or establish the scope of any hypothetical compromise."
       ],
       "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise references and attributed claims, not full source text or sensitive data.",
-      "review_method": "Manually read accessible vendor and legal reports, record the source's explicit alleged status, retain unknown incident fields as null, and do not infer identity matches or operational effects. The record documents a claim rather than a verified attack. File hashes describe working files at this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals.",
+      "review_method": "Manually read accessible vendor and legal reports, record the source's explicit alleged status, retain unknown incident fields as null, and do not infer identity matches or operational effects. The record documents a claim rather than a verified attack. File hashes describe working files at this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals. On 2026-11-14, search windows were expanded using labelled hypothetical recovery scenarios or retrieval-only report-date buffers; these are not verified incident durations. Scenario assumptions require explicit opt-in.",
       "created_at": "2026-11-13",
       "files": [
         {
           "path": "cyberattack.json",
-          "sha256": "294b755242481b4509dcb52ccf5c77a7d929ef0c8fd68bcc39a8885ae0db887e"
+          "sha256": "de1acc670fd98ca2ba89600a477849c0a925b32bf5776eeb1c12cf47831909a4"
         }
       ]
     },
@@ -475,12 +475,12 @@
         "Overlap with currency, tariff, geopolitical, or carrier evidence requires review to avoid double counting."
       ],
       "licence_notes": "Source permissions and index redistribution terms have not been independently verified. Store concise attributed factual observations and links, not full source text or copyrighted index datasets.",
-      "review_method": "Manually read the accessible source pages, retain currency, unit, dates and market/customer scope, and calculate percentage change from baseline and observed rates where the source does not report it. Keep the Drewry-reported rounded 57 percent distinct from the approximately 57.20 percent calculated from displayed prices. File hashes describe working files at this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals.",
+      "review_method": "Manually read the accessible source pages, retain currency, unit, dates and market/customer scope, and calculate percentage change from baseline and observed rates where the source does not report it. Keep the Drewry-reported rounded 57 percent distinct from the approximately 57.20 percent calculated from displayed prices. File hashes describe working files at this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals. On 2026-11-14, search windows were expanded using labelled hypothetical recovery scenarios or retrieval-only report-date buffers; these are not verified incident durations. Scenario assumptions require explicit opt-in.",
       "created_at": "2026-11-13",
       "files": [
         {
           "path": "energy_transport_cost_increase.json",
-          "sha256": "569696679674efde8328ab9415d0fc77ca05260ce462caa2d4e27a0c9200752c"
+          "sha256": "ba44913588e011b9a3d55607da03beceeaa0e2dad7a537a92fda87d7f953aaa0"
         }
       ]
     },
@@ -552,12 +552,128 @@
         "Related geopolitical, port, vessel, route and cost records require review to avoid double counting. These records are not probabilities."
       ],
       "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise attributed factual summaries and links, not full articles.",
-      "review_method": "Manually read accessible reports, distinguish military activity and advisory dates from observed or forecast commercial effects, retain unknown end dates, and label search windows as candidate-retrieval aids rather than proof of continuous disruption. File hashes describe working files at this review and must be refreshed when those files change.",
+      "review_method": "Manually read accessible reports, distinguish military activity and advisory dates from observed or forecast commercial effects, retain unknown end dates, and label search windows as candidate-retrieval aids rather than proof of continuous disruption. File hashes describe working files at this review and must be refreshed when those files change. On 2026-11-14, search windows were expanded using labelled hypothetical recovery scenarios or retrieval-only report-date buffers; these are not verified incident durations. Scenario assumptions require explicit opt-in.",
       "created_at": "2026-11-13",
       "files": [
         {
           "path": "geopolitical_conflict.json",
-          "sha256": "1586dd1a8a9f73d63a1dc3e9981d6ab12d45d911a229323afbf027999a00b2c7"
+          "sha256": "5806e75b430244bfaf0ed1b8e5dc4327b9c3a03959e4ab57faf95742f884c843"
+        }
+      ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory research into loss, alleged theft, or damage involving goods or containers in transit during the study period in study countries or on documented routes connected to them. Include container-only incidents as contextual evidence while clearly marking unknown cargo contents and supplier exposure.",
+      "sources_searched": [
+        {
+          "url": "https://www.ntsb.gov/investigations/Pages/RRD25FR019.aspx",
+          "outcome": "Included the official investigation of a 2025 Illinois freight derailment and product release from three tank cars."
+        },
+        {
+          "url": "https://tapa-apac.org/trailer-truck-cargo-theft-foiled-in-cainta-philippines-three-arrested/",
+          "outcome": "Included an attributed account of alleged theft from a moving steel-carrying truck in Cainta; the theft date and final recovery outcome are unknown."
+        },
+        {
+          "url": "https://tribune.net.ph/2025/08/30/caintas-bakal-boys-arrested",
+          "outcome": "Reviewed a 30 August 2025 report on arrests relating to steel taken from trucks in Cainta; used only as a related report-date anchor."
+        },
+        {
+          "url": "https://mb.com.ph/2025/08/29/3-nabbed-for-stealing-moving-trucks-cargo-in-cainta",
+          "outcome": "The original source linked by TAPA returned HTTP 403 and was not reviewed."
+        },
+        {
+          "url": "https://incidentnews.noaa.gov/incident/11131",
+          "outcome": "Included NOAA's initial notification of 32 containers lost from OOCL Sunflower on a Taiwan-to-Long Beach voyage."
+        },
+        {
+          "url": "https://safety4sea.com/vessel-loses-57-containers-overboard-on-route-to-long-beach/",
+          "outcome": "Reviewed a conflicting report of 57 containers for the same OOCL Sunflower incident; final count remains unresolved."
+        },
+        {
+          "url": "https://wkwebster.com/casualties/738/oocl-sunflower",
+          "outcome": "Reviewed 20 March follow-up reporting arrival at Long Beach on 18 March and commencement of removal of damaged containers; completion was not established."
+        },
+        {
+          "url": "https://www.marineinsight.com/ultra-large-containership-oocl-sunflower-loses-57-containers-in-north-pacific-storm/",
+          "outcome": "Reviewed secondary reporting naming OOCL as vessel operator and giving the voyage context; it also reports 57 containers."
+        },
+        {
+          "url": "https://www.ttsb.gov.tw/english/18609/28176/49882/post",
+          "outcome": "Included the official Taiwan collision report confirming container damage aboard Haian Opus."
+        },
+        {
+          "url": "https://maritime-executive.com/article/boxship-departing-taiwan-clips-docked-ship-sending-containers-into-harbor",
+          "outcome": "Reviewed reporting that four Zeal Lumos containers fell into the harbor and were secured; same collision as VESSEL-2026-TW-001."
+        },
+        {
+          "url": "https://safety4sea.com/vessels-collide-in-kaohsiung-causing-containers-to-fall-overboard/",
+          "outcome": "Reviewed a reported approximate port resumption time on 1 April; it does not establish cargo recovery or delivery completion."
+        },
+        {
+          "url": "https://www.mpa.gov.sg/media-centre/details/container-vessel-sinks-off-batam",
+          "outcome": "Included the official Golden Star 1 sinking report and warning about containers adrift; it did not provide a lost-container count."
+        },
+        {
+          "url": "https://www.xindemarinenews.com/news/2063910861887766529",
+          "outcome": "Reviewed the secondary report of 107 containers entering the sea, the Singapore-to-Malaysia voyage and reported charterer; these details are not confirmed in the MPA statement."
+        },
+        {
+          "url": "https://www.straitstimes.com/singapore/tanzania-registered-container-vessel-sinks-off-batam",
+          "outcome": "Reviewed reporting that 107 containers were aboard Golden Star 1, attributed to Antara; it did not establish that all were lost."
+        },
+        {
+          "url": "https://www.bairdmaritime.com/security/incidents/accidents/containership-sinks-off-batam-indonesia-all-on-board-rescued",
+          "outcome": "Reviewed reporting that some containers were found on 6 June; cargo recovery completion is unknown."
+        },
+        {
+          "url": "https://www.wecoxclaimsgroup.com/casualty-notices/new-casualty-golden-star-1-sank/",
+          "outcome": "Reviewed a claims specialist's report about the sinking and potential cargo claims; no recovery completion date was given."
+        },
+        {
+          "url": "https://portcalls.com/46-empty-containers-fall-off-ship-at-hamilo-point-in-batangas/",
+          "outcome": "Reviewed Span Asia 39's reported loss of 46 empty containers; excluded as a goods-loss record because goods were not established."
+        },
+        {
+          "url": "https://www.worldcargonews.com/shipping-logistics/2025/11/three-killed-three-injured-in-fire-onboard-container-ship-at-ptp/",
+          "outcome": "Reviewed Maersk's statement that the extent of Kyparissia's cargo impact was unknown; no separate goods-damage record included."
+        },
+        {
+          "url": "https://www.worldshipping.org/news/world-shipping-council-releases-containers-lost-at-sea-report-2026-update",
+          "outcome": "Reviewed global industry estimates for context only; not used as a study-country incident or supplier-specific probability."
+        }
+      ],
+      "known_coverage_gaps": [
+        "Exploratory research is not exhaustive across countries, transport modes, commodities, suppliers, dates, languages, or sources.",
+        "No record establishes an impact on a selected supplier, shipment, or graph route; an unmatched record is not proof of no impact.",
+        "Three maritime records describe container loss or damage without verified contents; they do not prove goods were lost or damaged.",
+        "NOAA's initial OOCL Sunflower count conflicts with secondary reporting and the final count is not reconciled.",
+        "Follow-up reporting documents milestones for two maritime incidents but does not establish cargo recovery or disruption end dates. The rail and alleged theft records also lack verified recovery durations.",
+        "The Golden Star 1 sinking occurred off Indonesia; its connection to the study is the reported Singapore-to-Malaysia voyage, not a verified incident in either country.",
+        "The Cainta account describes arrests, not convictions; the actual theft date, losses, and recovery are unknown.",
+        "No separate China-located goods-loss incident was included, and the empty Span Asia 39 containers were excluded.",
+        "The Zeal Lumos incident is also recorded as a carrier/vessel disruption; related records must not be counted as independent events.",
+        "Incident evidence does not establish a loss rate, probability, supplier cost, or insurance recovery."
+      ],
+      "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise attributed factual summaries and source links, not full articles.",
+      "review_method": "Manually review accessible sources, distinguish incident location from vessel flag and voyage endpoints, container damage from goods damage, allegations from convictions, and report dates from incident dates. Record conflicting counts, link related incidents, leave unverified dates and shipment matches unknown, and use labelled candidate-search windows. Refresh working-file hashes when files change. On 2026-11-14, search windows were expanded using labelled hypothetical recovery scenarios or retrieval-only report-date buffers; these are not verified incident durations. Scenario assumptions require explicit opt-in.",
+      "created_at": "2026-11-14",
+      "files": [
+        {
+          "path": "goods_in_transit.json",
+          "sha256": "2abf484fe7dedd3d2054b68591251b2da8f1a4e193911238162fce97417422f6"
         }
       ]
     }

@@ -13,7 +13,15 @@
     "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
     "verification_status": null,
     "limitations": [],
-    "search_window": {"start": null, "end": null, "basis": null, "note": null}
+    "search_window": {
+      "start": null,
+      "end": null,
+      "basis": null,
+      "note": null,
+      "anchor_date": null,
+      "anchor_basis": null
+    },
+    "scenario_recovery": null
   },
   "records": [
     {
@@ -41,9 +49,20 @@
       ],
       "search_window": {
         "start": "2025-04-01",
-        "end": "2025-04-03",
-        "basis": "observation_period",
-        "note": "Search range covers the reported exercise dates and the scheduled Zhejiang shipping exclusion; it does not establish a continuous exercise or its end."
+        "end": "2025-04-04",
+        "basis": "scenario_estimate",
+        "note": "Search range covers the reported exercise dates and the scheduled Zhejiang shipping exclusion; it does not establish a continuous exercise or its end. Search end also includes the illustrative maximum handling-delay scenario; it is not an observed recovery date.",
+        "anchor_date": "2025-04-01",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": {
+        "severity": "minor",
+        "min_days": 1,
+        "max_days": 3,
+        "anchor_date": "2025-04-01",
+        "scope": "hypothetical traffic handling delay if an affected route is established",
+        "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
+        "confidence": "low"
       }
     },
     {
@@ -71,9 +90,20 @@
       ],
       "search_window": {
         "start": "2025-12-29",
-        "end": "2025-12-30",
-        "basis": "observation_period",
-        "note": "Dates cover the reported exercise start and the announced flight restriction window, not a confirmed end to all military activity."
+        "end": "2026-01-01",
+        "basis": "scenario_estimate",
+        "note": "Dates cover the reported exercise start and the announced flight restriction window, not a confirmed end to all military activity. Search end also includes the illustrative maximum handling-delay scenario; it is not an observed recovery date.",
+        "anchor_date": "2025-12-29",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": {
+        "severity": "minor",
+        "min_days": 1,
+        "max_days": 3,
+        "anchor_date": "2025-12-29",
+        "scope": "hypothetical flight handling delay if an affected cargo flight is established",
+        "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
+        "confidence": "low"
       }
     },
     {
@@ -102,9 +132,20 @@
       ],
       "search_window": {
         "start": "2026-02-28",
-        "end": "2026-03-05",
-        "basis": "observation_period",
-        "note": "Search range spans the reported outbreak of hostilities to the fuel-supply report date; it is not a confirmed disruption end or proof of continuous shortage."
+        "end": "2026-03-14",
+        "basis": "scenario_estimate",
+        "note": "Search range spans the reported outbreak of hostilities to the fuel-supply report date; it is not a confirmed disruption end or proof of continuous shortage. Search end also includes the illustrative maximum handling-delay scenario; it is not an observed recovery date.",
+        "anchor_date": "2026-02-28",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": {
+        "severity": "severe",
+        "min_days": 7,
+        "max_days": 14,
+        "anchor_date": "2026-02-28",
+        "scope": "hypothetical initial fuel-order disruption; the conflict may last longer",
+        "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
+        "confidence": "low"
       }
     }
   ]
