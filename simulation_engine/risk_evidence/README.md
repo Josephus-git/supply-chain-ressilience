@@ -65,6 +65,11 @@ establish what Dyson shipped or what its suppliers used.
   An empty country list for an external corridor is not a location or exposure
   match; warnings and plans do not establish closures or shipment delays.
   Related geopolitical evidence can describe the same underlying event.
+- Supplier financial distress: company restructurings and a reported annual
+  loss provide financial-risk context. A loss is not proof of insolvency, and
+  a court process or its completion is not proof of a production stoppage,
+  shipment delay or complete customer recovery. Match legal entities to the
+  graph before attributing an event to a case-study supplier.
 
 ## Layout
 

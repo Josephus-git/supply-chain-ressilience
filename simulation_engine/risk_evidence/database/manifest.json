@@ -1154,6 +1154,55 @@
           "sha256": "2eabde196b838aa93b0a1a6be7bed36536e685cc6d4e1a602b0bc500e5d86184"
         }
       ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory search for documented financial pressure or restructuring reported during the study period, prioritizing the supplied supplier-name list and companies in comparable vacuum robotics, electronics and packaging markets. Distinguish losses from insolvency and legal proceedings from actual operational disruption.",
+      "sources_searched": [
+        {"url": "https://investor.wolfspeed.com/news/news-details/2025/Wolfspeed-Takes-Next-Step-to-Implement-Restructuring-Support-Agreement-and-Proactively-Strengthen-Capital-Structure/default.aspx", "outcome": "Included Wolfspeed's filing announcement and its account of continuing deliveries and vendor payments."},
+        {"url": "https://investor.wolfspeed.com/news/news-details/2025/Wolfspeed-Successfully-Completes-Financial-Restructuring-Emerges-as-Financially-Stronger-Company-Well-Positioned-in-Silicon-Carbide-Market/default.aspx", "outcome": "Reviewed the company's 29 September 2025 announcement of Chapter 11 emergence."},
+        {"url": "https://www.prnewswire.com/news-releases/klockner-pentaplast-enters-agreement-with-key-stakeholders-to-strengthen-financial-position-302604986.html", "outcome": "Included kp's restructuring announcement and stated scope of participating and excluded entities."},
+        {"url": "https://www.prnewswire.com/news-releases/klockner-pentaplast-successfully-completes-financial-restructuring-302675283.html", "outcome": "Reviewed kp's 30 January 2026 announcement of emergence."},
+        {"url": "https://media.irobot.com/2025-12-14-iRobot-Announces-Strategic-Transaction-to-Drive-Long-Term-Growth-Plan", "outcome": "Included iRobot's Chapter 11 announcement and proposed transaction with contract manufacturer Picea."},
+        {"url": "https://thecstreet.com/client-news/irobot-completes-court-supervised-transaction-with-picea-enabling-the-next-chapter-of-growth/", "outcome": "Reviewed iRobot's 23 January 2026 announcement of completion and emergence."},
+        {"url": "https://www.prnewswire.com/news-releases/pretium-packaging-initiates-comprehensive-capital-structure-optimization-transaction-to-support-continued-growth-302673345.html", "outcome": "Included Pretium's Chapter 11 filing announcement and proposed debt restructuring."},
+        {"url": "https://www.prnewswire.com/news-releases/pretium-packaging-successfully-completes-capital-structure-optimization-transaction-well-positioned-for-long-term-growth-302701843.html", "outcome": "Reviewed Pretium's 3 March 2026 announcement of transaction completion."},
+        {"url": "https://www.thestar.com.my/business/business-news/2026/09/30/vs-industry-slips-into-the-red-in-fy26-on-global-woes", "outcome": "Included a reported full-year group loss as a financial-pressure indicator for a supplied search name, not as insolvency."},
+        {"url": "https://www.businesstoday.com.my/2026/09/29/vs-industry-swings-to-rm55-million-loss-for-fy2026/", "outcome": "Additional financial-results report returned HTTP 403 and was not reviewed."},
+        {"url": "https://theedgemalaysia.com/node/802262", "outcome": "Reviewed Industronics' reported PN17 classification; omitted because a relevant case-study product or supplier link was not established."},
+        {"url": "https://pv-magazine-usa.com/2026/04/06/maxeon-filing-reveals-the-company-has-applied-for-restructuring-in-singapore-court/", "outcome": "Reviewed Maxeon's application for judicial management; omitted solar-panel case because case-study product relevance was not established."},
+        {"url": "https://www.sec.gov/Archives/edgar/data/1796898/000179689826000004/maxn_form_6-k_10_april_2.htm", "outcome": "Maxeon SEC filing returned HTTP 403 and was not independently reviewed."}
+      ],
+      "known_coverage_gaps": [
+        "Searches are exploratory and not exhaustive across suppliers, entities, countries, registries, languages or dates; no conclusion of financial health follows from an absent record.",
+        "The V.S. Industry group loss is a financial-pressure indicator, not evidence of insolvency, default or an inability to meet obligations. Its underlying exchange filing was not independently reviewed.",
+        "Company names and group affiliations have not been matched to graph entities or verified as current case-study supplier relationships. Do not propagate a group event to similarly named affiliates or locations.",
+        "Other companies are industry context only; iRobot is a different brand, and its filing does not establish that its manufacturer Picea filed for bankruptcy.",
+        "The initial Chapter 11 plans and claims about business continuity are company statements, and selected legal emergence announcements do not establish uninterrupted supply or complete stakeholder recovery.",
+        "No record verifies an affected case-study shipment, customer order, production outage or calibrated insolvency probability. Search buffers are not disruption durations."
+      ],
+      "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise attributed factual summaries and source links, not complete releases or articles.",
+      "review_method": "Manually review dated company restructuring disclosures and financial reporting, separate observed filings and legal completion from projections and operational outcomes, and explicitly distinguish reported losses from insolvency. Use labelled inclusive retrieval windows covering documented milestones without inferring an outage or supplier match. Refresh the file hash whenever evidence changes.",
+      "created_at": "2026-11-14",
+      "files": [
+        {
+          "path": "supplier_financial_distress.json",
+          "sha256": "0f5a2afad5629f8109f3d96d49ae61fe6e11b5fab304ba5e9d633bc62b54472d"
+        }
+      ]
     }
   ]
 }
