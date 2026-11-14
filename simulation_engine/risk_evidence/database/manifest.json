@@ -787,6 +787,75 @@
           "sha256": "3688a5ed92679bc7df10f2f3ba3e1629e6da69fb2c5a63758cc385e450d3d85a"
         }
       ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory research into documented supply shortages or material availability constraints in the study period with a connection to study jurisdictions and potential relevance to the supplied product descriptions. Include attributed production capacity reductions as clearly labelled contextual supply evidence, not automatically a market shortage. Company-specific and industry context can be useful without a Dyson shipment.",
+      "sources_searched": [
+        {
+          "url": "https://modernplasticsnetwork.com/2025/03/10/polyethylene-supply-shrinks-in-southeast-asia-amid-plant-closures/",
+          "outcome": "Included an attributed Malaysian PE production-capacity reduction; the report also describes weak demand and oversupply."
+        },
+        {
+          "url": "https://www.cbsnews.com/news/ford-ceo-china-rare-earth-shortage-car-production/",
+          "outcome": "Included the reported Ford rare-earth supply shortage and temporary unnamed factory shutdown; the factory location was not established."
+        },
+        {
+          "url": "https://www.taipeitimes.com/News/biz/archives/2025/11/17/2003847311",
+          "outcome": "Included an account of Nexperia's Chinese semiconductor supply disruption and downstream automotive effects."
+        },
+        {
+          "url": "https://www.nexperia.com/about/news-events/press-releases/update-on-company-developments-2",
+          "outcome": "The original company statement returned HTTP 403 and was not reviewed."
+        },
+        {
+          "url": "https://www.bairdmaritime.com/offshore/refining-processing/taiwans-formosa-petrochemical-issues-force-majeure-on-supplies-due-to-war-driven-shipping-delays",
+          "outcome": "Included Reuters reporting of a Taiwan petrochemical force majeure and constrained feedstock deliveries."
+        },
+        {
+          "url": "https://www.malaymail.com/news/malaysia/2026/04/10/malaysia-pet-plastic-prices-up-40pc-as-shortage-hits-packaging-supply-chain/215762",
+          "outcome": "Included attributed Malaysian PET resin shortage and a reported packaging substitution."
+        },
+        {
+          "url": "https://www.icis.com/explore/resources/news/2026/03/03/11184799/asia-pp-market-faces-severe-supply-disruptions-as-a-result-of-middle-east-conflict/",
+          "outcome": "Original article body was inaccessible; no separate polypropylene shortage record was based on it."
+        },
+        {
+          "url": "https://www.aircargonews.net/express/2025/09/faa-imposes-penalties-after-lithium-ion-batteries-catch-fire-during-air-transport/",
+          "outcome": "Battery cargo incidents discussed in the 2025 report occurred in 2024 and do not establish an in-scope battery-material shortage."
+        }
+      ],
+      "known_coverage_gaps": [
+        "Exploratory search is not exhaustive across product categories, countries, languages, sources or supplier tiers; no lithium-ion battery input shortage was verified for inclusion in this pass.",
+        "No affected case-study supplier, shipment, product composition, part number, or input dependency has been verified; listed product descriptions only suggest possible relevance.",
+        "A supply reduction, force majeure notice, and market shortage have different meanings. Their quantities, customer outcomes, and recovery dates are not generally established.",
+        "The Nexperia original company statement was inaccessible; accounts rely on accessible secondary reporting and attributed statements.",
+        "The Ford factory location is unknown; United States denotes reported supply context. Nexperia's China denotes source-side disruption, not downstream factory location.",
+        "Search windows are bounded retrieval aids, not confirmed incident durations; linkage to geopolitical and regulatory records identifies shared context, not independent impacts.",
+        "The records do not establish shortage probabilities, supplier losses, disruption durations, or causal exposure for a case-study shipment."
+      ],
+      "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise attributed factual summaries and source links, not complete articles.",
+      "review_method": "Manually review accessible articles, preserve source attribution and exact material and jurisdiction scope, distinguish actual shortage from production reductions and forecasts, and leave unverified event dates and case-study relationships unknown. Search windows use labelled report or month anchors and do not establish recovery. No recovery scenario is assigned to these report-based records; refresh file hashes after changes.",
+      "created_at": "2026-11-14",
+      "files": [
+        {
+          "path": "input_material_shortage.json",
+          "sha256": "15bcac86ba9cb08322c12e1b83ce750acba74bb02cf7929e3b1b31ee36b2d3f5"
+        }
+      ]
     }
   ]
 }

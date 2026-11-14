@@ -38,6 +38,11 @@ establish what Dyson shipped or what its suppliers used.
 - Government restrictions: the Chinese rare-earth announcement lists specific
   magnets; listed motorized products are only potentially relevant pending
   component specifications and transaction-level legal review.
+- Input material shortages: contextual reports cover resins and plastics
+  feedstocks, rare-earth materials, and semiconductors. Reduced production
+  capacity or force majeure does not by itself prove a market-wide shortage,
+  and the supplied product descriptions do not establish material composition
+  or dependency on a reported supplier.
 
 ## Layout
 
