@@ -50,6 +50,11 @@ establish what Dyson shipped or what its suppliers used.
 - Natural hazards: earthquake, flood, typhoon and winter-weather reports
   provide manufacturing and transport context. Planned gate closures and
   announced reopenings are not proof of full operational or shipment recovery.
+- Port disruption: terminal-specific incidents, weather advisories and
+  Singapore's aggregate vessel waits provide logistics context, not proof of
+  affected case-study cargo. Planned closures and reported resumptions do not
+  establish full recovery. Linked hazard, vessel and transit records can
+  describe the same incident and must not be counted as separate disruptions.
 
 ## Layout
 

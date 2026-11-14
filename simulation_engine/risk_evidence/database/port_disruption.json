@@ -14,7 +14,158 @@
     "related_evidence_ids": [],
     "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
     "verification_status": null,
-    "limitations": []
+    "limitations": [],
+    "search_window": {"start": null, "end": null, "basis": null, "note": null, "anchor_date": null, "anchor_basis": null},
+    "scenario_recovery": null
   },
-  "records": []
+  "records": [
+    {
+      "evidence_id": "PORT-2025-CN-RAGASA-001",
+      "reported_port": "Yantian, Nansha and Shekou terminals, Guangdong",
+      "country_code": "CN",
+      "country_name": "China",
+      "event_start": "2025-09-22",
+      "event_end": null,
+      "cause": "Preventive closures ahead of Typhoon Ragasa",
+      "reported_operational_impact": "WorldCargo News reported, citing market sources, that authorities preemptively closed the named Guangdong terminals on 22 September.",
+      "reported_delay": {"value": null, "unit": null},
+      "related_evidence_ids": ["HAZARD-2025-CN-RAGASA-001"],
+      "source": {"url": "https://www.worldcargonews.com/news/2025/09/super-typhoon-ragasa-halts-operations-at-hong-kong-and-southern-china-ports/", "publisher": "WorldCargo News", "published_at": "2025-09-25", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not verified; concise attributed summary and source link only."},
+      "verification_status": "secondary_source_reviewed_market_sources_attributed",
+      "limitations": [
+        "The report's 25 September resumption concerns a Hong Kong terminal, not the named Guangdong terminals; their reopening and backlog clearance are unverified.",
+        "A three-to-seven-day logistics delay was a forecast, not an observed shipment delay. The original OOCL update was inaccessible.",
+        "This is the same event as the linked hazard record, not an independent disruption. No case-study shipment or route has been matched."
+      ],
+      "search_window": {"start": "2025-09-22", "end": "2025-10-06", "basis": "event_date_buffer", "note": "The reported closure date plus a 14-day retrieval-only buffer, not a measured shutdown or recovery period.", "anchor_date": "2025-09-22", "anchor_basis": "event_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "PORT-2025-US-LONG-BEACH-001",
+      "reported_port": "Pier G, Port of Long Beach, California",
+      "country_code": "US",
+      "country_name": "United States",
+      "event_start": "2025-09-09",
+      "event_end": null,
+      "cause": "Container collapse from the Mississippi at berth",
+      "reported_operational_impact": "gCaptain reported that Pier G cargo operations were temporarily suspended after the collapse; by 10 September workers were unloading another vessel and trucks were moving containers. The Maritime Executive reported that Pier G was operating except in the immediate area around the Mississippi.",
+      "reported_delay": {"value": null, "unit": null},
+      "related_evidence_ids": [],
+      "source": {"url": "https://gcaptain.com/coast-guard-ntsb-probe-container-loss-accident-at-port-of-long-beach/", "publisher": "gCaptain", "published_at": "2025-09-10", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not verified; concise attributed summary and source link only."},
+      "verification_status": "secondary_sources_reviewed",
+      "limitations": [
+        "The resumption report is https://maritime-executive.com/article/port-of-long-beach-resumes-operations-after-container-collapse. Continued exclusion around the vessel and recovery work mean resumption did not establish complete recovery.",
+        "Other terminals were not reported affected; the precise suspension duration and specific shipment delays are unknown.",
+        "The NTSB's preliminary investigation at https://www-s.ntsb.gov/investigations/Pages/DCA25FM058.aspx reports later container counts that differ from early news estimates.",
+        "No affected case-study shipment or route has been matched."
+      ],
+      "search_window": {"start": "2025-09-09", "end": "2025-09-23", "basis": "event_date_buffer", "note": "The incident date plus a 14-day retrieval-only buffer; this does not assert continuous closure or recovery.", "anchor_date": "2025-09-09", "anchor_basis": "event_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "PORT-2025-MY-PTP-001",
+      "reported_port": "Port of Tanjung Pelepas, Johor",
+      "country_code": "MY",
+      "country_name": "Malaysia",
+      "event_start": "2025-11-07",
+      "event_end": null,
+      "cause": "Explosion aboard the Kyparissia during cargo operations",
+      "reported_operational_impact": "A Maersk statement reproduced by WorldCargo News said port operations were temporarily suspended for safety after the explosion and subsequently resumed following clearance by the authorities.",
+      "reported_delay": {"value": null, "unit": null},
+      "related_evidence_ids": ["VESSEL-2025-MY-001"],
+      "source": {"url": "https://www.worldcargonews.com/shipping-logistics/2025/11/three-killed-three-injured-in-fire-onboard-container-ship-at-ptp/", "publisher": "WorldCargo News", "published_at": "2025-11-10", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not verified; concise attributed summary and source link only."},
+      "verification_status": "secondary_source_carrier_statement_reviewed",
+      "limitations": [
+        "The article was updated after publication; the exact times of port suspension and resumption are not specified.",
+        "Port resumption does not establish cargo recovery, shipment delay, or the impact on the vessel and its cargo.",
+        "This is the same incident as the linked vessel record, not an independent disruption. No case-study shipment or route has been matched."
+      ],
+      "search_window": {"start": "2025-11-07", "end": "2025-11-21", "basis": "event_date_buffer", "note": "The explosion date plus a 14-day retrieval-only buffer, not a verified closure duration or recovery estimate.", "anchor_date": "2025-11-07", "anchor_basis": "event_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "PORT-2025-PH-UWAN-001",
+      "reported_port": "Manila Multipurpose Terminal",
+      "country_code": "PH",
+      "country_name": "Philippines",
+      "event_start": null,
+      "event_end": null,
+      "cause": "Typhoon Uwan",
+      "reported_operational_impact": "The terminal's 8 November advisory scheduled gate closure and delivery suspension for 9 November. Its 10 November advisory announced gate and cargo delivery resumption at 19:00, with vessel movements awaiting pilot confirmation.",
+      "reported_delay": {"value": null, "unit": null},
+      "related_evidence_ids": ["HAZARD-2025-PH-UWAN-001"],
+      "source": {"url": "https://cdnweb-mmt.ictsi.com/s3fs-public/inline-files/2025-MMT-CN048-MMT%20Advisory-Typhoon%20Uwan.pdf", "publisher": "Manila Multipurpose Terminal", "published_at": "2025-11-08", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not verified; concise attributed summary and source link only."},
+      "verification_status": "terminal_operational_advisories_reviewed",
+      "limitations": [
+        "The resumption advisory is https://cdnweb-mmt.ictsi.com/s3fs-public/inline-files/2025-MMT-CN050-MMT%20Advisory-%20Super%20Typhoon%20Uwan-Resumption%20of%20Operation.pdf.",
+        "The notices concern this terminal only; the closure was scheduled and resumption announced, not independently confirmed. Vessel resumption, full recovery, backlog clearance and individual shipment delays are unknown.",
+        "The linked hazard record covers the same storm and terminal notices; avoid double counting. No case-study shipment or route has been matched."
+      ],
+      "search_window": {"start": "2025-10-25", "end": "2025-11-22", "basis": "report_date_buffer", "note": "Fourteen days either side of the first advisory, for retrieval only; not a verified operational duration.", "anchor_date": "2025-11-08", "anchor_basis": "document_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "PORT-2026-US-WINTER-001",
+      "reported_port": "Maher, Elizabeth; Seagirt, Baltimore; Richmond Marine Terminal",
+      "country_code": "US",
+      "country_name": "United States",
+      "event_start": null,
+      "event_end": null,
+      "cause": "Winter storm",
+      "reported_operational_impact": "Evergreen's 26 January advisory listed gate closures scheduled for 27 January at Maher in New Jersey, Seagirt in Maryland and Richmond Marine Terminal in Virginia; other listed terminals were scheduled to open.",
+      "reported_delay": {"value": null, "unit": null},
+      "related_evidence_ids": ["HAZARD-2026-US-WINTER-001"],
+      "source": {"url": "https://www.evergreen-shipping.us/news/Terminal%20Operations%20%20WINTER%20STORM%20ADVISORY%20TERMINAL.pdf", "publisher": "Evergreen Shipping Agency", "published_at": "2026-01-26", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not verified; concise attributed summary and source link only."},
+      "verification_status": "carrier_operational_advisory_reviewed",
+      "limitations": [
+        "The advisory lists planned gate statuses subject to change, not independently confirmed closures, reopening or delays. It does not cover every terminal at these ports.",
+        "The advisory incorrectly labels Baltimore's state as MA; Seagirt is in Maryland.",
+        "The linked hazard record describes the same advisory and should not be double counted. No case-study shipment or route has been matched."
+      ],
+      "search_window": {"start": "2026-01-12", "end": "2026-02-09", "basis": "report_date_buffer", "note": "Fourteen days either side of the advisory, including the scheduled gate statuses; retrieval only, not a verified closure duration.", "anchor_date": "2026-01-26", "anchor_basis": "document_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "PORT-2026-TW-KAOHSIUNG-001",
+      "reported_port": "Port of Kaohsiung, near piers 77 and 78",
+      "country_code": "TW",
+      "country_name": "Taiwan",
+      "event_start": "2026-04-01",
+      "event_end": null,
+      "cause": "Collision between the Zeal Lumos and Haian Opus",
+      "reported_operational_impact": "Safety4Sea reported that containers fell into the water and authorities suspended vessel traffic in the affected area. It reported operations resuming around 12:30 after the containers were secured.",
+      "reported_delay": {"value": null, "unit": null},
+      "related_evidence_ids": ["VESSEL-2026-TW-001", "TRANSIT-2026-TW-001"],
+      "source": {"url": "https://safety4sea.com/vessels-collide-in-kaohsiung-causing-containers-to-fall-overboard/", "publisher": "Safety4Sea", "published_at": "2026-04-02", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not verified; concise attributed summary and source link only."},
+      "verification_status": "secondary_source_and_safety_board_reviewed",
+      "limitations": [
+        "Taiwan's safety board confirms the collision at https://www.ttsb.gov.tw/english/18609/28176/49882/post; the approximate reopening time is secondary reporting and does not establish an exact suspension duration or cargo recovery.",
+        "The traffic suspension was reported in the affected area, not necessarily throughout the port. No individual shipment delay was established.",
+        "Both linked records describe the same collision; avoid double counting. No case-study shipment or route has been matched."
+      ],
+      "search_window": {"start": "2026-04-01", "end": "2026-04-15", "basis": "event_date_buffer", "note": "The collision date plus a 14-day retrieval-only buffer, not a measured closure or recovery period.", "anchor_date": "2026-04-01", "anchor_basis": "event_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "PORT-2026-SG-CONGESTION-001",
+      "reported_port": "Port of Singapore",
+      "country_code": "SG",
+      "country_name": "Singapore",
+      "event_start": null,
+      "event_end": null,
+      "cause": "Port congestion, including downstream effects from Chinese port congestion",
+      "reported_operational_impact": "Xeneta's September 2026 scorecard reported an average Singapore vessel queue of 22 per day, up from 12, and an average vessel wait of 3.1 days, up from 1.9 days.",
+      "reported_delay": {"value": 3.1, "unit": "days"},
+      "related_evidence_ids": [],
+      "source": {"url": "https://www.xeneta.com/blog/xeneta-schedule-reliability-scorecard-september-2026", "publisher": "Xeneta", "published_at": null, "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not verified; concise attributed summary and source link only."},
+      "verification_status": "industry_analyst_scorecard_reviewed",
+      "limitations": [
+        "The reported 3.1 days is an aggregate average vessel wait, not extra delay attributable to congestion or a delay for a particular shipment.",
+        "The September scorecard is a monthly observation; it does not establish the onset, end or continuous daily congestion. Exact publication date was not verified.",
+        "No particular terminal, case-study cargo, supplier or route has been matched."
+      ],
+      "search_window": {"start": "2026-09-01", "end": "2026-09-30", "basis": "observation_period", "note": "September 2026 scorecard period, not proof of continuous daily impact or recovery.", "anchor_date": "2026-09-01", "anchor_basis": "observation_period"},
+      "scenario_recovery": null
+    }
+  ]
 }
