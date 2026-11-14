@@ -271,7 +271,7 @@
       "supplier_ids": [],
       "product_codes": [],
       "port_ids": [],
-      "selection_criteria": "Initial comparison of USD against the five non-US study currencies using two published observations within the study period. Federal Reserve pairs use 2 January 2025 and 30 September 2026; the Philippine peso comparison uses 31 January 2025 and 30 September 2026.",
+      "selection_criteria": "Initial comparison of USD against the five non-US study currencies using two published observations within the study period. Federal Reserve pairs use 2 January 2025 and 30 September 2026; the Philippine peso comparison uses 31 January 2025 and 30 September 2026. A separately labelled qualitative company statement about 2025 currency pressures provides case-study context, not a rate observation.",
       "sources_searched": [
         {
           "url": "https://www.federalreserve.gov/releases/h10/20250106/",
@@ -296,6 +296,10 @@
         {
           "url": "https://www.bsp.gov.ph/statistics/external/day99_data.aspx",
           "outcome": "Reviewed the 30 September 2026 Philippine daily rate."
+        },
+        {
+          "url": "https://www.dyson.co.uk/discover/news/press-releases/dyson-financial-results-2025",
+          "outcome": "Reviewed Dyson's 2025 results, published 26 March 2026, and included its qualitative statement about unfavorable currency developments; no currency pair or quantified FX effect was specified."
         }
       ],
       "known_coverage_gaps": [
@@ -304,15 +308,15 @@
         "The percentage change is calculated from the displayed rates; it is not directly reported by either central bank.",
         "Archived H.10 releases are not revised; the Philippine web tables may change, and source conditions remain unverified.",
         "USD is a reference comparison only; shipment invoicing, supplier exposure, hedging, conversion costs and actual losses have not been verified.",
-        "No reviewed entity or shipment matches are established."
+        "No reviewed entity or shipment matches are established. Dyson's company-wide statement names the company but does not establish a product-specific or shipment-specific effect."
       ],
       "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise numerical observations and source links, not complete source files.",
-      "review_method": "Manually compare the published country-labelled source tables and Philippine bulletin, record dates and quote direction, and calculate the percent change as (ending rate / starting rate - 1) * 100 rounded to two decimals. The source field points to the end observation; start sources are documented in the records and manifest. File hashes describe working files at this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals. On 2026-11-14, search windows were expanded using labelled hypothetical recovery scenarios or retrieval-only report-date buffers; these are not verified incident durations. Scenario assumptions require explicit opt-in.",
+      "review_method": "Manually compare the published country-labelled source tables and Philippine bulletin, record dates and quote direction, and calculate the percent change as (ending rate / starting rate - 1) * 100 rounded to two decimals. The numerical source field points to the end observation; start sources are documented in the records and manifest. The company statement is qualitative and must not be used as a rate observation. File hashes describe working files at this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals. On 2026-11-14, search windows were expanded using labelled hypothetical recovery scenarios or retrieval-only report-date buffers; these are not verified incident durations. Scenario assumptions require explicit opt-in.",
       "created_at": "2026-11-13",
       "files": [
         {
           "path": "currency_fluctuations.json",
-          "sha256": "18af3762e931498d3fc2c26d12b2f69fba9b42556f56259073390ce6c0d4a5ed"
+          "sha256": "52974ad8a3c0d1a18cc854dcc4244e625d18e5164bf610d2ab1d7c1ed609060c"
         }
       ]
     },
@@ -653,6 +657,18 @@
         {
           "url": "https://www.worldshipping.org/news/world-shipping-council-releases-containers-lost-at-sea-report-2026-update",
           "outcome": "Reviewed global industry estimates for context only; not used as a study-country incident or supplier-specific probability."
+        },
+        {
+          "url": "https://www.lion.com/lion-news/february-2026/faa-93-lithium-battery-air-incidents-in-2025",
+          "outcome": "Reviewed a secondary summary of FAA incident data and included three separate US ground-handling lithium-ion battery incidents; no Dyson connection is established."
+        },
+        {
+          "url": "https://www.faa.gov/hazmat/resources/lithium_batteries/incidents",
+          "outcome": "Reviewed FAA's incident-data caveats; individual interactive chart entries were not independently verified."
+        },
+        {
+          "url": "https://www.aircargonews.net/express/2025/09/faa-imposes-penalties-after-lithium-ion-batteries-catch-fire-during-air-transport/",
+          "outcome": "Reviewed a 2025 report on battery incidents in 2024; excluded those incidents because they occurred outside the study window."
         }
       ],
       "known_coverage_gaps": [
@@ -665,6 +681,7 @@
         "The Cainta account describes arrests, not convictions; the actual theft date, losses, and recovery are unknown.",
         "No separate China-located goods-loss incident was included, and the empty Span Asia 39 containers were excluded.",
         "The Zeal Lumos incident is also recorded as a carrier/vessel disruption; related records must not be counted as independent events.",
+        "The three battery records rely on one secondary summary of FAA data; individual FAA entries were not independently verified and no Dyson connection or shipment-level recovery outcome is established.",
         "Incident evidence does not establish a loss rate, probability, supplier cost, or insurance recovery."
       ],
       "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise attributed factual summaries and source links, not full articles.",
@@ -673,7 +690,101 @@
       "files": [
         {
           "path": "goods_in_transit.json",
-          "sha256": "2abf484fe7dedd3d2054b68591251b2da8f1a4e193911238162fce97417422f6"
+          "sha256": "b7954151453b9b6cd6abb768ece5989cdf920e8aac35eac7a9fe8be335403c79"
+        }
+      ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory search for documented government restrictions or conditional export controls relevant to study-country trade, products, or transit during the study period. Prefer original regulations and preserve uncertainty when relying on secondary legal commentary.",
+      "sources_searched": [
+        {
+          "url": "https://aqygzj.mofcom.gov.cn/qdml/art/2025/art_a7ac614d3a784deb8f88700cdadd471c.html",
+          "outcome": "Reviewed official 4 February 2025 announcement on selected tungsten, tellurium, bismuth, molybdenum and indium items."
+        },
+        {
+          "url": "https://aqygzj.mofcom.gov.cn/flzc/gzjgfxwj/art/2025/art_f3a1432ba20248eca12ff7b91bc73fda.html",
+          "outcome": "Reviewed official 4 April 2025 announcement on selected rare-earth items, including specified permanent magnets potentially relevant to motor components; case-study product composition and applicability are unverified."
+        },
+        {
+          "url": "https://english.mofcom.gov.cn/Policies/AnnouncementsOrders/art/2025/art_0dd87cbee7b045bf93fabe6ab2faceee.html",
+          "outcome": "English version could not be retrieved due to a transport failure; the Chinese original was reviewed."
+        },
+        {
+          "url": "https://www.iea.org/policies/26796-export-controls-on-certain-medium-and-heavy-rare-earth-items",
+          "outcome": "Reviewed IEA's English-language summary of the April rare-earth controls and their start date."
+        },
+        {
+          "url": "https://www.federalregister.gov/documents/full_text/text/2025/01/16/2025-00711.txt",
+          "outcome": "Reviewed original US advanced-computing interim final rule and its separate effective and compliance dates."
+        },
+        {
+          "url": "https://www.bis.gov/press-release/commerce-strengthens-restrictions-advanced-computing-semiconductors-enhance-foundry-due-diligence-prevent",
+          "outcome": "Reviewed BIS explanation of revised foundry and packaging due diligence; not a substitute for the regulation."
+        },
+        {
+          "url": "https://www.rahmatlim.com/perspectives/articles/31040/mykh-implements-export-control-measures-on-advanced-ai-chips",
+          "outcome": "Included legal commentary on Malaysian Directive No. 1/2025, including the restricted-activity trigger and interpretation uncertainty."
+        },
+        {
+          "url": "https://sanctionsnews.bakermckenzie.com/malaysia-introduces-new-export-control-directive-for-advanced-ai-chips/",
+          "outcome": "Reviewed legal commentary noting that the directive and media statement differ in their described scope."
+        },
+        {
+          "url": "https://www.thestar.com.my/business/business-news/2025/07/14/miti-imposes-permit-requirement-on-us-origin-ai-chip-exports-to-close-regulatory-gaps",
+          "outcome": "Reviewed Bernama reporting of MITI's broader media statement concerning US-origin chips."
+        },
+        {
+          "url": "https://www.miti.gov.my/index.php/announcements/view/908",
+          "outcome": "Official page returned no substantive announcement text in the reviewed fetch; the primary directive and technical annex were not verified."
+        },
+        {
+          "url": "https://www.rajahtannasia.com/viewpoints/strategic-goods-control-legislation-amended-to-update-control-list/",
+          "outcome": "Included legal commentary on Singapore's 2025 order and reported 1 December effective date."
+        },
+        {
+          "url": "https://assets.egazette.gov.sg/2025/Legislative%20Supplements/Subsidiary%20Legislation%20Supplement/660.pdf",
+          "outcome": "Official Singapore 2025 order PDF could not be independently extracted with available fetch tools."
+        },
+        {
+          "url": "https://isomer-user-content.by.gov.sg/174/af798900-c5a9-4a2f-b3d6-1253cb233175/Circular_08_2025__Ver_1_.pdf",
+          "outcome": "Direct retrieval of the Singapore Customs 2025 circular returned HTTP 403."
+        },
+        {
+          "url": "https://www.customs.gov.sg/permits-and-licences/trade-controls-and-prohibitions/strategic-goods-control/strategic-goods-control-overview/",
+          "outcome": "Reviewed Singapore Customs general framework; its 2026 order is stated to take effect after the study period."
+        }
+      ],
+      "known_coverage_gaps": [
+        "Research is exploratory and not exhaustive across jurisdictions, products, trade routes, exemptions, dates, amendments or enforcement decisions.",
+        "Records identify the issuing country as the controlled jurisdiction; this does not establish an affected destination, supplier or shipment.",
+        "No record establishes an applicable case-study item classification, end-use, licence outcome, restriction impact or actual delay.",
+        "The full amendment and repeal history was not verified. Search windows are bounded by the study cutoff, which does not establish expiry or continuous unchanged legal effect.",
+        "Malaysia's primary directive and technical annex and Singapore's 2025 order were not independently reviewed; secondary legal summaries and the divergent Malaysian media statement are explicitly identified.",
+        "No separate Philippine or Taiwan restriction was included. Absence of a record is not proof that no restriction exists.",
+        "Export licence requirements are conditional regulatory controls, not blanket export bans or calibrated supplier-risk probabilities.",
+        "Current legal applicability needs authoritative verification and professional review; these records do not constitute legal advice."
+      ],
+      "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise attributed factual summaries and source links, not full regulations or articles.",
+      "review_method": "Manually review accessible original announcements and clearly attributed legal commentary; distinguish effective dates from publication and compliance dates, and define search windows from the cited start through the study cutoff without treating it as a legal expiry. Leave unverified end dates and supplier impacts unknown. No hypothetical recovery duration is assigned to regulatory measures.",
+      "created_at": "2026-11-14",
+      "files": [
+        {
+          "path": "government_restrictions.json",
+          "sha256": "3688a5ed92679bc7df10f2f3ba3e1629e6da69fb2c5a63758cc385e450d3d85a"
         }
       ]
     }

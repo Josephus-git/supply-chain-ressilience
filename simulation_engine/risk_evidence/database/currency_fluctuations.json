@@ -33,6 +33,41 @@
   },
   "records": [
     {
+      "evidence_id": "FX-2025-DYSON-QUALITATIVE-001",
+      "base_currency": null,
+      "quote_currency": null,
+      "rate_definition": "Dyson reported unfavorable foreign currency developments in its 2025 results; this is a qualitative company statement, not an exchange-rate observation.",
+      "observation_start": null,
+      "observation_end": null,
+      "starting_rate": null,
+      "ending_rate": null,
+      "reported_change_percent": null,
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.dyson.co.uk/discover/news/press-releases/dyson-financial-results-2025",
+        "publisher": "Dyson",
+        "published_at": "2026-03-26",
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."
+      },
+      "verification_status": "company_statement_reviewed_not_independently_verified",
+      "limitations": [
+        "Dyson also reported US tariffs were particularly damaging, but the statement does not isolate a currency impact or specify currencies, rate direction, transaction dates, or loss.",
+        "The source describes company-wide 2025 results and mentions vacuum cleaners and other products; it does not identify a particular affected product, supplier, route, or shipment.",
+        "The year-based search window is an indexing approximation, not independently verified start and end dates of a currency movement or its business effects.",
+        "This qualitative record cannot be used as an exchange-rate pair, a numerical rate change, or a probability."
+      ],
+      "search_window": {
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "basis": "year_approximation",
+        "note": "Calendar-year retrieval window for the company's 2025 results; precise timing and duration of the adverse currency effects are not stated.",
+        "anchor_date": null,
+        "anchor_basis": null
+      },
+      "scenario_recovery": null
+    },
+    {
       "evidence_id": "FX-2025-2026-USD-CNY-001",
       "base_currency": "USD",
       "quote_currency": "CNY",

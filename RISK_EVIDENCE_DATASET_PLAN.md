@@ -77,6 +77,29 @@ Before collecting data, choose:
 4. Whether each experiment is a historical case study or a future
    hypothetical scenario informed by a historical evidence version.
 
+### Dyson case-study product context
+
+The case study concerns Dyson. The user supplied a list of product
+descriptions for the study, including:
+
+- Vacuum cleaners and parts; hair dryers, other hairdressing apparatus and
+  parts; other motorized domestic appliances and parts.
+- Gas filtering or purifying machinery, fans and fan parts, heating and
+  drying equipment, brushes, and household plastic articles.
+- Lithium-ion batteries, switches, electrical control boards, insulated
+  conductors, machinery and machinery parts, industrial robots, fasteners,
+  springs, valves, packaging and LED luminaires.
+- Other listed categories include sugar, pet food, fresh grapes, toys,
+  clothing, tyres, vehicle parts, wooden furniture and beauty preparations.
+
+Use the full supplied descriptions as research and retrieval context rather
+than restricting the study to vacuum cleaners. Their presence in the supplied
+list does not establish a specific shipment, supplier, trade direction,
+origin, destination or brand association. Check those details and product
+specifications against the graph before matching evidence or applying
+restrictions. Some descriptions are broad; do not infer a complete customs
+classification or supplier impact from a description alone.
+
 ### Country scope
 
 The research covers these countries:

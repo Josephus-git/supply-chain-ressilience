@@ -28,6 +28,114 @@
   },
   "records": [
     {
+      "evidence_id": "TRANSIT-2025-US-BATTERY-001",
+      "incident_type": "lithium-ion battery shipment fire during ground handling",
+      "reported_shipment": "A shipment containing a lithium-ion battery",
+      "reported_carrier": null,
+      "location": "Cargo facility, Memphis, Tennessee",
+      "country_code": "US",
+      "country_name": "United States",
+      "event_start": "2025-05-10",
+      "event_end": null,
+      "reported_loss_or_damage": "Lion Technology's summary of FAA incident data reports that a battery shipment caught fire during ground handling; the fire was extinguished and contained. No injury or facility damage was reported.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.lion.com/lion-news/february-2026/faa-93-lithium-battery-air-incidents-in-2025",
+        "publisher": "Lion Technology, summarizing FAA incident data",
+        "published_at": null,
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Redistribution terms not verified; concise attributed factual summary and link only."
+      },
+      "verification_status": "secondary_source_reviewed_faa_incident_chart_not_independently_verified",
+      "limitations": [
+        "The original individual FAA chart entry was not independently verified; the source is a secondary summary of FAA data.",
+        "The article identifies no shipment owner, destination, battery application, or Dyson connection; lithium-ion batteries are in the user-supplied product descriptions, not necessarily this shipment.",
+        "No shipment delivery or replacement outcome, loss value, or wider operational disruption is established. Event end and recovery duration are unknown.",
+        "The source page identifies February 2026 in its URL, but an exact publication date was not verified."
+      ],
+      "search_window": {
+        "start": "2025-05-10",
+        "end": "2025-05-24",
+        "basis": "event_date_buffer",
+        "note": "The event date plus a 14-day retrieval-only buffer; this does not assert a 14-day incident, recovery, or disruption.",
+        "anchor_date": "2025-05-10",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "TRANSIT-2025-US-BATTERY-002",
+      "incident_type": "lithium-ion battery package fire during ground handling",
+      "reported_shipment": "A package containing two lithium-ion batteries",
+      "reported_carrier": null,
+      "location": "FedEx facility, Dulles, Virginia",
+      "country_code": "US",
+      "country_name": "United States",
+      "event_start": "2025-06-09",
+      "event_end": null,
+      "reported_loss_or_damage": "Lion Technology's summary of FAA incident data reports that two lithium-ion batteries in a package emitted smoke; personnel used an extinguisher and water to extinguish the fire. No injury or facility damage was reported.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.lion.com/lion-news/february-2026/faa-93-lithium-battery-air-incidents-in-2025",
+        "publisher": "Lion Technology, summarizing FAA incident data",
+        "published_at": null,
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Redistribution terms not verified; concise attributed factual summary and link only."
+      },
+      "verification_status": "secondary_source_reviewed_faa_incident_chart_not_independently_verified",
+      "limitations": [
+        "The original individual FAA chart entry was not independently verified; the source is a secondary summary of FAA data.",
+        "The source identifies the facility operator but not the shipment carrier, owner, destination, battery application, or any Dyson connection.",
+        "No delivery or replacement outcome, loss value, or wider operational disruption is established. Event end and recovery duration are unknown.",
+        "The source page identifies February 2026 in its URL, but an exact publication date was not verified."
+      ],
+      "search_window": {
+        "start": "2025-06-09",
+        "end": "2025-06-23",
+        "basis": "event_date_buffer",
+        "note": "The event date plus a 14-day retrieval-only buffer; this does not assert a 14-day incident, recovery, or disruption.",
+        "anchor_date": "2025-06-09",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "TRANSIT-2025-US-BATTERY-003",
+      "incident_type": "lithium-ion battery package smoke during ground handling",
+      "reported_shipment": "A package containing a lithium-ion battery",
+      "reported_carrier": null,
+      "location": "Cargo facility, Memphis, Tennessee",
+      "country_code": "US",
+      "country_name": "United States",
+      "event_start": "2025-11-26",
+      "event_end": null,
+      "reported_loss_or_damage": "Lion Technology's summary of FAA incident data reports that a package containing a lithium-ion battery emitted smoke; emergency personnel placed the package in a water-filled salvage drum. No injury or damage was reported.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.lion.com/lion-news/february-2026/faa-93-lithium-battery-air-incidents-in-2025",
+        "publisher": "Lion Technology, summarizing FAA incident data",
+        "published_at": null,
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Redistribution terms not verified; concise attributed factual summary and link only."
+      },
+      "verification_status": "secondary_source_reviewed_faa_incident_chart_not_independently_verified",
+      "limitations": [
+        "The original individual FAA chart entry was not independently verified; the source is a secondary summary of FAA data.",
+        "The article identifies no shipment owner, destination, battery application, or Dyson connection; smoke alone does not establish a quantified loss.",
+        "No delivery or replacement outcome, loss value, or wider operational disruption is established. Event end and recovery duration are unknown.",
+        "The source page identifies February 2026 in its URL, but an exact publication date was not verified."
+      ],
+      "search_window": {
+        "start": "2025-11-26",
+        "end": "2025-12-10",
+        "basis": "event_date_buffer",
+        "note": "The event date plus a 14-day retrieval-only buffer; this does not assert a 14-day incident, recovery, or disruption.",
+        "anchor_date": "2025-11-26",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": null
+    },
+    {
       "evidence_id": "TRANSIT-2025-US-001",
       "incident_type": "rail derailment and product release",
       "reported_shipment": "Hazardous materials carried in three tank cars on Norfolk Southern freight train NS 167",

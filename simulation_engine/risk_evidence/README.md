@@ -7,6 +7,38 @@ database, not a database server or a working simulation. The research is limited
 suppliers, countries, products, and routes; these must be defined before
 collecting reports.
 
+The case study concerns Dyson. The user supplied product descriptions spanning
+vacuum cleaners, hair-care equipment, filtering machinery, batteries,
+components and other categories. Verify actual shipment and product details
+in the graph before treating evidence as applicable. See the
+[case-study scope](../../RISK_EVIDENCE_DATASET_PLAN.md).
+
+## Product-context review
+
+The eight populated categories were reviewed against the supplied product
+descriptions. This is exploratory, not exhaustive, and the descriptions do not
+establish what Dyson shipped or what its suppliers used.
+
+- Border/customs: existing reports are contextual; the China magnet-delay
+  lead remained inaccessible and was not added as a verified incident.
+- Carrier/vessel: cargo contents and case-study shipment matches remain
+  generally unknown.
+- Currency: Dyson reported unfavorable currency developments in its 2025
+  results; the company statement does not identify a currency pair or an
+  affected shipment. Other records are reference-rate comparisons.
+- Cyberattack: the existing company-related claim remains unverified; product
+  descriptions do not establish an incident.
+- Energy/transport costs: existing fuel, electricity and freight observations
+  are market context, not supplier invoices or product-specific costs.
+- Geopolitical conflict: existing events provide route or trade context, not
+  proof of an affected case-study shipment.
+- Goods in transit: three reported US lithium-ion battery handling incidents
+  are product-category context, not verified Dyson shipments. Their individual
+  original FAA entries were not independently verified.
+- Government restrictions: the Chinese rare-earth announcement lists specific
+  magnets; listed motorized products are only potentially relevant pending
+  component specifications and transaction-level legal review.
+
 ## Layout
 
 - `database/`: the working evidence files for the 18 selected risk factors
@@ -34,7 +66,7 @@ than treating templates as evidence.
   `document_date` identifies when a source reported an issue, not when it
   began or ended; `claim_date` identifies an unverified claim. An
   `observation_period` is a comparison window, not continuous observations;
-  `month_approximation` expands a reported month to calendar dates for
+  `month_approximation` or `year_approximation` expands a reported month or year to calendar dates for
   searching only. A window is not a verified incident interval, and its
   absence outside a query is not proof of no overlap.
 - Every actual evidence record must have non-null `search_window.start` and
@@ -51,6 +83,15 @@ than treating templates as evidence.
   solely for retrieval; it is not an estimated recovery period. The
   `anchor_basis` distinguishes these dates from an incident date. Neither
   type proves continuous impact or complete recall.
+- `event_date_buffer` expands a known incident anchor for retrieval only;
+  its end is not a measured incident end, disruption, or recovery. A
+  qualitative company currency statement is not a numerical exchange-rate
+  observation: its currency pair and rate values remain unknown.
+- `study_period_bound` is a retrieval interval from a documented or
+  attributed effective date to the study cutoff when the legal end date is
+  unknown. The cutoff is not an expiry date or proof that the original rule
+  remained unchanged. Confirm later amendments and actual applicability
+  against authoritative sources before using a restriction.
 - `scenario_recovery`, when non-null, is a low-confidence hypothetical
   handling-delay assumption with a scope, anchor, severity, minimum and maximum
   elapsed days. The illustrative subjective buckets are minor 1–3, moderate
