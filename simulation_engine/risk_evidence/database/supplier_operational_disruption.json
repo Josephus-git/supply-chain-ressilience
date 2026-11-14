@@ -14,7 +14,33 @@
     "related_evidence_ids": [],
     "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
     "verification_status": null,
-    "limitations": []
+    "limitations": [],
+    "search_window": {"start": null, "end": null, "basis": null, "note": null, "anchor_date": null, "anchor_basis": null},
+    "scenario_recovery": null
   },
-  "records": []
+  "records": [
+    {
+      "evidence_id": "OPERATIONS-2026-PH-VS-001",
+      "reported_supplier": "V.S. Industry Berhad",
+      "country_code": "PH",
+      "country_name": "Philippines",
+      "facility": null,
+      "event_start": null,
+      "event_end": null,
+      "cause": "Insufficient raw materials from a key supplier, according to PublicInvest Research.",
+      "reported_operational_impact": "In a 3 April 2026 post-briefing report, PublicInvest Research said that one production model in V.S. Industry's Philippine operations had previously been disrupted by insufficient raw materials. It expected operations to resume gradually from February 2026 as supply stabilised.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://klse.i3investor.com/web/blog/detail/PublicInvest/2026-04-03-story-h501419457-VS_Industry_Berhad_Dragged_by_Philippines_Operations", "publisher": "PublicInvest Research via I3investor", "published_at": "2026-04-03", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "analyst_report_reviewed",
+      "limitations": [
+        "The report does not give the disruption's start or end date, establish that it began within the study period, identify the affected model or facility, or quantify lost output. It does not establish a plant-wide shutdown.",
+        "Gradual resumption from February 2026 was an analyst expectation, not a confirmed restart or full-recovery date; no duration or recovery estimate is inferred.",
+        "An earlier analyst report describes beauty-care and floor-care models in the Philippine operations, but does not identify which model was later disrupted: https://klse.i3investor.com/web/blog/detail/PublicInvest/2025-06-13-story-h499544605-VS_Industry_Berhad_Mixed_Signals_Post_Briefing.",
+        "A June 2026 report mentions a prospective resin shortage and a floor-care ramp-up but does not establish that resin caused this earlier disruption: https://www.insage.com.my/Upload/MediaNews/VS/VS-NST-25062026.pdf.",
+        "The named group appears in the supplied search scope; the affected legal entity, graph match, customer, product and any Dyson or case-study shipment have not been verified. Do not assign the event to a similarly named entity or specific facility."
+      ],
+      "search_window": {"start": "2026-03-20", "end": "2026-04-17", "basis": "report_date_buffer", "note": "Fourteen days either side of the report date for retrieval only; the range does not establish when the disruption occurred, continued or ended.", "anchor_date": "2026-04-03", "anchor_basis": "report_date"},
+      "scenario_recovery": null
+    }
+  ]
 }

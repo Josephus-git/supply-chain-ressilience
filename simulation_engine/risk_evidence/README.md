@@ -15,7 +15,7 @@ in the graph before treating evidence as applicable. See the
 
 ## Product-context review
 
-The eight populated categories were reviewed against the supplied product
+The populated categories were reviewed against the supplied product
 descriptions. This is exploratory, not exhaustive, and the descriptions do not
 establish what Dyson shipped or what its suppliers used.
 
@@ -70,6 +70,16 @@ establish what Dyson shipped or what its suppliers used.
   a court process or its completion is not proof of a production stoppage,
   shipment delay or complete customer recovery. Match legal entities to the
   graph before attributing an event to a case-study supplier.
+- Supplier operational disruption: an analyst reported a past material-related
+  disruption to one V.S. Industry production model in the Philippines. Its
+  start, end, affected facility and customer are unknown; an expected
+  resumption is not confirmed recovery. A group name does not establish a
+  match to a particular graph entity or affected Dyson shipment.
+- Supplier or route concentration: V.S. Industry's customer-revenue share is
+  downstream concentration, not Dyson's supplier share. Global foundry revenue
+  and Malacca oil-flow shares are industry context, not proof that a case-study
+  component or shipment depends on those sources or routes. These observations
+  are not disruption probabilities or continuously measured exposure.
 
 ## Layout
 

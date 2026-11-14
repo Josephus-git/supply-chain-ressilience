@@ -1203,6 +1203,89 @@
           "sha256": "0f5a2afad5629f8109f3d96d49ae61fe6e11b5fab304ba5e9d633bc62b54472d"
         }
       ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory search for reported operational disruptions involving supplied supplier names, prioritizing dated source reports and preserving entity, facility and product scope. Include a report published during the study period even if incident dates cannot be established, explicitly marking that limitation.",
+      "sources_searched": [
+        {"url": "https://klse.i3investor.com/web/blog/detail/PublicInvest/2026-04-03-story-h501419457-VS_Industry_Berhad_Dragged_by_Philippines_Operations", "outcome": "Included an analyst report of a past material-related disruption to one V.S. Industry Philippine production model; incident dates and actual recovery were not given."},
+        {"url": "https://klse.i3investor.com/web/blog/detail/PublicInvest/2025-06-13-story-h499544605-VS_Industry_Berhad_Mixed_Signals_Post_Briefing", "outcome": "Reviewed descriptions of Philippine beauty-care and floor-care production, but the later disrupted model was not identified."},
+        {"url": "https://www.insage.com.my/Upload/MediaNews/VS/VS-NST-25062026.pdf", "outcome": "Reviewed a 25 June 2026 report mentioning a prospective resin shortage and floor-care ramp-up; neither was attributed to the earlier model disruption."},
+        {"url": "https://businessnews.com.my/vs-industry-philippines-operations/", "outcome": "Reviewed a separate article quoting the same PublicInvest assessment; it is not independent corroboration."},
+        {"url": "https://www.industriall-union.org/union-busting-at-flextronics-technology-sdn-bhd", "outcome": "Reviewed the union's account of a disputed Flextronics Penang ballot; it does not establish a strike or production interruption."},
+        {"url": "https://www.businesstoday.com.my/2025/09/30/vs-industry-posts-q4-loss-of-rm33-million-impacted-by-philippine-ops/", "outcome": "Direct retrieval returned HTTP 403; the article was not reviewed or used as evidence."}
+      ],
+      "known_coverage_gaps": [
+        "Searches are exploratory and not exhaustive across named suppliers, facilities, countries, dates, languages or non-public disclosures. Absence of a record is not proof that no disruption occurred.",
+        "The included report identifies a group and country but not the affected legal entity, specific facility, product model or customer. A graph match or affected case-study shipment has not been verified.",
+        "The analyst report does not date the underlying disruption or confirm resumption or recovery. Its publication falls within the study period, but the event itself cannot be verified as occurring within that period.",
+        "A union ballot, forecast resin shortage, financial loss or regional hazard does not by itself establish a supplier production interruption. Search buffers do not measure disruption duration."
+      ],
+      "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise attributed factual summaries and source links, not complete articles or reports.",
+      "review_method": "Manually search supplied supplier names and review accessible dated reports. Separate directly reported impacts from expectations and contextual risks, preserve unknown incident dates and legal entities, and use labelled inclusive retrieval windows without inferring supplier exposure or recovery. Refresh the file hash whenever evidence changes.",
+      "created_at": "2026-11-14",
+      "files": [
+        {
+          "path": "supplier_operational_disruption.json",
+          "sha256": "f52b09168221c0bc1192b7db5d233a33ac6278b1a82a70c96f148f5a004ffdf0"
+        }
+      ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory search for measured concentration involving supplied supplier names, potentially relevant product supply chains, and regional routes. Distinguish supplier customer revenue, industry market shares and oil-route flow shares from actual case-study sourcing or shipment exposure. Include overlapping fiscal-year observations only with their full period and explicit boundary limitations.",
+      "sources_searched": [
+        {"url": "https://www.insage.com.my/Upload/Docs/VS/VS%20Industry%20-%20AR%202025.pdf", "outcome": "Reviewed V.S. Industry's annual report, note 26 major-customer revenue and group total; calculated combined customer share. The fiscal year starts before the study window."},
+        {"url": "https://www.klsescreener.com/v2/announcements/view/10725325", "outcome": "Reviewed the 28 November 2025 annual report submission announcement to date the annual report."},
+        {"url": "https://klse.i3investor.com/web/blog/detail/PublicInvest/2025-10-09-story-h500439265-VS_Industry_Berhad_Margins_Under_Pressure", "outcome": "Reviewed analyst forecasts for an unnamed customer and product lines; forecasts and identities were not treated as actual Dyson concentration."},
+        {"url": "https://www.trendforce.com/presscenter/news/20260312-12965.html", "outcome": "Included TrendForce's fourth-quarter 2025 global foundry revenue market-share estimate for TSMC, with product and customer exposure unverified."},
+        {"url": "https://www.malaymail.com/news/malaysia/2026/04/06/strait-of-melaka-handles-nearly-a-third-of-global-oil-flows-remains-top-chokepoint/215235", "outcome": "Included Bernama's report of EIA's first-half 2025 Malacca seaborne oil share, not as a container-trade or shipment share."},
+        {"url": "https://www.eia.gov/international/content/analysis/special_topics/World_Oil_Transit_Chokepoints/", "outcome": "Direct EIA retrieval returned a figure caption but not the numerical estimates; the oil-flow figure is attributed through Bernama."},
+        {"url": "https://www.mpa.gov.sg/media-centre/details/singapore-posts-record-port-performance-in-2025-and-develops-future-readiness-through-industry-collaborations-for-2026", "outcome": "Reviewed Singapore container throughput; excluded as a concentration share because the source gives no relevant total or case-study denominator."},
+        {"url": "https://www.csis.org/analysis/south-china-sea-trade-chokepoints", "outcome": "Reviewed Malacca and Taiwan Strait trade estimates; omitted because the cited observation is for 2024, outside the study window."},
+        {"url": "https://www.sec.gov/Archives/edgar/data/866374/000130817926000365/flex_courtesy-pdf.pdf", "outcome": "Direct retrieval of the Flex annual-report PDF returned HTTP 403; not independently reviewed or used for a record."}
+      ],
+      "known_coverage_gaps": [
+        "Searches are exploratory and not exhaustive across suppliers, products, shipment routes, countries, periods or languages. Missing observations do not imply diversification or zero risk.",
+        "The V.S. Industry record measures its customer revenue, not Dyson's procurement. Its anonymised customers cannot be identified as Dyson. The full fiscal-year aggregation partly predates the study period and cannot be split from the reviewed figures.",
+        "Global foundry revenue and maritime oil flow are contextual denominators, not verified measures of actual case-study component sourcing, supplier dependence or container traffic. Taiwan is company context, not the geographic share of foundry activity.",
+        "No record establishes an incident, its probability, continuous exposure, a graph match, a current supplier relationship, or an affected Dyson shipment. Source estimates and calculation methods are not interchangeable."
+      ],
+      "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise attributed factual summaries and source links, not complete reports or articles.",
+      "review_method": "Review annual-report and industry-source measures, preserve observation periods and denominators, calculate only explicitly reproducible shares, and label secondary attributions and pre-window overlap. Do not equate aggregate market concentration or a supplier's customer mix with case-study exposure. Refresh the file hash whenever evidence changes.",
+      "created_at": "2026-11-14",
+      "files": [
+        {
+          "path": "supplier_route_concentration.json",
+          "sha256": "7ef7391863d4177d51134485a63e3f31c7b31f82af2b229500e7d38fcee58e0a"
+        }
+      ]
     }
   ]
 }

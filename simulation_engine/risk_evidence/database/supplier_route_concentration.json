@@ -12,7 +12,70 @@
     "related_evidence_ids": [],
     "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
     "verification_status": null,
-    "limitations": []
+    "limitations": [],
+    "search_window": {"start": null, "end": null, "basis": null, "note": null, "anchor_date": null, "anchor_basis": null},
+    "scenario_recovery": null
   },
-  "records": []
+  "records": [
+    {
+      "evidence_id": "CONCENTRATION-2025-MY-VS-001",
+      "assessment_scope": "V.S. Industry Berhad group: concentration of revenue among three major customers in the financial year ended 31 July 2025",
+      "countries": [{"country_code": "MY", "country_name": "Malaysia"}],
+      "observation_start": "2024-08-01",
+      "observation_end": "2025-07-31",
+      "measure": {"name": "Share of consolidated group revenue from disclosed major customers A, B and C", "value": 66.18, "unit": "percent", "definition": "Calculated as (RM1,222,963,000 + RM548,554,000 + RM735,332,000) / RM3,787,833,000 * 100, rounded to two decimal places. The company identifies these three customers as each contributing at least 10% of group revenue."},
+      "reported_entities_or_routes": ["V.S. Industry Berhad", "Customer A (unnamed)", "Customer B (unnamed)", "Customer C (unnamed)"],
+      "related_evidence_ids": [],
+      "source": {"url": "https://www.insage.com.my/Upload/Docs/VS/VS%20Industry%20-%20AR%202025.pdf", "publisher": "V.S. Industry Berhad, 2025 annual report", "published_at": "2025-11-28", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "company_annual_report_reviewed",
+      "limitations": [
+        "This is V.S. Industry's downstream customer revenue concentration, not the percentage of Dyson's purchases sourced from V.S. Industry or the supplier's own sourcing concentration.",
+        "The annual report anonymises the customers; it does not identify any of A, B or C as Dyson. The Malaysia operating segment includes branches in Singapore and the Philippines; these customer revenues are not proof that all production occurred at a Malaysian facility.",
+        "The fiscal year begins before the study window. The measure aggregates the full year and cannot be restricted to the part inside the window; it is not evidence that the same shares applied each day or in later years.",
+        "The group's name is a supplied search target, but no graph entity, current supplier relationship, specific product, customer order or shipment has been verified. This is not a disruption probability.",
+        "Publication date follows the annual report submission announcement: https://www.klsescreener.com/v2/announcements/view/10725325."
+      ],
+      "search_window": {"start": "2024-08-01", "end": "2025-07-31", "basis": "observation_period", "note": "The fiscal-year observation period for retrieval; it includes months before the study window and does not imply a continuous disruption or current exposure.", "anchor_date": "2025-07-31", "anchor_basis": "observation_period"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "CONCENTRATION-2025-TW-FOUNDRY-001",
+      "assessment_scope": "Global semiconductor foundry market revenue in the fourth quarter of 2025",
+      "countries": [{"country_code": "TW", "country_name": "Taiwan"}],
+      "observation_start": "2025-10-01",
+      "observation_end": "2025-12-31",
+      "measure": {"name": "TSMC share of foundry market revenue", "value": 70.4, "unit": "percent", "definition": "TrendForce's estimated global foundry revenue market share for TSMC in fourth quarter 2025; a revenue share, not a share of wafer volume or manufacturing capacity."},
+      "reported_entities_or_routes": ["Taiwan Semiconductor Manufacturing Company (TSMC)", "global semiconductor foundry market"],
+      "related_evidence_ids": [],
+      "source": {"url": "https://www.trendforce.com/presscenter/news/20260312-12965.html", "publisher": "TrendForce", "published_at": "2026-03-12", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "industry_research_reviewed",
+      "limitations": [
+        "Global foundry revenue is a broad market measure influenced by product mix and prices; it is not a direct measure of all chips, mature-node capacity, or any particular appliance component.",
+        "TSMC is a Taiwan-headquartered company, but the percentage is not Taiwan's geographic share and does not establish that all TSMC manufacturing occurs in Taiwan.",
+        "This is electronics industry context, not evidence that TSMC supplies Dyson, a listed case-study supplier, or a specific chip or shipment. No shortage or interruption is inferred."
+      ],
+      "search_window": {"start": "2025-10-01", "end": "2025-12-31", "basis": "observation_period", "note": "The reported calendar quarter for retrieval; not a continuous disruption, recovery period, or a verified current market share.", "anchor_date": "2025-12-31", "anchor_basis": "observation_period"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "CONCENTRATION-2025-MALACCA-OIL-001",
+      "assessment_scope": "Estimated share of global maritime oil flows transiting the Strait of Malacca in the first half of 2025",
+      "countries": [{"country_code": "MY", "country_name": "Malaysia"}, {"country_code": "SG", "country_name": "Singapore"}],
+      "observation_start": "2025-01-01",
+      "observation_end": "2025-06-30",
+      "measure": {"name": "Share of global maritime oil flows through the Strait of Malacca", "value": 29, "unit": "percent", "definition": "Bernama's report of the US Energy Information Administration estimate for first-half 2025 maritime oil flows; the reported transit volume is approximately 23.2 million barrels per day."},
+      "reported_entities_or_routes": ["Strait of Malacca", "global maritime oil flows"],
+      "related_evidence_ids": [],
+      "source": {"url": "https://www.malaymail.com/news/malaysia/2026/04/06/strait-of-melaka-handles-nearly-a-third-of-global-oil-flows-remains-top-chokepoint/215235", "publisher": "Bernama via Malay Mail, reporting US Energy Information Administration estimates", "published_at": "2026-04-06", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "secondary_report_official_estimate_attributed",
+      "limitations": [
+        "The share concerns seaborne oil, not containerized appliance shipments, all maritime trade, a particular fuel purchase or a named supplier's route.",
+        "The direct EIA page retrieved during review did not expose the numerical table; the percentage is attributed to the EIA through Bernama, not independently verified from its original table.",
+        "Malaysia and Singapore indicate nearby case-study geography, not a claim about territorial jurisdiction or a verified port call. Alternative shipping routes exist; no actual closure, delay or supplier exposure is established.",
+        "This is a half-year estimate, not a daily reading, incident probability, or recovery duration."
+      ],
+      "search_window": {"start": "2025-01-01", "end": "2025-06-30", "basis": "observation_period", "note": "The first-half 2025 observation period for candidate retrieval; not a disruption interval or evidence of any case-study shipment.", "anchor_date": "2025-06-30", "anchor_basis": "observation_period"},
+      "scenario_recovery": null
+    }
+  ]
 }
