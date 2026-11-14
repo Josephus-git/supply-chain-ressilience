@@ -55,6 +55,11 @@ establish what Dyson shipped or what its suppliers used.
   affected case-study cargo. Planned closures and reported resumptions do not
   establish full recovery. Linked hazard, vessel and transit records can
   describe the same incident and must not be counted as separate disruptions.
+- Product quality and compliance: model-specific recalls, a Philippine
+  certification enforcement action and a planned Malaysian operation provide
+  product-category context, not evidence that Dyson goods were affected.
+  Recall announcement dates do not establish defect onset or remedy completion;
+  model numbers in descriptions are not verified graph or customs codes.
 
 ## Layout
 

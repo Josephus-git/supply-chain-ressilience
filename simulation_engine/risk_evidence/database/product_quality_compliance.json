@@ -15,7 +15,165 @@
     "related_evidence_ids": [],
     "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
     "verification_status": null,
-    "limitations": []
+    "limitations": [],
+    "search_window": {"start": null, "end": null, "basis": null, "note": null, "anchor_date": null, "anchor_basis": null},
+    "scenario_recovery": null
   },
-  "records": []
+  "records": [
+    {
+      "evidence_id": "QUALITY-2025-US-HAIR-001",
+      "reported_supplier": "AliExpress (recalling firm); Super Appliance Store (distributor)",
+      "country_code": "US",
+      "country_name": "United States",
+      "product_description": "6-in-1 and 5-in-1 Multi Styler hair dryers, model HS01",
+      "product_code": null,
+      "event_start": "2025-01-30",
+      "event_end": null,
+      "issue_or_standard": "Lack of an immersion protection device poses an electrocution or shock hazard if plugged-in hair dryers fall into water.",
+      "reported_effect": "The US Consumer Product Safety Commission (CPSC) announced a recall of about 980 hair dryers, with a full refund offered. No incidents or injuries were reported in the notice.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://www.cpsc.gov/Recalls/2025/AliExpress-Recalls-Multi-Styler-Hair-Dryers-Due-to-Electrocution-or-Shock-Hazards-Sold-on-AliExpress-com", "publisher": "US Consumer Product Safety Commission", "published_at": "2025-01-30", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "official_recall_notice_reviewed",
+      "limitations": [
+        "The date is the recall announcement, not the onset of the defect, an individual incident or the completion of the remedy. Recall end and financial or production impact are unknown.",
+        "The model name and number describe the recalled goods, not a verified Dyson model, supplier or shipment. No case-study relationship has been established.",
+        "China is listed as the country of manufacture; this record describes a US recall and does not establish a Chinese recall or affected case-study import."
+      ],
+      "search_window": {"start": "2025-01-16", "end": "2025-02-13", "basis": "report_date_buffer", "note": "Fourteen days either side of the recall announcement for retrieval only; not a measured defect, recall or recovery duration.", "anchor_date": "2025-01-30", "anchor_basis": "document_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "QUALITY-2025-US-POOL-001",
+      "reported_supplier": "Dongguan Yuanhong Intelligent Technology (manufacturer); Shenzhen Aiper Intelligent (distributor)",
+      "country_code": "US",
+      "country_name": "United States",
+      "product_description": "Aiper Seagull Pro ZT6001 cordless robotic pool vacuum cleaner",
+      "product_code": null,
+      "event_start": "2025-03-20",
+      "event_end": null,
+      "issue_or_standard": "The pool vacuum's large current adapter can overheat, posing burn and fire hazards.",
+      "reported_effect": "CPSC announced a recall of about 32,660 US units and a replacement remedy. The notice reported 19 cases of melting, smoke or fire while charging, including five instances of property damage.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://www.cpsc.gov/Recalls/2025/Aiper-Seagull-Pro-Cordless-Robotic-Pool-Vacuum-Cleaners-Recalled-Due-to-Burn-and-Fire-Hazards-Distributed-by-Shenzhen-Aiper-Intelligent-Co", "publisher": "US Consumer Product Safety Commission", "published_at": "2025-03-20", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "official_recall_notice_reviewed",
+      "limitations": [
+        "This is a pool-cleaning robot, not a household floor vacuum; it is contextual evidence about robotic cleaning and adapter safety only.",
+        "The recall announcement is not the date when the defect began or the remedy was completed; no production downtime or delivery delay is established.",
+        "China is the reported manufacturing country; the record concerns the US recall and does not establish a recall in China or a case-study supplier or shipment."
+      ],
+      "search_window": {"start": "2025-03-06", "end": "2025-04-03", "basis": "report_date_buffer", "note": "Fourteen days either side of the recall announcement for retrieval only; not the recall duration or recovery period.", "anchor_date": "2025-03-20", "anchor_basis": "document_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "QUALITY-2025-PH-FANS-001",
+      "reported_supplier": null,
+      "country_code": "PH",
+      "country_name": "Philippines",
+      "product_description": "Electric fans and other household appliances seized in Bulacan",
+      "product_code": null,
+      "event_start": null,
+      "event_end": null,
+      "issue_or_standard": "Products covered by mandatory certification were reported without required Philippine Standard marks or Import Commodity Clearance stickers.",
+      "reported_effect": "The Philippine Department of Trade and Industry reported confiscating more than 3,000 household appliances worth approximately PHP 13.2 million, including fans, after an online test-buy. A notice of violation was issued.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://fairtrade.dti.gov.ph/press-release/dti-seizes-php-13m-worth-of-uncertified-home-appliances/", "publisher": "Philippine Department of Trade and Industry", "published_at": "2025-09-29", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "official_enforcement_report_reviewed",
+      "limitations": [
+        "The agency gives 29 September as the release date while the webpage displays 30 October 2025; the exact operation date is not stated.",
+        "The totals cover all listed appliance types, not fans alone; no brand, model, supplier, production or individual shipment impact is identified.",
+        "Missing certification markings and a notice of violation are reported enforcement findings, not proof that each item failed a physical safety test or a final legal adjudication.",
+        "The incident is contextual; no link to Dyson or a case-study product has been verified."
+      ],
+      "search_window": {"start": "2025-09-15", "end": "2025-11-13", "basis": "report_date_buffer", "note": "Fourteen days before the stated release date through 14 days after the webpage's displayed date; retrieval only, not a verified enforcement or disruption duration.", "anchor_date": "2025-09-29", "anchor_basis": "document_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "QUALITY-2026-US-PURIFIER-001",
+      "reported_supplier": "Airova, Inc. (importer)",
+      "country_code": "US",
+      "country_name": "United States",
+      "product_description": "Aroeve MK04 air purifier, manufactured before July 2025 with serial numbers beginning BN",
+      "product_code": null,
+      "event_start": "2026-02-09",
+      "event_end": null,
+      "issue_or_standard": "The air purifiers can overheat and ignite, posing fire and burn hazards.",
+      "reported_effect": "CPSC announced a recall of about 191,390 units and a free replacement remedy. Airova reported 37 overheating cases including one fire, with no reported injuries or property damage.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://www.cpsc.gov/Recalls/2026/Airova-Recalls-Aroeve-Air-Purifiers-Due-to-Fire-and-Burn-Hazards", "publisher": "US Consumer Product Safety Commission", "published_at": "2026-02-09", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "official_recall_notice_reviewed",
+      "limitations": [
+        "The recall is limited to the specified units; the announcement is not a defect start date, recovery date, or evidence of shipment delays.",
+        "China is the reported manufacturing country, but this is a US recall; it does not establish recalls in other countries.",
+        "Air-purifier context does not establish that Dyson or its suppliers used these products or components."
+      ],
+      "search_window": {"start": "2026-01-26", "end": "2026-02-23", "basis": "report_date_buffer", "note": "Fourteen days either side of the recall announcement for retrieval only; not a verified defect, recall or recovery duration.", "anchor_date": "2026-02-09", "anchor_basis": "document_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "QUALITY-2026-US-FAN-001",
+      "reported_supplier": "Merkury Innovations (importer)",
+      "country_code": "US",
+      "country_name": "United States",
+      "product_description": "Merkury Innovations Hot + Cool bladeless heating and cooling fan, model MI-DHC02",
+      "product_code": null,
+      "event_start": "2026-06-11",
+      "event_end": null,
+      "issue_or_standard": "Fan overheating poses a fire hazard and risk of serious injury or death.",
+      "reported_effect": "CPSC announced a recall of about 18,000 fans with a full refund remedy. The firm reported two fires, including one case of smoke damage; no injuries were reported.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://www.cpsc.gov/Recalls/2026/Merkury-Innovations-Recalls-Hot-Cool-Heating-and-Cooling-Fans-Due-to-Risk-of-Serious-Injury-or-Death-from-Fire-Hazard", "publisher": "US Consumer Product Safety Commission", "published_at": "2026-06-11", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "official_recall_notice_reviewed",
+      "limitations": [
+        "The announcement date does not establish when the defect began, when remedies ended or the duration of a supply disruption.",
+        "The product was manufactured in China according to the US notice, which does not establish a Chinese recall.",
+        "This is another brand's product; no case-study supplier, product or shipment is matched."
+      ],
+      "search_window": {"start": "2026-05-28", "end": "2026-06-25", "basis": "report_date_buffer", "note": "Fourteen days either side of the recall announcement for retrieval only, not a measured recall or recovery period.", "anchor_date": "2026-06-11", "anchor_basis": "document_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "QUALITY-2026-US-VACUUM-001",
+      "reported_supplier": "Groupe SEB USA dba Rowenta USA (importer)",
+      "country_code": "US",
+      "country_name": "United States",
+      "product_description": "Rowenta X-Force Flex 14.60 Animal RH99A2U1 and 15.60 Animal RH99F2U1 cordless vacuums with ZR0097U2 batteries, date codes beginning 23 or 24",
+      "product_code": null,
+      "event_start": "2026-07-02",
+      "event_end": null,
+      "issue_or_standard": "The affected lithium-ion battery can overheat and ignite, posing fire and burn hazards.",
+      "reported_effect": "CPSC announced a recall of about 3,660 units and free replacement batteries. The firm reported two battery overheating or non-charging reports and 65 additional reports globally, with no injuries reported.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://www.cpsc.gov/Recalls/2026/Rowenta-Recalls-Cordless-Vacuum-Cleaners-Due-to-Risk-of-Serious-Injury-from-fire-and-Burn-Hazards", "publisher": "US Consumer Product Safety Commission", "published_at": "2026-07-02", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "official_recall_notice_reviewed",
+      "limitations": [
+        "The recall covers the specified batteries, also sold separately; the vacuum was manufactured in France and the battery in China. The US notice does not establish a Chinese recall.",
+        "The recall date is not a defect onset or remedy completion date, and no supply disruption duration or shipment delay is established.",
+        "Rowenta is a different brand; no case-study product, supplier or shipment match has been established."
+      ],
+      "search_window": {"start": "2026-06-18", "end": "2026-07-16", "basis": "report_date_buffer", "note": "Fourteen days either side of the recall announcement for retrieval only, not a measured recall or recovery period.", "anchor_date": "2026-07-02", "anchor_basis": "document_date"},
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "QUALITY-2026-MY-COMPLIANCE-001",
+      "reported_supplier": null,
+      "country_code": "MY",
+      "country_name": "Malaysia",
+      "product_description": "Controlled electrical appliances, including vacuum cleaners, fans, chargers and cables",
+      "product_code": null,
+      "event_start": null,
+      "event_end": null,
+      "issue_or_standard": "Planned enforcement targets electrical products that do not meet Malaysian safety requirements or certification.",
+      "reported_effect": "Bernama reported the deputy finance minister's announcement of a planned multi-agency compliance operation covering 34 categories, including vacuum cleaners and fans. Proposed activities include import monitoring, premises inspections and product testing.",
+      "related_evidence_ids": [],
+      "source": {"url": "https://www.bernama.com/en/general/news.php?id=2585040", "publisher": "Bernama", "published_at": "2026-07-23", "retrieved_at": "2026-11-14", "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."},
+      "verification_status": "news_report_official_statement_attributed",
+      "limitations": [
+        "This is an announced future compliance operation, not evidence that a specific vacuum cleaner or fan was seized, recalled or found defective.",
+        "The minister's charger inspection statistic concerns phone chargers, not the full set of regulated product categories; the notice gives no sample details.",
+        "The start, end and outcome of the operation and any individual shipment delay are unknown; no case-study supplier or product has been matched."
+      ],
+      "search_window": {"start": "2026-07-09", "end": "2026-08-06", "basis": "report_date_buffer", "note": "Fourteen days either side of the report for retrieval only; not dates of the planned operation or a recovery period.", "anchor_date": "2026-07-23", "anchor_basis": "report_date"},
+      "scenario_recovery": null
+    }
+  ]
 }

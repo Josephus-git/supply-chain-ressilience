@@ -1056,6 +1056,54 @@
           "sha256": "5e6320413a9e73239e040f712c25a5b979826ed9b5bd8da632666672f2575cf3"
         }
       ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory search for product safety recalls, certification enforcement and announced compliance operations during the study period in study countries, prioritizing products and components comparable to the supplied case-study descriptions. Include other brands as context without assuming a case-study supplier, product or shipment match.",
+      "sources_searched": [
+        {"url": "https://www.cpsc.gov/Recalls/2025/AliExpress-Recalls-Multi-Styler-Hair-Dryers-Due-to-Electrocution-or-Shock-Hazards-Sold-on-AliExpress-com", "outcome": "Included a US recall for multi-styler hair dryers lacking immersion protection."},
+        {"url": "https://www.cpsc.gov/Recalls/2025/Aiper-Seagull-Pro-Cordless-Robotic-Pool-Vacuum-Cleaners-Recalled-Due-to-Burn-and-Fire-Hazards-Distributed-by-Shenzhen-Aiper-Intelligent-Co", "outcome": "Included a robotic pool vacuum recall involving overheating adapters, as contextual rather than floor-vacuum evidence."},
+        {"url": "https://fairtrade.dti.gov.ph/press-release/dti-seizes-php-13m-worth-of-uncertified-home-appliances/", "outcome": "Included the reported Philippine confiscation of uncertified appliances, including fans; the release and webpage display different dates."},
+        {"url": "https://www.cpsc.gov/Recalls/2026/Airova-Recalls-Aroeve-Air-Purifiers-Due-to-Fire-and-Burn-Hazards", "outcome": "Included a model- and serial-specific US air-purifier recall."},
+        {"url": "https://www.cpsc.gov/Recalls/2026/Merkury-Innovations-Recalls-Hot-Cool-Heating-and-Cooling-Fans-Due-to-Risk-of-Serious-Injury-or-Death-from-Fire-Hazard", "outcome": "Included a US bladeless heating and cooling fan recall."},
+        {"url": "https://www.cpsc.gov/Recalls/2026/Rowenta-Recalls-Cordless-Vacuum-Cleaners-Due-to-Risk-of-Serious-Injury-from-fire-and-Burn-Hazards", "outcome": "Included a US recall involving specified cordless vacuum batteries, manufactured in China according to the notice."},
+        {"url": "https://www.bernama.com/en/general/news.php?id=2585040", "outcome": "Included reporting of a planned Malaysian electrical product compliance operation; no actual seizure or case-study impact inferred."},
+        {"url": "https://www.cpsc.gov/Recalls/2025/Empower-Brands-Recalls-Remington-Hair-Dryers-Due-to-Risk-of-Serious-Injury-or-Death-from-Electrocution-and-Shock-Hazards", "outcome": "Reviewed an additional 2025 US hair dryer recall; not included in this initial selection."},
+        {"url": "https://aseanconsumer.org/product-alert", "outcome": "Reviewed the ASEAN product-alert portal; the accessible rendered page did not expose a populated recall listing."},
+        {"url": "https://www.consumerproductsafety.gov.sg/consumers/safety-alerts-and-recalls/", "outcome": "The accessible rendered Singapore recall page did not expose its full listing; no specific notice was verified."},
+        {"url": "https://www.bsmi.gov.tw/wSite/lp?ctNode=8268&BaseDSD=7&mp=1", "outcome": "The accessible rendered Taiwan recall page did not expose a usable listing; no specific notice was verified."}
+      ],
+      "known_coverage_gaps": [
+        "Searches are exploratory and not exhaustive across product types, recalls, suppliers, markets, languages or jurisdictions. No Singapore, Taiwan or Chinese domestic recall was verified in this pass.",
+        "The US notices describe US recalls even where products or batteries were manufactured in China; they do not prove recalls or sales in other countries.",
+        "A model number is not an HS code or verified graph product identifier. Named importers, distributors and manufacturers are source roles, not verified Dyson suppliers.",
+        "The Philippine report's stated release date and webpage date differ; the operation date, fan-only quantity and final legal outcome are unknown.",
+        "Malaysia's operation was planned when reported, not a verified seizure or recall. A lack of certification markings does not alone establish a failed safety test.",
+        "Recall announcement dates, defect onset, individual incidents, remedy completion, supplier production and shipment delays are distinct; retrieval windows do not establish a continuous disruption or recovery duration.",
+        "No record verifies an affected case-study shipment, product, supplier or calibrated disruption probability."
+      ],
+      "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise attributed factual summaries and source links, not complete notices or articles.",
+      "review_method": "Manually review regulator notices, enforcement reports and attributed news. Record recall announcement dates without inferring defect onset or remedy completion, preserve source roles and jurisdiction, separate planned action from completed enforcement, and use labelled inclusive retrieval-only windows. Refresh the file hash whenever evidence changes.",
+      "created_at": "2026-11-14",
+      "files": [
+        {
+          "path": "product_quality_compliance.json",
+          "sha256": "e35c2956d5f5c5dfea62c0f1efe75804cbdb95b242224dfd921b66843b26ed40"
+        }
+      ]
     }
   ]
 }
