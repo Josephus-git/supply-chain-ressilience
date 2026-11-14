@@ -43,6 +43,10 @@ establish what Dyson shipped or what its suppliers used.
   capacity or force majeure does not by itself prove a market-wide shortage,
   and the supplied product descriptions do not establish material composition
   or dependency on a reported supplier.
+- Labour disruption: strikes and a disputed warehouse labour action provide
+  manufacturing and logistics context. A strike's end is not necessarily a
+  return to normal production or delivery; disputed operational impacts and
+  unverified supply-chain links must remain labelled.
 
 ## Layout
 

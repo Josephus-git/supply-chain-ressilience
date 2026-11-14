@@ -856,6 +856,79 @@
           "sha256": "15bcac86ba9cb08322c12e1b83ce750acba74bb02cf7929e3b1b31ee36b2d3f5"
         }
       ]
+    },
+    {
+      "snapshot_id": null,
+      "coverage_start": "2025-01-01",
+      "coverage_end": "2026-09-30",
+      "countries": [
+        {"country_code": "SG", "country_name": "Singapore"},
+        {"country_code": "MY", "country_name": "Malaysia"},
+        {"country_code": "PH", "country_name": "Philippines"},
+        {"country_code": "US", "country_name": "United States"},
+        {"country_code": "TW", "country_name": "Taiwan"},
+        {"country_code": "CN", "country_name": "China"}
+      ],
+      "supplier_ids": [],
+      "product_codes": [],
+      "port_ids": [],
+      "selection_criteria": "Exploratory search for actual labour actions or disputes during the study period in the study countries, prioritizing manufacturing and logistics relevant to the supplied product descriptions. Include industry context without requiring a Dyson connection, and label disputed operational impacts and unknown shipment exposure.",
+      "sources_searched": [
+        {
+          "url": "https://businessmirror.com.ph/2025/03/10/nexperia-phl-employees-reach-settlement-group/",
+          "outcome": "Included a Philippine semiconductor factory strike, a reported 74-hour production halt and an officially attributed settlement."
+        },
+        {
+          "url": "https://www.industriall-union.org/union-win-at-nexperia-philippines-inc-after-three-day-strike",
+          "outcome": "Reviewed union account of the same strike and noted its conflicting 6 March start date."
+        },
+        {
+          "url": "https://www.carscoops.com/2026/06/american-axle-uaw-strike/",
+          "outcome": "Reviewed reporting of the 1 June walkout at a Michigan axle plant and potential, not verified, downstream impacts."
+        },
+        {
+          "url": "https://www.wmuk.org/wmuk-news/2026-06-15/the-uaw-ratifies-a-contract-with-american-axle-in-three-rivers-ending-a-nearly-two-week-strike",
+          "outcome": "Reviewed reporting of contract ratification and the end of the Three Rivers strike."
+        },
+        {
+          "url": "https://teamster.org/2026/03/smurfit-westrock-teamsters-launch-ulp-strike-in-massachusetts/",
+          "outcome": "Included the union's 24 March report of a packaging-plant strike; exact start and end are unverified."
+        },
+        {
+          "url": "https://www.paperadvance.com/news/industry-news/strike-at-smurfit-westrock-plant-ahead-of-closure.html",
+          "outcome": "Reviewed plant product scope, the separately planned closure, employer position, and nonparticipating unions."
+        },
+        {
+          "url": "https://kesq.com/news/2026/09/02/teamsters-target-amazon-site-for-protest-company-denies-any-disruption/",
+          "outcome": "Included a warehouse labour action with conflicting union and employer accounts of participation and operational disruption."
+        },
+        {
+          "url": "https://www.industriall-union.org/union-busting-at-flextronics-technology-sdn-bhd",
+          "outcome": "Reviewed a union account of a disputed Malaysian election and alleged interference. No strike or verified production interruption was established, so no labour disruption record was created."
+        },
+        {
+          "url": "https://ebs.publicnow.com/view/4CB12EDDCAA900DA4BDFF670594CDC60C8E503B6",
+          "outcome": "Potential China electronics-factory strike source returned HTTP 403 and was not reviewed or used for a record."
+        }
+      ],
+      "known_coverage_gaps": [
+        "Searches are exploratory and not exhaustive across countries, transport modes, industries, employers, dates, languages, or local sources.",
+        "No qualifying Malaysia, Singapore, Taiwan, or China incident was included in this pass; absence of a record is not proof of no incident.",
+        "Nexperia sources disagree on the strike start date; no production restart or supply-chain recovery is verified.",
+        "The Wakefield strike exact dates are unknown, and the Riverside warehouse work stoppage and operational effects are disputed.",
+        "Labour dispute allegations are attributed to their sources and are not automatically legal findings. An election dispute is not proof of a work stoppage.",
+        "No record verifies a case-study supplier relationship, product, affected shipment, backlog, loss, or calibrated disruption probability.",
+        "Reported strike ends, where known, are not necessarily full production or shipment recovery. Search buffers are retrieval aids, not inferred impact durations."
+      ],
+      "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise attributed factual summaries and source links, not complete articles.",
+      "review_method": "Manually review accessible news and union sources, distinguish actual action from strike authorization or a planned closure, preserve disagreements between parties and sources, and separate strike end from operational recovery. Use non-null dated candidate windows with explicit retrieval-only buffers; leave unknown dates and recovery assumptions null. Refresh the file hash whenever evidence changes.",
+      "created_at": "2026-11-14",
+      "files": [
+        {
+          "path": "labour_disruption.json",
+          "sha256": "1a8ef7fb1799743ea47ae49d23fd4b3b1eb396989b0e8856166dd2256a534894"
+        }
+      ]
     }
   ]
 }

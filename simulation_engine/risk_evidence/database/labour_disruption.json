@@ -14,7 +14,158 @@
     "related_evidence_ids": [],
     "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
     "verification_status": null,
-    "limitations": []
+    "limitations": [],
+    "search_window": {
+      "start": null,
+      "end": null,
+      "basis": null,
+      "note": null,
+      "anchor_date": null,
+      "anchor_basis": null
+    },
+    "scenario_recovery": null
   },
-  "records": []
+  "records": [
+    {
+      "evidence_id": "LABOUR-2025-PH-NEXPERIA-001",
+      "reported_organisation": "Nexperia Philippines Inc.",
+      "country_code": "PH",
+      "country_name": "Philippines",
+      "location": "Cabuyao, Laguna",
+      "event_start": "2025-03-05",
+      "event_end": "2025-03-08",
+      "disruption_type": "semiconductor factory workers' strike",
+      "reported_operational_impact": "BusinessMirror reported that more than 1,000 workers struck after bargaining talks reached a deadlock, halting production for 74 hours. The strike ended on 8 March after a settlement confirmed by the labor secretary.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://businessmirror.com.ph/2025/03/10/nexperia-phl-employees-reach-settlement-group/",
+        "publisher": "BusinessMirror",
+        "published_at": "2025-03-10",
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Redistribution terms not verified; concise attributed factual summary and link only."
+      },
+      "verification_status": "secondary_source_reviewed_settlement_officially_attributed",
+      "limitations": [
+        "IndustriALL's account at https://www.industriall-union.org/union-win-at-nexperia-philippines-inc-after-three-day-strike says the strike began on 6 March, conflicting with BusinessMirror's 5 March date. The earlier reported date is retained for retrieval; the discrepancy is unresolved.",
+        "The 8 March date is the reported end of the strike, not verified restoration of normal output, order delivery, or supply-chain recovery.",
+        "The reported duration and production stoppage come from the news report and are not independently measured against factory output records.",
+        "Electronic components provide context for the supplied electrical product categories; no case-study part, supplier relationship, or shipment has been verified.",
+        "MATERIAL-2025-CN-CHIP-001 concerns a different Nexperia supply disruption in China in October 2025, not this strike."
+      ],
+      "search_window": {
+        "start": "2025-03-05",
+        "end": "2025-03-15",
+        "basis": "event_date_buffer",
+        "note": "The reported strike dates and seven additional days after its reported end are included for retrieval only; the buffer is not an observed recovery period.",
+        "anchor_date": "2025-03-05",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "LABOUR-2026-US-AXLE-001",
+      "reported_organisation": "American Axle / Dauch Corporation",
+      "country_code": "US",
+      "country_name": "United States",
+      "location": "Three Rivers, Michigan",
+      "event_start": "2026-06-01",
+      "event_end": "2026-06-14",
+      "disruption_type": "automotive-parts factory workers' strike",
+      "reported_operational_impact": "Carscoops reported that approximately 1,000 UAW workers walked out at a plant producing axles for GM pickup trucks. WMUK reported that members ratified a contract on 14 June, ending the strike.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.wmuk.org/wmuk-news/2026-06-15/the-uaw-ratifies-a-contract-with-american-axle-in-three-rivers-ending-a-nearly-two-week-strike",
+        "publisher": "WMUK",
+        "published_at": "2026-06-15",
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Redistribution terms not verified; concise attributed factual summary and links only."
+      },
+      "verification_status": "secondary_sources_reviewed_union_account_attributed",
+      "limitations": [
+        "Start date, approximate worker count and axle application are reported by https://www.carscoops.com/2026/06/american-axle-uaw-strike/; WMUK independently describes the strike and ratification.",
+        "The strike end is the reported ratification date; normal plant output, fulfillment of backlogs, and shipment recovery dates are not established.",
+        "Potential interruption to GM production was reported as a risk, not an observed shutdown; no downstream shutdown is asserted.",
+        "Vehicle parts appear in the supplied descriptions, but no case-study component, buyer, or shipment is linked to the plant."
+      ],
+      "search_window": {
+        "start": "2026-06-01",
+        "end": "2026-06-21",
+        "basis": "event_date_buffer",
+        "note": "The reported strike dates plus seven days after reported ratification are included for retrieval only; the buffer is not a measured recovery period.",
+        "anchor_date": "2026-06-01",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "LABOUR-2026-US-PACKAGING-001",
+      "reported_organisation": "Smurfit Westrock",
+      "country_code": "US",
+      "country_name": "United States",
+      "location": "Wakefield, Massachusetts",
+      "event_start": null,
+      "event_end": null,
+      "disruption_type": "corrugated packaging production workers' strike",
+      "reported_operational_impact": "The Teamsters reported on 24 March that 60 Local 3 members had launched a strike after their contract expired. Industry reporting identifies the site as a corrugated packaging plant and says other unions at the facility were not participating.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://teamster.org/2026/03/smurfit-westrock-teamsters-launch-ulp-strike-in-massachusetts/",
+        "publisher": "International Brotherhood of Teamsters",
+        "published_at": "2026-03-24",
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Redistribution terms not verified; concise attributed summary and source links only."
+      },
+      "verification_status": "union_statement_and_secondary_report_reviewed",
+      "limitations": [
+        "The strike's exact start and end dates, duration, production volume lost, and order delays were not established; contract expiry on 23 March is not a verified strike start.",
+        "Industry account https://www.paperadvance.com/news/industry-news/strike-at-smurfit-westrock-plant-ahead-of-closure.html reports a separately planned closure and other nonparticipating unions. The closure is not asserted to have resulted from the strike.",
+        "The union describes its action as an unfair labor practice strike; the employer disputed its characterization and reported good-faith negotiations in the industry account.",
+        "Corrugated packaging is in the supplied list, but the report identifies food-service packaging and no case-study buyer or shipment."
+      ],
+      "search_window": {
+        "start": "2026-03-10",
+        "end": "2026-04-07",
+        "basis": "report_date_buffer",
+        "note": "Fourteen days either side of the union's 24 March report for retrieval only; the buffer is not a verified strike or recovery interval.",
+        "anchor_date": "2026-03-24",
+        "anchor_basis": "report_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "LABOUR-2026-US-WAREHOUSE-001",
+      "reported_organisation": "Amazon DJT6 / Teamsters Local 1932",
+      "country_code": "US",
+      "country_name": "United States",
+      "location": "Riverside, California",
+      "event_start": "2026-09-02",
+      "event_end": null,
+      "disruption_type": "warehouse labour action; operational impact disputed",
+      "reported_operational_impact": "City News Service reported a union-organized action on 2 September. The Teamsters claimed a 24-hour work stoppage involving both primary shifts; Amazon denied operational disruption and disputed that employees participated.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://kesq.com/news/2026/09/02/teamsters-target-amazon-site-for-protest-company-denies-any-disruption/",
+        "publisher": "City News Service via KESQ",
+        "published_at": "2026-09-02",
+        "retrieved_at": "2026-11-14",
+        "licence_notes": "Redistribution terms not verified; concise attributed summary and link only."
+      },
+      "verification_status": "secondary_source_reviewed_operational_impact_disputed",
+      "limitations": [
+        "The union and company disagree about worker participation, representation, and whether the facility stopped. Neither version of the operational impact was independently established.",
+        "The 24-hour stoppage is a union claim, not a verified event duration; the end date and any backlog or recovery are unknown.",
+        "Reported allegations about the parties' conduct are disputed claims, not independently established findings.",
+        "A general warehouse labour action offers logistics context only; no case-study product, supplier, route, or shipment is identified."
+      ],
+      "search_window": {
+        "start": "2026-09-02",
+        "end": "2026-09-16",
+        "basis": "event_date_buffer",
+        "note": "The reported action date and a 14-day retrieval-only buffer do not establish an operational stoppage, incident end, or recovery duration.",
+        "anchor_date": "2026-09-02",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": null
+    }
+  ]
 }
