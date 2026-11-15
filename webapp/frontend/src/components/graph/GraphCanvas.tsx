@@ -34,16 +34,39 @@ interface Props {
   roots: string[]
 }
 
-const truncate = (s: string, n: number) => (s.length > n ? `${s.slice(0, n - 1)}…` : s)
 
-/** Caption drawn inside the circle, Bloom-style. The full name shows on selection and in the inspector. */
+/** Break a caption into at most `lines` lines of about `width` characters, at spaces where possible. */
+function wrapCaption(text: string, width: number, lines: number): string {
+  const out: string[] = []
+  let cur = ''
+  for (let word of text.split(/\s+/).filter(Boolean)) {
+    while (word.length > width) {
+      // A word too long for one line: fill the current line, then hard-break.
+      if (cur) { out.push(cur); cur = '' }
+      out.push(word.slice(0, width))
+      word = word.slice(width)
+    }
+    if (!cur) cur = word
+    else if (cur.length + 1 + word.length <= width) cur += ` ${word}`
+    else { out.push(cur); cur = word }
+  }
+  if (cur) out.push(cur)
+  if (out.length <= lines) return out.join('\n')
+  const kept = out.slice(0, lines)
+  kept[lines - 1] = `${kept[lines - 1].slice(0, width - 1)}…`
+  return kept.join('\n')
+}
+
+/** Caption drawn inside the circle, Bloom-style. The full name shows in the inspector. */
 function caption(n: GNode): string {
   if (n.kind === 'product') {
     const hs = n.properties.hs_code
-    return typeof hs === 'number' ? `HS ${String(hs).padStart(6, '0')}` : truncate(n.name, 18)
+    if (typeof hs === 'number') return `HS ${String(hs).padStart(6, '0')}`
   }
-  if (n.kind === 'shipment') return truncate(n.name, 18)
-  return truncate(n.name, n.kind === 'buyer' ? 22 : 20)
+  // ~6px per character at 10px: keep lines inside the circle.
+  if (n.kind === 'buyer') return wrapCaption(n.name, 11, 2)
+  if (n.kind === 'shipment') return wrapCaption(n.name, 8, 3)
+  return wrapCaption(n.name, 9, 3)
 }
 
 function layoutOptions(name: LayoutName, randomize: boolean, roots: string[], count: number): LayoutOptions {
@@ -100,20 +123,22 @@ function stylesheet(mode: Mode): StylesheetJson {
         'border-width': 0,
         label: 'data(caption)',
         color: 'data(ink)',
-        'font-size': 8,
+        'font-size': 10,
+        'font-weight': 500,
         'font-family': 'Geist Variable, system-ui, sans-serif',
         'text-valign': 'center',
         'text-halign': 'center',
+        // Line breaks come from wrapCaption(); a wide max-width stops any further wrapping.
         'text-wrap': 'wrap',
-        'text-max-width': '46px',
-        'text-overflow-wrap': 'anywhere',
-        'line-height': 1.15,
-        'min-zoomed-font-size': 5,
+        'text-max-width': '200px',
+        'line-height': 1.2,
+        // Hide captions once they would be too small to read, rather than smearing them.
+        'min-zoomed-font-size': 6,
         'transition-property': 'opacity',
         'transition-duration': 150,
       },
     },
-    { selector: 'node.root', style: { 'font-size': 10, 'font-weight': 600, 'text-max-width': '62px' } },
+    { selector: 'node.root', style: { 'font-size': 13, 'font-weight': 600 } },
     {
       selector: 'edge',
       style: {
@@ -124,14 +149,14 @@ function stylesheet(mode: Mode): StylesheetJson {
         'arrow-scale': 0.8,
         'curve-style': 'bezier',
         label: 'data(label)',
-        'font-size': 7,
+        'font-size': 8,
         'font-family': 'Geist Variable, system-ui, sans-serif',
         color: ch.ink2,
         'text-rotation': 'autorotate',
         'text-background-color': ch.surface,
         'text-background-opacity': 0.85,
         'text-background-padding': '1px',
-        'min-zoomed-font-size': 6,
+        'min-zoomed-font-size': 7,
         'transition-property': 'opacity',
         'transition-duration': 150,
       },
@@ -203,6 +228,11 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
       maxZoom: 4,
       boxSelectionEnabled: false,
       selectionType: 'single',
+      // Cytoscape caches labels as bitmaps and stretches them while zooming; drawing at
+      // (at least) 2x keeps those bitmaps sharp, even on a 1x screen.
+      pixelRatio: Math.max(2, window.devicePixelRatio || 1),
+      motionBlur: false,
+      textureOnViewport: false,
     })
     cyRef.current = cy
     // Dev only: lets browser tests and the console reach the instance.
@@ -373,7 +403,7 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
  * outer ring.
  */
 function radialPositions(cy: Core, centre: cytoscape.NodeSingular) {
-  const RING = 170
+  const RING = 190
   const children = new Map<string, string[]>()
   const depth = new Map<string, number>([[centre.id(), 0]])
   const queue = [centre.id()]

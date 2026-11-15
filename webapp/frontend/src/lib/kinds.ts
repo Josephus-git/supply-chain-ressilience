@@ -18,15 +18,15 @@ export const KIND_META: Record<
   NodeKind,
   { label: string; plural: string; color: string; ink: string; shape: string; icon: LucideIcon; size: number }
 > = {
-  buyer: { label: 'Dyson buyer', plural: 'Dyson buyers', color: '#F79767', ink: '#2a1a12', shape: 'ellipse', icon: Warehouse, size: 74 },
-  shipment: { label: 'Shipment', plural: 'Shipments', color: '#8DAA7E', ink: '#17200f', shape: 'ellipse', icon: Building2, size: 56 },
-  supplier: { label: 'Supplier', plural: 'Suppliers', color: '#FFC454', ink: '#2b2008', shape: 'ellipse', icon: Factory, size: 60 },
-  parent: { label: 'Parent company', plural: 'Parent companies', color: '#3B5BDB', ink: '#ffffff', shape: 'ellipse', icon: Landmark, size: 60 },
-  product: { label: 'Product', plural: 'Products', color: '#D5A6F0', ink: '#24142e', shape: 'ellipse', icon: Package, size: 54 },
-  exit_port: { label: 'Exit port', plural: 'Exit ports', color: '#82C77E', ink: '#10220f', shape: 'ellipse', icon: Anchor, size: 54 },
-  entry_port: { label: 'Entry port', plural: 'Entry ports', color: '#F9B8E8', ink: '#2e1427', shape: 'ellipse', icon: PlaneLanding, size: 54 },
-  carrier: { label: 'Carrier', plural: 'Carriers', color: '#3CC4D0', ink: '#0b2427', shape: 'ellipse', icon: Truck, size: 54 },
-  vessel: { label: 'Vessel', plural: 'Vessels', color: '#FFB3C1', ink: '#2e1218', shape: 'ellipse', icon: Ship, size: 54 },
+  buyer: { label: 'Dyson buyer', plural: 'Dyson buyers', color: '#F79767', ink: '#2a1a12', shape: 'ellipse', icon: Warehouse, size: 86 },
+  shipment: { label: 'Shipment', plural: 'Shipments', color: '#8DAA7E', ink: '#17200f', shape: 'ellipse', icon: Building2, size: 64 },
+  supplier: { label: 'Supplier', plural: 'Suppliers', color: '#FFC454', ink: '#2b2008', shape: 'ellipse', icon: Factory, size: 68 },
+  parent: { label: 'Parent company', plural: 'Parent companies', color: '#3B5BDB', ink: '#ffffff', shape: 'ellipse', icon: Landmark, size: 66 },
+  product: { label: 'Product', plural: 'Products', color: '#D5A6F0', ink: '#24142e', shape: 'ellipse', icon: Package, size: 60 },
+  exit_port: { label: 'Exit port', plural: 'Exit ports', color: '#82C77E', ink: '#10220f', shape: 'ellipse', icon: Anchor, size: 60 },
+  entry_port: { label: 'Entry port', plural: 'Entry ports', color: '#F9B8E8', ink: '#2e1427', shape: 'ellipse', icon: PlaneLanding, size: 60 },
+  carrier: { label: 'Carrier', plural: 'Carriers', color: '#3CC4D0', ink: '#0b2427', shape: 'ellipse', icon: Truck, size: 60 },
+  vessel: { label: 'Vessel', plural: 'Vessels', color: '#FFB3C1', ink: '#2e1218', shape: 'ellipse', icon: Ship, size: 60 },
 }
 
 export const KIND_ORDER: NodeKind[] = [
