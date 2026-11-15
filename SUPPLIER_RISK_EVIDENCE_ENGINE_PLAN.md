@@ -576,6 +576,24 @@ No remote or hosted servers, and no live data sources, are planned.
    validation errors, normalisation (including tiered port matching), matching
    for each risk type, and dated retrieval. Output must be deterministic for the
    same payload and records.
+   - Done on 2026-11-15 in `supplier_risk_engine/engine/` (standard library
+     only). All 18 fixtures return exactly their `expected_ids`, with the
+     expected link basis, strength, matched values, and date status. Repeated
+     runs give identical output.
+   - Choices made where the plan was silent (review in phase 4):
+     - Strengths: currency `medium` (as the gold set has it), carrier name
+       `medium`, HS-code tariff link `medium`, buyer and vessel `strong`.
+     - When two bases have the same strength, the main basis follows a fixed
+       order (`reference.BASIS_PRIORITY`). Every link is still returned in
+       `links`.
+     - Name punctuation: dots and apostrophes are deleted ("V.S." becomes
+       "vs"); other punctuation becomes a space.
+     - Approximated values whose stored `basis` says "informational only" are
+       never used to link.
+     - `data_snapshot_id` falls back to a hash of the records passed in until
+       the loader (phase 5) supplies one.
+     - The country-name table is a draft, pending decision 4 (section 5.4).
+     - `unlinked_context` is always empty.
 4. **Test with fixed records.** Cover exact and near-miss names, role text,
    list-valued fields, unnamed entries, country-name conversion, parent-company
    links in one direction only, the three port tiers, HS-code prefixes,
