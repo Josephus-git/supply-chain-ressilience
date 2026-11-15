@@ -7,9 +7,9 @@ not findings.
 ## 1. Goal and scope
 
 Build a reproducible Python engine that receives a payload of suppliers (name
-and country) and a query date, matches each supplier against stored
-supply-chain records, and returns the matched records with their dated,
-source-attributed evidence reports and related context.
+and country) and a query date, finds the stored evidence that could affect each
+supplier, and returns the matched records with their dated, source-attributed
+evidence reports and related context.
 
 The engine only retrieves stored records. It estimates no probabilities, runs
 no simulation, and does not infer impact. It runs locally as an MCP server on
@@ -19,43 +19,37 @@ application can connect to it later without changing it.
 The engine should:
 
 - Accept one or many suppliers in a single request.
-- Preserve stored shipment, route, and evidence records with their identifiers
-  and sources.
-- Report shared departure ports as stored facts, without treating them as
-  shared exposure to any event.
-- Report unmatched, ambiguous, and partially covered inputs, along with data
-  gaps and limitations.
+- Treat each supplier as the subject of the query. The evidence describes the
+  environment around a supplier, so a supplier does not need its own record.
+- Match evidence by company name, country, or vessel name, using the rules for
+  each risk type (section 7).
+- Report data gaps and limitations alongside results.
 - Keep retrieved reports separate from any conclusion about impact.
 
-The [evidence dataset plan](./RISK_EVIDENCE_DATASET_PLAN.md) covers historical
-incidents, tariff rules, provenance, and matching.
+The [evidence dataset plan](./RISK_EVIDENCE_DATASET_PLAN.md) covers how the
+records are collected, verified, and reviewed.
 
-## 2. Current graph and data boundaries
+## 2. Stored data and its boundaries
 
-The documented [graph schema](./langchain/schema.txt) includes suppliers,
-shipments, buyers, products, departure and arrival ports, carriers, vessels,
-and parent companies. In particular:
+The engine's only database is the JSON evidence database in
+[supplier_risk_engine/risk_evidence/database/](./supplier_risk_engine/risk_evidence/database/).
+It holds one file per risk type, plus a manifest, and 97 evidence records
+across 18 risk types. The study window is 2025-01-01 to 2026-09-30.
 
-| Information | Documented source |
-| --- | --- |
-| Supplier ID, name, country, address | `Supplier` |
-| Shipment ID, dates, quantity, weight, costs | `Shipment` |
-| Departure and arrival ports and coordinates | `Exit Port`, `Entry Port` |
-| Buyer identity and country | `Buyer` |
-| Product description and HS code | `Product` |
-| Carrier, vessel, and parent company | Related nodes where available |
+The engine does not use Neo4j, the combined CSV, or any other store. The
+records do not contain:
 
-These are historical records, not necessarily current routes or verified
-dependencies. The schema does not list tariff rates, financial health, actual
-sailing paths, or inventory levels. The
-[combined dataset](./data/processed/combined/combined.csv) contains
-`source_file` and `source_row`, but the documented schema does not show them;
-verify whether this provenance is actually present in Neo4j.
+- A supplier registry. A supplier is never matched to a stored supplier ID.
+- Shipments, buyers, products, or port identifiers. The `supplier_ids` and
+  `port_ids` fields are empty in every record.
+- Parent-company or ownership links. Parent names are supplied in the payload
+  (section 6.1), not stored in the records.
+- Provenance fields such as `source_file` and `source_row`. Each record has its
+  own `source` object with a URL and publisher instead.
 
-Before implementation, inspect the local Neo4j database read-only. The relationship
-names in [cypher_qa.py](./langchain/cypher_qa.py) and
-[vector_cypher_retriever.py](./rag/vector_cypher_retriever.py) differ from
-parts of `schema.txt`. Do not assume which reflects the database.
+Records describe reported events, observations, and rules, not verified impacts
+on any supplier. Each record carries its own `verification_status` and
+`limitations`, and the engine returns them unchanged.
 
 ## 3. Architecture
 
@@ -65,138 +59,143 @@ Payload: suppliers, as_of_date, event_window_days
              v
 Supplier risk evidence engine (standalone)
   - validates the payload
-  - matches suppliers to stored records
-  - retrieves dated reports and linked context
-  - returns a structured result with coverage and warnings
+  - matches each supplier against the evidence records, by risk type
+  - applies dated retrieval
+  - returns a structured result with the study window and any validation errors
              ^
              |
 Adapters (outside the engine)
-  - application layer: reads Neo4j and the evidence files, passes records in
+  - loader: reads the JSON database and passes records in
   - MCP server: exposes the engine to MCP clients on this machine
   - LangChain app (later): calls the MCP server as a client
   - CLI: for testing
 ```
 
-The engine receives stored records as plain input. It contains no Neo4j, LLM,
-MCP, or UI code. The application layer reads the records and passes them in,
-so the matching and retrieval logic can be tested with fixed records.
+The engine receives records as plain input. It contains no file access, LLM,
+MCP, or UI code, so its matching and retrieval logic can be tested with fixed
+records.
 
 Evidence `search_window` dates are retrieval aids with an explicit basis, not
 necessarily incident start or end dates. The engine must distinguish report,
 claim, and approximate dates from verified overlaps, and must surface unknown
-event dates rather than treating a search window as proof of impact. Every
-evidence record needs valid ISO search-window dates in order. Invalid or
-incomplete records are reported and rejected, not silently dropped. Template
+event dates rather than treating a search window as proof of impact. Template
 placeholders are not evidence.
 
-The dataset may include `scenario_recovery` suggestions: subjective,
-low-confidence handling-delay ranges. The engine returns them only as stored,
-labelled with their scope and anchor. They are not verified recovery durations,
-and the engine never uses them, or any retrieval window, as a duration.
+The `scenario_recovery` field is returned only as stored, labelled with its
+scope and anchor. It is not a verified recovery duration, and the engine never
+uses it, or any retrieval window, as an impact duration.
 
 The existing [mcp_client.py](./langchain/mcp_client.py) targets an external
 Apify service. It is unrelated to this local MCP server.
 
-## 4. Shared exposure and linked context
+## 4. Linked context and limits
 
-The engine reports facts from the stored records. It does not decide that an
-event has occurred.
+The engine reports which records are linked to a supplier, and how. It does not
+decide that an event affected a supplier.
 
-- **Shared departure port:** when a matched supplier's stored shipments depart
-  from a port that other stored suppliers also use, return the port and the
-  number of other suppliers. This is a fact about the stored shipments, not a
-  shared exposure to any event.
-- **Observed routes:** a route is one shipment's departure and arrival port
-  pair. Do not combine ports into pairs that were never observed together.
-- **Country:** a common country is not an event. A country-only link is labelled
-  as weak.
-- **Duplicate reports:** reports describing the same event are returned as
-  linked, not counted separately.
-- **Historical associations:** a shipment association does not establish a
-  verified route, a chokepoint crossing, supplier capacity, financial exposure,
-  or a current event.
+- **Link basis:** every linked report states its basis: `company_name`,
+  `parent_company_name`, `carrier_name`, `vessel_name`, or `country_code`. A link
+  is relevant context, not evidence of impact.
+- **Parent companies:** a report about a parent company is linked to each
+  subsidiary the payload names under it. The link runs one way, from parent to
+  child. A report about a subsidiary is not linked to its parent. The caller
+  states the ownership; the engine does not verify it or look it up.
+- **Country-only links:** labelled as weak. Some risk types do not allow them at
+  all (section 7).
+- **Shared exposure:** not reported. The records contain no shipment or port
+  data, so the engine cannot say that two suppliers share a route or port.
+- **Duplicate reports:** records with `related_evidence_ids` describe the same
+  incident. Return them together, and do not count them as separate events.
+- **Verified links:** the engine cannot show that a supplier used a vessel,
+  route, or port, or that a record describes its operations. It returns only the
+  name, vessel, or country match.
 
 ## 5. Matching and dated retrieval
 
 The engine receives a payload of suppliers and a query date. It matches the
-suppliers against stored records and returns the matched records with their
-dated context. It makes no external lookups.
+suppliers against the evidence records and returns the linked reports with
+their dated context. It makes no external lookups.
 
-### 5.1 Supplier matching
+### 5.1 Normalisation
 
-For each supplier in the payload:
+Matching compares normalised values for exact equality. There is no fuzzy
+scoring.
 
-1. Normalise the name (case, whitespace, punctuation) and the country to an
-   ISO 3166-1 alpha-2 code. An unrecognised country is a validation error, not
-   a non-match.
-2. Match the normalised name and country exactly against stored supplier
-   records.
-3. Return one status:
-   - `matched`: exactly one stored record matches.
-   - `ambiguous`: more than one record matches. List all candidates and link
-     none automatically.
-   - `not_found`: no stored record matches.
+- **Company, parent-company, carrier, and vessel names:** Unicode case-fold, trim, collapse
+  whitespace, remove punctuation, remove bracketed role text such as
+  "(charterer)", and remove legal suffixes at the end of the name (for example
+  Inc, Ltd, Corp, Co, LLC, Berhad, Bhd, Sdn Bhd, Pte Ltd, GmbH, Plc).
+- **List-valued name fields:** split on `;` or `,` before normalising. Ignore
+  entries marked `(unnamed)`.
+- **Country:** the payload country, given as an ISO 3166-1 alpha-2 code or a
+  name, is converted to a code through a reviewed mapping table. An unknown name
+  is a validation error. Matching then compares codes only.
 
-Fuzzy candidates are not linked automatically. Whether they are listed at all
-is an open decision (section 5.5).
+Under these rules, "Nexperia" matches "Nexperia Inc." but not "Nexperia
+Philippines Inc." (section 5.4, decision 2).
 
-`not_found` means the database holds no record for the supplier. It does not
-mean the supplier is low-risk or unknown in the outside world.
+### 5.2 Dated retrieval
 
-### 5.2 Dated reports
+Each risk type uses one of four date families, given in section 7. The query
+date `as_of_date` and the caller-supplied `event_window_days` apply to each
+family as follows.
 
-Each evidence record has an event interval (`event_start`, `event_end`). Given
-the query date `as_of_date` and the caller-supplied `event_window_days`, a
-dated report is in scope when:
+- **Event interval** (`event_start`, `event_end`): in scope when
 
-    event_start - event_window_days <= as_of_date
-        <= (event_end or event_start) + event_window_days
+      event_start - event_window_days <= as_of_date
+          <= (event_end or event_start) + event_window_days
 
-A record with no `event_start` is returned only as an undated candidate, and
-only when its `search_window` contains `as_of_date`. It is labelled as a
-retrieval aid, not as an event date.
+- **Observation point** (`observation_date`): in scope when `as_of_date` is
+  within `event_window_days` of `observation_date`.
+- **Observation start** (`observation_start`, and `observation_end` where
+  present): in scope when `as_of_date` falls within the same expanded interval.
+  An open end is treated as the start date.
+- **Effective interval** (`effective_from`, `effective_to`): in scope when
+  `as_of_date` falls within the expanded interval. An open end is treated as
+  unknown, not as indefinite.
+
+A record without its date field is not returned as in scope. If its
+`search_window` contains `as_of_date`, it is returned as an undated candidate,
+labelled as a retrieval aid rather than an event date.
 
 The window is a retrieval setting. It does not describe how long an event
-lasted. Each returned report carries its source, verification status, and
-limitations exactly as stored.
+lasted.
 
-### 5.3 Linking reports to matched suppliers
+### 5.3 Study window
 
-A report is linked to a matched supplier only through a stored, checkable
-field:
+The engine covers a fixed study window, 2025-01-01 to 2026-09-30. A query with
+`as_of_date` outside this window returns no records and no warning.
+`event_window_days` is separate: it only sets how far an event's dates may sit
+from `as_of_date`.
 
-- **`country_only`:** the report's country code equals the supplier's country.
-  This link is weak and is labelled as such.
-- **`port_match`:** the report's reported port matches a departure or arrival
-  port in the supplier's stored shipments, using a reviewed mapping table.
-
-A link means the report is relevant context. It does not show that the supplier
-or any of its shipments was affected.
-
-### 5.4 Shipment context
-
-For each matched supplier, return its stored shipments with arrival dates,
-departure and arrival ports, carrier, vessel, and product. Dates are returned
-as stored, with their position relative to `as_of_date` (before, on, or after).
-
-The engine does not infer which shipments were in transit on `as_of_date`. The
-stored data has no departure date, so that inference would need an assumption
-that is not in the data.
-
-### 5.5 Open decisions
+### 5.4 Open decisions
 
 Agree these before implementation:
 
-1. Whether fuzzy supplier candidates are returned, and at what threshold.
-2. Which country formats the payload accepts: names, ISO codes, or both.
-3. Whether `event_window_days` is required in every request, as proposed, or
-   has a default.
-4. Whether `country_only` links appear in the main results or in a separate
-   list.
-5. Which store is authoritative for supplier records: Neo4j, the evidence
-   JSON files, or both.
+1. **Payload keys:** the proposed supplier keys are `supplier_name`, `country`,
+   and `parent_companies` (required), plus optional `vessel_names`. Carrier matching for `carrier_vessel_disruption`
+   and `goods_in_transit` needs a carrier key too. Should it be an optional
+   `carrier_names`?
+2. **Company-name strictness:** exact equality after normalisation, as proposed,
+   means "Nexperia" does not match "Nexperia Philippines Inc.". Is that the
+   intended behaviour?
+3. **Data fixes needed before some risk types can be matched:**
+   - `natural_hazards`: add a `country_code` to each record. Only `location`
+     text exists now.
+   - `currency_fluctuations`: has no country or company field. Add a currency
+     key to the payload, or leave this risk type unmatched.
+   - `tariffs_and_duties`: needs product classification and importing country.
+     The dataset README says supplier country alone does not establish tariff
+     applicability, so leave this type unmatched until those keys exist.
+4. **Country-name mapping:** who reviews the mapping from country names to
+   codes?
+5. **Required request fields:** confirm that `event_window_days` is required in
+   every request, as proposed.
+6. **Parent chain:** should the payload carry each parent level, or only the
+   ultimate parent? The engine matches every name it receives and does not climb
+   the chain itself.
 
-### 5.6 Not in scope
+### 5.5 Not in scope
 
 The engine does not estimate probabilities, delays, costs, or impacts. It does
 not calculate tariffs, assess financial health, model cascades across tiers, or
@@ -210,72 +209,67 @@ separate project with its own plan and its own assumptions.
 ```json
 {
   "schema_version": "1.0",
-  "as_of_date": "2025-09-25",
+  "as_of_date": "2026-09-25",
   "event_window_days": 14,
   "suppliers": [
-    {"supplier_name": "Supplier A", "country": "MY"},
-    {"supplier_name": "Supplier B", "country": "CN"}
+    {
+      "supplier_name": "Supplier A",
+      "country": "MY",
+      "parent_companies": ["Flex Ltd"]
+    }
   ]
 }
 ```
 
 - `as_of_date`: ISO date. Required.
 - `event_window_days`: non-negative integer. Required. Returned in the response.
-- `suppliers`: non-empty array. Each entry needs `supplier_name` and `country`.
-  An optional `supplier_id` must match a stored record exactly if given.
+- `suppliers`: non-empty array. Each entry needs `supplier_name`, `country`, and
+  `parent_companies`. `parent_companies` is a non-empty list of parent names,
+  from the nearest parent up to the ultimate parent. If the supplier has no
+  parent, the caller passes the supplier's own name. `vessel_names` is optional.
 
 Two entries with the same normalised name and country are a validation error.
 
 ### 6.2 Response
 
-The values below are illustrative.
+The values below are illustrative. The example assumes the caller has stated
+that "Supplier A" is a subsidiary of "Flex Ltd". The engine does not verify that
+link. The linked report is the cyberattack claim `CYBER-CLAIM-2026-001`, which is
+unverified and has no event date. It is returned as an undated candidate because
+`as_of_date` falls within its search window, and its stored limitations are
+returned unchanged.
 
 ```json
 {
   "schema_version": "1.0",
   "status": "completed",
-  "as_of_date": "2025-09-25",
+  "as_of_date": "2026-09-25",
   "event_window_days": 14,
   "data_snapshot_id": "illustrative-snapshot",
   "engine_version": "0.1.0",
-  "coverage": {
-    "coverage_start": "2025-01-01",
-    "coverage_end": "2026-09-30",
-    "as_of_within_coverage": true
-  },
+  "study_window": {"start": "2025-01-01", "end": "2026-09-30"},
   "suppliers": [
     {
-      "input": {"supplier_name": "Supplier B", "country": "CN"},
-      "match_status": "matched",
-      "matched_record": {
-        "supplier_id": "S2",
-        "supplier_name": "Supplier B",
-        "country": "CN"
+      "input": {
+        "supplier_name": "Supplier A",
+        "country": "MY",
+        "parent_companies": ["Flex Ltd"]
       },
       "linked_reports": [
         {
-          "evidence_id": "PORT-2025-CN-RAGASA-001",
-          "risk_type": "port_disruption",
-          "event_start": "2025-09-22",
+          "risk_type": "cyberattack",
+          "evidence_id": "CYBER-CLAIM-2026-001",
+          "event_start": null,
           "event_end": null,
-          "in_scope_reason": "as_of_date within event_start window",
-          "link_basis": "country_only",
-          "verification_status": "secondary_source_reviewed_market_sources_attributed",
-          "limitations": ["Stored limitations are returned unchanged."]
+          "in_scope_reason": "undated candidate: as_of_date within search_window",
+          "link_basis": "parent_company_name",
+          "matched_value": "Flex Ltd",
+          "verification_status": "unverified_attacker_claim_source_reviewed",
+          "limitations": [
+            "SOCRadar labels the report alleged and says leak-site claims may not be independently verified or reflect confirmed breaches; a listing does not establish that an attack or breach occurred.",
+            "No affected facility, country of incident, service, operational impact, or shipment has been verified."
+          ]
         }
-      ],
-      "shipments": [
-        {
-          "shipment_id": "SH2",
-          "arrival_date": "2025-10-03",
-          "position_vs_as_of": "after",
-          "departure_port": {"id": "P1", "name": "Port A"},
-          "arrival_port": {"id": "P2", "name": "Port B"},
-          "product_hs_code": "850870"
-        }
-      ],
-      "shared_departure_ports": [
-        {"port_id": "P1", "other_stored_suppliers": 2}
       ]
     }
   ],
@@ -283,9 +277,8 @@ The values below are illustrative.
 }
 ```
 
-If `as_of_date` falls outside coverage, suppliers are still matched, but no
-dated reports are returned and a warning explains why. An empty report list is
-never presented as the absence of risk.
+If `as_of_date` falls outside the study window, the result contains no records
+and no warning.
 
 ### 6.3 Validation
 
@@ -294,43 +287,59 @@ never presented as the absence of risk.
 | Missing or invalid `as_of_date` | Reject with a specific error. |
 | Missing `event_window_days` | Reject. |
 | Negative or non-integer `event_window_days` | Reject. |
-| Empty `suppliers`, or a missing name or country | Reject. |
-| Unrecognised country | Reject. |
+| Empty `suppliers`, or a missing name, country, or `parent_companies` | Reject. |
+| Unrecognised country name or code | Reject. |
 | Duplicate supplier entry | Reject. |
-| `as_of_date` outside coverage | Match suppliers, return no dated reports, warn. |
-| No matching record | `not_found`. Not treated as no risk. |
-| More than one matching record | `ambiguous`, with all candidates. No automatic link. |
+| Empty or whitespace-only name, parent, vessel, or carrier | Reject. |
+| `as_of_date` outside the study window | Return no records. |
 
-## 7. Evidence categories
+## 7. Fetch rules by risk type
 
-The stored evidence is organised into the following categories. A category is
-returned only when records exist for it. A category with no records for a
-matched supplier is reported as "no stored records", never as no risk.
+Each risk type has its own fields. The table shows what the engine matches on
+for each type, using the payload keys (supplier name, country, vessel name) and
+the optional carrier key proposed in section 5.4. Parent-company names are
+matched against the same company-name field as the supplier name, for each risk
+type that has one.
 
-1. Supplier operational disruption
-2. Cyberattack
-3. Supplier financial distress
-4. Product quality or compliance
-5. Labour disruption
-6. Natural hazards, including flooding
-7. Port disruption
-8. Carrier or vessel disruption
-9. Route or chokepoint disruption
-10. Loss, theft, or damage to goods in transit
-11. Tariffs and duties
-12. Government restrictions
-13. Border and customs delays
-14. Geopolitical conflict
-15. Supplier or route concentration
-16. Input or material shortage
-17. Energy or transport cost increases
-18. Currency fluctuations
+Date families are as defined in section 5.2. "Country alone" says whether a
+country match is returned without a name, vessel, or carrier match.
 
-Each category needs its own stored records before it appears in results. The
-[evidence dataset plan](./RISK_EVIDENCE_DATASET_PLAN.md) describes how those
-records are collected. Historical endpoints do not prove that a shipment used a
-particular chokepoint. Records describing the same incident are linked, not
-counted as separate events.
+| Risk type (file) | Records | Company-name field | Country field | Vessel or carrier field | Date family | Country alone | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Supplier operational disruption (`supplier_operational_disruption.json`) | 1 | `reported_supplier` | `country_code` | none | event interval | allowed, labelled | Single record. `facility` is not matched. |
+| Cyberattack (`cyberattack.json`) | 1 | `reported_organisation` | `country_code` | none | event interval | allowed, labelled | The record states the company claim is unverified. |
+| Supplier financial distress (`supplier_financial_distress.json`) | 5 | `reported_supplier` | `country_code` | none | observation point | allowed, labelled | `distress_indicator` is not used for ranking. |
+| Product quality or compliance (`product_quality_compliance.json`) | 7 | `reported_supplier`, split on `;`, role text removed | `country_code` | none | event interval | allowed, labelled | Product fields are not in the proposed key set. |
+| Labour disruption (`labour_disruption.json`) | 4 | `reported_organisation` | `country_code` | none | event interval | allowed, labelled | `location` text is not matched. |
+| Natural hazards (`natural_hazards.json`) | 5 | none | none. `location` is free text. | none | event interval | not possible | Add `country_code` to each record before country matching (section 5.4). |
+| Port disruption (`port_disruption.json`) | 7 | none | `country_code` | none | event interval | allowed, labelled as location | `reported_port` is not in the key set. |
+| Carrier or vessel disruption (`carrier_vessel_disruption.json`) | 6 | none | `country_code`, the incident location | `reported_vessel` (vessel name), `reported_carrier` (carrier, role text removed) | event interval | **not used** | The record states that the country is the incident location, not the vessel's flag or the supplier's country. |
+| Route or chokepoint disruption (`route_chokepoint_disruption.json`) | 5 | none | `countries[].country_code` | none | event interval | allowed, labelled | `route_or_chokepoint` text is not in the key set. |
+| Loss, theft, or damage in transit (`goods_in_transit.json`) | 8 | none | `country_code` | `reported_carrier` | event interval | allowed, labelled | `reported_shipment` is not matched. |
+| Tariffs and duties (`tariffs_and_duties.json`) | 15 | none | `origin_country_code`, `importing_country_code` | none | effective interval | **not used** | Needs product and importing-country keys (section 5.4). Unmatched until then. |
+| Government restrictions (`government_restrictions.json`) | 5 | `reported_organisation` | `affected_countries[]`, `issuing_country_code` | none | effective interval | allowed, labelled | `product_classification` is not in the key set. |
+| Border and customs delays (`border_customs_delays.json`) | 6 | none | `country_code` | none | event interval | allowed, labelled | `border_or_customs_location` is not matched. |
+| Geopolitical conflict (`geopolitical_conflict.json`) | 3 | none | `affected_countries[]` | none | event interval | allowed, labelled | `affected_area` text is not matched. |
+| Input or material shortage (`input_material_shortage.json`) | 5 | `reported_supplier` | `affected_countries[]` | none | event interval | allowed, labelled | `material` is not in the key set. |
+| Energy or transport cost increases (`energy_transport_cost_increase.json`) | 5 | none | `affected_countries[]` | none | observation start | allowed, labelled | Market context, not supplier costs. |
+| Supplier or route concentration (`supplier_route_concentration.json`) | 3 | `reported_entities_or_routes`, split into list items, `(unnamed)` ignored | `countries[].country_code` | none | observation start | allowed, labelled | |
+| Currency fluctuations (`currency_fluctuations.json`) | 6 | none | none | none | observation start | not possible | No country or company field. Needs a currency key (section 5.4). |
+
+### 7.1 Worked example: carrier or vessel disruption
+
+This type is matched on the vessel and carrier, not on the supplier.
+
+1. Normalise the payload's `vessel_names` and compare them with
+   `reported_vessel`. For example, "Kyparissia" matches "Kyparissia" in
+   `VESSEL-2025-MY-001`.
+2. If the payload includes a carrier, normalise it and compare it with
+   `reported_carrier`, with role text removed. "Maersk" matches "Maersk
+   (charterer)".
+3. Apply the event-interval rule (section 5.2) to `event_start` and `event_end`.
+4. Return the linked report with its `link_basis` (`vessel_name` or
+   `carrier_name`) and its stored limitations.
+5. Do not link the record by country. The country is where the incident was
+   reported, not where the vessel is registered or where the supplier operates.
 
 ## 8. Interfaces and integration
 
@@ -340,48 +349,46 @@ These names are proposed, not an existing API:
 result = lookup_suppliers(payload, records)
 ```
 
-- **CLI:** reads a payload file, prints the result with its warnings, and can
-  save the full JSON result.
 - **MCP server:** the local interface. It exposes `lookup_suppliers` as an MCP
   tool, reads the stored records, and calls the same function. It contains no
   matching or retrieval logic of its own.
+- **CLI:** reads a payload file, prints the result with its warnings, and can
+  save the full JSON result. Used for testing without an MCP client.
 - **LangChain app (later):** connects to the local MCP server as a client and
   passes the returned records to the LLM for explanation. The LLM may explain
   returned records but must not add facts that are not in them.
-- **CLI:** reads a payload file, prints the result with its warnings, and can
-  save the full JSON result. Used for testing without an MCP client.
 
 No remote servers, hosted web API, or live data sources are planned.
 
 ## 9. Implementation phases
 
-1. **Verify stored records.** Inspect the local Neo4j schema read-only. Confirm
-   relationship names, IDs, and whether `source_file` and `source_row` exist.
-   Confirm which store is authoritative for supplier records (section 5.5).
-2. **Settle open decisions.** Resolve section 5.5 and the shared-port wording in
-   section 4.
+1. **Verify stored records.** Check the fields, IDs, and dates in each risk file
+   against section 7, and confirm every date falls within the study window.
+   Confirm the data fixes listed in section 5.4.
+2. **Settle open decisions.** Resolve section 5.4, including the payload keys,
+   company-name strictness, and the country-name mapping.
 3. **Implement the engine.** Add typed payload and result models, validation,
-   supplier matching, dated retrieval, linking, shared-port facts, coverage,
-   and warnings. Output must be deterministic for the same payload and records.
-4. **Test with fixed records.** Cover exact, ambiguous, and missing matches;
-   out-of-coverage dates; window boundaries (on the start, on the end, and one
-   day outside); country-only links; undated candidates; duplicate reports;
-   invalid input; and repeated runs producing identical output.
-5. **Connect the application layer.** Add parameterised, read-only Neo4j queries,
-   the evidence file loader, the MCP server, and the CLI. Record the data snapshot and engine
-   version in each result.
+   normalisation, per-type matching, and dated retrieval.
+   Output must be deterministic for the same payload and records.
+4. **Test with fixed records.** Cover exact and near-miss names, role text,
+   list-valued fields, unnamed entries, country-name conversion, parent-company
+   links in one direction only, country-only links for each type, the carrier/vessel no-country rule, window boundaries (on
+   the start, on the end, and one day outside), open end dates, undated
+   candidates, dates outside the study window, invalid input, and repeated runs producing
+   identical output.
+5. **Connect the application layer.** Add a loader for the JSON database, the MCP
+   server, and the CLI. Record the data snapshot and engine version in each
+   result.
 6. **Connect the LangChain app.** Separate work, planned after the engine and its
    MCP server are tested. The app connects to the MCP server as a client and
    uses the returned records unchanged.
 
 ## 10. Evaluation and limitations
 
-- Test matching, date handling, and linking against fixed records with known
-  answers.
+- Test matching, normalisation, date handling, and linking against fixed records
+  with known answers.
 - Record the data snapshot fingerprint and engine version in every result.
-- Check that every returned fact traces to a stored record and its source.
-  Any LLM explanation added later should be checked against the returned
-  records.
+- Check that every returned fact traces to a stored record and its source. Any
+  LLM explanation added later should be checked against the returned records.
 - Never infer a verified route, supplier capacity, financial exposure, or
-  current event solely from a historical shipment association or a country
-  match.
+  current event from a name, vessel, or country match.
