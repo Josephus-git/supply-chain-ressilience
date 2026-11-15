@@ -5,11 +5,17 @@ Plan: [WEB_APP_PLAN.md](../WEB_APP_PLAN.md). Phase 1 (backend) and phase 2
 
 ## Run the backend
 
-From the repository root (Neo4j running, `.env` filled in):
+With Neo4j running and `.env` filled in:
 
 ```bash
-.venv/bin/uvicorn webapp.backend.main:app --reload --port 8000
+cd webapp/backend
+npm start          # http://localhost:8000, reloads when backend or engine code changes
+npm test           # backend tests
 ```
+
+`npm start` runs uvicorn from the repository root with `.venv`, so there's
+nothing to activate. The long form is
+`.venv/bin/uvicorn webapp.backend.main:app --reload --port 8000` from the root.
 
 Interactive API docs: http://localhost:8000/docs
 
@@ -27,7 +33,7 @@ Demo (one process): build once, then the backend serves the app at `/`.
 
 ```bash
 cd webapp/frontend && npm run build
-cd ../.. && .venv/bin/uvicorn webapp.backend.main:app --port 8000   # http://localhost:8000
+cd ../backend && npm start                                          # http://localhost:8000
 ```
 
 The backend only looks for `webapp/frontend/dist` at startup, so restart it after the first build.

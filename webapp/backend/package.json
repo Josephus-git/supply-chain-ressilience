@@ -1,0 +1,9 @@
+{
+  "name": "backend",
+  "private": true,
+  "description": "npm shortcuts for the FastAPI backend. They run from the repository root with the project's .venv, so no activation is needed.",
+  "scripts": {
+    "start": "cd ../.. && .venv/bin/uvicorn webapp.backend.main:app --reload --reload-dir webapp/backend --reload-dir supplier_risk_engine --port 8000",
+    "test": "cd ../.. && .venv/bin/python -m unittest discover -s webapp/backend/tests -t ."
+  }
+}
