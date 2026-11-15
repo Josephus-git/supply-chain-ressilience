@@ -104,10 +104,15 @@ The engine reports which records are linked to a supplier, and how. It does not
 decide that an event affected a supplier.
 
 - **Link basis:** every linked report states its basis: `company_name`,
-  `parent_company_name`, `carrier_name`, `vessel_name`, `port_code`,
-  `port_name`, `port_country`, `hs_code`, `importing_country`, `currency`, or
-  `country_code`. It also states a `link_strength` (`strong`, `medium`, or
+  `parent_company_name`, `buyer_name`, `carrier_name`, `vessel_name`,
+  `port_code`, `port_name`, `port_country`, `hs_code`, `importing_country`,
+  `currency`, `trade_lane`, or `country_code`. It also states a `link_strength` (`strong`, `medium`, or
   `weak`). A link is relevant context, not evidence of impact.
+- **Approximated fields:** some records hold analyst-approximated values,
+  listed in the record's `approximations` field with a `basis`. A link made
+  through an approximated field is always `weak`. It is returned with
+  `"approximated": true` and the stored basis. Approximated values that are
+  marked informational only are never used to link.
 - **Exposure counts:** the payload's shipment counts for each port, carrier,
   vessel, and HS code are echoed back on the matching link (`matched_exposure`),
   unchanged. The engine never uses them to filter or rank.
@@ -121,6 +126,9 @@ decide that an event affected a supplier.
   data, so the engine cannot say that two suppliers share a route or port.
 - **Duplicate reports:** records with `related_evidence_ids` describe the same
   incident. Return them together, and do not count them as separate events.
+  Links are treated as two-way. 12 links are stored in one direction only. When
+  the loader reads the records, it groups them into incident groups using the
+  union of both directions, and the data files stay unchanged.
 - **Verified links:** the engine cannot show that a supplier used a vessel,
   route, or port, or that a record describes its operations. It returns only the
   name, vessel, or country match.
@@ -168,6 +176,14 @@ Philippines Inc." (section 5.4, decision 2).
   the other, with a minimum of 6 digits ("850760" matches "8507.60.00").
 - **Currency:** the caller passes the supplier's currency (ISO 4217). It matches
   a record whose `quote_currency` or `base_currency` equals it.
+- **Buyers:** the caller may pass the buyers a supplier ships to. Buyer names
+  are normalised like company names and compared with `reported_organisation`
+  on currency records.
+- **Trade lanes:** a lane matches when the supplier's country is in
+  `origin_country_codes`, `request_context.importing_country` equals
+  `destination_country_code`, and at least one payload entry port has a
+  `coast` equal to `destination_coast`. If no entry port carries `coast`, no
+  lane link is made.
 
 ### 5.2 Dated retrieval
 
@@ -186,8 +202,12 @@ family as follows.
   present): in scope when `as_of_date` falls within the same expanded interval.
   An open end is treated as the start date.
 - **Effective interval** (`effective_from`, `effective_to`): in scope when
-  `as_of_date` falls within the expanded interval. An open end is treated as
-  unknown, not as indefinite.
+  `as_of_date` falls within the expanded interval. When `effective_to` is null,
+  the record is treated as in force until the study end (2026-09-30), which
+  matches its `study_period_bound` search window. It is labelled
+  `"open_end": "no end date recorded; continued force not verified"`. This
+  applies to 6 tariffs and all 5 government restrictions. Event and observation
+  families keep the rule that an open end equals the start date.
 
 A record without its date field is not returned as in scope. If its
 `search_window` contains `as_of_date`, it is returned as an undated candidate,
@@ -202,6 +222,12 @@ The engine covers a fixed study window, 2025-01-01 to 2026-09-30. A query with
 `as_of_date` outside this window returns no records and no warning.
 `event_window_days` is separate: it only sets how far an event's dates may sit
 from `as_of_date`.
+
+A record needs only to overlap the study window, not to sit entirely inside it.
+Its dates are returned as stored. For example, `CONCENTRATION-2025-MY-VS-001`
+covers VS Industry's financial year, 2024-08-01 to 2025-07-31. Search windows
+that run past 2026-09-30 are allowed, since `as_of_date` cannot exceed the
+study end.
 
 ### 5.4 Open decisions
 
@@ -221,9 +247,9 @@ Agree these before implementation:
      measure; product applicability not established". Records with a code also
      need an `hs_code` match. Check graph `hs_code` precision before
      implementing.
-   - `route_chokepoint_disruption`: records with empty `countries` (Red Sea,
-     Hormuz, Panama) cannot be linked. Return them once per response as
-     unlinked global context.
+   - `route_chokepoint_disruption`: resolved by approximated `trade_lanes`
+     (Suez, Panama) and an approximated country (Hormuz), with the
+     `approximations` field recording the basis for each.
 4. **Country-name mapping:** who reviews the mapping from country names to
    codes?
 5. **Required request fields:** confirm that `event_window_days` is required in
@@ -253,6 +279,8 @@ Values are illustrative. The caller builds every supplier key from the graph:
 | `exit_ports`, `entry_ports` | `DEPARTED_FROM` and `ARRIVED_AT` port names and codes |
 | `carriers`, `vessels` | `CARRIED_BY` and `TRANSPORTED_ON` |
 | `currency` | the supplier country, through a fixed ISO 4217 table |
+| `buyers` | `(Shipment)-[:CONSIGNED_TO]->(Buyer).buyer_name`, with shipment counts |
+| `entry_ports[].coast` | US entry ports only: `east_gulf` when `entry_port_lon` > -100, otherwise `west` |
 | `importing_country` | entry-port or buyer country |
 | `shipments`, `footprint_window` | counts and the range of `Shipment.arrival_date` |
 
@@ -274,7 +302,8 @@ Values are illustrative. The caller builds every supplier key from the graph:
       "parent_companies": ["Flex Ltd"],
       "hs_codes":    [{"code": "850760", "shipments": 12}],
       "exit_ports":  [{"name": "Tanjung Pelepas", "code": "00000", "country": "MY", "shipments": 9}],
-      "entry_ports": [{"name": "Los Angeles, Ca", "code": "2704", "country": "US", "shipments": 7}],
+      "entry_ports": [{"name": "Los Angeles, Ca", "code": "2704", "country": "US", "coast": "west", "shipments": 7}],
+      "buyers":      [{"name": "Dyson Inc", "shipments": 31}],
       "carriers":    [{"name": "Maersk", "code": "MAEU", "shipments": 5}],
       "vessels":     [{"name": "Kyparissia", "shipments": 2}],
       "currency": "MYR",
@@ -293,7 +322,7 @@ Values are illustrative. The caller builds every supplier key from the graph:
   parent names, from the nearest parent up to the ultimate parent. If the
   supplier has no parent, the caller passes the supplier's own name.
   `supplier_id` is echoed back and not matched. The list keys (`hs_codes`,
-  `exit_ports`, `entry_ports`, `carriers`, `vessels`) are optional. Their
+  `exit_ports`, `entry_ports`, `carriers`, `vessels`, `buyers`) are optional. Their
   `shipments` counts are echoed back unchanged.
 
 Two entries with the same normalised name and country are a validation error.
@@ -388,7 +417,7 @@ country match is returned without a name, vessel, or carrier match.
 | Natural hazards (`natural_hazards.json`) | 5 | none | `location.country_code` | port name against `location.label` and `location.affected_area` (section 5.1) | event interval | allowed, labelled | |
 | Port disruption (`port_disruption.json`) | 7 | none | `country_code` | exit and entry ports against `reported_port`, tiered (section 5.1) | event interval | allowed as `port_country`, weak | |
 | Carrier or vessel disruption (`carrier_vessel_disruption.json`) | 6 | none | `country_code`, the incident location | `reported_vessel` (vessel name), `reported_carrier` (carrier, role text removed) | event interval | **not used** | The record states that the country is the incident location, not the vessel's flag or the supplier's country. |
-| Route or chokepoint disruption (`route_chokepoint_disruption.json`) | 5 | none | `countries[].country_code` | none | event interval | allowed, labelled | Records with empty `countries` are returned once as unlinked global context. |
+| Route or chokepoint disruption (`route_chokepoint_disruption.json`) | 5 | none | `countries[].country_code` | `trade_lanes` against supplier country, importing country, and entry-port coast (section 5.1) | event interval | allowed, labelled | Suez and Panama link by approximated lane; Hormuz by approximated country (SG). All are weak. |
 | Loss, theft, or damage in transit (`goods_in_transit.json`) | 8 | none | `country_code` | `reported_carrier`, split on `;`, role text removed | event interval | allowed, labelled | `reported_shipment` is not matched. |
 | Tariffs and duties (`tariffs_and_duties.json`) | 15 | none | `origin_country_code` = supplier country and `importing_country_code` = `importing_country`, both required | `hs_codes` against `product_classification.code`, where present | effective interval | country pair only, weak, "country-wide measure" | A null origin means global: it matches on importing country alone. |
 | Government restrictions (`government_restrictions.json`) | 5 | `reported_organisation` | `affected_countries[]`, `issuing_country_code` | none | effective interval | allowed, labelled | `product_classification` is not in the key set. |
@@ -397,7 +426,7 @@ country match is returned without a name, vessel, or carrier match.
 | Input or material shortage (`input_material_shortage.json`) | 5 | `reported_supplier` | `affected_countries[]` | none | event interval | allowed, labelled | `material` is not in the key set. |
 | Energy or transport cost increases (`energy_transport_cost_increase.json`) | 5 | none | `affected_countries[]` | none | observation start | allowed, labelled | Market context, not supplier costs. |
 | Supplier or route concentration (`supplier_route_concentration.json`) | 3 | `reported_entities_or_routes`, split into list items, `(unnamed)` ignored | `countries[].country_code` | none | observation start | allowed, labelled | |
-| Currency fluctuations (`currency_fluctuations.json`) | 6 | none | none | `currency` against `quote_currency` and `base_currency` | observation start | not applicable | Records with null currencies are skipped. |
+| Currency fluctuations (`currency_fluctuations.json`) | 6 | `reported_organisation` against payload `buyers` (`buyer_name`) | `country_code` is informational only, never linked | `currency` against `quote_currency` and `base_currency` | observation start | not applicable | The Dyson record has no currencies and links only by buyer name. |
 
 ### 7.1 Worked example: carrier or vessel disruption
 
@@ -490,8 +519,29 @@ No remote or hosted servers, and no live data sources, are planned.
 
 ## 9. Implementation phases
 
-1. **Verify stored records.** Check the fields, IDs, and dates in each risk file
-   against section 7, and confirm that every date falls within the study window.
+1. **Verify stored records.** Done on 2026-11-15, read-only.
+   - Passed: all 18 files and 97 records match the section 7 counts; IDs are
+     unique; every related ID resolves; dates are ISO and correctly ordered;
+     source, verification status, limitations, and search window are present;
+     country and currency codes are valid; manifest sha256 values match.
+   - Decisions taken: open-ended effective intervals run to the study end
+     (section 5.2); related links are two-way (section 4); records need only
+     overlap the study window (section 5.3).
+   - Coverage limits to state in the evaluation:
+     - 27 of 97 records have no event date and can only be returned as
+       undated candidates.
+     - All 5 government restrictions have an empty `reported_organisation`,
+       so they link by country only.
+     - `CYBER-CLAIM-2026-001` has no country, so it links by name only.
+     - 4 records could never be returned. On 2026-11-15, approximated fields
+       were added, each recorded in `approximations` with its basis:
+       - `FX-2025-DYSON-QUALITATIVE-001`: `reported_organisation` "Dyson"
+         (taken from the source) and an informational country (SG). It links
+         through payload `buyers`.
+       - Suez and Panama: `trade_lanes`.
+       - Hormuz: `countries` set to SG.
+       The manifest sha256 values and coverage gaps were updated.
+     - The manifest `snapshot_id` is null, so the loader computes it.
 2. **Write fixture payloads.** Hand-write one payload for each supplier in
    `data/raw_yeti_response/`, using the real ports, carriers, vessels, and HS
    codes from those files. Pair each payload with the `evidence_id`s it is

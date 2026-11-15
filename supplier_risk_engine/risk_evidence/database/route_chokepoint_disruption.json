@@ -5,6 +5,7 @@
     "evidence_id": null,
     "route_or_chokepoint": null,
     "countries": [{"country_code": null, "country_name": null}],
+    "trade_lanes": [{"origin_country_codes": [], "destination_country_code": null, "destination_coast": null}],
     "event_start": null,
     "event_end": null,
     "disruption_type": null,
@@ -13,6 +14,7 @@
     "source": {"url": null, "publisher": null, "published_at": null, "retrieved_at": null, "licence_notes": null},
     "verification_status": null,
     "limitations": [],
+    "approximations": [{"field": null, "value": null, "basis": null, "review_status": null}],
     "search_window": {"start": null, "end": null, "basis": null, "note": null, "anchor_date": null, "anchor_basis": null},
     "scenario_recovery": null
   },
@@ -21,6 +23,7 @@
       "evidence_id": "ROUTE-2025-SUEZ-001",
       "route_or_chokepoint": "Red Sea, Bab el-Mandeb and Suez Canal; diversion via Cape of Good Hope",
       "countries": [],
+      "trade_lanes": [{"origin_country_codes": ["CN", "TW", "MY", "SG", "PH"], "destination_country_code": "US", "destination_coast": "east_gulf"}],
       "event_start": null,
       "event_end": null,
       "disruption_type": "shipping diversion and reduced canal tonnage",
@@ -34,6 +37,7 @@
         "This corridor is outside the six study countries but provides route context; the empty countries array does not assert no geographic location or case-study exposure.",
         "No affected case-study vessel, product, supplier or route has been verified."
       ],
+      "approximations": [{"field": "trade_lanes", "value": [{"origin_country_codes": ["CN", "TW", "MY", "SG", "PH"], "destination_country_code": "US", "destination_coast": "east_gulf"}], "basis": "Analyst approximation: container services from the Asian study countries to US East and Gulf coast ports can route via the Suez Canal and Red Sea. The source reports a corridor-wide observation, not case-study lanes, carriers or shipments.", "review_status": "unreviewed"}],
       "search_window": {"start": "2025-05-01", "end": "2025-05-31", "basis": "month_approximation", "note": "The calendar month containing the report's early-May observation, for retrieval only; not a verified continuous disruption or recovery period.", "anchor_date": "2025-05-01", "anchor_basis": "observation_period"},
       "scenario_recovery": null
     },
@@ -41,6 +45,7 @@
       "evidence_id": "ROUTE-2025-SG-ROBBERY-001",
       "route_or_chokepoint": "Phillip Channel, eastbound traffic separation lane in Singapore Strait",
       "countries": [{"country_code": "SG", "country_name": "Singapore"}],
+      "trade_lanes": [],
       "event_start": "2025-07-01",
       "event_end": null,
       "disruption_type": "sea robbery incidents and navigational security alert",
@@ -53,6 +58,7 @@
         "Singapore identifies the named strait and study corridor, not an assertion that the incidents occurred in Singapore territorial waters; no precise jurisdiction has been established.",
         "The event date describes the reported cluster, not the end of security risk. No case-study vessel, supplier or shipment has been matched."
       ],
+      "approximations": [],
       "search_window": {"start": "2025-07-01", "end": "2025-07-15", "basis": "event_date_buffer", "note": "The incident date plus 14 days for candidate retrieval only, not a measured security-alert or route-disruption duration.", "anchor_date": "2025-07-01", "anchor_basis": "event_date"},
       "scenario_recovery": null
     },
@@ -60,6 +66,7 @@
       "evidence_id": "ROUTE-2025-TW-DRILLS-001",
       "route_or_chokepoint": "Waters around Taiwan, including announced live-fire exercise areas",
       "countries": [{"country_code": "TW", "country_name": "Taiwan"}],
+      "trade_lanes": [],
       "event_start": "2025-12-29",
       "event_end": null,
       "disruption_type": "military exercise navigation warnings",
@@ -72,13 +79,15 @@
         "Taiwan News reported live-fire zones were announced for 30 December: https://www.taiwannews.com.tw/news/6273637. The exercise end and exact durations of navigational effects are not independently established.",
         "The linked geopolitical record describes the same exercises from an aviation perspective; avoid double counting. No case-study vessel or route has been matched."
       ],
+      "approximations": [],
       "search_window": {"start": "2025-12-29", "end": "2026-01-12", "basis": "event_date_buffer", "note": "The exercise and notice date plus 14 days for retrieval only, not a confirmed exercise end or navigation recovery.", "anchor_date": "2025-12-29", "anchor_basis": "event_date"},
       "scenario_recovery": null
     },
     {
       "evidence_id": "ROUTE-2026-HORMUZ-001",
       "route_or_chokepoint": "Strait of Hormuz",
-      "countries": [],
+      "countries": [{"country_code": "SG", "country_name": "Singapore"}],
+      "trade_lanes": [],
       "event_start": null,
       "event_end": null,
       "disruption_type": "severely reduced ship transits during regional conflict",
@@ -91,6 +100,7 @@
         "Hormuz is outside the six study countries; the linked record reports an attributed downstream Singapore fuel effect, not a closure of Singapore port or a case-study shipment impact.",
         "The linked geopolitical record describes the same conflict and a related effect, not an independent event. Oil and gas traffic may be more directly exposed than a given container route."
       ],
+      "approximations": [{"field": "countries", "value": [{"country_code": "SG", "country_name": "Singapore"}], "basis": "Analyst approximation derived from related record GEO-2026-SG-001, which reports an attributed downstream Singapore fuel effect. Hormuz is outside the study countries; Singapore is not the incident location.", "review_status": "unreviewed"}],
       "search_window": {"start": "2026-03-01", "end": "2026-03-23", "basis": "observation_period", "note": "Includes the early-March transit observation through the 23 March report; retrieval only, not proof of continuous daily impact or recovery.", "anchor_date": "2026-03-23", "anchor_basis": "report_date"},
       "scenario_recovery": null
     },
@@ -98,6 +108,7 @@
       "evidence_id": "ROUTE-2026-PANAMA-GATUN-001",
       "route_or_chokepoint": "Panama Canal, Gatun Locks east lane",
       "countries": [],
+      "trade_lanes": [{"origin_country_codes": ["CN", "TW", "MY", "SG", "PH"], "destination_country_code": "US", "destination_coast": "east_gulf"}],
       "event_start": null,
       "event_end": null,
       "disruption_type": "scheduled lock maintenance and reduced booking slots",
@@ -110,6 +121,7 @@
         "The restriction concerns the Gatun east lane and Panamax booking slots; it does not establish a complete canal closure or identical restrictions for all lock systems.",
         "Panama is outside the six study countries; the corridor is contextual and no case-study shipment, carrier or route has been verified."
       ],
+      "approximations": [{"field": "trade_lanes", "value": [{"origin_country_codes": ["CN", "TW", "MY", "SG", "PH"], "destination_country_code": "US", "destination_coast": "east_gulf"}], "basis": "Analyst approximation: container services from the Asian study countries to US East and Gulf coast ports can route via the Panama Canal. The source reports a corridor-wide observation, not case-study lanes, carriers or shipments.", "review_status": "unreviewed"}],
       "search_window": {"start": "2026-03-05", "end": "2026-04-23", "basis": "report_date_buffer", "note": "Fourteen days before the advisory through 14 days after the planned final maintenance date, for retrieval only; not a verified shutdown or recovery period.", "anchor_date": "2026-03-19", "anchor_basis": "document_date"},
       "scenario_recovery": null
     }

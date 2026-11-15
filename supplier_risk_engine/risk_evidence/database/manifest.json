@@ -308,7 +308,8 @@
         "The percentage change is calculated from the displayed rates; it is not directly reported by either central bank.",
         "Archived H.10 releases are not revised; the Philippine web tables may change, and source conditions remain unverified.",
         "USD is a reference comparison only; shipment invoicing, supplier exposure, hedging, conversion costs and actual losses have not been verified.",
-        "No reviewed entity or shipment matches are established. Dyson's company-wide statement names the company but does not establish a product-specific or shipment-specific effect."
+        "No reviewed entity or shipment matches are established. Dyson's company-wide statement names the company but does not establish a product-specific or shipment-specific effect.",
+        "Approximated values are listed in each record's `approximations` field and are unreviewed analyst approximations, not source facts. The Dyson record's Singapore country code is Dyson's global headquarters, is informational only, and does not identify an affected currency."
       ],
       "licence_notes": "Source permissions and redistribution terms have not been independently verified. Store concise numerical observations and source links, not complete source files.",
       "review_method": "Manually compare the published country-labelled source tables and Philippine bulletin, record dates and quote direction, and calculate the percent change as (ending rate / starting rate - 1) * 100 rounded to two decimals. The numerical source field points to the end observation; start sources are documented in the records and manifest. The company statement is qualitative and must not be used as a rate observation. File hashes describe working files at this review and must be refreshed when those files change. Search windows are separately labelled candidate-retrieval aids, not inferred incident intervals. On 2026-11-14, search windows were expanded using labelled hypothetical recovery scenarios or retrieval-only report-date buffers; these are not verified incident durations. Scenario assumptions require explicit opt-in.",
@@ -316,7 +317,7 @@
       "files": [
         {
           "path": "currency_fluctuations.json",
-          "sha256": "52974ad8a3c0d1a18cc854dcc4244e625d18e5164bf610d2ab1d7c1ed609060c"
+          "sha256": "7fbeb75137b70028eac3cdf142acca0c0ed2c4ac6b1a8fb14585a1d88afbc193"
         }
       ]
     },
@@ -1143,7 +1144,8 @@
         "The Suez statistic concerns tonnage relative to the 2023 average, not vessel count; the Hormuz statistic concerns ship transits and does not establish a formal closure.",
         "Gatun maintenance, slot limits and subsequent reinstatement were scheduled, not independently verified as completed. Conditions, recovery dates and impact outside documented observations remain unknown.",
         "No record verifies an affected case-study vessel, product, shipment or route. Linked geopolitical evidence can describe the same event; avoid double counting.",
-        "Search windows are candidate retrieval aids, not continuous disruption intervals, shipment delays or calibrated recovery estimates."
+        "Search windows are candidate retrieval aids, not continuous disruption intervals, shipment delays or calibrated recovery estimates.",
+        "Approximated values are listed in each record's `approximations` field and are unreviewed analyst approximations, not source facts. Suez and Panama trade lanes (Asian study countries to US East and Gulf coast ports) and the Hormuz Singapore country link do not establish that any case-study shipment used or was affected by the corridor."
       ],
       "licence_notes": "Source permissions and redistribution terms have not been independently verified except where noted. Store concise attributed factual summaries and source links, not complete notices or articles.",
       "review_method": "Manually review international organization reports, regional security alerts, a maritime authority notice and a canal booking advisory. Preserve observation periods and distinguish measured traffic from forecasts, security warnings and planned maintenance. Use labelled inclusive retrieval-only windows and link related evidence without inventing route matches or recovery durations. Refresh the file hash whenever evidence changes.",
@@ -1151,7 +1153,7 @@
       "files": [
         {
           "path": "route_chokepoint_disruption.json",
-          "sha256": "2eabde196b838aa93b0a1a6be7bed36536e685cc6d4e1a602b0bc500e5d86184"
+          "sha256": "abea4a5fcefe523754535f6131943ec4eb279f272c214242beb746e52f0cfcf7"
         }
       ]
     },

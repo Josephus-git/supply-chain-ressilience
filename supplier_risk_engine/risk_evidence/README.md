@@ -25,7 +25,9 @@ establish what Dyson shipped or what its suppliers used.
   generally unknown.
 - Currency: Dyson reported unfavorable currency developments in its 2025
   results; the company statement does not identify a currency pair or an
-  affected shipment. Other records are reference-rate comparisons.
+  affected shipment. The record names Dyson as `reported_organisation` and
+  carries an approximated Singapore country code (global headquarters), which
+  is informational only. Other records are reference-rate comparisons.
 - Cyberattack: the existing company-related claim remains unverified; product
   descriptions do not establish an incident.
 - Energy/transport costs: existing fuel, electricity and freight observations
@@ -64,6 +66,10 @@ establish what Dyson shipped or what its suppliers used.
   canal maintenance cover corridors inside and outside the study countries.
   An empty country list for an external corridor is not a location or exposure
   match; warnings and plans do not establish closures or shipment delays.
+  Suez and Panama carry approximated `trade_lanes` (Asian study countries to
+  US East and Gulf coast ports), and Hormuz carries an approximated Singapore
+  country link based on its related record. These are listed in each record's
+  `approximations` and are not source facts.
   Related geopolitical evidence can describe the same underlying event.
 - Supplier financial distress: company restructurings and a reported annual
   loss provide financial-risk context. A loss is not proof of insolvency, and
