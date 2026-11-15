@@ -62,6 +62,31 @@ SUPPLIERS: dict[str, tuple[int, str, list[str], str]] = {
     "org:wencor-m-sdn-bhd": (18, "TW", ["WENCOR GROUP, LLC"], "2025-12-29"),
 }
 
+# Extra fixtures (added 2026-11-15, plan section 9 phase 6): an existing
+# supplier's payload on a second as_of_date, so records that the first date
+# cannot reach are still tested. fixture number -> (supplier_id, as_of_date)
+EXTRA_FIXTURES: dict[int, tuple[str, str]] = {
+    19: ("org:v-s-industrial-berhad", "2026-04-08"),
+    20: ("org:vs-industrial-philippines-inc", "2026-09-30"),
+    21: ("org:flextronics-shah-alam", "2026-02-06"),
+    22: ("org:flextronics-shah-alam-sdn-bhd", "2025-07-14"),
+    23: ("org:hi-p-philippines-technology-corpora", "2026-03-21"),
+    24: ("org:hip-philipines-technology-corp", "2025-10-05"),
+    25: ("org:flextronics-shah-alam", "2025-05-10"),
+    26: ("org:hi-p-philippines-technology-corp", "2025-09-11"),
+    27: ("org:flextronics-shah-alam", "2025-06-16"),
+    28: ("org:flextronics-shah-alam-sdn-bhd", "2026-08-03"),
+    29: ("org:flextronics-shah-alam-sdn-bhd", "2026-04-21"),
+    30: ("org:vs-industrial-berhad", "2025-12-05"),
+    31: ("org:flextronics-shah-alam-sdn-bhd", "2025-03-21"),
+    32: ("org:hi-p-philippines-technology-corp", "2026-07-06"),
+    33: ("org:hi-p-philippines-technology-corp", "2025-07-28"),
+    34: ("org:hi-p-philippines-technology-corp", "2025-03-19"),
+    35: ("org:hi-p-philippines-technology-corpora", "2026-09-27"),
+    36: ("org:hi-p-philippines-technology-corpora", "2025-04-12"),
+    37: ("org:hi-p-philippines-technology-corpora", "2025-02-01"),
+}
+
 # Section 6.1: currency from the supplier country through a fixed ISO 4217 table.
 CURRENCY = {"CN": "CNY", "HK": "HKD", "MY": "MYR", "PH": "PHP", "SG": "SGD", "TW": "TWD"}
 
@@ -107,8 +132,10 @@ def load_rows() -> dict[str, list[dict]]:
     return rows
 
 
-def build(supplier_id: str, rows: list[dict]) -> dict:
-    _, country, parents, as_of = SUPPLIERS[supplier_id]
+def build(supplier_id: str, rows: list[dict], num: int | None = None, as_of: str | None = None) -> dict:
+    first_num, country, parents, first_as_of = SUPPLIERS[supplier_id]
+    num = first_num if num is None else num
+    as_of = first_as_of if as_of is None else as_of
     names = {r["supplier_name"] for r in rows}
     assert len(names) == 1, (supplier_id, names)
 
@@ -131,7 +158,7 @@ def build(supplier_id: str, rows: list[dict]) -> dict:
         "as_of_date": as_of,
         "event_window_days": EVENT_WINDOW_DAYS,
         "request_context": {
-            "bom_line_id": f"FIXTURE-{SUPPLIERS[supplier_id][0]:02d}",
+            "bom_line_id": f"FIXTURE-{num:02d}",
             "component_query": products.most_common(1)[0][0],
             "importing_country": IMPORTING_COUNTRY,
         },
@@ -164,13 +191,16 @@ def main() -> None:
     rows = load_rows()
     missing = set(SUPPLIERS) ^ set(rows)
     assert not missing, f"supplier table and CSVs disagree: {sorted(missing)}"
+    assert not set(EXTRA_FIXTURES) & {v[0] for v in SUPPLIERS.values()}, "fixture numbers overlap"
+    assert set(s for s, _ in EXTRA_FIXTURES.values()) <= set(SUPPLIERS), "unknown extra supplier"
     OUT_DIR.mkdir(exist_ok=True)
-    for supplier_id in sorted(SUPPLIERS, key=lambda s: SUPPLIERS[s][0]):
-        num = SUPPLIERS[supplier_id][0]
+    jobs = [(v[0], s, None) for s, v in SUPPLIERS.items()]
+    jobs += [(num, s, as_of) for num, (s, as_of) in EXTRA_FIXTURES.items()]
+    for num, supplier_id, as_of in sorted(jobs):
         slug = supplier_id.removeprefix("org:")
         path = OUT_DIR / f"{num:02d}_{slug}.json"
-        path.write_text(json.dumps(build(supplier_id, rows[supplier_id]), indent=2, ensure_ascii=False) + "\n",
-                        encoding="utf-8")
+        payload = build(supplier_id, rows[supplier_id], num, as_of)
+        path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         print(path.relative_to(ROOT))
 
 

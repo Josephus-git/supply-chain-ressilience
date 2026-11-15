@@ -5,7 +5,9 @@ search window, as the duration of an event.
 
 No look-ahead (phase 6): a record is in scope only from the date it became
 known (`known_from`), and the window extends only past its end, never before
-its start.
+its start. A record that becomes known after its end (or after its search
+window) stays in scope for the window from `known_from`, so a late report is
+still seen once it is public.
 """
 
 from __future__ import annotations
@@ -18,6 +20,14 @@ from .reference import DATE_FAMILY, STUDY_END, STUDY_START
 
 UNDATED_REASON = (
     "undated candidate: as_of_date within search_window and on or after known_from"
+)
+UNDATED_LATE_REASON = (
+    "undated candidate: known after search_window ended; as_of_date within "
+    "event_window_days of known_from"
+)
+DATED_LATE_REASON = (
+    "dated: known after its end date; as_of_date from known_from to known_from "
+    "plus event_window_days"
 )
 OPEN_EFFECTIVE_END = "no end date recorded; continued force not verified"
 
@@ -82,7 +92,7 @@ def date_scope(
     if as_of < known[0]:
         return None
     if start is None:
-        return _undated(family, record, as_of, stored, known)
+        return _undated(family, record, as_of, window_days, stored, known)
 
     window = timedelta(days=window_days)
     open_end = None
@@ -96,12 +106,13 @@ def date_scope(
 
     if not _overlaps_study(start, end):
         return None
-    if as_of > end + window:
+    reported_late = known[0] > end
+    if as_of > max(end, known[0]) + window:
         return None
     return DateScope(
         date_family=family,
         date_status="dated",
-        in_scope_reason=_DATED_REASONS[family],
+        in_scope_reason=DATED_LATE_REASON if reported_late else _DATED_REASONS[family],
         dates=stored,
         known_from=known[0].isoformat(),
         known_from_rule=known[1],
@@ -134,24 +145,33 @@ def _undated(
     family: str,
     record: dict[str, Any],
     as_of: date,
+    window_days: int,
     stored: dict[str, Any],
     known: tuple[date, str],
 ) -> DateScope | None:
     """A record without its date field is only an undated candidate, and only
     when its stored search window contains as_of (no event window applied).
-    The caller has already checked that it is known by as_of."""
+    If it became known after the search window ended, it is a candidate for
+    event_window_days from known_from instead. The caller has already checked
+    that it is known by as_of."""
     sw = record.get("search_window") or {}
     sw_start, sw_end = _iso(sw.get("start")), _iso(sw.get("end"))
     if sw_start is None or sw_end is None:
         return None
     if not _overlaps_study(sw_start, sw_end):
         return None
-    if not (sw_start <= as_of <= sw_end):
+    if known[0] > sw_end:
+        if as_of > known[0] + timedelta(days=window_days):
+            return None
+        reason = UNDATED_LATE_REASON
+    elif sw_start <= as_of <= sw_end:
+        reason = UNDATED_REASON
+    else:
         return None
     return DateScope(
         date_family=family,
         date_status="undated_candidate",
-        in_scope_reason=UNDATED_REASON,
+        in_scope_reason=reason,
         dates=stored,
         known_from=known[0].isoformat(),
         known_from_rule=known[1],

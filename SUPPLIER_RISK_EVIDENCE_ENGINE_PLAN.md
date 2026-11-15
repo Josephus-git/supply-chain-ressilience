@@ -200,6 +200,14 @@ after-effects of an event (for example a hurricane) stay visible. Nothing is
 returned before it is known: the engine never warns about an event that has
 not yet happened (decided 2026-11-15; implemented in phase 6, section 9).
 
+A record that becomes known only after its end (a late report, such as an
+annual report on a finished financial year) stays in scope for
+`event_window_days` from `known_from` instead, so every family's upper bound
+is `max(end, known_from) + event_window_days`. This only reaches forwards
+from the date the record became known, so it adds no look-ahead (decided
+2026-11-15). Such reports are labelled
+`"dated: known after its end date; ..."`.
+
 - **Event interval** (`event_start`, `event_end`): in scope when
 
       known_from <= as_of_date <= (event_end or event_start) + event_window_days
@@ -220,7 +228,9 @@ not yet happened (decided 2026-11-15; implemented in phase 6, section 9).
 A record without its date field is not returned as in scope. If its
 `search_window` contains `as_of_date` and it is known by `as_of_date`, it is
 returned as an undated candidate, labelled as a retrieval aid rather than an
-event date.
+event date. If it became known only after its search window ended, it is an
+undated candidate for `event_window_days` from `known_from` instead (the
+late-report rule above).
 
 **When a record becomes known (`known_from`):**
 
@@ -258,7 +268,7 @@ study end.
 
 ### 5.4 Open decisions
 
-Agree these before implementation (decision 4 is still open):
+Agree these before implementation (all are resolved):
 
 1. **Payload keys:** resolved. The caller builds an exposure profile for each
    supplier from the graph (section 6.1). Each request covers one BOM line.
@@ -278,8 +288,17 @@ Agree these before implementation (decision 4 is still open):
    - `route_chokepoint_disruption`: resolved by approximated `trade_lanes`
      (Suez, Panama) and an approximated country (Hormuz), with the
      `approximations` field recording the basis for each.
-4. **Country-name mapping:** deferred. The user will check the country names
-   in the Neo4j database before the draft name-to-code table is confirmed.
+4. **Country-name mapping:** resolved on 2026-11-15. The graph stores an ISO
+   alpha-2 code beside every country name (supplier, supplier address, buyer
+   and vessel), so the caller sends codes (section 6.1). The name table in
+   `engine/reference.py` is kept as a fallback and was reviewed against the
+   graph CSVs (`data/processed/*_shipments_clean.csv`). Their nine names
+   all convert to the code stored beside them, after "Portugal" was added,
+   and a test checks this on every run. An unknown name is still rejected.
+   Data note: one Ihastek Malaysia Sdn Bhd shipment has `supplier_country`
+   "Portugal" with address country MY, which looks like a source error. It
+   does not reach the engine, because the payload uses the supplier node's
+   single country code.
 5. **Required request fields:** resolved on 2026-11-15. `as_of_date` and
    `event_window_days` are required in every request: the date is what
    decides which evidence is returned.
@@ -345,6 +364,9 @@ Values are illustrative. The caller builds every supplier key from the graph:
 
 - `as_of_date`: ISO date. Required.
 - `event_window_days`: non-negative integer. Required. Returned in the response.
+- Countries: send ISO alpha-2 codes, taken from the graph's `*_country_code`
+  properties. Names are accepted only through the fallback table (decision
+  4, section 5.4), and an unknown name is rejected.
 - `request_context`: required. `importing_country` is required. `bom_line_id`
   and `component_query` are echoed back and not matched.
 - `suppliers`: non-empty array. Each entry needs `supplier_name`, `country`,
@@ -630,7 +652,9 @@ No remote or hosted servers, and no live data sources, are planned.
        never used to link.
      - `data_snapshot_id` falls back to a hash of the records passed in until
        the loader (phase 5) supplies one.
-     - The country-name table is a draft, pending decision 4 (section 5.4).
+     - The country-name table was a draft, pending decision 4 (section 5.4).
+       Resolved on 2026-11-15: codes first, with the table as a reviewed
+       fallback.
      - `unlinked_context` is always empty.
 4. **Test with fixed records.** Cover exact and near-miss names, role text,
    list-valued fields, unnamed entries, country-name conversion, parent-company
@@ -733,16 +757,34 @@ No remote or hosted servers, and no live data sources, are planned.
        `RESTRICT-2025-SG-001` (2025-10-03).
      - Disclosed later (3): the three concentration records, known from
        `source.published_at`.
-     - Two-point comparisons (9), decided 2026-11-15: the five FX pairs are
-       known from `observation_end` (2026-09-30), because their ending rate
-       and change are not known earlier. The four cost comparisons are known
-       from `observation_end`, except `COST-2025-MY-DIESEL-001`, which uses
-       its earlier publication date (2025-07-09).
+     - Two-point comparisons (9), decided 2026-11-15: each is known from the
+       date its ending value was published, because the ending value and
+       the change are not known earlier. The four Federal Reserve FX pairs
+       use the weekly H.10 release that first carried the 30 September
+       rate (2026-10-05, after the study end), and the peso pair uses
+       2026-09-30. The cost comparisons use the announcement of the
+       observed value: 2025-07-09 and 2026-03-25 (Malaysian diesel),
+       2026-06-30 (Singapore electricity) and 2025-06-05 (transpacific
+       freight).
      - No start and no publication date (3): `CUSTOMS-2025-PH-001`
-       (2025-09-24, the memorandum date), `TRANSIT-2025-PH-001` (2025-08-30,
-       the related report date), and `PORT-2026-SG-CONGESTION-001`
-       (2026-09-30, the end of the monthly period). These were the only
-       records without a basis.
+       (2025-09-30, the memorandum's release), `TRANSIT-2025-PH-001`
+       (2025-08-30, the related report date), and
+       `PORT-2026-SG-CONGESTION-001` (2026-10-12, the post date, after the
+       study end, so it is never returned). These were the only records
+       without a basis.
+     - Source review, 2026-11-15: all 25 values were checked online, and
+       each check is recorded in its `approximations` basis. 24 have
+       `review_status` `source_checked`. Corrected, because the first
+       value was too early (look-ahead): the customs memo (dated
+       2025-09-24, released 2025-09-30), the Singapore congestion post
+       (2026-10-12) and the four H.10 FX pairs (2026-10-05). Corrected
+       because it was later than the first public date: the Singapore
+       restriction (2025-10-01, its gazette publication), Singapore
+       electricity (2026-06-30) and the 2026 diesel record (2026-03-25).
+       The opioid 20% tariff's 2025-03-03 is confirmed by the stored EO
+       14357 text. Still `unreviewed`: `FX-2025-2026-USD-PHP-001`, because
+       the BSP daily bulletin for 2026-09-30 was not located. Recheck it
+       when more data is collected.
      - Left at the default: `TARIFF-2025-US-CN-RECIPROCAL` (its start is a
        guidance date for a rate already in force), the five forced-labour
        Section 301 tariffs (no announcement date stored), the other
@@ -754,7 +796,26 @@ No remote or hosted servers, and no live data sources, are planned.
      them. Every expected link now records `known_from` and
      `known_from_rule`. The `effective_to_window_applies` interpretation now
      extends the end only, and `known_from_no_look_ahead` was added. The
-     records expected in some fixture fell from 43 to 30.
+     records expected in some fixture fell from 43 to 30, then to 29 after
+     the source review removed `CUSTOMS-2025-PH-001` from FIXTURE-06.
+   - Coverage restored, 2026-11-15:
+     - A sweep of every fixture payload over every study date found
+       reports that became known after their window had closed and so could
+       never be returned (the VS Industry and Taiwan foundry concentration
+       records, Dyson FX). The late-report rule (section 5.2) was added.
+       It also adds Dyson FX to FIXTURE-05, 09 and 17 and the Suez report
+       to FIXTURE-06.
+     - FIXTURE-19 to 37 were added: existing suppliers' payloads on a second
+       `as_of_date` (`EXTRA_FIXTURES` in `examples/build_payloads.py`),
+       chosen by a set cover so that every record returnable for some graph
+       supplier is expected in some fixture. The first 18 payloads are
+       unchanged. The new fixtures' expected results came from the engine
+       and were reviewed link by link against the agreed interpretations.
+     - The gold set now has 37 fixtures and covers 59 of 97 records. The
+       other 38 cannot be returned for any graph supplier on any study date:
+       they do not link (mostly US- and SG-country records), or they become
+       known only after the study end. 157 tests pass, and the batch passes
+       37 of 37.
 7. **Later, outside this scope:** the LangChain app and its frontend
    (section 8.4).
 
@@ -779,14 +840,16 @@ supplier_risk_engine/
 - Check that no returned report has a `known_from` after its request's
   `as_of_date` (no look-ahead, section 5.2).
 - Coverage limits from the known-from rule (phase 6):
-  - The five FX pairs are in scope only on 2026-09-30, so currency links
-    appear in no fixture. Point-in-time rate records (for example, monthly
-    H.10 observations) would restore them.
-  - `FX-2025-DYSON-QUALITATIVE-001` can never be returned: it was published
-    on 2026-03-26, after its 2025 search window ends.
-  - 25 stored `known_from` values are analyst approximations, not yet
-    reviewed. Three of them rest on a related document date, not on the
-    record's own report.
+  - The four H.10 FX pairs can never be returned (first published on
+    2026-10-05, after the study end). The peso pair is in scope only on
+    2026-09-30 and is tested only in FIXTURE-20. Point-in-time rate records
+    (for example, each weekly H.10 release) would give currency links
+    through the study.
+  - 25 stored `known_from` values were checked against sources on
+    2026-11-15 (24 confirmed). `FX-2025-2026-USD-PHP-001` is unconfirmed, and
+    `TRANSIT-2025-PH-001` rests on a related report's date.
+  - `PORT-2026-SG-CONGESTION-001` can never be returned: its source was
+    published on 2026-10-12, after the study end.
 - Check that every returned fact traces to a stored record and its source. Any
   LLM explanation added later should be checked against the returned records.
 - Never infer a verified route, supplier capacity, financial exposure, or

@@ -1,0 +1,274 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2026-09-30",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-20",
+    "component_query": "Vacuum Cleaners Dyson Wash Hard Floor Wet Cleaner After Assembly Process",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:vs-industrial-philippines-inc",
+      "supplier_name": "Vs Industrial Philippines Inc",
+      "country": "PH",
+      "parent_companies": [
+        "V.S. INDUSTRY BERHAD"
+      ],
+      "hs_codes": [
+        {
+          "code": "850811",
+          "shipments": 27
+        },
+        {
+          "code": "851632",
+          "shipments": 15
+        },
+        {
+          "code": "392490",
+          "shipments": 4
+        },
+        {
+          "code": "401110",
+          "shipments": 3
+        },
+        {
+          "code": "330499",
+          "shipments": 1
+        },
+        {
+          "code": "851631",
+          "shipments": 1
+        },
+        {
+          "code": "853710",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Manila",
+          "code": "56549",
+          "country": "PH",
+          "shipments": 24
+        },
+        {
+          "name": "Shanghai",
+          "code": "57035",
+          "country": "CN",
+          "shipments": 12
+        },
+        {
+          "name": "Ning Bo",
+          "code": "57020",
+          "country": "CN",
+          "shipments": 5
+        },
+        {
+          "name": "Kaohsiung",
+          "code": "58309",
+          "country": "TW",
+          "shipments": 3
+        },
+        {
+          "name": "Pusan",
+          "code": "58023",
+          "country": "KR",
+          "shipments": 3
+        },
+        {
+          "name": "Nansha",
+          "code": "57073",
+          "country": "CN",
+          "shipments": 2
+        },
+        {
+          "name": "Qingdao",
+          "code": "57047",
+          "country": "CN",
+          "shipments": 1
+        },
+        {
+          "name": "Yangshan",
+          "code": "57037",
+          "country": "CN",
+          "shipments": 1
+        },
+        {
+          "name": "Yantian",
+          "code": "57078",
+          "country": "CN",
+          "shipments": 1
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 31
+        },
+        {
+          "name": "Tacoma, Wa",
+          "code": "3002",
+          "country": "US",
+          "coast": "west",
+          "shipments": 9
+        },
+        {
+          "name": "Newark, Nj",
+          "code": "4601",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 6
+        },
+        {
+          "name": "Long Beach, Ca",
+          "code": "2709",
+          "country": "US",
+          "coast": "west",
+          "shipments": 5
+        },
+        {
+          "name": "Seattle, Wa",
+          "code": "3001",
+          "country": "US",
+          "coast": "west",
+          "shipments": 1
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 50
+        },
+        {
+          "name": "Dyson B2B Inc",
+          "shipments": 1
+        },
+        {
+          "name": "Dyson Canada Limited",
+          "shipments": 1
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Pyramid Lines Singapore Pte Ltd",
+          "code": "PYMN",
+          "shipments": 24
+        },
+        {
+          "name": "Dhl Express",
+          "code": "DMAL",
+          "shipments": 21
+        },
+        {
+          "name": "Maersk Line",
+          "code": "MAEU",
+          "shipments": 7
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Cma Cgm Swordfish",
+          "shipments": 7
+        },
+        {
+          "name": "Cma Cgm Georgia",
+          "shipments": 6
+        },
+        {
+          "name": "Cma Cgm White Shark",
+          "shipments": 6
+        },
+        {
+          "name": "Cma Cgm Florida",
+          "shipments": 3
+        },
+        {
+          "name": "Cma Cgm Virginia",
+          "shipments": 3
+        },
+        {
+          "name": "Matson Kauai",
+          "shipments": 3
+        },
+        {
+          "name": "Cma Cgm Manta Ray",
+          "shipments": 2
+        },
+        {
+          "name": "Cma Cgm New Jersey",
+          "shipments": 2
+        },
+        {
+          "name": "Corneille",
+          "shipments": 2
+        },
+        {
+          "name": "Hmm Cebu",
+          "shipments": 2
+        },
+        {
+          "name": "Hong Kong Express",
+          "shipments": 2
+        },
+        {
+          "name": "Mol Premium",
+          "shipments": 2
+        },
+        {
+          "name": "Ym Plum",
+          "shipments": 2
+        },
+        {
+          "name": "Cisnes",
+          "shipments": 1
+        },
+        {
+          "name": "Cosco England",
+          "shipments": 1
+        },
+        {
+          "name": "Cosco Shipping Denali",
+          "shipments": 1
+        },
+        {
+          "name": "Gjertrud Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Grete Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Matson Waikiki",
+          "shipments": 1
+        },
+        {
+          "name": "Msc Sola",
+          "shipments": 1
+        },
+        {
+          "name": "Mundra Express",
+          "shipments": 1
+        },
+        {
+          "name": "Navios Constellation",
+          "shipments": 1
+        },
+        {
+          "name": "Ym Utility",
+          "shipments": 1
+        }
+      ],
+      "currency": "PHP",
+      "footprint_window": {
+        "first_arrival": "2025-08-02",
+        "last_arrival": "2026-09-23",
+        "shipments": 52
+      }
+    }
+  ]
+}

@@ -88,7 +88,7 @@
         "The observation does not establish a supplier's fuel consumption or transport costs."
       ],
       "known_from": "2025-07-09",
-      "approximations": [{"field": "known_from", "value": "2025-07-09", "basis": "Two-point comparison: the observed value is known only once announced or observed, so known from 2025-07-09 (source.published_at, which reports the observed price before observation_end), not observation_start (plan section 5.2, rule 3; decided 2026-11-15).", "review_status": "unreviewed"}],
+      "approximations": [{"field": "known_from", "value": "2025-07-09", "basis": "Two-point comparison: the observed value is known only once announced or observed, so known from 2025-07-09 (source.published_at, which reports the observed price before observation_end), not observation_start (plan section 5.2, rule 3; decided 2026-11-15). Checked 2026-11-15: the Ministry of Finance release is dated 9 July 2025, for prices from 10 to 16 July 2025.", "review_status": "source_checked"}],
       "search_window": {
         "start": "2025-07-03",
         "end": "2025-07-16",
@@ -139,8 +139,8 @@
         "The report states that diesel for public transportation and land logistics remained subsidised at MYR 2.15 per litre; eligibility and the price paid by any particular business are not established.",
         "Prices in Sabah, Sarawak and Labuan differed; this is not evidence of a supplier-specific cost increase."
       ],
-      "known_from": "2026-03-26",
-      "approximations": [{"field": "known_from", "value": "2026-03-26", "basis": "Two-point comparison: the observed value is known only once announced or observed, so known from 2026-03-26 (observation_end; publication date not verified), not observation_start (plan section 5.2, rule 3; decided 2026-11-15).", "review_status": "unreviewed"}],
+      "known_from": "2026-03-25",
+      "approximations": [{"field": "known_from", "value": "2026-03-25", "basis": "Two-point comparison: the observed price was announced on 25 March 2026 (Bernama dateline, checked 2026-11-15) for 26 March to 1 April, so known from the announcement, not observation_start (plan section 5.2, rule 3; decided 2026-11-15).", "review_status": "source_checked"}],
       "search_window": {
         "start": "2026-03-19",
         "end": "2026-04-01",
@@ -241,8 +241,8 @@
         "The regulated household tariff excludes GST and is not an industrial contract rate. Other retail contracts may differ.",
         "The official Energy Market Authority page was inaccessible to the fetch tool; no supplier cost or consumption is established."
       ],
-      "known_from": "2026-07-01",
-      "approximations": [{"field": "known_from", "value": "2026-07-01", "basis": "Two-point comparison: the observed value is known only once announced or observed, so known from 2026-07-01 (observation_end, the start of the observed quarter; the earlier tariff announcement date is not verified), not observation_start (plan section 5.2, rule 3; decided 2026-11-15).", "review_status": "unreviewed"}],
+      "known_from": "2026-06-30",
+      "approximations": [{"field": "known_from", "value": "2026-06-30", "basis": "Two-point comparison: the observed tariff is known from its announcement, not observation_start (plan section 5.2, rule 3; decided 2026-11-15). Checked 2026-11-15: SP Group's media release is dated 30 June 2026 and states the 4.64 cents per kWh (17.0%) increase for 1 July to 30 September 2026.", "review_status": "source_checked"}],
       "search_window": {
         "start": "2026-04-01",
         "end": "2026-09-30",
@@ -298,7 +298,7 @@
         "The article's publication date was not verified; the dates are assessment dates."
       ],
       "known_from": "2025-06-05",
-      "approximations": [{"field": "known_from", "value": "2025-06-05", "basis": "Two-point comparison: the observed value is known only once announced or observed, so known from 2025-06-05 (observation_end; publication date not verified), not observation_start (plan section 5.2, rule 3; decided 2026-11-15).", "review_status": "unreviewed"}],
+      "approximations": [{"field": "known_from", "value": "2025-06-05", "basis": "Two-point comparison: the observed value is known only once reported, so known from 2025-06-05, not observation_start (plan section 5.2, rule 3; decided 2026-11-15). Checked 2026-11-15: the gCaptain article is dated 5 June 2025 and reports that week's Drewry index.", "review_status": "source_checked"}],
       "search_window": {
         "start": "2025-05-29",
         "end": "2025-06-05",

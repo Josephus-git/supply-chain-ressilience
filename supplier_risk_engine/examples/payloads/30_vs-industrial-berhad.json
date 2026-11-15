@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2025-12-05",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-30",
+    "component_query": "Air Purifier Pallet Free All Including Destination Charges",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:vs-industrial-berhad",
+      "supplier_name": "Vs Industrial Berhad",
+      "country": "CN",
+      "parent_companies": [
+        "V.S. INDUSTRY BERHAD"
+      ],
+      "hs_codes": [
+        {
+          "code": "842139",
+          "shipments": 5
+        },
+        {
+          "code": "851629",
+          "shipments": 2
+        },
+        {
+          "code": "841451",
+          "shipments": 1
+        },
+        {
+          "code": "850811",
+          "shipments": 1
+        },
+        {
+          "code": "851690",
+          "shipments": 1
+        },
+        {
+          "code": "940360",
+          "shipments": 1
+        },
+        {
+          "code": "940521",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Tanjung Pelepas",
+          "code": "55750",
+          "country": "MY",
+          "shipments": 5
+        },
+        {
+          "name": "Yangshan",
+          "code": "57037",
+          "country": "CN",
+          "shipments": 4
+        },
+        {
+          "name": "Ning Bo",
+          "code": "57020",
+          "country": "CN",
+          "shipments": 1
+        },
+        {
+          "name": "Shanghai",
+          "code": "57035",
+          "country": "CN",
+          "shipments": 1
+        },
+        {
+          "name": "Xiamen",
+          "code": "57069",
+          "country": "CN",
+          "shipments": 1
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 6
+        },
+        {
+          "name": "Newark, Nj",
+          "code": "4601",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 5
+        },
+        {
+          "name": "Long Beach, Ca",
+          "code": "2709",
+          "country": "US",
+          "coast": "west",
+          "shipments": 1
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 10
+        },
+        {
+          "name": "Dyson B2B Inc",
+          "shipments": 2
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Maersk Line",
+          "code": "MAEU",
+          "shipments": 10
+        },
+        {
+          "name": "Maersk Logistics & Services Intl A/S",
+          "code": "MZLY",
+          "shipments": 2
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Gustav Maersk",
+          "shipments": 2
+        },
+        {
+          "name": "Antwerpen Express",
+          "shipments": 1
+        },
+        {
+          "name": "Basle Express",
+          "shipments": 1
+        },
+        {
+          "name": "Cisnes",
+          "shipments": 1
+        },
+        {
+          "name": "Gunde Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Guthorm Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Ludwigshafen Express",
+          "shipments": 1
+        },
+        {
+          "name": "Maersk Algol",
+          "shipments": 1
+        },
+        {
+          "name": "Missouri Express",
+          "shipments": 1
+        },
+        {
+          "name": "Shanghai Express",
+          "shipments": 1
+        },
+        {
+          "name": "Ute",
+          "shipments": 1
+        }
+      ],
+      "currency": "CNY",
+      "footprint_window": {
+        "first_arrival": "2025-09-13",
+        "last_arrival": "2026-09-27",
+        "shipments": 12
+      }
+    }
+  ]
+}

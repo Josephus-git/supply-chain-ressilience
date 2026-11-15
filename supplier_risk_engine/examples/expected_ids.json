@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "description": "Retrieval gold set for the phase 2 fixture payloads (SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md, sections 9 and 10). Compare each fixture's returned evidence_ids with expected_ids and report missed and unexpected IDs. expected_links and expected_exclusions explain each entry; only expected_ids is the pass/fail comparison.",
+  "description": "Retrieval gold set for the fixture payloads (18 from phase 2, 19 added in phase 6) (SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md, sections 9 and 10). Compare each fixture's returned evidence_ids with expected_ids and report missed and unexpected IDs. expected_links and expected_exclusions explain each entry; only expected_ids is the pass/fail comparison.",
   "status": "agreed 2026-11-15: derived by applying the plan's rules to the stored records, then reviewed by hand. Not produced by the engine. The interpretations were agreed with the user on 2026-11-15.",
   "created_at": "2026-11-15",
   "evidence_database": {
     "path": "risk_evidence/database/",
-    "manifest_sha256": "2734011e8c5a427174c05aaee2b8de1c6096e569296fddf7b9b55819248ef375",
+    "manifest_sha256": "2d90a2d73d2e799d9c159e4f2117fbccc45ad976e3445d059be8f3438945304c",
     "records": 97,
     "note": "If the database changes, recheck every fixture against the new records."
   },
@@ -87,7 +87,7 @@
     },
     {
       "id": "known_from_no_look_ahead",
-      "rule": "A record is expected only from its known_from date (plan section 5.2): a stored known_from, else its start date, else source.published_at. event_window_days extends past the end only. Each expected link records known_from and known_from_rule.",
+      "rule": "A record is expected only from its known_from date (plan section 5.2): a stored known_from, else its start date, else source.published_at. event_window_days extends past the end only. Each expected link records known_from and known_from_rule. A record known after its end (or after its search window) stays in scope for event_window_days from known_from (late-report rule, agreed 2026-11-15).",
       "agreed": "2026-11-15"
     }
   ],
@@ -150,7 +150,7 @@
       },
       "expected_exclusions": {
         "TARIFF-2026-US-CN-BATTERY-301": "In force and CN origin, but the footprint has no HS code sharing a 6-digit prefix with 8507.60.00.",
-        "FX-2025-DYSON-QUALITATIVE-001": "Buyer Dyson links by name, but the undated record's search window ends 2025-12-31.",
+        "FX-2025-DYSON-QUALITATIVE-001": "Buyer Dyson links by name, but the undated record's search window ends 2025-12-31. Under the late-report rule (2026-11-15) it is in scope only from 2026-03-26 to 2026-04-09.",
         "FX-2025-2026-USD-CNY-001": "Not yet known: known_from 2026-09-30 (stored known_from) is after as_of_date 2026-09-25. Expected before phase 6; removed 2026-11-15 (no look-ahead).",
         "PORT-2026-SG-CONGESTION-001": "Not yet known: known_from 2026-09-30 (stored known_from) is after as_of_date 2026-09-25. Expected before phase 6; removed 2026-11-15 (no look-ahead)."
       }
@@ -324,9 +324,10 @@
       "supplier_name": "Hi P Philippines Technology Corpora",
       "as_of_date": "2026-04-01",
       "event_window_days": 14,
-      "as_of_date_basis": "Exit port Kaohsiung on the Zeal Lumos collision date (2026-04-01); Newark entry tests the approximated Panama lane; carrier/vessel country rule.",
+      "as_of_date_basis": "Exit port Kaohsiung on the Zeal Lumos collision date (2026-04-01); Newark entry tests the approximated Panama lane; carrier/vessel country rule. FX-2025-DYSON-QUALITATIVE-001: Added 2026-11-15 (late-report rule): known after its search window ended, so in scope for event_window_days from known_from.",
       "expected_ids": [
         "CUSTOMS-PILOT-001",
+        "FX-2025-DYSON-QUALITATIVE-001",
         "PORT-2026-TW-KAOHSIUNG-001",
         "ROUTE-2026-PANAMA-GATUN-001",
         "TARIFF-2026-US-GLOBAL-122",
@@ -382,6 +383,16 @@
           "in_scope": "dated",
           "known_from": "2026-04-01",
           "known_from_rule": "start_date"
+        },
+        "FX-2025-DYSON-QUALITATIVE-001": {
+          "link_basis": "buyer_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "Dyson"
+          ],
+          "in_scope": "undated candidate: known after search_window ended; as_of_date within event_window_days of known_from",
+          "known_from": "2026-03-26",
+          "known_from_rule": "source_published_at"
         }
       },
       "expected_exclusions": {
@@ -400,24 +411,14 @@
       "supplier_name": "Hip Philipines Technology Corp",
       "as_of_date": "2025-09-24",
       "event_window_days": 14,
-      "as_of_date_basis": "Exit ports Yantian and Nansha on Typhoon Ragasa landfall (2025-09-24).",
+      "as_of_date_basis": "Exit ports Yantian and Nansha on Typhoon Ragasa landfall (2025-09-24). ROUTE-2025-SUEZ-001: Added 2026-11-15 (late-report rule): known after its search window ended, so in scope for event_window_days from known_from.",
       "expected_ids": [
-        "CUSTOMS-2025-PH-001",
         "HAZARD-2025-CN-RAGASA-001",
         "PORT-2025-CN-RAGASA-001",
+        "ROUTE-2025-SUEZ-001",
         "TARIFF-2025-US-PH-RECIPROCAL"
       ],
       "expected_links": {
-        "CUSTOMS-2025-PH-001": {
-          "link_basis": "country_code",
-          "link_strength": "weak",
-          "matched_values": [
-            "PH"
-          ],
-          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
-          "known_from": "2025-09-24",
-          "known_from_rule": "stored_known_from"
-        },
         "HAZARD-2025-CN-RAGASA-001": {
           "link_basis": "port_name",
           "link_strength": "medium",
@@ -449,12 +450,23 @@
           "in_scope": "dated",
           "known_from": "2025-07-31",
           "known_from_rule": "stored_known_from"
+        },
+        "ROUTE-2025-SUEZ-001": {
+          "link_basis": "trade_lane",
+          "link_strength": "weak",
+          "matched_values": [
+            "east_gulf"
+          ],
+          "in_scope": "undated candidate: known after search_window ended; as_of_date within event_window_days of known_from",
+          "known_from": "2025-09-24",
+          "known_from_rule": "source_published_at"
         }
       },
       "expected_exclusions": {
         "FX-2025-2026-USD-PHP-001": "Not yet known: known_from 2026-09-30 (stored known_from) is after as_of_date 2025-09-24. Expected before phase 6; removed 2026-11-15 (no look-ahead).",
         "FX-2025-DYSON-QUALITATIVE-001": "Not yet known: known_from 2026-03-26 (source.published_at) is after as_of_date 2025-09-24. Expected before phase 6; removed 2026-11-15 (no look-ahead).",
-        "QUALITY-2025-PH-FANS-001": "Not yet known: known_from 2025-09-29 (source.published_at) is after as_of_date 2025-09-24. Expected before phase 6; removed 2026-11-15 (no look-ahead)."
+        "QUALITY-2025-PH-FANS-001": "Not yet known: known_from 2025-09-29 (source.published_at) is after as_of_date 2025-09-24. Expected before phase 6; removed 2026-11-15 (no look-ahead).",
+        "CUSTOMS-2025-PH-001": "Not yet known: known_from 2025-09-30 (stored known_from; the memorandum dated 24 September was released 30 September) is after as_of_date 2025-09-24. Removed 2026-11-15 in the known_from review."
       }
     },
     {
@@ -598,9 +610,10 @@
       "supplier_name": "Kinpo Electronics Philippines Inc",
       "as_of_date": "2026-04-01",
       "event_window_days": 14,
-      "as_of_date_basis": "Supplier country HK has no country records; Kaohsiung exit and a CN-only HS 850760 tariff test origin rules.",
+      "as_of_date_basis": "Supplier country HK has no country records; Kaohsiung exit and a CN-only HS 850760 tariff test origin rules. FX-2025-DYSON-QUALITATIVE-001: Added 2026-11-15 (late-report rule): known after its search window ended, so in scope for event_window_days from known_from.",
       "expected_ids": [
         "CUSTOMS-PILOT-001",
+        "FX-2025-DYSON-QUALITATIVE-001",
         "PORT-2026-TW-KAOHSIUNG-001",
         "TARIFF-2026-US-GLOBAL-122"
       ],
@@ -634,6 +647,16 @@
           "in_scope": "dated",
           "known_from": "2026-02-20",
           "known_from_rule": "stored_known_from"
+        },
+        "FX-2025-DYSON-QUALITATIVE-001": {
+          "link_basis": "buyer_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "Dyson"
+          ],
+          "in_scope": "undated candidate: known after search_window ended; as_of_date within event_window_days of known_from",
+          "known_from": "2026-03-26",
+          "known_from_rule": "source_published_at"
         }
       },
       "expected_exclusions": {
@@ -938,8 +961,9 @@
       "supplier_name": "Vs Industrial Philippines Inc",
       "as_of_date": "2026-04-01",
       "event_window_days": 14,
-      "as_of_date_basis": "Parent V.S. INDUSTRY BERHAD against the undated PH operational disruption (search window 2026-03-20 to 2026-04-17).",
+      "as_of_date_basis": "Parent V.S. INDUSTRY BERHAD against the undated PH operational disruption (search window 2026-03-20 to 2026-04-17). FX-2025-DYSON-QUALITATIVE-001: Added 2026-11-15 (late-report rule): known after its search window ended, so in scope for event_window_days from known_from.",
       "expected_ids": [
+        "FX-2025-DYSON-QUALITATIVE-001",
         "PORT-2026-TW-KAOHSIUNG-001",
         "ROUTE-2026-PANAMA-GATUN-001",
         "TARIFF-2026-US-GLOBAL-122"
@@ -974,6 +998,16 @@
           "in_scope": "dated",
           "known_from": "2026-02-20",
           "known_from_rule": "stored_known_from"
+        },
+        "FX-2025-DYSON-QUALITATIVE-001": {
+          "link_basis": "buyer_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "Dyson"
+          ],
+          "in_scope": "undated candidate: known after search_window ended; as_of_date within event_window_days of known_from",
+          "known_from": "2026-03-26",
+          "known_from_rule": "source_published_at"
         }
       },
       "expected_exclusions": {
@@ -1046,67 +1080,1002 @@
       "interpretation_dependent_ids": [
         "HAZARD-2025-MY-FLOOD-001"
       ]
+    },
+    {
+      "fixture": "FIXTURE-19",
+      "payload": "payloads/19_v-s-industrial-berhad.json",
+      "supplier_id": "org:v-s-industrial-berhad",
+      "supplier_name": "V S Industrial Berhad",
+      "as_of_date": "2026-04-08",
+      "event_window_days": 14,
+      "as_of_date_basis": "Late reports and the 2026 diesel price: Strait of Malacca concentration (known 2026-04-06), Malaysian diesel (2026-03-25), Dyson FX (2026-03-26) and the undated VS Philippines operations record (2026-04-03), all within 14 days.",
+      "expected_ids": [
+        "CONCENTRATION-2025-MALACCA-OIL-001",
+        "COST-2026-MY-DIESEL-001",
+        "FX-2025-DYSON-QUALITATIVE-001",
+        "OPERATIONS-2026-PH-VS-001",
+        "RESTRICT-2025-MY-001",
+        "ROUTE-2026-PANAMA-GATUN-001",
+        "TARIFF-2026-US-GLOBAL-122"
+      ],
+      "expected_links": {
+        "CONCENTRATION-2025-MALACCA-OIL-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-04-06",
+          "known_from_rule": "stored_known_from"
+        },
+        "COST-2026-MY-DIESEL-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-03-25",
+          "known_from_rule": "stored_known_from"
+        },
+        "FX-2025-DYSON-QUALITATIVE-001": {
+          "link_basis": "buyer_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "Dyson"
+          ],
+          "in_scope": "undated candidate: known after search_window ended; as_of_date within event_window_days of known_from",
+          "known_from": "2026-03-26",
+          "known_from_rule": "source_published_at"
+        },
+        "OPERATIONS-2026-PH-VS-001": {
+          "link_basis": "parent_company_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "V.S. Industry Berhad"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2026-04-03",
+          "known_from_rule": "source_published_at"
+        },
+        "RESTRICT-2025-MY-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-07-14",
+          "known_from_rule": "start_date"
+        },
+        "ROUTE-2026-PANAMA-GATUN-001": {
+          "link_basis": "trade_lane",
+          "link_strength": "weak",
+          "matched_values": [
+            "east_gulf"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2026-03-19",
+          "known_from_rule": "source_published_at"
+        },
+        "TARIFF-2026-US-GLOBAL-122": {
+          "link_basis": "importing_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "US"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-02-20",
+          "known_from_rule": "stored_known_from"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-20",
+      "payload": "payloads/20_vs-industrial-philippines-inc.json",
+      "supplier_id": "org:vs-industrial-philippines-inc",
+      "supplier_name": "Vs Industrial Philippines Inc",
+      "as_of_date": "2026-09-30",
+      "event_window_days": 14,
+      "as_of_date_basis": "Study end: VS Industry's financial-distress observation and the peso FX pair are known only on 2026-09-30; also the Philippine forced-labour Section 301 tariff.",
+      "expected_ids": [
+        "FINANCE-2026-MY-VS-001",
+        "FX-2025-2026-USD-PHP-001",
+        "TARIFF-2026-US-PH-FORCED-LABOR-301"
+      ],
+      "expected_links": {
+        "FINANCE-2026-MY-VS-001": {
+          "link_basis": "parent_company_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "V.S. Industry Berhad"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-09-30",
+          "known_from_rule": "start_date"
+        },
+        "FX-2025-2026-USD-PHP-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "PHP"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-09-30",
+          "known_from_rule": "stored_known_from"
+        },
+        "TARIFF-2026-US-PH-FORCED-LABOR-301": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "PH"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-07-24",
+          "known_from_rule": "start_date"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-21",
+      "payload": "payloads/21_flextronics-shah-alam.json",
+      "supplier_id": "org:flextronics-shah-alam",
+      "supplier_name": "Flextronics Shah Alam",
+      "as_of_date": "2026-02-06",
+      "event_window_days": 14,
+      "as_of_date_basis": "US winter storm hazard and port records (undated, search window 2026-01-12 to 2026-02-09, published 2026-01-26) through the Los Angeles entry port.",
+      "expected_ids": [
+        "HAZARD-2026-US-WINTER-001",
+        "PORT-2026-US-WINTER-001",
+        "RESTRICT-2025-CN-001",
+        "RESTRICT-2025-CN-002",
+        "TARIFF-2025-US-CN-OPIOID-10B",
+        "TARIFF-2025-US-CN-RECIPROCAL"
+      ],
+      "expected_links": {
+        "HAZARD-2026-US-WINTER-001": {
+          "link_basis": "port_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "Los Angeles, Ca"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2026-01-26",
+          "known_from_rule": "source_published_at"
+        },
+        "PORT-2026-US-WINTER-001": {
+          "link_basis": "port_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "Los Angeles, Ca"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2026-01-26",
+          "known_from_rule": "source_published_at"
+        },
+        "RESTRICT-2025-CN-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-02-04",
+          "known_from_rule": "start_date"
+        },
+        "RESTRICT-2025-CN-002": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-04-04",
+          "known_from_rule": "start_date"
+        },
+        "TARIFF-2025-US-CN-OPIOID-10B": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-11-04",
+          "known_from_rule": "stored_known_from"
+        },
+        "TARIFF-2025-US-CN-RECIPROCAL": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-08-07",
+          "known_from_rule": "start_date"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-22",
+      "payload": "payloads/22_flextronics-shah-alam-sdn-bhd.json",
+      "supplier_id": "org:flextronics-shah-alam-sdn-bhd",
+      "supplier_name": "Flextronics Shah Alam Sdn Bhd",
+      "as_of_date": "2025-07-14",
+      "event_window_days": 14,
+      "as_of_date_basis": "Malaysian diesel price (announced 2025-07-09) and the third CBP notification issue (published 2025-07-03), both within their windows.",
+      "expected_ids": [
+        "COST-2025-MY-DIESEL-001",
+        "CUSTOMS-2025-US-003",
+        "RESTRICT-2025-MY-001"
+      ],
+      "expected_links": {
+        "COST-2025-MY-DIESEL-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-07-09",
+          "known_from_rule": "stored_known_from"
+        },
+        "CUSTOMS-2025-US-003": {
+          "link_basis": "port_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "Long Beach, Ca",
+            "Los Angeles, Ca",
+            "Newark, Nj"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2025-07-03",
+          "known_from_rule": "source_published_at"
+        },
+        "RESTRICT-2025-MY-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-07-14",
+          "known_from_rule": "start_date"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-23",
+      "payload": "payloads/23_hi-p-philippines-technology-corpora.json",
+      "supplier_id": "org:hi-p-philippines-technology-corpora",
+      "supplier_name": "Hi P Philippines Technology Corpora",
+      "as_of_date": "2026-03-21",
+      "event_window_days": 14,
+      "as_of_date_basis": "Taiwan foundry concentration (reported 2026-03-12, late-report rule) and the undated Taiwan feedstock shortage (published 2026-03-10).",
+      "expected_ids": [
+        "CONCENTRATION-2025-TW-FOUNDRY-001",
+        "CUSTOMS-PILOT-001",
+        "MATERIAL-2026-TW-FEEDSTOCK-001",
+        "ROUTE-2026-PANAMA-GATUN-001",
+        "TARIFF-2026-US-GLOBAL-122"
+      ],
+      "expected_links": {
+        "CONCENTRATION-2025-TW-FOUNDRY-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "TW"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-03-12",
+          "known_from_rule": "stored_known_from"
+        },
+        "CUSTOMS-PILOT-001": {
+          "link_basis": "port_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "Tanjung Pelepas"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2026-03-21",
+          "known_from_rule": "source_published_at"
+        },
+        "MATERIAL-2026-TW-FEEDSTOCK-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "TW"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2026-03-10",
+          "known_from_rule": "source_published_at"
+        },
+        "ROUTE-2026-PANAMA-GATUN-001": {
+          "link_basis": "trade_lane",
+          "link_strength": "weak",
+          "matched_values": [
+            "east_gulf"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2026-03-19",
+          "known_from_rule": "source_published_at"
+        },
+        "TARIFF-2026-US-GLOBAL-122": {
+          "link_basis": "importing_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "US"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-02-20",
+          "known_from_rule": "stored_known_from"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-24",
+      "payload": "payloads/24_hip-philipines-technology-corp.json",
+      "supplier_id": "org:hip-philipines-technology-corp",
+      "supplier_name": "Hip Philipines Technology Corp",
+      "as_of_date": "2025-10-05",
+      "event_window_days": 14,
+      "as_of_date_basis": "Philippine customs memo (released 2025-09-30) and the Suez report (published 2025-09-24, late-report rule), within 14 days of becoming known.",
+      "expected_ids": [
+        "CUSTOMS-2025-PH-001",
+        "HAZARD-2025-CN-RAGASA-001",
+        "PORT-2025-CN-RAGASA-001",
+        "QUALITY-2025-PH-FANS-001",
+        "ROUTE-2025-SUEZ-001",
+        "TARIFF-2025-US-PH-RECIPROCAL"
+      ],
+      "expected_links": {
+        "CUSTOMS-2025-PH-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "PH"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2025-09-30",
+          "known_from_rule": "stored_known_from"
+        },
+        "HAZARD-2025-CN-RAGASA-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Nansha",
+            "Yantian"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-09-24",
+          "known_from_rule": "start_date"
+        },
+        "PORT-2025-CN-RAGASA-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Nansha",
+            "Yantian"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-09-22",
+          "known_from_rule": "start_date"
+        },
+        "QUALITY-2025-PH-FANS-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "PH"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2025-09-29",
+          "known_from_rule": "source_published_at"
+        },
+        "ROUTE-2025-SUEZ-001": {
+          "link_basis": "trade_lane",
+          "link_strength": "weak",
+          "matched_values": [
+            "east_gulf"
+          ],
+          "in_scope": "undated candidate: known after search_window ended; as_of_date within event_window_days of known_from",
+          "known_from": "2025-09-24",
+          "known_from_rule": "source_published_at"
+        },
+        "TARIFF-2025-US-PH-RECIPROCAL": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "PH"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-07-31",
+          "known_from_rule": "stored_known_from"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-25",
+      "payload": "payloads/25_flextronics-shah-alam.json",
+      "supplier_id": "org:flextronics-shah-alam",
+      "supplier_name": "Flextronics Shah Alam",
+      "as_of_date": "2025-05-10",
+      "event_window_days": 14,
+      "as_of_date_basis": "The first two CBP notification issues (published 2025-04-28 and 2025-05-07) through the Los Angeles entry port.",
+      "expected_ids": [
+        "CUSTOMS-2025-US-001",
+        "CUSTOMS-2025-US-002",
+        "RESTRICT-2025-CN-001",
+        "RESTRICT-2025-CN-002",
+        "TARIFF-2025-US-CN-OPIOID-20"
+      ],
+      "expected_links": {
+        "CUSTOMS-2025-US-001": {
+          "link_basis": "port_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "Los Angeles, Ca"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2025-04-28",
+          "known_from_rule": "source_published_at"
+        },
+        "CUSTOMS-2025-US-002": {
+          "link_basis": "port_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "Los Angeles, Ca"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2025-05-07",
+          "known_from_rule": "source_published_at"
+        },
+        "RESTRICT-2025-CN-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-02-04",
+          "known_from_rule": "start_date"
+        },
+        "RESTRICT-2025-CN-002": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-04-04",
+          "known_from_rule": "start_date"
+        },
+        "TARIFF-2025-US-CN-OPIOID-20": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-03-03",
+          "known_from_rule": "stored_known_from"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-26",
+      "payload": "payloads/26_hi-p-philippines-technology-corp.json",
+      "supplier_id": "org:hi-p-philippines-technology-corp",
+      "supplier_name": "Hi P Philippines Technology Corp",
+      "as_of_date": "2025-09-11",
+      "event_window_days": 14,
+      "as_of_date_basis": "Long Beach port disruption (2025-09-09) through US entry ports, and the undated Philippine cargo theft (known 2025-08-30).",
+      "expected_ids": [
+        "PORT-2025-US-LONG-BEACH-001",
+        "TARIFF-2025-US-PH-RECIPROCAL",
+        "TRANSIT-2025-PH-001"
+      ],
+      "expected_links": {
+        "PORT-2025-US-LONG-BEACH-001": {
+          "link_basis": "port_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "Los Angeles, Ca",
+            "Tacoma, Wa"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-09-09",
+          "known_from_rule": "start_date"
+        },
+        "TARIFF-2025-US-PH-RECIPROCAL": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "PH"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-07-31",
+          "known_from_rule": "stored_known_from"
+        },
+        "TRANSIT-2025-PH-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "PH"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2025-08-30",
+          "known_from_rule": "stored_known_from"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-27",
+      "payload": "payloads/27_flextronics-shah-alam.json",
+      "supplier_id": "org:flextronics-shah-alam",
+      "supplier_name": "Flextronics Shah Alam",
+      "as_of_date": "2025-06-16",
+      "event_window_days": 14,
+      "as_of_date_basis": "Transpacific freight rate increase (reported 2025-06-05) for a China-country supplier.",
+      "expected_ids": [
+        "COST-2025-CN-US-FREIGHT-001",
+        "RESTRICT-2025-CN-001",
+        "RESTRICT-2025-CN-002",
+        "TARIFF-2025-US-CN-OPIOID-20"
+      ],
+      "expected_links": {
+        "COST-2025-CN-US-FREIGHT-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-06-05",
+          "known_from_rule": "stored_known_from"
+        },
+        "RESTRICT-2025-CN-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-02-04",
+          "known_from_rule": "start_date"
+        },
+        "RESTRICT-2025-CN-002": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-04-04",
+          "known_from_rule": "start_date"
+        },
+        "TARIFF-2025-US-CN-OPIOID-20": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-03-03",
+          "known_from_rule": "stored_known_from"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-28",
+      "payload": "payloads/28_flextronics-shah-alam-sdn-bhd.json",
+      "supplier_id": "org:flextronics-shah-alam-sdn-bhd",
+      "supplier_name": "Flextronics Shah Alam Sdn Bhd",
+      "as_of_date": "2026-08-03",
+      "event_window_days": 14,
+      "as_of_date_basis": "Undated Malaysian product-compliance record (published 2026-07-23).",
+      "expected_ids": [
+        "QUALITY-2026-MY-COMPLIANCE-001",
+        "RESTRICT-2025-MY-001",
+        "TARIFF-2026-US-GLOBAL-122",
+        "TARIFF-2026-US-MY-FORCED-LABOR-301"
+      ],
+      "expected_links": {
+        "QUALITY-2026-MY-COMPLIANCE-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2026-07-23",
+          "known_from_rule": "source_published_at"
+        },
+        "RESTRICT-2025-MY-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-07-14",
+          "known_from_rule": "start_date"
+        },
+        "TARIFF-2026-US-GLOBAL-122": {
+          "link_basis": "importing_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "US"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-02-20",
+          "known_from_rule": "stored_known_from"
+        },
+        "TARIFF-2026-US-MY-FORCED-LABOR-301": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-07-24",
+          "known_from_rule": "start_date"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-29",
+      "payload": "payloads/29_flextronics-shah-alam-sdn-bhd.json",
+      "supplier_id": "org:flextronics-shah-alam-sdn-bhd",
+      "supplier_name": "Flextronics Shah Alam Sdn Bhd",
+      "as_of_date": "2026-04-21",
+      "event_window_days": 14,
+      "as_of_date_basis": "Undated Malaysian PET shortage (published 2026-04-10).",
+      "expected_ids": [
+        "MATERIAL-2026-MY-PET-001",
+        "RESTRICT-2025-MY-001",
+        "ROUTE-2026-PANAMA-GATUN-001",
+        "TARIFF-2026-US-GLOBAL-122"
+      ],
+      "expected_links": {
+        "MATERIAL-2026-MY-PET-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2026-04-10",
+          "known_from_rule": "source_published_at"
+        },
+        "RESTRICT-2025-MY-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-07-14",
+          "known_from_rule": "start_date"
+        },
+        "ROUTE-2026-PANAMA-GATUN-001": {
+          "link_basis": "trade_lane",
+          "link_strength": "weak",
+          "matched_values": [
+            "east_gulf"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2026-03-19",
+          "known_from_rule": "source_published_at"
+        },
+        "TARIFF-2026-US-GLOBAL-122": {
+          "link_basis": "importing_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "US"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-02-20",
+          "known_from_rule": "stored_known_from"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-30",
+      "payload": "payloads/30_vs-industrial-berhad.json",
+      "supplier_id": "org:vs-industrial-berhad",
+      "supplier_name": "Vs Industrial Berhad",
+      "as_of_date": "2025-12-05",
+      "event_window_days": 14,
+      "as_of_date_basis": "VS Industry's FY2025 customer concentration, reported in the annual report on 2025-11-28 (late-report rule); strong parent-name link.",
+      "expected_ids": [
+        "CONCENTRATION-2025-MY-VS-001",
+        "RESTRICT-2025-CN-001",
+        "RESTRICT-2025-CN-002",
+        "TARIFF-2025-US-CN-OPIOID-10B",
+        "TARIFF-2025-US-CN-RECIPROCAL"
+      ],
+      "expected_links": {
+        "CONCENTRATION-2025-MY-VS-001": {
+          "link_basis": "parent_company_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "V.S. Industry Berhad"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-11-28",
+          "known_from_rule": "stored_known_from"
+        },
+        "RESTRICT-2025-CN-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-02-04",
+          "known_from_rule": "start_date"
+        },
+        "RESTRICT-2025-CN-002": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-04-04",
+          "known_from_rule": "start_date"
+        },
+        "TARIFF-2025-US-CN-OPIOID-10B": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-11-04",
+          "known_from_rule": "stored_known_from"
+        },
+        "TARIFF-2025-US-CN-RECIPROCAL": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-08-07",
+          "known_from_rule": "start_date"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-31",
+      "payload": "payloads/31_flextronics-shah-alam-sdn-bhd.json",
+      "supplier_id": "org:flextronics-shah-alam-sdn-bhd",
+      "supplier_name": "Flextronics Shah Alam Sdn Bhd",
+      "as_of_date": "2025-03-21",
+      "event_window_days": 14,
+      "as_of_date_basis": "Undated Malaysian polyethylene shortage (published 2025-03-10).",
+      "expected_ids": [
+        "MATERIAL-2025-MY-PE-001"
+      ],
+      "expected_links": {
+        "MATERIAL-2025-MY-PE-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2025-03-10",
+          "known_from_rule": "source_published_at"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-32",
+      "payload": "payloads/32_hi-p-philippines-technology-corp.json",
+      "supplier_id": "org:hi-p-philippines-technology-corp",
+      "supplier_name": "Hi P Philippines Technology Corp",
+      "as_of_date": "2026-07-06",
+      "event_window_days": 14,
+      "as_of_date_basis": "Undated Philippine customs record (published 2026-06-25) through the Manila exit port.",
+      "expected_ids": [
+        "CUSTOMS-2026-PH-001",
+        "TARIFF-2026-US-GLOBAL-122"
+      ],
+      "expected_links": {
+        "CUSTOMS-2026-PH-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Manila"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2026-06-25",
+          "known_from_rule": "source_published_at"
+        },
+        "TARIFF-2026-US-GLOBAL-122": {
+          "link_basis": "importing_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "US"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-02-20",
+          "known_from_rule": "stored_known_from"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-33",
+      "payload": "payloads/33_hi-p-philippines-technology-corp.json",
+      "supplier_id": "org:hi-p-philippines-technology-corp",
+      "supplier_name": "Hi P Philippines Technology Corp",
+      "as_of_date": "2025-07-28",
+      "event_window_days": 14,
+      "as_of_date_basis": "Undated Philippine electricity cost record (published 2025-07-11).",
+      "expected_ids": [
+        "COST-2025-PH-ELECTRICITY-001"
+      ],
+      "expected_links": {
+        "COST-2025-PH-ELECTRICITY-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "PH"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2025-07-11",
+          "known_from_rule": "source_published_at"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-34",
+      "payload": "payloads/34_hi-p-philippines-technology-corp.json",
+      "supplier_id": "org:hi-p-philippines-technology-corp",
+      "supplier_name": "Hi P Philippines Technology Corp",
+      "as_of_date": "2025-03-19",
+      "event_window_days": 14,
+      "as_of_date_basis": "Nexperia Philippines labour disruption (2025-03-05 to 2025-03-08), within 14 days after its end.",
+      "expected_ids": [
+        "LABOUR-2025-PH-NEXPERIA-001"
+      ],
+      "expected_links": {
+        "LABOUR-2025-PH-NEXPERIA-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "PH"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-03-05",
+          "known_from_rule": "start_date"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-35",
+      "payload": "payloads/35_hi-p-philippines-technology-corpora.json",
+      "supplier_id": "org:hi-p-philippines-technology-corpora",
+      "supplier_name": "Hi P Philippines Technology Corpora",
+      "as_of_date": "2026-09-27",
+      "event_window_days": 14,
+      "as_of_date_basis": "Taiwan forced-labour Section 301 tariff (effective 2026-07-24, open end).",
+      "expected_ids": [
+        "TARIFF-2026-US-TW-FORCED-LABOR-301"
+      ],
+      "expected_links": {
+        "TARIFF-2026-US-TW-FORCED-LABOR-301": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "TW"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-07-24",
+          "known_from_rule": "start_date"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-36",
+      "payload": "payloads/36_hi-p-philippines-technology-corpora.json",
+      "supplier_id": "org:hi-p-philippines-technology-corpora",
+      "supplier_name": "Hi P Philippines Technology Corpora",
+      "as_of_date": "2025-04-12",
+      "event_window_days": 14,
+      "as_of_date_basis": "Taiwan geopolitical record (2025-04-01), within 14 days.",
+      "expected_ids": [
+        "GEO-2025-TW-001"
+      ],
+      "expected_links": {
+        "GEO-2025-TW-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "TW"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-04-01",
+          "known_from_rule": "start_date"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-37",
+      "payload": "payloads/37_hi-p-philippines-technology-corpora.json",
+      "supplier_id": "org:hi-p-philippines-technology-corpora",
+      "supplier_name": "Hi P Philippines Technology Corpora",
+      "as_of_date": "2025-02-01",
+      "event_window_days": 14,
+      "as_of_date_basis": "Taiwan earthquake (2025-01-21), within 14 days.",
+      "expected_ids": [
+        "HAZARD-2025-TW-QUAKE-001"
+      ],
+      "expected_links": {
+        "HAZARD-2025-TW-QUAKE-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "TW"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-01-21",
+          "known_from_rule": "start_date"
+        }
+      },
+      "expected_exclusions": {}
     }
   ],
   "coverage": {
-    "records_expected_in_some_fixture": 30,
+    "records_expected_in_some_fixture": 59,
     "records_never_expected": [
-      "CONCENTRATION-2025-MALACCA-OIL-001",
-      "CONCENTRATION-2025-MY-VS-001",
-      "CONCENTRATION-2025-TW-FOUNDRY-001",
-      "COST-2025-CN-US-FREIGHT-001",
-      "COST-2025-MY-DIESEL-001",
-      "COST-2025-PH-ELECTRICITY-001",
-      "COST-2026-MY-DIESEL-001",
       "COST-2026-SG-ELECTRICITY-001",
-      "CUSTOMS-2025-US-001",
-      "CUSTOMS-2025-US-002",
-      "CUSTOMS-2025-US-003",
-      "CUSTOMS-2026-PH-001",
       "FINANCE-2025-US-IROBOT-001",
       "FINANCE-2025-US-KP-001",
       "FINANCE-2025-US-WOLFSPEED-001",
-      "FINANCE-2026-MY-VS-001",
       "FINANCE-2026-US-PRETIUM-001",
       "FX-2025-2026-USD-CNY-001",
       "FX-2025-2026-USD-MYR-001",
-      "FX-2025-2026-USD-PHP-001",
       "FX-2025-2026-USD-SGD-001",
       "FX-2025-2026-USD-TWD-001",
-      "FX-2025-DYSON-QUALITATIVE-001",
-      "GEO-2025-TW-001",
       "GEO-2026-SG-001",
-      "HAZARD-2025-TW-QUAKE-001",
-      "HAZARD-2026-US-WINTER-001",
-      "LABOUR-2025-PH-NEXPERIA-001",
       "LABOUR-2026-US-AXLE-001",
       "LABOUR-2026-US-PACKAGING-001",
       "LABOUR-2026-US-WAREHOUSE-001",
-      "MATERIAL-2025-MY-PE-001",
       "MATERIAL-2025-US-RARE-EARTH-001",
-      "MATERIAL-2026-MY-PET-001",
-      "MATERIAL-2026-TW-FEEDSTOCK-001",
-      "OPERATIONS-2026-PH-VS-001",
-      "PORT-2025-US-LONG-BEACH-001",
       "PORT-2026-SG-CONGESTION-001",
-      "PORT-2026-US-WINTER-001",
       "QUALITY-2025-US-HAIR-001",
       "QUALITY-2025-US-POOL-001",
-      "QUALITY-2026-MY-COMPLIANCE-001",
       "QUALITY-2026-US-FAN-001",
       "QUALITY-2026-US-PURIFIER-001",
       "QUALITY-2026-US-VACUUM-001",
       "RESTRICT-2025-SG-001",
       "RESTRICT-2025-US-001",
       "ROUTE-2025-SG-ROBBERY-001",
-      "ROUTE-2025-SUEZ-001",
       "ROUTE-2026-HORMUZ-001",
       "TARIFF-2025-US-SG-RECIPROCAL",
       "TARIFF-2026-US-CN-BATTERY-301",
-      "TARIFF-2026-US-PH-FORCED-LABOR-301",
       "TARIFF-2026-US-SG-FORCED-LABOR-301",
-      "TARIFF-2026-US-TW-FORCED-LABOR-301",
-      "TRANSIT-2025-PH-001",
       "TRANSIT-2025-US-001",
       "TRANSIT-2025-US-BATTERY-001",
       "TRANSIT-2025-US-BATTERY-002",
@@ -1119,7 +2088,7 @@
       "VESSEL-2026-STRAIT-001",
       "VESSEL-2026-TW-001"
     ],
-    "note": "No supplier in the graph is in the US or SG, so US- and SG-country records link only through ports, lanes or names, and most do not appear. Since phase 6, records not yet known on a fixture's as_of_date are excluded; all five FX pairs (known from 2026-09-30) and FX-2025-DYSON-QUALITATIVE-001 (published after its search window ends) are now never expected."
+    "note": "No supplier in the graph is in the US or SG, so US- and SG-country records link only through ports, lanes or names, and most do not appear. On 2026-11-15 a sweep of every fixture payload over every study date showed that each record in records_never_expected cannot be returned for any graph supplier on any date: they do not link, or (the four H.10 FX pairs, PORT-2026-SG-CONGESTION-001) become known only after the study end."
   },
   "revisions": [
     {
@@ -1254,6 +2223,31 @@
         }
       ],
       "removed_total": 40
+    },
+    {
+      "date": "2026-11-15",
+      "change": "known_from review against sources: CUSTOMS-2025-PH-001 moved to 2025-09-30 (memo release date), PORT-2026-SG-CONGESTION-001 to 2026-10-12 (post date, after the study end), COST-2026-MY-DIESEL-001 to 2026-03-25 (announcement). Only the first changes a fixture.",
+      "removed": [
+        {
+          "fixture": "FIXTURE-06",
+          "removed": [
+            "CUSTOMS-2025-PH-001"
+          ]
+        }
+      ],
+      "removed_total": 1
+    },
+    {
+      "date": "2026-11-15",
+      "change": "Remaining known_from values checked online: four H.10 FX pairs to 2026-10-05, RESTRICT-2025-SG-001 to 2025-10-01, COST-2026-SG-ELECTRICITY-001 to 2026-06-30. No fixture changed.",
+      "removed": [],
+      "removed_total": 0
+    },
+    {
+      "date": "2026-11-15",
+      "change": "Late-report rule added to the engine; Dyson FX added to FIXTURE-05, 09 and 17 and the Suez report to FIXTURE-06. FIXTURE-19 to 37 added (extra dates for existing suppliers, examples/build_payloads.py EXTRA_FIXTURES) so every record returnable for a graph supplier is expected somewhere. New fixtures' expected results were produced by the engine and then reviewed link by link against the agreed interpretations.",
+      "removed": [],
+      "removed_total": 0
     }
   ]
 }

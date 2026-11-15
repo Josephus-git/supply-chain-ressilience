@@ -131,7 +131,7 @@
       "files": [
         {
           "path": "border_customs_delays.json",
-          "sha256": "2965654d019ca735adc4beed287161a7ebe3623584a77a8a91e95c78a67b351f"
+          "sha256": "1ec7aa27528aeb2c2464fd98baac0852793a0d516cd287b1d33504a1f23ae28f"
         }
       ]
     },
@@ -317,7 +317,7 @@
       "files": [
         {
           "path": "currency_fluctuations.json",
-          "sha256": "4c64c8303e5bd5d0350a95377511f97e4b97b8c5b42d7924ef6b3697cf382771"
+          "sha256": "5413548224288bcea06813ad60cafca0bf79c3e1ab889ad495bd63ffa681f357"
         }
       ]
     },
@@ -485,7 +485,7 @@
       "files": [
         {
           "path": "energy_or_transport_cost_increase.json",
-          "sha256": "fea2a515a3f0875979be8c0308458207bb07597c525d2b73200c330f859404af"
+          "sha256": "67e585f4270b92299943084d2df93d19db64e8627c50988d08057fa20e4713c9"
         }
       ]
     },
@@ -691,7 +691,7 @@
       "files": [
         {
           "path": "goods_in_transit_loss_theft_or_damage.json",
-          "sha256": "4ca26c5fcee8e82bfc2fc5c2957ab7249bb76fc68cd1609457e413ee7a80197c"
+          "sha256": "0cb6782c69ca6f101c7cb4420218c5caf1239da3ee31c1355fbaeb0766639a6e"
         }
       ]
     },
@@ -785,7 +785,7 @@
       "files": [
         {
           "path": "government_restrictions.json",
-          "sha256": "f51e9768b8ba1daedc6a2ec9d29e02c48f8580088b4d05d7b72227a7a65b6270"
+          "sha256": "2d4f7aa23dd2948c2841ca718bd501ab62be49fd7bef329793a09ddac02d881d"
         }
       ]
     },
@@ -1054,7 +1054,7 @@
       "files": [
         {
           "path": "port_disruption.json",
-          "sha256": "8aecbaf15d29f0c06cc436bf65c1145d2f5ffb69450625e09977854101ef36df"
+          "sha256": "1f7748d3675011095b6f9a0f7b5f4c2ec9f9d87b0a1d5ff2cf1dd572833f72bf"
         }
       ]
     },
@@ -1285,7 +1285,7 @@
       "files": [
         {
           "path": "supplier_or_route_concentration.json",
-          "sha256": "e14a17b77f39414e78cdf3b45d2fcc1227b87b29fa35bce74d1216a24dcd96f6"
+          "sha256": "d64421644f3edfe7a9585f9a3fe96d85b533e5e65bd3167ec2b90589dc8fc714"
         }
       ]
     },
@@ -1341,7 +1341,7 @@
       "files": [
         {
           "path": "tariffs_and_duties.json",
-          "sha256": "dfc7a735fe7e09acd9d03798dc2f0d583f1261c55a54b09afadecb6dcf0994ca"
+          "sha256": "b07c8a9be4088f98b6d112d0d783d41ff22b55d948a20a0d6127fc39ea60f704"
         }
       ]
     }

@@ -205,7 +205,7 @@
         "No case-study supplier or shipment has been matched."
       ],
       "known_from": "2025-08-30",
-      "approximations": [{"field": "known_from", "value": "2025-08-30", "basis": "No start date and no source.published_at. Date of the related Daily Tribune report (search_window anchor), the earliest verified date the theft was public (plan section 5.2, rule 3).", "review_status": "unreviewed"}],
+      "approximations": [{"field": "known_from", "value": "2025-08-30", "basis": "No start date and no source.published_at. Date of the related Daily Tribune report (search_window anchor), the earliest verified date the theft was public (plan section 5.2, rule 3). Checked 2026-11-15: the TAPA post is dated 8 September 2025 and gives no theft date; it links a Manila Bulletin article whose URL suggests 29 August 2025, not verified, so the later verified date is kept.", "review_status": "source_checked"}],
       "search_window": {
         "start": "2025-08-16",
         "end": "2025-09-13",

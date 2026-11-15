@@ -102,8 +102,8 @@
         "The source describes manifest submission delays, not a measured shipment clearance delay.",
         "No case-study supplier, shipment, specific border location, or graph match is established."
       ],
-      "known_from": "2025-09-24",
-      "approximations": [{"field": "known_from", "value": "2025-09-24", "basis": "No start date and no source.published_at. Date of memorandum 61-2025 (search_window anchor), the earliest date the suspension could be known; the report's own date is not verified (plan section 5.2, rule 3).", "review_status": "unreviewed"}],
+      "known_from": "2025-09-30",
+      "approximations": [{"field": "known_from", "value": "2025-09-30", "basis": "No start date and no source.published_at. The PortCalls article (checked 2026-11-15) says memorandum 61-2025 was dated 24 September and released on 30 September 2025, so it is known from its release, not its date (plan section 5.2, rule 3). The article's own date is not shown.", "review_status": "source_checked"}],
       "search_window": {
         "start": "2025-09-10",
         "end": "2025-10-08",

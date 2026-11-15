@@ -1,0 +1,232 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2026-08-03",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-28",
+    "component_query": "Dyson Gen Detect Extra Purpleironpurple Costco",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:flextronics-shah-alam-sdn-bhd",
+      "supplier_name": "Flextronics Shah Alam Sdn Bhd",
+      "country": "MY",
+      "parent_companies": [
+        "FLEX LTD."
+      ],
+      "hs_codes": [
+        {
+          "code": "850811",
+          "shipments": 14
+        },
+        {
+          "code": "850870",
+          "shipments": 2
+        },
+        {
+          "code": "851631",
+          "shipments": 2
+        },
+        {
+          "code": "851632",
+          "shipments": 2
+        },
+        {
+          "code": "170113",
+          "shipments": 1
+        },
+        {
+          "code": "230910",
+          "shipments": 1
+        },
+        {
+          "code": "847950",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Tanjung Pelepas",
+          "code": "55750",
+          "country": "MY",
+          "shipments": 9
+        },
+        {
+          "name": "Shanghai",
+          "code": "57035",
+          "country": "CN",
+          "shipments": 5
+        },
+        {
+          "name": "Yangshan",
+          "code": "57037",
+          "country": "CN",
+          "shipments": 5
+        },
+        {
+          "name": "Port Klang",
+          "code": "55751",
+          "country": "MY",
+          "shipments": 2
+        },
+        {
+          "name": "All Other Peoples Republic Of China Ports",
+          "code": "57000",
+          "country": "CN",
+          "shipments": 1
+        },
+        {
+          "name": "Singapore",
+          "code": "55976",
+          "country": "SG",
+          "shipments": 1
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 12
+        },
+        {
+          "name": "Newark, Nj",
+          "code": "4601",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 9
+        },
+        {
+          "name": "Long Beach, Ca",
+          "code": "2709",
+          "country": "US",
+          "coast": "west",
+          "shipments": 2
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 21
+        },
+        {
+          "name": "Dyson B2B Inc",
+          "shipments": 2
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Maersk Line",
+          "code": "MAEU",
+          "shipments": 13
+        },
+        {
+          "name": "Pyramid Lines Singapore Pte Ltd",
+          "code": "PYMN",
+          "shipments": 4
+        },
+        {
+          "name": "Dsv Ocean Transport",
+          "code": "DSVF",
+          "shipments": 2
+        },
+        {
+          "name": "Kerry Freight (Usa) Inc",
+          "code": "KFUN",
+          "shipments": 2
+        },
+        {
+          "name": "Maersk Logistics & Services Intl A/S",
+          "code": "MZLY",
+          "shipments": 2
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Cma Cgm Virginia",
+          "shipments": 3
+        },
+        {
+          "name": "Guthorm Maersk",
+          "shipments": 2
+        },
+        {
+          "name": "Southampton Express",
+          "shipments": 2
+        },
+        {
+          "name": "Antwerpen Express",
+          "shipments": 1
+        },
+        {
+          "name": "Basle Express",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Georgia",
+          "shipments": 1
+        },
+        {
+          "name": "Ever Mode",
+          "shipments": 1
+        },
+        {
+          "name": "Georg Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Gerd Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Gerda Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Gunde Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Gustav Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Leverkusen Express",
+          "shipments": 1
+        },
+        {
+          "name": "Madrid Express",
+          "shipments": 1
+        },
+        {
+          "name": "Maersk Algol",
+          "shipments": 1
+        },
+        {
+          "name": "Msc Irene",
+          "shipments": 1
+        },
+        {
+          "name": "Rome Express",
+          "shipments": 1
+        },
+        {
+          "name": "Shanghai Express",
+          "shipments": 1
+        },
+        {
+          "name": "Ulsan Express",
+          "shipments": 1
+        }
+      ],
+      "currency": "MYR",
+      "footprint_window": {
+        "first_arrival": "2025-09-15",
+        "last_arrival": "2026-09-23",
+        "shipments": 23
+      }
+    }
+  ]
+}

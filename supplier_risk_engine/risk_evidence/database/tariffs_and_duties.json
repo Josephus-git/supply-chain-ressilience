@@ -33,7 +33,7 @@
       "verification_status": "official_order_reviewed",
       "limitations": ["The 10% was increased to 20% for covered entries from 4 March 2025; implementation and in-transit exceptions require entry-specific review.", "This is an additional duty, not a total duty rate or evidence of any case-study shipment. IEEPA duty collections were subsequently terminated; legal challenges and refund outcomes are not assessed."],
       "known_from": "2025-02-01",
-      "approximations": [{"field": "known_from", "value": "2025-02-01", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at, the order's publication date.", "review_status": "unreviewed"}],
+      "approximations": [{"field": "known_from", "value": "2025-02-01", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at, the order's publication date. Checked 2026-11-15: the White House order is dated 1 February 2025 and applies from 4 February 2025.", "review_status": "source_checked"}],
       "search_window": {"start": "2025-02-04", "end": "2025-03-03", "basis": "observation_period", "note": "The dated initial rate interval for retrieval; exceptions and entry times still govern applicability.", "anchor_date": "2025-02-04", "anchor_basis": "effective_date"},
       "scenario_recovery": null
     },
@@ -50,7 +50,7 @@
       "verification_status": "official_order_reviewed",
       "limitations": ["Dates describe the nominal covered-entry rate interval, not a complete determination for goods qualifying for special treatment.", "This is not a total rate. Subsequent termination, litigation and possible refunds require separate review; no case-study shipment has been verified."],
       "known_from": "2025-03-03",
-      "approximations": [{"field": "known_from", "value": "2025-03-03", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is the signing of EO 14228 (cited in conditions_and_exclusions); the stored source is the later EO 14357 page, so its published_at is not the announcement.", "review_status": "unreviewed"}],
+      "approximations": [{"field": "known_from", "value": "2025-03-03", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is the signing of EO 14228 (cited in conditions_and_exclusions); the stored source is the later EO 14357 page, so its published_at is not the announcement. Checked 2026-11-15: the stored EO 14357 text refers to \"Executive Order 14228 of March 3, 2025\", which raised the rate from 10 to 20 percent.", "review_status": "source_checked"}],
       "search_window": {"start": "2025-03-04", "end": "2025-11-09", "basis": "observation_period", "note": "Nominal rate period for retrieval; not proof every entry was assessed this rate.", "anchor_date": "2025-03-04", "anchor_basis": "effective_date"},
       "scenario_recovery": null
     },
@@ -67,7 +67,7 @@
       "verification_status": "official_order_and_cbp_guidance_reviewed",
       "limitations": ["End date is the last full day before CBP's collection cutoff, not a ruling on historical legal validity or refund eligibility.", "This is one additional duty layer, not a total rate or evidence that a specific product or shipment was assessed."],
       "known_from": "2025-11-04",
-      "approximations": [{"field": "known_from", "value": "2025-11-04", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at (EO 14357).", "review_status": "unreviewed"}],
+      "approximations": [{"field": "known_from", "value": "2025-11-04", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at (EO 14357). Checked 2026-11-15: EO 14357 is dated 4 November 2025 and reduces the rate from 10 November 2025.", "review_status": "source_checked"}],
       "search_window": {"start": "2025-11-10", "end": "2026-02-23", "basis": "observation_period", "note": "Nominal rate and collection interval for retrieval; applicability and legal outcomes require separate review.", "anchor_date": "2025-11-10", "anchor_basis": "effective_date"},
       "scenario_recovery": null
     },
@@ -84,7 +84,7 @@
       "verification_status": "official_annex_and_cbp_guidance_reviewed",
       "limitations": ["Nominal country rate, not proof it applied to a particular product throughout the interval; product exclusions and amendments may change treatment.", "The end date represents the last full day before the CBP collection cutoff, not a determination of legal validity, refund eligibility or the end of other duties.", "Origin is not necessarily supplier location; no Dyson entry, classification or origin has been verified."],
       "known_from": "2025-07-31",
-      "approximations": [{"field": "known_from", "value": "2025-07-31", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at.", "review_status": "unreviewed"}],
+      "approximations": [{"field": "known_from", "value": "2025-07-31", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at. Checked 2026-11-15: EO 14326 is dated 31 July 2025 and applies 7 days after that date (7 August 2025).", "review_status": "source_checked"}],
       "search_window": {"start": "2025-08-07", "end": "2026-02-23", "basis": "observation_period", "note": "Nominal country-rate collection interval for retrieval; not proof of applicability to each product or entry.", "anchor_date": "2025-08-07", "anchor_basis": "effective_date"},
       "scenario_recovery": null
     },
@@ -101,7 +101,7 @@
       "verification_status": "official_annex_and_cbp_guidance_reviewed",
       "limitations": ["Nominal country rate, not proof it applied to any particular product throughout the interval; exclusions and amendments may change treatment.", "The end date represents the last full day before CBP's collection cutoff, not a ruling on legal validity or refund eligibility. No case-study entry or origin has been verified."],
       "known_from": "2025-07-31",
-      "approximations": [{"field": "known_from", "value": "2025-07-31", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at.", "review_status": "unreviewed"}],
+      "approximations": [{"field": "known_from", "value": "2025-07-31", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at. Checked 2026-11-15: EO 14326 is dated 31 July 2025 and applies 7 days after that date (7 August 2025).", "review_status": "source_checked"}],
       "search_window": {"start": "2025-08-07", "end": "2026-02-23", "basis": "observation_period", "note": "Nominal country-rate collection interval for retrieval; not proof of applicability to each product or entry.", "anchor_date": "2025-08-07", "anchor_basis": "effective_date"},
       "scenario_recovery": null
     },
@@ -118,7 +118,7 @@
       "verification_status": "official_annex_and_cbp_guidance_reviewed",
       "limitations": ["Nominal country rate, not proof it applied to a particular product throughout the interval; exclusions and amendments may change treatment.", "The end date represents the last full day before CBP's collection cutoff, not a ruling on legal validity or refund eligibility. No case-study entry or origin has been verified."],
       "known_from": "2025-07-31",
-      "approximations": [{"field": "known_from", "value": "2025-07-31", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at.", "review_status": "unreviewed"}],
+      "approximations": [{"field": "known_from", "value": "2025-07-31", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at. Checked 2026-11-15: EO 14326 is dated 31 July 2025 and applies 7 days after that date (7 August 2025).", "review_status": "source_checked"}],
       "search_window": {"start": "2025-08-07", "end": "2026-02-23", "basis": "observation_period", "note": "Nominal country-rate collection interval for retrieval; not proof of applicability to each product or entry.", "anchor_date": "2025-08-07", "anchor_basis": "effective_date"},
       "scenario_recovery": null
     },
@@ -135,7 +135,7 @@
       "verification_status": "official_order_and_cbp_guidance_reviewed",
       "limitations": ["This record starts at the 7 August 2025 modification, not the original baseline start; it does not establish product-specific eligibility throughout the interval.", "End is the last full day before CBP's collection cutoff; legal validity and refund eligibility are not assessed. Origin and a case-study entry are unverified."],
       "known_from": "2025-07-31",
-      "approximations": [{"field": "known_from", "value": "2025-07-31", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at.", "review_status": "unreviewed"}],
+      "approximations": [{"field": "known_from", "value": "2025-07-31", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at. Checked 2026-11-15: EO 14326 is dated 31 July 2025 and applies 7 days after that date (7 August 2025).", "review_status": "source_checked"}],
       "search_window": {"start": "2025-08-07", "end": "2026-02-23", "basis": "observation_period", "note": "Nominal baseline and collection interval from the reviewed modification, for retrieval only.", "anchor_date": "2025-08-07", "anchor_basis": "effective_date"},
       "scenario_recovery": null
     },
@@ -167,7 +167,7 @@
       "verification_status": "official_proclamation_and_cbp_guidance_reviewed",
       "limitations": ["The end field is the last full date before the specified 00:01 expiry; date-only intervals cannot express the exact one-minute boundary or special entry conditions.", "This is an additional surcharge, not a total rate; excluded products and legal challenges require separate analysis. No case-study entry has been verified."],
       "known_from": "2026-02-20",
-      "approximations": [{"field": "known_from", "value": "2026-02-20", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at.", "review_status": "unreviewed"}],
+      "approximations": [{"field": "known_from", "value": "2026-02-20", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at. Checked 2026-11-15: the proclamation is dated 20 February 2026 and is effective 24 February 2026.", "review_status": "source_checked"}],
       "search_window": {"start": "2026-02-24", "end": "2026-07-23", "basis": "observation_period", "note": "Scheduled covered-entry period for retrieval, excluding the partial-minute expiry boundary and not proving every article was covered.", "anchor_date": "2026-02-24", "anchor_basis": "effective_date"},
       "scenario_recovery": null
     },
@@ -184,7 +184,7 @@
       "verification_status": "official_ustr_notice_reviewed",
       "limitations": ["The 2024 notice specifies a 2026 rate; later amendments and current individual exclusions have not been comprehensively verified. Null end does not prove that the provision remained unchanged.", "The source describes a schedule, not an actual tariff paid or proof that a Dyson product contains a Chinese-origin battery. This is not a total duty rate."],
       "known_from": "2024-09-18",
-      "approximations": [{"field": "known_from", "value": "2024-09-18", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at, the determination that scheduled the 2026 rate.", "review_status": "unreviewed"}],
+      "approximations": [{"field": "known_from", "value": "2024-09-18", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at, the determination that scheduled the 2026 rate. Checked 2026-11-15: the USTR notice (file dated 12 September 2024) schedules the 2026 increase for 8507.60.0020. 2024-09-18 is kept as its Federal Register date; either date is before the study start, so retrieval is unaffected.", "review_status": "source_checked"}],
       "search_window": {"start": "2026-01-01", "end": "2026-09-30", "basis": "study_period_bound", "note": "From scheduled effective date through the study cutoff for candidate retrieval; cutoff is not a verified expiry or proof of unchanged applicability.", "anchor_date": "2026-01-01", "anchor_basis": "effective_date"},
       "scenario_recovery": null
     },

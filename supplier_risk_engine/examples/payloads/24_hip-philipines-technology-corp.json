@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2025-10-05",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-24",
+    "component_query": "Uscamx Amsipkcp Air Wrap Styler",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:hip-philipines-technology-corp",
+      "supplier_name": "Hip Philipines Technology Corp",
+      "country": "PH",
+      "parent_companies": [
+        "HI-P INTERNATIONAL PTE. LTD."
+      ],
+      "hs_codes": [
+        {
+          "code": "851632",
+          "shipments": 26
+        },
+        {
+          "code": "850811",
+          "shipments": 5
+        },
+        {
+          "code": "851631",
+          "shipments": 2
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Pusan",
+          "code": "58023",
+          "country": "KR",
+          "shipments": 12
+        },
+        {
+          "name": "Yantian",
+          "code": "57078",
+          "country": "CN",
+          "shipments": 11
+        },
+        {
+          "name": "Nansha",
+          "code": "57073",
+          "country": "CN",
+          "shipments": 7
+        },
+        {
+          "name": "Tanjung Pelepas",
+          "code": "55750",
+          "country": "MY",
+          "shipments": 3
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Newark, Nj",
+          "code": "4601",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 28
+        },
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 5
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 33
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Maersk Line",
+          "code": "MAEU",
+          "shipments": 33
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Corcovado",
+          "shipments": 5
+        },
+        {
+          "name": "Al Qibla Express",
+          "shipments": 4
+        },
+        {
+          "name": "Cisnes",
+          "shipments": 4
+        },
+        {
+          "name": "Coyhaique",
+          "shipments": 4
+        },
+        {
+          "name": "Dortmund Express",
+          "shipments": 4
+        },
+        {
+          "name": "Southampton Express",
+          "shipments": 3
+        },
+        {
+          "name": "Cauquenes",
+          "shipments": 2
+        },
+        {
+          "name": "Rome Express",
+          "shipments": 2
+        },
+        {
+          "name": "Ain Snan Express",
+          "shipments": 1
+        },
+        {
+          "name": "Kuala Lumpur Express",
+          "shipments": 1
+        },
+        {
+          "name": "Maersk Eunapolis",
+          "shipments": 1
+        },
+        {
+          "name": "Navios Constellation",
+          "shipments": 1
+        },
+        {
+          "name": "Tsingtao Express",
+          "shipments": 1
+        }
+      ],
+      "currency": "PHP",
+      "footprint_window": {
+        "first_arrival": "2025-09-29",
+        "last_arrival": "2026-09-15",
+        "shipments": 33
+      }
+    }
+  ]
+}

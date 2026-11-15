@@ -32,7 +32,11 @@ ISO_COUNTRY_CODES = frozenset(
 )
 
 # Country names (normalised: case-folded, punctuation removed, whitespace
-# collapsed) to ISO alpha-2. DRAFT, pending review (plan section 5.4, item 4).
+# collapsed) to ISO alpha-2. A fallback only: callers should send the ISO
+# codes the graph stores (plan section 5.4, decision 4). Reviewed 2026-11-15
+# against every country name in data/processed/*_shipments_clean.csv;
+# tests/test_normalise.py checks that each converts to its stored code.
+# A name not listed here is rejected, never guessed.
 COUNTRY_NAMES = {
     # Study countries and their common variants.
     "china": "CN",
@@ -94,6 +98,7 @@ COUNTRY_NAMES = {
     "france": "FR",
     "italy": "IT",
     "spain": "ES",
+    "portugal": "PT",
     "netherlands": "NL",
     "the netherlands": "NL",
     "belgium": "BE",

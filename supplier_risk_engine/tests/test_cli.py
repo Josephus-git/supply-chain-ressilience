@@ -96,19 +96,19 @@ class RunAll(unittest.TestCase):
         self.assertEqual(code, cli.EXIT_OK, err)
         summary = json.loads((out_dir / cli.SUMMARY_NAME).read_text())
         gold = summary["gold"]
-        self.assertEqual((gold["fixtures_compared"], gold["fixtures_passed"]), (18, 18))
+        self.assertEqual((gold["fixtures_compared"], gold["fixtures_passed"]), (37, 37))
         self.assertEqual((gold["missed_ids"], gold["unexpected_ids"]), (0, 0))
         self.assertEqual((gold["recall"], gold["precision"]), (1.0, 1.0))
         self.assertEqual(gold["payloads_without_fixture"], [])
         self.assertEqual(gold["fixtures_without_payload"], [])
-        self.assertEqual(len(list(out_dir.glob("*.json"))), 19)  # 18 results + summary
+        self.assertEqual(len(list(out_dir.glob("*.json"))), 38)  # 37 results + summary
 
     def test_batch_without_gold(self):
         code, _, _ = run_cli("run-all", str(PAYLOAD_DIR), "--out", str(self.tmp / "o"))
         self.assertEqual(code, cli.EXIT_OK)
         summary = json.loads((self.tmp / "o" / cli.SUMMARY_NAME).read_text())
         self.assertNotIn("gold", summary)
-        self.assertEqual(summary["completed"], 18)
+        self.assertEqual(summary["completed"], 37)
 
     def test_gold_mismatch_reported(self):
         gold = load_gold()

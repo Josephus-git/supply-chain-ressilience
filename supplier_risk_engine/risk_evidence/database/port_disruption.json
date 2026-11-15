@@ -164,8 +164,8 @@
         "The September scorecard is a monthly observation; it does not establish the onset, end or continuous daily congestion. Exact publication date was not verified.",
         "No particular terminal, case-study cargo, supplier or route has been matched."
       ],
-      "known_from": "2026-09-30",
-      "approximations": [{"field": "known_from", "value": "2026-09-30", "basis": "No start date and no verified source.published_at. A September monthly average cannot be reported before the month ends, so known from 2026-09-30, the last day of the observation period; the actual publication may be later (plan section 5.2, rule 3).", "review_status": "unreviewed"}],
+      "known_from": "2026-10-12",
+      "approximations": [{"field": "known_from", "value": "2026-10-12", "basis": "No start date and no stored source.published_at. The Xeneta post is dated 12 October 2026 (checked 2026-11-15), after the study end, so this record is never in scope (plan section 5.2, rule 3).", "review_status": "source_checked"}],
       "search_window": {"start": "2026-09-01", "end": "2026-09-30", "basis": "observation_period", "note": "September 2026 scorecard period, not proof of continuous daily impact or recovery.", "anchor_date": "2026-09-01", "anchor_basis": "observation_period"},
       "scenario_recovery": null
     }

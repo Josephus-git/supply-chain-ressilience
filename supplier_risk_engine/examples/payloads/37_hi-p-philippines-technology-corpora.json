@@ -1,0 +1,268 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2025-02-01",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-37",
+    "component_query": "Air Wrap Styler",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:hi-p-philippines-technology-corpora",
+      "supplier_name": "Hi P Philippines Technology Corpora",
+      "country": "TW",
+      "parent_companies": [
+        "HI-P INTERNATIONAL PTE. LTD."
+      ],
+      "hs_codes": [
+        {
+          "code": "851632",
+          "shipments": 30
+        },
+        {
+          "code": "960390",
+          "shipments": 7
+        },
+        {
+          "code": "850980",
+          "shipments": 5
+        },
+        {
+          "code": "850990",
+          "shipments": 2
+        },
+        {
+          "code": "842139",
+          "shipments": 1
+        },
+        {
+          "code": "851690",
+          "shipments": 1
+        },
+        {
+          "code": "960350",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Kaohsiung",
+          "code": "58309",
+          "country": "TW",
+          "shipments": 19
+        },
+        {
+          "name": "Shanghai",
+          "code": "57035",
+          "country": "CN",
+          "shipments": 15
+        },
+        {
+          "name": "Hong Kong",
+          "code": "58201",
+          "country": "HK",
+          "shipments": 5
+        },
+        {
+          "name": "Pusan",
+          "code": "58023",
+          "country": "KR",
+          "shipments": 2
+        },
+        {
+          "name": "Qingdao",
+          "code": "57047",
+          "country": "CN",
+          "shipments": 2
+        },
+        {
+          "name": "Tanjung Pelepas",
+          "code": "55750",
+          "country": "MY",
+          "shipments": 2
+        },
+        {
+          "name": "Ning Bo",
+          "code": "57020",
+          "country": "CN",
+          "shipments": 1
+        },
+        {
+          "name": "Singapore",
+          "code": "55976",
+          "country": "SG",
+          "shipments": 1
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 27
+        },
+        {
+          "name": "Long Beach, Ca",
+          "code": "2709",
+          "country": "US",
+          "coast": "west",
+          "shipments": 16
+        },
+        {
+          "name": "Seattle, Wa",
+          "code": "3001",
+          "country": "US",
+          "coast": "west",
+          "shipments": 3
+        },
+        {
+          "name": "Newark, Nj",
+          "code": "4601",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 1
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 44
+        },
+        {
+          "name": "Dyson Canada Limited",
+          "shipments": 2
+        },
+        {
+          "name": "Dyson Appliances Canada",
+          "shipments": 1
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Dhl Express",
+          "code": "DMAL",
+          "shipments": 46
+        },
+        {
+          "name": "Maersk Logistics & Services Intl A/S",
+          "code": "MZLY",
+          "shipments": 1
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Cma Cgm Swordfish",
+          "shipments": 5
+        },
+        {
+          "name": "Cosco Shipping Panama",
+          "shipments": 4
+        },
+        {
+          "name": "Ym Uniformity",
+          "shipments": 4
+        },
+        {
+          "name": "Cma Cgm Florida",
+          "shipments": 2
+        },
+        {
+          "name": "Cma Cgm Georgia",
+          "shipments": 2
+        },
+        {
+          "name": "Cma Cgm Manta Ray",
+          "shipments": 2
+        },
+        {
+          "name": "Cma Cgm Virginia",
+          "shipments": 2
+        },
+        {
+          "name": "Cma Cgm White Shark",
+          "shipments": 2
+        },
+        {
+          "name": "Cosco Netherlands",
+          "shipments": 2
+        },
+        {
+          "name": "Cosco Shipping Andes",
+          "shipments": 2
+        },
+        {
+          "name": "Cosco Shipping Carnatio",
+          "shipments": 2
+        },
+        {
+          "name": "Msc Antigua",
+          "shipments": 2
+        },
+        {
+          "name": "President Jq Adams",
+          "shipments": 2
+        },
+        {
+          "name": "Ym Unanimity",
+          "shipments": 2
+        },
+        {
+          "name": "Cma Cgm Rodolphe",
+          "shipments": 1
+        },
+        {
+          "name": "Cosco England",
+          "shipments": 1
+        },
+        {
+          "name": "Madrid Express",
+          "shipments": 1
+        },
+        {
+          "name": "Maersk Shivling",
+          "shipments": 1
+        },
+        {
+          "name": "One Humber",
+          "shipments": 1
+        },
+        {
+          "name": "Oocl Bauhinia",
+          "shipments": 1
+        },
+        {
+          "name": "Oocl New York",
+          "shipments": 1
+        },
+        {
+          "name": "Oocl Poland",
+          "shipments": 1
+        },
+        {
+          "name": "Oocl Sunflower",
+          "shipments": 1
+        },
+        {
+          "name": "Oocl Violet",
+          "shipments": 1
+        },
+        {
+          "name": "Xin Da Yang Zhou",
+          "shipments": 1
+        },
+        {
+          "name": "Ym Ubiquity",
+          "shipments": 1
+        }
+      ],
+      "currency": "TWD",
+      "footprint_window": {
+        "first_arrival": "2025-02-11",
+        "last_arrival": "2026-09-23",
+        "shipments": 47
+      }
+    }
+  ]
+}

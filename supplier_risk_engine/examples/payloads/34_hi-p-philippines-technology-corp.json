@@ -1,0 +1,142 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2025-03-19",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-34",
+    "component_query": "Air Wrap Styler",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:hi-p-philippines-technology-corp",
+      "supplier_name": "Hi P Philippines Technology Corp",
+      "country": "PH",
+      "parent_companies": [
+        "HI-P INTERNATIONAL PTE. LTD."
+      ],
+      "hs_codes": [
+        {
+          "code": "851632",
+          "shipments": 7
+        },
+        {
+          "code": "841459",
+          "shipments": 3
+        },
+        {
+          "code": "850870",
+          "shipments": 2
+        },
+        {
+          "code": "950300",
+          "shipments": 2
+        },
+        {
+          "code": "842199",
+          "shipments": 1
+        },
+        {
+          "code": "960390",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Manila",
+          "code": "56549",
+          "country": "PH",
+          "shipments": 15
+        },
+        {
+          "name": "Yangshan",
+          "code": "57037",
+          "country": "CN",
+          "shipments": 1
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 13
+        },
+        {
+          "name": "Tacoma, Wa",
+          "code": "3002",
+          "country": "US",
+          "coast": "west",
+          "shipments": 3
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 16
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Pyramid Lines Singapore Pte Ltd",
+          "code": "PYMN",
+          "shipments": 15
+        },
+        {
+          "name": "Maersk Line",
+          "code": "MAEU",
+          "shipments": 1
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Hansa Breitenburg",
+          "shipments": 3
+        },
+        {
+          "name": "Mol Premium",
+          "shipments": 3
+        },
+        {
+          "name": "President Carter",
+          "shipments": 2
+        },
+        {
+          "name": "Ym Utility",
+          "shipments": 2
+        },
+        {
+          "name": "Hmm Manila",
+          "shipments": 1
+        },
+        {
+          "name": "Maersk Shivling",
+          "shipments": 1
+        },
+        {
+          "name": "President Bush",
+          "shipments": 1
+        },
+        {
+          "name": "President Reagan",
+          "shipments": 1
+        },
+        {
+          "name": "Ym Masculinity",
+          "shipments": 1
+        },
+        {
+          "name": "Ym Upsurgence",
+          "shipments": 1
+        }
+      ],
+      "currency": "PHP",
+      "footprint_window": {
+        "first_arrival": "2025-04-02",
+        "last_arrival": "2026-05-28",
+        "shipments": 16
+      }
+    }
+  ]
+}

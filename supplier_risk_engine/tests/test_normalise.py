@@ -1,6 +1,8 @@
 """Normalisation (plan section 5.1)."""
 
+import csv
 import unittest
+from pathlib import Path
 
 from supplier_risk_engine.engine.normalise import (
     contains_whole_words,
@@ -75,6 +77,29 @@ class Countries(unittest.TestCase):
     def test_unknown_name_or_code(self):
         self.assertIsNone(country_to_code("Atlantis"))
         self.assertIsNone(country_to_code("XX"))
+
+    def test_graph_country_names_convert_to_their_stored_codes(self):
+        """Decision 4 (plan section 5.4): every name/code pair in the CSVs
+        the graph is loaded from must agree with the name table."""
+        csv_dir = Path(__file__).resolve().parents[2] / "data" / "processed"
+        paths = sorted(csv_dir.glob("*_shipments_clean.csv"))
+        if not paths:
+            self.skipTest(f"no graph CSVs in {csv_dir}")
+        pairs = set()
+        for path in paths:
+            with path.open(encoding="utf-8", newline="") as fh:
+                for row in csv.DictReader(fh):
+                    for name_col, code_col in (
+                        ("supplier_country", "supplier_country_code"),
+                        ("buyer_country", "buyer_country_code"),
+                    ):
+                        if row.get(name_col):
+                            pairs.add((row[name_col], row[code_col]))
+        self.assertTrue(pairs)
+        for name, code in sorted(pairs):
+            with self.subTest(name=name):
+                self.assertEqual(country_to_code(name), code)
+                self.assertEqual(country_to_code(code), code)
 
 
 class Ports(unittest.TestCase):
