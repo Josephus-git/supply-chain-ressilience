@@ -58,3 +58,8 @@ xxhash                   ==3.6.0
 zstandard                ==0.25.0
 langchain_ollama
 mcp                      >=2.3,<3
+annotated-doc            ==0.0.6
+fastapi                  ==0.163.1
+starlette                ==1.10.0
+uvicorn                  ==0.54.0
+sse-starlette            ==3.6.0

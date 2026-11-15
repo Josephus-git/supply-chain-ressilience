@@ -1,0 +1,143 @@
+{
+  "description": "Hand-reviewed map coordinates for graph nodes that have no lat/lon. City-level only, read from the address stored on each node. No external geocoding service was used and the graph is not changed. Coordinates are approximate city/town centres (about 4 decimal places) and are for map display only; the engine never reads this file.",
+  "reviewed": "2026-11-15",
+  "review_status": "draft — please check each entry against the stored address",
+  "suppliers": {
+    "org:flextronics-shah-alam": {
+      "city": "Gelang Patah", "region": "Johor", "country_code": "MY",
+      "lat": 1.4436, "lon": 103.5926,
+      "basis": "Address: 'Zon Perindustrian Bebas Gelang Patah Jo 81560 My' (Port of Tanjung Pelepas free zone)."
+    },
+    "org:flextronics-shah-alam-sdn-bhd": {
+      "city": "Gelang Patah", "region": "Johor", "country_code": "MY",
+      "lat": 1.4436, "lon": 103.5926,
+      "basis": "Address: 'Zon Perindustrian Bebas Pelabuhan Tanjung Pelepas ... Johor Bahru My' (same plot D26 as the Gelang Patah entry)."
+    },
+    "org:flextronics-technology-penang-sdn": {
+      "city": "Perai", "region": "Penang", "country_code": "MY",
+      "lat": 5.3833, "lon": 100.3833,
+      "basis": "Address: 'Kawasan Perindustrian Prai Perai My'."
+    },
+    "org:hi-p-philippines-technology-corpora": {
+      "city": "Tanauan City", "region": "Batangas", "country_code": "PH",
+      "lat": 14.0858, "lon": 121.1497,
+      "basis": "Address: 'First Philippine Industrial Park - Special Economic Zone Tanauan City Ph'."
+    },
+    "org:hi-p-philippines-technology-corp": {
+      "city": "Tanauan City", "region": "Batangas", "country_code": "PH",
+      "lat": 14.0858, "lon": 121.1497,
+      "basis": "Address: 'Fpipsez Tanauan City 40 4234 Ph'."
+    },
+    "org:hip-philipines-technology-corp": {
+      "city": "Tanauan City", "region": "Batangas", "country_code": "PH",
+      "lat": 14.0858, "lon": 121.1497,
+      "basis": "Address: 'Fpipsez Tanauan ... Ph'."
+    },
+    "org:ihastek-malaysia-sdn-bhd": {
+      "city": "Senai", "region": "Johor", "country_code": "MY",
+      "lat": 1.6006, "lon": 103.6419,
+      "basis": "Address: 'Taman Teknologi Johor Senai Kulai 01 81400 My'. Graph reports country CN (ImportYeti); address is Malaysia."
+    },
+    "org:kinpo-electronics-philippines": {
+      "city": "Santo Tomas", "region": "Batangas", "country_code": "PH",
+      "lat": 14.1078, "lon": 121.1414,
+      "basis": "Address: 'Fpip Ii- Sez Brgy Sta Anastacia Sto Tomas 4234 Ph'."
+    },
+    "org:kinpo-electronics-philippines-inc": {
+      "city": "Santo Tomas", "region": "Batangas", "country_code": "PH",
+      "lat": 14.1078, "lon": 121.1414,
+      "basis": "Address: 'Fpip Ii-Sez Brgy Sta Anastacia Sto Tomas Batanga Ph'. Graph reports country HK (ImportYeti); address is the Philippines."
+    },
+    "org:meiban-technologies-m-sdn-bhd": {
+      "city": "Ulu Tiram", "region": "Johor", "country_code": "MY",
+      "lat": 1.6000, "lon": 103.8167,
+      "basis": "Address: 'Taman Perindustrian Cemerlang Ulu Tiram 01 81800 My'."
+    },
+    "org:meiban-technologies-malaysia-sdn": {
+      "city": "Ulu Tiram", "region": "Johor", "country_code": "MY",
+      "lat": 1.6000, "lon": 103.8167,
+      "basis": "Address: 'Taman Perindustrian Cemerlang Ulu Tiram My'. Graph reports country HK (ImportYeti); address is Malaysia."
+    },
+    "org:syarikat-sin-kwang-plastic": {
+      "city": "Senai", "region": "Johor", "country_code": "MY",
+      "lat": 1.6006, "lon": 103.6419,
+      "basis": "Address: 'Taman Teknologi Johor Senai Jo 81400 My'. Graph reports country CN (ImportYeti); address is Malaysia."
+    },
+    "org:syarikat-sin-kwang-plastic-ind-s-b": {
+      "city": "Senai", "region": "Johor", "country_code": "MY",
+      "lat": 1.6006, "lon": 103.6419,
+      "basis": "Address: 'Taman Teknologi Johor Senai My'."
+    },
+    "org:syarikat-sin-kwang-plastic-industri": {
+      "city": "Batu Pahat", "region": "Johor", "country_code": "MY",
+      "lat": 1.8548, "lon": 102.9325,
+      "basis": "Address: '421 4Th Miles Jalan Kluang Batu Pahat My'."
+    },
+    "org:v-s-industrial-berhad": {
+      "city": "Senai", "region": "Johor", "country_code": "MY",
+      "lat": 1.6006, "lon": 103.6419,
+      "basis": "Address: 'Murni Industrial Estate ... Taman Perindustrian Murni Senai My'."
+    },
+    "org:vs-industrial-berhad": {
+      "city": "Senai", "region": "Johor", "country_code": "MY",
+      "lat": 1.6006, "lon": 103.6419,
+      "basis": "Address: 'Jalan Murni 12 Kawasan P Senai Na 81400 My'. Graph reports country CN (ImportYeti); address is Malaysia."
+    },
+    "org:vs-industrial-philippines-inc": {
+      "city": "Santo Tomas", "region": "Batangas", "country_code": "PH",
+      "lat": 14.1078, "lon": 121.1414,
+      "basis": "Address: 'Light Industry And Science Park Iii San Rafael City Of Sto Tomas Batangas Ph'."
+    },
+    "org:wencor-m-sdn-bhd": {
+      "city": "Johor Bahru", "region": "Johor", "country_code": "MY",
+      "lat": 1.4927, "lon": 103.7414,
+      "basis": "Address: 'Kawasan Perindustrian Selatan Johor Bahru My'. Graph reports country TW (ImportYeti); address is Malaysia."
+    }
+  },
+  "buyers": {
+    "org:dyson-appliances-canada": {
+      "city": "Mississauga", "region": "Ontario", "country_code": "CA",
+      "lat": 43.5890, "lon": -79.6441,
+      "basis": "Address: '6360 Belgrave Road Mississauga Ca'. Graph reports country US (ImportYeti); address is Canada."
+    },
+    "org:dyson-b2b-inc": {
+      "city": "Chicago", "region": "Illinois", "country_code": "US",
+      "lat": 41.8781, "lon": -87.6298,
+      "basis": "Address: '1330 West Fulton Street ... Chicago Il'."
+    },
+    "org:dyson-canada-limited": {
+      "city": "Toronto", "region": "Ontario", "country_code": "CA",
+      "lat": 43.6532, "lon": -79.3832,
+      "basis": "Address: '8 Spadina Ave Suite 2200 Toronto Ca'. Graph reports country US (ImportYeti); address is Canada."
+    },
+    "org:dyson-canada-ltd": {
+      "city": "Toronto", "region": "Ontario", "country_code": "CA",
+      "lat": 43.6532, "lon": -79.3832,
+      "basis": "Address: '8 Spadina Avenue Suite 2200 Toronto Ca'. Graph reports country US (ImportYeti); address is Canada."
+    },
+    "org:dyson-inc": {
+      "city": "Walton", "region": "Kentucky", "country_code": "US",
+      "lat": 38.8756, "lon": -84.6102,
+      "basis": "Address: 'Ups Walton Ky Logistics Boulevard ... Walton Ky 41094 Us'."
+    }
+  },
+  "exit_ports": {
+    "port:57020": {
+      "city": "Ningbo", "region": "Zhejiang", "country_code": "CN",
+      "lat": 29.8683, "lon": 121.5440, "level": "city",
+      "basis": "Port name 'Ning Bo' has no coordinates in the graph; placed at Ningbo city."
+    },
+    "port:55200": {
+      "city": null, "region": null, "country_code": "VN",
+      "lat": 14.0583, "lon": 108.2772, "level": "country",
+      "label": "Viet Nam (other ports, country level)",
+      "basis": "Catch-all 'All Other Viet Nam Ports'; no single location, drawn at the country centroid."
+    },
+    "port:57000": {
+      "city": null, "region": null, "country_code": "CN",
+      "lat": 35.8617, "lon": 104.1954, "level": "country",
+      "label": "China (other ports, country level)",
+      "basis": "Catch-all 'All Other Peoples Republic Of China Ports'; no single location, drawn at the country centroid."
+    }
+  }
+}
