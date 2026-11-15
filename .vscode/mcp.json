@@ -1,8 +1,0 @@
-{
-  "servers": {
-    "graphacademy": {
-      "type": "http",
-      "url": "https://mcp.graphacademy.neo4j.com/mcp"
-    }
-  }
-}
