@@ -601,6 +601,19 @@ No remote or hosted servers, and no live data sources, are planned.
    no-country rule, and window boundaries (on the start, on the end, and one day
    outside). Also cover open end dates, undated candidates, dates outside the
    study window, invalid input, and repeated runs producing identical output.
+   - Done on 2026-11-15 in `supplier_risk_engine/tests/`: 115 tests, all
+     passing, standard library `unittest` only (pytest is optional). Run from
+     the repository root with
+     `python -m unittest discover -s supplier_risk_engine/tests -t .`.
+     - `test_normalise.py`, `test_dates.py`, `test_validate.py`, and
+       `test_matching.py` use synthetic records, so each rule is tested on
+       its own. `test_gold_fixtures.py` runs the 18 fixtures against
+       `expected_ids.json` (IDs, basis, strength, matched values, date
+       status, exclusions), plus determinism and the other two operations.
+     - `tests/helpers.py` has a minimal database reader that stands in for
+       the phase 5 loader.
+     - The phase 3 choices listed above are now fixed by tests, so changing
+       one means changing its test.
 5. **Add the loader and CLI.** The loader reads the JSON database and computes
    the data snapshot ID. The CLI exposes the three operations from section 8.2
    and runs the fixture batch.
