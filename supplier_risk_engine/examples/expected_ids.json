@@ -5,7 +5,7 @@
   "created_at": "2026-11-15",
   "evidence_database": {
     "path": "risk_evidence/database/",
-    "manifest_sha256": "2540a61bbede3d4892fd316f25de1df45f9d8fdc9fb51f4125fa7974c63785f6",
+    "manifest_sha256": "2840315d0df52abfc1dd86696c444c631ac8545c429580d374b519764fa5d391",
     "records": 97,
     "note": "If the database changes, recheck every fixture against the new records."
   },

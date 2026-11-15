@@ -418,14 +418,14 @@ country match is returned without a name, vessel, or carrier match.
 | Port disruption (`port_disruption.json`) | 7 | none | `country_code` | exit and entry ports against `reported_port`, tiered (section 5.1) | event interval | allowed as `port_country`, weak | |
 | Carrier or vessel disruption (`carrier_vessel_disruption.json`) | 6 | none | `country_code`, the incident location | `reported_vessel` (vessel name), `reported_carrier` (carrier, role text removed) | event interval | **not used** | The record states that the country is the incident location, not the vessel's flag or the supplier's country. |
 | Route or chokepoint disruption (`route_chokepoint_disruption.json`) | 5 | none | `countries[].country_code` | `trade_lanes` against supplier country, importing country, and entry-port coast (section 5.1) | event interval | allowed, labelled | Suez and Panama link by approximated lane; Hormuz by approximated country (SG). All are weak. |
-| Loss, theft, or damage in transit (`goods_in_transit.json`) | 8 | none | `country_code` | `reported_carrier`, split on `;`, role text removed | event interval | allowed, labelled | `reported_shipment` is not matched. |
+| Loss, theft, or damage in transit (`goods_in_transit_loss_theft_or_damage.json`) | 8 | none | `country_code` | `reported_carrier`, split on `;`, role text removed | event interval | allowed, labelled | `reported_shipment` is not matched. |
 | Tariffs and duties (`tariffs_and_duties.json`) | 15 | none | `origin_country_code` = supplier country and `importing_country_code` = `importing_country`, both required | `hs_codes` against `product_classification.code`, where present | effective interval | country pair only, weak, "country-wide measure" | A null origin means global: it matches on importing country alone. |
 | Government restrictions (`government_restrictions.json`) | 5 | `reported_organisation` | `affected_countries[]`, `issuing_country_code` | none | effective interval | allowed, labelled | `product_classification` is not in the key set. |
 | Border and customs delays (`border_customs_delays.json`) | 6 | none | `country_code` | port name against `border_or_customs_location` (section 5.1) | event interval | allowed, labelled | |
 | Geopolitical conflict (`geopolitical_conflict.json`) | 3 | none | `affected_countries[]` | none | event interval | allowed, labelled | `affected_area` text is not matched. |
 | Input or material shortage (`input_material_shortage.json`) | 5 | `reported_supplier` | `affected_countries[]` | none | event interval | allowed, labelled | `material` is not in the key set. |
-| Energy or transport cost increases (`energy_transport_cost_increase.json`) | 5 | none | `affected_countries[]` | none | observation start | allowed, labelled | Market context, not supplier costs. |
-| Supplier or route concentration (`supplier_route_concentration.json`) | 3 | `reported_entities_or_routes`, split into list items, `(unnamed)` ignored | `countries[].country_code` | none | observation start | allowed, labelled | |
+| Energy or transport cost increases (`energy_or_transport_cost_increase.json`) | 5 | none | `affected_countries[]` | none | observation start | allowed, labelled | Market context, not supplier costs. |
+| Supplier or route concentration (`supplier_or_route_concentration.json`) | 3 | `reported_entities_or_routes`, split into list items, `(unnamed)` ignored | `countries[].country_code` | none | observation start | allowed, labelled | |
 | Currency fluctuations (`currency_fluctuations.json`) | 6 | `reported_organisation` against payload `buyers` (`buyer_name`) | `country_code` is informational only, never linked | `currency` against `quote_currency` and `base_currency` | observation start | not applicable | The Dyson record has no currencies and links only by buyer name. |
 
 ### 7.1 Worked example: carrier or vessel disruption
@@ -617,6 +617,43 @@ No remote or hosted servers, and no live data sources, are planned.
 5. **Add the loader and CLI.** The loader reads the JSON database and computes
    the data snapshot ID. The CLI exposes the three operations from section 8.2
    and runs the fixture batch.
+   - Done on 2026-11-15: `supplier_risk_engine/loader.py`,
+     `supplier_risk_engine/cli.py`, and `__main__.py` (standard library only).
+     `tests/test_loader.py` and `tests/test_cli.py` bring the suite to 142
+     tests, all passing. `tests/helpers.py` now reads records through the
+     loader.
+   - Loader checks: every file parses, is named `<risk_type>.json` after the
+     `risk_type` it holds, and has a `records` list; evidence IDs are unique;
+     each file's sha256 equals `manifest.json`; the manifest and the directory
+     list the same files. Parse, name, and shape errors always fail.
+   - Three files were renamed to match their `risk_type`:
+     `energy_or_transport_cost_increase.json`,
+     `goods_in_transit_loss_theft_or_damage.json`, and
+     `supplier_or_route_concentration.json`. Their contents and sha256 values
+     are unchanged. The manifest paths and the gold set's `manifest_sha256`
+     were updated. Hash and file-list mismatches fail unless `verify=False`
+     (`--no-verify`), which turns them into warnings.
+   - Snapshot ID: the manifest's `snapshot_id` when every entry sets the same
+     value. Otherwise `db-sha256:` plus 16 hex characters of a sha256 over the
+     sorted `file name:file sha256` lines, so it changes whenever a stored
+     file changes. It replaces the engine's records-hash fallback in every
+     result.
+   - CLI, run as `python -m supplier_risk_engine [--database DIR]
+     [--no-verify] <command>`:
+     - `query <payload.json> [--out FILE]` (stdout by default).
+     - `run-all <dir> --out <dir> [--expected expected_ids.json]` writes one
+       result per payload plus `_summary.json`. With `--expected`, it reports
+       missed and unexpected IDs for each fixture, with totals, recall, and
+       precision (section 10). It warns if the gold set's `manifest_sha256`
+       differs from the current manifest.
+     - `evidence <id>` and `describe`. `describe` adds the database path, the
+       snapshot source, and the file hashes.
+     - Exit codes: 0 success; 1 a payload was rejected, an ID was not found,
+       or the batch differs from the gold set; 2 usage, file, or database
+       errors.
+   - Fixture batch:
+     `python -m supplier_risk_engine run-all supplier_risk_engine/examples/payloads --out <dir> --expected supplier_risk_engine/examples/expected_ids.json`
+     passes 18 of 18 fixtures, with 0 missed and 0 unexpected IDs.
 6. **Add the MCP server.** Expose the same three operations as MCP tools.
 7. **Later, outside this scope:** the LangChain app and its frontend
    (section 8.4).

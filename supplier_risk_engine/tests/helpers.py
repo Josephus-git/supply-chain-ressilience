@@ -1,7 +1,7 @@
 """Shared builders for the tests.
 
-`load_database` is a minimal reader for the stored JSON files. It stands in
-for the phase 5 loader and does no validation of its own.
+`load_database` returns the stored records through the real loader
+(supplier_risk_engine.loader), so manifest checks run on every test load.
 """
 
 from __future__ import annotations
@@ -11,6 +11,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from supplier_risk_engine import loader
 from supplier_risk_engine.engine import lookup_suppliers
 
 PACKAGE_DIR = Path(__file__).resolve().parent.parent
@@ -19,13 +20,7 @@ EXAMPLES_DIR = PACKAGE_DIR / "examples"
 
 
 def load_database() -> dict[str, list[dict[str, Any]]]:
-    records: dict[str, list[dict[str, Any]]] = {}
-    for path in sorted(DATABASE_DIR.glob("*.json")):
-        if path.name == "manifest.json":
-            continue
-        data = json.loads(path.read_text(encoding="utf-8"))
-        records[data["risk_type"]] = data["records"]
-    return records
+    return loader.load_database(DATABASE_DIR).records
 
 
 def load_gold() -> dict[str, Any]:
