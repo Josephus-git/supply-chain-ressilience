@@ -12,9 +12,14 @@ supplier, and returns the matched records with their dated, source-attributed
 evidence reports and related context.
 
 The engine only retrieves stored records. It estimates no probabilities, runs
-no simulation, and does not infer impact. It runs locally as an MCP server on
-this machine, using only historical data already stored here. A LangChain
-application can connect to it later without changing it.
+no simulation, and does not infer impact. It runs locally on this machine,
+called through a CLI or a direct Python import, using only historical data
+already stored here. A LangChain application can import it later without
+changing it.
+
+The engine simulates a real-time decision. `as_of_date` is the simulated
+"today": the engine returns only evidence that was known on that date
+(section 5.2), never later reports of events that had not yet happened.
 
 The engine should:
 
@@ -75,10 +80,8 @@ Supplier risk evidence engine (standalone)
              |
 Adapters (outside the engine)
   - loader: reads the JSON database and passes records in
-  - MCP server: exposes the engine to MCP clients on this machine
   - CLI: for testing and evaluation runs
-  - LangChain app (later): calls the MCP server as a client
-  - Python import (later): a Python frontend or app calls the engine directly
+  - LangChain app (later): imports the engine directly (no server)
 ```
 
 The engine receives records as plain input. It contains no file access, LLM,
@@ -96,7 +99,7 @@ scope and anchor. It is not a verified recovery duration, and the engine never
 uses it, or any retrieval window, as an impact duration.
 
 The existing [mcp_client.py](./langchain/mcp_client.py) targets an external
-Apify service. It is unrelated to this local MCP server.
+Apify service. It is unrelated to this engine.
 
 ## 4. Linked context and limits
 
@@ -191,18 +194,23 @@ Each risk type uses one of four date families, given in section 7. The query
 date `as_of_date` and the caller-supplied `event_window_days` apply to each
 family as follows.
 
+The window looks back only. A record is in scope from the date it became
+known, and stays in scope for `event_window_days` after its end, so the
+after-effects of an event (for example a hurricane) stay visible. Nothing is
+returned before it is known: the engine never warns about an event that has
+not yet happened (decided 2026-11-15; implemented in phase 6, section 9).
+
 - **Event interval** (`event_start`, `event_end`): in scope when
 
-      event_start - event_window_days <= as_of_date
-          <= (event_end or event_start) + event_window_days
+      known_from <= as_of_date <= (event_end or event_start) + event_window_days
 
-- **Observation point** (`observation_date`): in scope when `as_of_date` is
-  within `event_window_days` of `observation_date`.
+- **Observation point** (`observation_date`): in scope when
+  `known_from <= as_of_date <= observation_date + event_window_days`.
 - **Observation start** (`observation_start`, and `observation_end` where
-  present): in scope when `as_of_date` falls within the same expanded interval.
-  An open end is treated as the start date.
+  present): in scope under the same rule as an event interval. An open end is
+  treated as the start date.
 - **Effective interval** (`effective_from`, `effective_to`): in scope when
-  `as_of_date` falls within the expanded interval. When `effective_to` is null,
+  `known_from <= as_of_date <= effective_to + event_window_days`. When `effective_to` is null,
   the record is treated as in force until the study end (2026-09-30), which
   matches its `study_period_bound` search window. It is labelled
   `"open_end": "no end date recorded; continued force not verified"`. This
@@ -210,8 +218,27 @@ family as follows.
   families keep the rule that an open end equals the start date.
 
 A record without its date field is not returned as in scope. If its
-`search_window` contains `as_of_date`, it is returned as an undated candidate,
-labelled as a retrieval aid rather than an event date.
+`search_window` contains `as_of_date` and it is known by `as_of_date`, it is
+returned as an undated candidate, labelled as a retrieval aid rather than an
+event date.
+
+**When a record becomes known (`known_from`):**
+
+1. A record with a start date (`event_start`, `observation_date`,
+   `observation_start`, or `effective_from`) is known from that date. A
+   sudden public event, such as a hurricane, is known as it happens, even if
+   the report about it was published days later.
+2. A record without a start date is known from its publication date
+   (`source.published_at`), the only evidence of when anyone knew.
+3. A record may store its own `known_from`, recorded with its basis in
+   `approximations`. It overrides rules 1 and 2 in two cases:
+   - announced in advance: a tariff or restriction announced before it takes
+     effect is known from the announcement;
+   - disclosed later: an onset that was not public when it happened (for
+     example a cyberattack disclosed later, or a financial figure that exists
+     only once reported) is known from the disclosure.
+
+Each returned report states its `known_from` and which rule set it.
 
 The window is a retrieval setting. It does not describe how long an event
 lasted.
@@ -231,13 +258,14 @@ study end.
 
 ### 5.4 Open decisions
 
-Agree these before implementation:
+Agree these before implementation (decision 4 is still open):
 
 1. **Payload keys:** resolved. The caller builds an exposure profile for each
    supplier from the graph (section 6.1). Each request covers one BOM line.
-2. **Company-name strictness:** exact equality after normalisation, as proposed,
-   means "Nexperia" does not match "Nexperia Philippines Inc.". Is that the
-   intended behaviour?
+2. **Company-name strictness:** resolved on 2026-11-15. Names match only on
+   exact equality after normalisation, so "Nexperia" does not match "Nexperia
+   Philippines Inc.". Looser matching would attach other companies' evidence
+   to a supplier.
 3. **Data fixes needed before some risk types can be matched:**
    - `natural_hazards`: resolved. `location.country_code` now exists.
    - `currency_fluctuations`: resolved by the payload `currency` key.
@@ -250,13 +278,15 @@ Agree these before implementation:
    - `route_chokepoint_disruption`: resolved by approximated `trade_lanes`
      (Suez, Panama) and an approximated country (Hormuz), with the
      `approximations` field recording the basis for each.
-4. **Country-name mapping:** who reviews the mapping from country names to
-   codes?
-5. **Required request fields:** confirm that `event_window_days` is required in
-   every request, as proposed.
-6. **Parent chain:** should the payload carry each parent level, or only the
-   ultimate parent? The engine matches every name it receives and does not climb
-   the chain itself.
+4. **Country-name mapping:** deferred. The user will check the country names
+   in the Neo4j database before the draft name-to-code table is confirmed.
+5. **Required request fields:** resolved on 2026-11-15. `as_of_date` and
+   `event_window_days` are required in every request: the date is what
+   decides which evidence is returned.
+6. **Parent chain:** resolved on 2026-11-15. The graph stores one ultimate
+   parent per supplier and no intermediate parents, so the payload carries
+   that one name. The engine matches every name it receives and does not climb
+   a chain, so a longer list would still work.
 
 ### 5.5 Not in scope
 
@@ -319,8 +349,9 @@ Values are illustrative. The caller builds every supplier key from the graph:
   and `component_query` are echoed back and not matched.
 - `suppliers`: non-empty array. Each entry needs `supplier_name`, `country`,
   `parent_companies`, and `currency`. `parent_companies` is a non-empty list of
-  parent names, from the nearest parent up to the ultimate parent. If the
-  supplier has no parent, the caller passes the supplier's own name.
+  parent names. The graph has one ultimate parent per supplier, so the list
+  normally holds that one name. If the supplier has no parent, the caller
+  passes the supplier's own name.
   `supplier_id` is echoed back and not matched. The list keys (`hs_codes`,
   `exit_ports`, `entry_ports`, `carriers`, `vessels`, `buyers`) are optional. Their
   `shipments` counts are echoed back unchanged.
@@ -478,19 +509,17 @@ any cited `evidence_id`.
 | Adapter | Status | Use |
 | --- | --- | --- |
 | CLI | in scope | Testing and evaluation runs. `query <payload.json> --out <result.json>` runs one payload. `run-all <dir> --out <dir>` runs a batch. `evidence <id>` and `describe` cover the other two operations. |
-| MCP server (stdio, local) | in scope | Used by the LangChain app as a client. The three operations are exposed as MCP tools. It can also be registered in `.vscode/mcp.json` for manual checks. |
-| Python import | available by design | A Python app (the LangChain app, or a Streamlit or Gradio frontend) can import `lookup_suppliers`, `get_evidence`, and `describe_database` and call them directly. No server is needed. |
+| Python import | in scope | The LangChain app (and a Streamlit or Gradio frontend) imports `lookup_suppliers`, `get_evidence`, and `describe_database` and calls them directly. No server is needed. |
+| MCP server | dropped on 2026-11-15 | Not needed: the LangChain app is Python and imports the engine. It would only help an assistant outside the app (for example in VS Code), which this research does not need. It can be added later as a thin adapter without changing the engine. |
 
 The engine has no HTTP endpoint of its own. The interactive frontend talks to
-the LangChain app, never to the engine. The app reaches the engine through MCP
-or a direct import:
+the LangChain app, never to the engine. The app reaches the engine through a
+direct import:
 
 - With a Python frontend (for example Streamlit, which can also draw the Neo4j
   graph view), everything runs in one process and needs no endpoint.
 - A browser (JavaScript) frontend would need HTTP, but on the LangChain app's
-  backend, not on the engine. If an HTTP connection to the engine is ever
-  needed, the same MCP server can switch to MCP's Streamable HTTP transport, so
-  no separate REST API is needed.
+  backend, not on the engine.
 
 So that any of these callers works without changing the engine:
 
@@ -502,15 +531,21 @@ So that any of these callers works without changing the engine:
   nodes in a graph view. The engine itself never reads Neo4j.
 - Validation errors are returned as structured objects (`field`, `code`,
   `message`), not as raw exceptions, so each adapter can map them to its own
-  error format: CLI exit codes, MCP tool errors, or Python exceptions.
+  error format: CLI exit codes or Python exceptions.
 - The engine keeps no state between calls. Records are loaded once by the
   loader and passed in.
 
 ### 8.4 Later work, outside the engine
 
-- **LangChain app:** connects to the MCP server as a client and passes the
-  returned records to the LLM for explanation. The LLM may explain returned
-  records, but must not add facts that are not in them.
+- **LangChain app:** the user submits a BOM; the app finds the suppliers in
+  Neo4j, builds the payload, and runs `lookup_suppliers` once with the
+  simulated `as_of_date`. The LLM explains the returned records and must not
+  add facts that are not in them.
+  - The LLM never chooses or changes `as_of_date`, and cannot rerun the lookup
+    for another date: that would break the real-time simulation.
+  - It gets read-only tools over the direct import: `get_evidence` (open a
+    cited record's source, limitations, and related records) and
+    `describe_database`.
 - **Frontend:** talks to the LangChain app. It shows the engine's evidence
   alongside a Neo4j graph view, using the echoed `supplier_id` and port and
   carrier codes to link the two views.
@@ -654,7 +689,30 @@ No remote or hosted servers, and no live data sources, are planned.
    - Fixture batch:
      `python -m supplier_risk_engine run-all supplier_risk_engine/examples/payloads --out <dir> --expected supplier_risk_engine/examples/expected_ids.json`
      passes 18 of 18 fixtures, with 0 missed and 0 unexpected IDs.
-6. **Add the MCP server.** Expose the same three operations as MCP tools.
+6. **Apply the known-from rule (no look-ahead).** Replaces the MCP server
+   phase, which was dropped on 2026-11-15 (section 8.3). Implement section
+   5.2 as decided on 2026-11-15:
+   - Why: `as_of_date` is the simulated "today". Before this phase the window
+     also ran forwards, so events that had not yet started were returned. In
+     the gold fixtures, 5 results across 3 records start after `as_of_date`:
+     `PORT-2025-MY-PTP-001`, `FINANCE-2026-MY-VS-001` (in 3 fixtures), and
+     `TARIFF-2025-US-CN-OPIOID-20`. Five undated candidates were also
+     returned before their publication date, for example
+     `CUSTOMS-2026-PH-001`.
+   - Engine: drop the forward part of `event_window_days`; compute
+     `known_from` (rules 1 to 3) and return it with its rule in each report.
+     `event_window_days` stays required and still extends past the end of an
+     event, for after-effects.
+   - Data: review the tariff, restriction, cyberattack, and financial
+     records, and add `known_from` with its basis in `approximations` where
+     the default is wrong (announced earlier, or disclosed later). For
+     example, the opioid tariff was announced before it took effect on
+     2025-03-04. Refresh the manifest sha256 values.
+   - Check: 25 records have no `source.published_at`. Any of them that also
+     has no start date needs a `known_from` or another stored report date.
+   - Gold set: recheck every fixture, update `expected_ids.json` and its
+     `manifest_sha256`, and record each change with its reason. Then update
+     the tests and the section 6.2 example.
 7. **Later, outside this scope:** the LangChain app and its frontend
    (section 8.4).
 
@@ -665,7 +723,6 @@ supplier_risk_engine/
   engine/        models.py, validate.py, normalise.py, match.py, dates.py, lookup.py
   loader.py      reads risk_evidence/database/, computes the snapshot ID
   cli.py
-  mcp_server.py
   examples/      fixture payloads and expected_ids.json
   tests/
 ```
@@ -677,6 +734,8 @@ supplier_risk_engine/
 - Measure retrieval against the fixture gold set (`examples/expected_ids.json`):
   report missed and unexpected `evidence_id`s for each fixture.
 - Record the data snapshot fingerprint and engine version in every result.
+- Check that no returned report has a `known_from` after its request's
+  `as_of_date` (no look-ahead, section 5.2).
 - Check that every returned fact traces to a stored record and its source. Any
   LLM explanation added later should be checked against the returned records.
 - Never infer a verified route, supplier capacity, financial exposure, or
