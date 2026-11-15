@@ -117,7 +117,8 @@
         "The endpoints do not describe the intervening rate path or volatility; archived releases may not reflect subsequent data revisions.",
         "Reference rates do not establish any selected supplier's invoicing currency, conversion rate, hedging, or actual cost impact."
       ],
-      "approximations": [],
+      "approximations": [{"field": "known_from", "value": "2026-09-30", "basis": "Two-point comparison: the ending rate and the change percentage exist only once the observation_end rate is published, so known from observation_end, not observation_start; otherwise an earlier as_of_date would see a later rate (plan section 5.2, rule 3; decided 2026-11-15).", "review_status": "unreviewed"}],
+      "known_from": "2026-09-30",
       "search_window": {
         "start": "2025-01-02",
         "end": "2026-09-30",
@@ -156,7 +157,8 @@
         "The endpoints do not describe the intervening rate path or volatility; archived releases may not reflect subsequent data revisions.",
         "Reference rates do not establish any selected supplier's invoicing currency, conversion rate, hedging, or actual cost impact."
       ],
-      "approximations": [],
+      "approximations": [{"field": "known_from", "value": "2026-09-30", "basis": "Two-point comparison: the ending rate and the change percentage exist only once the observation_end rate is published, so known from observation_end, not observation_start; otherwise an earlier as_of_date would see a later rate (plan section 5.2, rule 3; decided 2026-11-15).", "review_status": "unreviewed"}],
+      "known_from": "2026-09-30",
       "search_window": {
         "start": "2025-01-02",
         "end": "2026-09-30",
@@ -195,7 +197,8 @@
         "The endpoints do not describe the intervening rate path or volatility; archived releases may not reflect subsequent data revisions.",
         "Reference rates do not establish any selected supplier's invoicing currency, conversion rate, hedging, or actual cost impact."
       ],
-      "approximations": [],
+      "approximations": [{"field": "known_from", "value": "2026-09-30", "basis": "Two-point comparison: the ending rate and the change percentage exist only once the observation_end rate is published, so known from observation_end, not observation_start; otherwise an earlier as_of_date would see a later rate (plan section 5.2, rule 3; decided 2026-11-15).", "review_status": "unreviewed"}],
+      "known_from": "2026-09-30",
       "search_window": {
         "start": "2025-01-02",
         "end": "2026-09-30",
@@ -234,7 +237,8 @@
         "The endpoints do not describe the intervening rate path or volatility; archived releases may not reflect subsequent data revisions.",
         "Reference rates do not establish any selected supplier's invoicing currency, conversion rate, hedging, or actual cost impact."
       ],
-      "approximations": [],
+      "approximations": [{"field": "known_from", "value": "2026-09-30", "basis": "Two-point comparison: the ending rate and the change percentage exist only once the observation_end rate is published, so known from observation_end, not observation_start; otherwise an earlier as_of_date would see a later rate (plan section 5.2, rule 3; decided 2026-11-15).", "review_status": "unreviewed"}],
+      "known_from": "2026-09-30",
       "search_window": {
         "start": "2025-01-02",
         "end": "2026-09-30",
@@ -274,7 +278,8 @@
         "The endpoints do not describe the intervening rate path or volatility; the BSP web tables can be updated.",
         "BSP rates use a different source and convention from the Federal Reserve rates; reference rates do not establish supplier invoicing, hedging, or actual cost impact."
       ],
-      "approximations": [],
+      "approximations": [{"field": "known_from", "value": "2026-09-30", "basis": "Two-point comparison: the ending rate and the change percentage exist only once the observation_end rate is published, so known from observation_end, not observation_start; otherwise an earlier as_of_date would see a later rate (plan section 5.2, rule 3; decided 2026-11-15).", "review_status": "unreviewed"}],
+      "known_from": "2026-09-30",
       "search_window": {
         "start": "2025-01-31",
         "end": "2026-09-30",

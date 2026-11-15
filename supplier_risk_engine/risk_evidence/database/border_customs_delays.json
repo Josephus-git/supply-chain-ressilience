@@ -102,6 +102,8 @@
         "The source describes manifest submission delays, not a measured shipment clearance delay.",
         "No case-study supplier, shipment, specific border location, or graph match is established."
       ],
+      "known_from": "2025-09-24",
+      "approximations": [{"field": "known_from", "value": "2025-09-24", "basis": "No start date and no source.published_at. Date of memorandum 61-2025 (search_window anchor), the earliest date the suspension could be known; the report's own date is not verified (plan section 5.2, rule 3).", "review_status": "unreviewed"}],
       "search_window": {
         "start": "2025-09-10",
         "end": "2025-10-08",

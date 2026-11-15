@@ -4,6 +4,9 @@ import unittest
 from datetime import date
 
 from supplier_risk_engine.engine.dates import (
+    KNOWN_FROM_PUBLISHED,
+    KNOWN_FROM_START,
+    KNOWN_FROM_STORED,
     OPEN_EFFECTIVE_END,
     UNDATED_REASON,
     date_scope,
@@ -31,9 +34,11 @@ class EventInterval(unittest.TestCase):
         self.assertIsNone(scope(self.RT, self.rec, "2025-06-21"))     # one day after
 
     def test_boundaries_with_window(self):
-        self.assertIsNotNone(scope(self.RT, self.rec, "2025-06-03", 7))
+        # The window looks back only: it extends past the end, never before the start.
+        self.assertIsNone(scope(self.RT, self.rec, "2025-06-03", 7))
+        self.assertIsNone(scope(self.RT, self.rec, "2025-06-09", 7))
+        self.assertIsNotNone(scope(self.RT, self.rec, "2025-06-10", 7))
         self.assertIsNotNone(scope(self.RT, self.rec, "2025-06-27", 7))
-        self.assertIsNone(scope(self.RT, self.rec, "2025-06-02", 7))
         self.assertIsNone(scope(self.RT, self.rec, "2025-06-28", 7))
 
     def test_open_end_equals_start(self):
@@ -60,9 +65,9 @@ class ObservationPoint(unittest.TestCase):
         del rec["event_start"], rec["event_end"]
         self.assertIsNotNone(scope(self.RT, rec, "2025-06-10"))
         self.assertIsNone(scope(self.RT, rec, "2025-06-11"))
-        self.assertIsNotNone(scope(self.RT, rec, "2025-06-05", 5))
+        self.assertIsNone(scope(self.RT, rec, "2025-06-05", 5))  # before: not yet known
+        self.assertIsNone(scope(self.RT, rec, "2025-06-09", 5))
         self.assertIsNotNone(scope(self.RT, rec, "2025-06-15", 5))
-        self.assertIsNone(scope(self.RT, rec, "2025-06-04", 5))
         self.assertIsNone(scope(self.RT, rec, "2025-06-16", 5))
 
 
@@ -93,6 +98,8 @@ class EffectiveInterval(unittest.TestCase):
         # The window extends the end (gold-set interpretation effective_to_window_applies).
         self.assertIsNotNone(scope(self.RT, rec, "2025-11-21", 14))
         self.assertIsNone(scope(self.RT, rec, "2025-11-24", 14))
+        # ...but never the start.
+        self.assertIsNone(scope(self.RT, rec, "2025-03-31", 14))
 
     def test_open_end_runs_to_study_end_and_is_labelled(self):
         rec = record("T", effective_from="2025-04-01", effective_to=None)
@@ -128,6 +135,64 @@ class UndatedCandidates(unittest.TestCase):
         rec = self.rec()
         rec["event_start"] = "not-a-date"
         self.assertEqual(scope(self.RT, rec, "2026-09-10").date_status, "undated_candidate")
+
+
+class KnownFrom(unittest.TestCase):
+    """Plan section 5.2: nothing is in scope before the date it became known."""
+
+    def test_rule_start_date_even_if_reported_later(self):
+        rec = record("H", event_start="2025-06-10", event_end=None,
+                     source={"published_at": "2025-06-20"})
+        s = scope("natural_hazards", rec, "2025-06-10")
+        self.assertEqual((s.known_from, s.known_from_rule), ("2025-06-10", KNOWN_FROM_START))
+
+    def test_stored_known_from_announced_in_advance(self):
+        rec = record("T", effective_from="2025-08-07", effective_to="2026-02-23",
+                     known_from="2025-07-31")
+        self.assertIsNone(scope("tariffs_and_duties", rec, "2025-07-30", 14))
+        s = scope("tariffs_and_duties", rec, "2025-07-31")
+        self.assertEqual((s.known_from, s.known_from_rule), ("2025-07-31", KNOWN_FROM_STORED))
+
+    def test_stored_known_from_disclosed_later(self):
+        rec = record("C", observation_start="2024-08-01", observation_end="2025-07-31",
+                     known_from="2025-11-28")
+        rt = "supplier_or_route_concentration"
+        self.assertIsNone(scope(rt, rec, "2025-03-01"))        # inside the period, not yet reported
+        self.assertIsNone(scope(rt, rec, "2025-11-27", 400))
+        s = scope(rt, rec, "2025-11-28", 120)
+        self.assertEqual((s.known_from, s.known_from_rule), ("2025-11-28", KNOWN_FROM_STORED))
+        self.assertIsNone(scope(rt, rec, "2025-11-29", 120))  # window from the end still applies
+
+    def test_undated_known_from_published_at(self):
+        rec = record("U", event_start=None, event_end=None,
+                     search_window={"start": "2026-06-11", "end": "2026-07-09"},
+                     source={"published_at": "2026-06-25"})
+        self.assertIsNone(scope("border_customs_delays", rec, "2026-06-24"))
+        s = scope("border_customs_delays", rec, "2026-06-25")
+        self.assertEqual(s.date_status, "undated_candidate")
+        self.assertEqual((s.known_from, s.known_from_rule), ("2026-06-25", KNOWN_FROM_PUBLISHED))
+
+    def test_undated_stored_known_from_overrides_published_at(self):
+        rec = record("U", event_start=None, event_end=None, known_from="2026-06-20",
+                     search_window={"start": "2026-06-11", "end": "2026-07-09"},
+                     source={"published_at": "2026-06-25"})
+        self.assertEqual(scope("border_customs_delays", rec, "2026-06-20").known_from_rule,
+                         KNOWN_FROM_STORED)
+
+    def test_no_basis_never_in_scope(self):
+        rec = record("U", event_start=None, event_end=None, source={"published_at": None},
+                     search_window={"start": "2026-06-11", "end": "2026-07-09"})
+        self.assertIsNone(scope("border_customs_delays", rec, "2026-06-20"))
+
+    def test_invalid_stored_known_from_falls_back(self):
+        rec = record("E", event_start="2025-06-10", event_end=None, known_from="soon")
+        self.assertEqual(scope("labour_disruption", rec, "2025-06-10").known_from_rule,
+                         KNOWN_FROM_START)
+
+    def test_report_states_known_from_and_rule(self):
+        records = {"labour_disruption": [record("L", reported_organisation="Acme Widgets")]}
+        r = reports(records, supplier(), as_of_date="2025-06-15")["L"]
+        self.assertEqual((r["known_from"], r["known_from_rule"]), ("2025-06-01", KNOWN_FROM_START))
 
 
 class StudyWindow(unittest.TestCase):

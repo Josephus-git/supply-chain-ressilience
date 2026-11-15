@@ -48,6 +48,9 @@ class GoldFixtures(unittest.TestCase):
                     self.assertEqual(r["link_basis"], exp["link_basis"])
                     self.assertEqual(r["link_strength"], exp["link_strength"])
                     self.assertEqual(sorted(r["matched_values"]), sorted(exp["matched_values"]))
+                    self.assertEqual(r["known_from"], exp["known_from"])
+                    self.assertEqual(r["known_from_rule"], exp["known_from_rule"])
+                    self.assertLessEqual(r["known_from"], fixture["as_of_date"])
                     if exp["in_scope"] == "dated":
                         self.assertEqual(r["date_status"], "dated")
                     else:
@@ -70,6 +73,36 @@ class GoldFixtures(unittest.TestCase):
                 stored = self.index.by_id[r["evidence_id"]][1]
                 self.assertEqual(r["limitations"], stored["limitations"])
                 self.assertEqual(r["verification_status"], stored["verification_status"])
+
+
+class StoredKnownFrom(unittest.TestCase):
+    """Phase 6 data checks (plan section 5.2)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.records = load_database()
+
+    def test_every_record_has_a_known_from_basis(self):
+        from supplier_risk_engine.engine.dates import FAMILY_FIELDS, known_from
+        from supplier_risk_engine.engine.reference import DATE_FAMILY
+
+        for risk_type, recs in self.records.items():
+            start_field = FAMILY_FIELDS[DATE_FAMILY[risk_type]][0]
+            for rec in recs:
+                with self.subTest(evidence_id=rec["evidence_id"]):
+                    self.assertIsNotNone(known_from(rec, start_field))
+
+    def test_stored_known_from_has_its_basis_in_approximations(self):
+        for recs in self.records.values():
+            for rec in recs:
+                if "known_from" not in rec:
+                    continue
+                with self.subTest(evidence_id=rec["evidence_id"]):
+                    entries = [a for a in rec.get("approximations") or []
+                               if a.get("field") == "known_from"]
+                    self.assertEqual(len(entries), 1)
+                    self.assertEqual(entries[0]["value"], rec["known_from"])
+                    self.assertTrue(entries[0]["basis"])
 
 
 class Determinism(unittest.TestCase):

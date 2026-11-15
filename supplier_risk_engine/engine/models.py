@@ -143,6 +143,8 @@ class DateScope:
     date_status: str  # "dated" or "undated_candidate"
     in_scope_reason: str
     dates: dict[str, Any]
+    known_from: str
+    known_from_rule: str  # see dates.KNOWN_FROM_*
     open_end: str | None = None
 
 
@@ -172,6 +174,8 @@ class LinkedReport:
             "date_status": self.scope.date_status,
             "in_scope_reason": self.scope.in_scope_reason,
             **self.scope.dates,
+            "known_from": self.scope.known_from,
+            "known_from_rule": self.scope.known_from_rule,
         }
         if self.scope.open_end is not None:
             out["open_end"] = self.scope.open_end

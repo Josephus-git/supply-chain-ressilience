@@ -221,6 +221,8 @@
         "The order lists many products and technical specifications. No single product classification or case-study supplier, shipment, permit decision, or delay is established.",
         "No verified expiry or complete amendment history is recorded. The study cutoff is not a legal end date."
       ],
+      "known_from": "2025-10-03",
+      "approximations": [{"field": "known_from", "value": "2025-10-03", "basis": "Announced in advance: known from the announcement, before the effective date (plan section 5.2, rule 3). Date is source.published_at.", "review_status": "unreviewed"}],
       "search_window": {
         "start": "2025-12-01",
         "end": "2026-09-30",

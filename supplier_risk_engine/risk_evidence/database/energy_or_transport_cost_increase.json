@@ -87,6 +87,8 @@
         "Prices in Sabah, Sarawak and Labuan were different. Eligibility for diesel support and the price paid by a specific customer are not established.",
         "The observation does not establish a supplier's fuel consumption or transport costs."
       ],
+      "known_from": "2025-07-09",
+      "approximations": [{"field": "known_from", "value": "2025-07-09", "basis": "Two-point comparison: the observed value is known only once announced or observed, so known from 2025-07-09 (source.published_at, which reports the observed price before observation_end), not observation_start (plan section 5.2, rule 3; decided 2026-11-15).", "review_status": "unreviewed"}],
       "search_window": {
         "start": "2025-07-03",
         "end": "2025-07-16",
@@ -137,6 +139,8 @@
         "The report states that diesel for public transportation and land logistics remained subsidised at MYR 2.15 per litre; eligibility and the price paid by any particular business are not established.",
         "Prices in Sabah, Sarawak and Labuan differed; this is not evidence of a supplier-specific cost increase."
       ],
+      "known_from": "2026-03-26",
+      "approximations": [{"field": "known_from", "value": "2026-03-26", "basis": "Two-point comparison: the observed value is known only once announced or observed, so known from 2026-03-26 (observation_end; publication date not verified), not observation_start (plan section 5.2, rule 3; decided 2026-11-15).", "review_status": "unreviewed"}],
       "search_window": {
         "start": "2026-03-19",
         "end": "2026-04-01",
@@ -237,6 +241,8 @@
         "The regulated household tariff excludes GST and is not an industrial contract rate. Other retail contracts may differ.",
         "The official Energy Market Authority page was inaccessible to the fetch tool; no supplier cost or consumption is established."
       ],
+      "known_from": "2026-07-01",
+      "approximations": [{"field": "known_from", "value": "2026-07-01", "basis": "Two-point comparison: the observed value is known only once announced or observed, so known from 2026-07-01 (observation_end, the start of the observed quarter; the earlier tariff announcement date is not verified), not observation_start (plan section 5.2, rule 3; decided 2026-11-15).", "review_status": "unreviewed"}],
       "search_window": {
         "start": "2026-04-01",
         "end": "2026-09-30",
@@ -291,6 +297,8 @@
         "No selected supplier, shipment, specific service or graph route has been matched to this assessment.",
         "The article's publication date was not verified; the dates are assessment dates."
       ],
+      "known_from": "2025-06-05",
+      "approximations": [{"field": "known_from", "value": "2025-06-05", "basis": "Two-point comparison: the observed value is known only once announced or observed, so known from 2025-06-05 (observation_end; publication date not verified), not observation_start (plan section 5.2, rule 3; decided 2026-11-15).", "review_status": "unreviewed"}],
       "search_window": {
         "start": "2025-05-29",
         "end": "2025-06-05",

@@ -247,8 +247,8 @@ lasted.
 
 The engine covers a fixed study window, 2025-01-01 to 2026-09-30. A query with
 `as_of_date` outside this window returns no records and no warning.
-`event_window_days` is separate: it only sets how far an event's dates may sit
-from `as_of_date`.
+`event_window_days` is separate: it only sets how long after an event's end
+the event stays in scope.
 
 A record needs only to overlap the study window, not to sit entirely inside it.
 Its dates are returned as stored. For example, `CONCENTRATION-2025-MY-VS-001`
@@ -364,7 +364,8 @@ The values below are illustrative. The example assumes the caller has stated
 that "Supplier A" is a subsidiary of "Flex Ltd". The engine does not verify that
 link. The linked report is the cyberattack claim `CYBER-CLAIM-2026-001`, which is
 unverified and has no event date. It is returned as an undated candidate because
-`as_of_date` falls within its search window, and its stored limitations are
+`as_of_date` falls within its search window and on or after its `known_from`
+(here its publication date, rule 2 in section 5.2). Its stored limitations are
 returned unchanged.
 
 ```json
@@ -389,7 +390,9 @@ returned unchanged.
           "evidence_id": "CYBER-CLAIM-2026-001",
           "event_start": null,
           "event_end": null,
-          "in_scope_reason": "undated candidate: as_of_date within search_window",
+          "known_from": "2026-09-21",
+          "known_from_rule": "source_published_at",
+          "in_scope_reason": "undated candidate: as_of_date within search_window and on or after known_from",
           "link_basis": "parent_company_name",
           "matched_value": "Flex Ltd",
           "link_strength": "strong",
@@ -713,6 +716,45 @@ No remote or hosted servers, and no live data sources, are planned.
    - Gold set: recheck every fixture, update `expected_ids.json` and its
      `manifest_sha256`, and record each change with its reason. Then update
      the tests and the section 6.2 example.
+   - Done on 2026-11-15. `engine/dates.py` computes `known_from` and checks
+     `known_from <= as_of_date <= end + event_window_days`. Each report adds
+     `known_from` and `known_from_rule` (`stored_known_from`, `start_date`,
+     or `source_published_at`). A record with no usable basis is never
+     returned. 152 tests pass (new `KnownFrom` and `StoredKnownFrom`
+     classes), and the fixture batch passes 18 of 18.
+   - Data: 25 records gained a stored `known_from`, each with one
+     `approximations` entry giving its basis (`review_status`
+     `unreviewed`). The manifest sha256 values were refreshed.
+     - Announced in advance (10): the three China opioid tariffs (2025-02-01;
+       2025-03-03, the EO 14228 signing, because the stored source is the
+       later EO 14357; and 2025-11-04), the MY, PH, TW and SG reciprocal
+       tariffs (2025-07-31), the global Section 122 tariff (2026-02-20), the
+       China battery Section 301 tariff (2024-09-18), and
+       `RESTRICT-2025-SG-001` (2025-10-03).
+     - Disclosed later (3): the three concentration records, known from
+       `source.published_at`.
+     - Two-point comparisons (9), decided 2026-11-15: the five FX pairs are
+       known from `observation_end` (2026-09-30), because their ending rate
+       and change are not known earlier. The four cost comparisons are known
+       from `observation_end`, except `COST-2025-MY-DIESEL-001`, which uses
+       its earlier publication date (2025-07-09).
+     - No start and no publication date (3): `CUSTOMS-2025-PH-001`
+       (2025-09-24, the memorandum date), `TRANSIT-2025-PH-001` (2025-08-30,
+       the related report date), and `PORT-2026-SG-CONGESTION-001`
+       (2026-09-30, the end of the monthly period). These were the only
+       records without a basis.
+     - Left at the default: `TARIFF-2025-US-CN-RECIPROCAL` (its start is a
+       guidance date for a rate already in force), the five forced-labour
+       Section 301 tariffs (no announcement date stored), the other
+       restrictions, the financial-distress records (observation date equals
+       the publication date), and the cyberattack claim (rule 2).
+   - Gold set: `as_of_date`s were not changed. 40 expected results across 17
+     fixtures were not yet known on their fixture's date. They moved to
+     `expected_exclusions` with the reason, and the `revisions` entry lists
+     them. Every expected link now records `known_from` and
+     `known_from_rule`. The `effective_to_window_applies` interpretation now
+     extends the end only, and `known_from_no_look_ahead` was added. The
+     records expected in some fixture fell from 43 to 30.
 7. **Later, outside this scope:** the LangChain app and its frontend
    (section 8.4).
 
@@ -736,6 +778,15 @@ supplier_risk_engine/
 - Record the data snapshot fingerprint and engine version in every result.
 - Check that no returned report has a `known_from` after its request's
   `as_of_date` (no look-ahead, section 5.2).
+- Coverage limits from the known-from rule (phase 6):
+  - The five FX pairs are in scope only on 2026-09-30, so currency links
+    appear in no fixture. Point-in-time rate records (for example, monthly
+    H.10 observations) would restore them.
+  - `FX-2025-DYSON-QUALITATIVE-001` can never be returned: it was published
+    on 2026-03-26, after its 2025 search window ends.
+  - 25 stored `known_from` values are analyst approximations, not yet
+    reviewed. Three of them rest on a related document date, not on the
+    record's own report.
 - Check that every returned fact traces to a stored record and its source. Any
   LLM explanation added later should be checked against the returned records.
 - Never infer a verified route, supplier capacity, financial exposure, or

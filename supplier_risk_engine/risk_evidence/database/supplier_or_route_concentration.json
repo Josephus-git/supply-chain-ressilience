@@ -35,6 +35,8 @@
         "The group's name is a supplied search target, but no graph entity, current supplier relationship, specific product, customer order or shipment has been verified. This is not a disruption probability.",
         "Publication date follows the annual report submission announcement: https://www.klsescreener.com/v2/announcements/view/10725325."
       ],
+      "known_from": "2025-11-28",
+      "approximations": [{"field": "known_from", "value": "2025-11-28", "basis": "Disclosed later: the figure exists only once reported, so known from source.published_at, not the start of the observation period (plan section 5.2, rule 3).", "review_status": "unreviewed"}],
       "search_window": {"start": "2024-08-01", "end": "2025-07-31", "basis": "observation_period", "note": "The fiscal-year observation period for retrieval; it includes months before the study window and does not imply a continuous disruption or current exposure.", "anchor_date": "2025-07-31", "anchor_basis": "observation_period"},
       "scenario_recovery": null
     },
@@ -54,6 +56,8 @@
         "TSMC is a Taiwan-headquartered company, but the percentage is not Taiwan's geographic share and does not establish that all TSMC manufacturing occurs in Taiwan.",
         "This is electronics industry context, not evidence that TSMC supplies Dyson, a listed case-study supplier, or a specific chip or shipment. No shortage or interruption is inferred."
       ],
+      "known_from": "2026-03-12",
+      "approximations": [{"field": "known_from", "value": "2026-03-12", "basis": "Disclosed later: the figure exists only once reported, so known from source.published_at, not the start of the observation period (plan section 5.2, rule 3).", "review_status": "unreviewed"}],
       "search_window": {"start": "2025-10-01", "end": "2025-12-31", "basis": "observation_period", "note": "The reported calendar quarter for retrieval; not a continuous disruption, recovery period, or a verified current market share.", "anchor_date": "2025-12-31", "anchor_basis": "observation_period"},
       "scenario_recovery": null
     },
@@ -74,6 +78,8 @@
         "Malaysia and Singapore indicate nearby case-study geography, not a claim about territorial jurisdiction or a verified port call. Alternative shipping routes exist; no actual closure, delay or supplier exposure is established.",
         "This is a half-year estimate, not a daily reading, incident probability, or recovery duration."
       ],
+      "known_from": "2026-04-06",
+      "approximations": [{"field": "known_from", "value": "2026-04-06", "basis": "Disclosed later: the figure exists only once reported, so known from source.published_at, not the start of the observation period (plan section 5.2, rule 3).", "review_status": "unreviewed"}],
       "search_window": {"start": "2025-01-01", "end": "2025-06-30", "basis": "observation_period", "note": "The first-half 2025 observation period for candidate retrieval; not a disruption interval or evidence of any case-study shipment.", "anchor_date": "2025-06-30", "anchor_basis": "observation_period"},
       "scenario_recovery": null
     }

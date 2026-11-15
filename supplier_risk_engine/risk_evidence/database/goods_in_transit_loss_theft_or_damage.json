@@ -204,6 +204,8 @@
         "The source links to a Manila Bulletin article that was inaccessible; a Daily Tribune report dated 30 August 2025 also describes arrests, but does not independently establish the theft date.",
         "No case-study supplier or shipment has been matched."
       ],
+      "known_from": "2025-08-30",
+      "approximations": [{"field": "known_from", "value": "2025-08-30", "basis": "No start date and no source.published_at. Date of the related Daily Tribune report (search_window anchor), the earliest verified date the theft was public (plan section 5.2, rule 3).", "review_status": "unreviewed"}],
       "search_window": {
         "start": "2025-08-16",
         "end": "2025-09-13",

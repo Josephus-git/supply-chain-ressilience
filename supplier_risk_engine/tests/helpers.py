@@ -77,6 +77,9 @@ def record(evidence_id: str, **fields: Any) -> dict[str, Any]:
         "verification_status": "test",
         "limitations": ["test record"],
         "search_window": dict(SEARCH_WINDOW),
+        # Early publication date, so undated test records are already known
+        # (known-from rule 3, plan section 5.2) unless a test overrides it.
+        "source": {"published_at": "2025-01-01"},
     }
     base.update(fields)
     return base
