@@ -109,18 +109,18 @@ export function NodeInspector(p: NodeProps) {
     <div className="flex h-full flex-col">
       <Header kind={node.kind} title={node.name} subtitle={meta?.label ?? node.label} id={node.id} onClose={p.onClose} />
       <div className="flex flex-wrap gap-1.5 border-b p-3">
+        <Button size="sm" onClick={() => p.onExpand(false)} disabled={p.busy}>
+          {p.busy ? <Loader2 className="size-3.5 animate-spin" /> : <Network className="size-3.5" />} Expand
+        </Button>
         {!isShipment && (
-          <Button size="sm" onClick={() => p.onExpand(true)} disabled={p.busy}>
-            {p.busy ? <Loader2 className="size-3.5 animate-spin" /> : <Network className="size-3.5" />} Expand
+          <Button size="sm" variant="outline" onClick={() => p.onExpand(true)} disabled={p.busy}>
+            <Ship className="size-3.5" /> Summarise shipments
           </Button>
         )}
-        <Button size="sm" variant="outline" onClick={() => p.onExpand(false)} disabled={p.busy}>
-          <Ship className="size-3.5" /> {isShipment ? 'Expand' : 'With shipments'}
-        </Button>
         <Button size="sm" variant="outline" onClick={p.onFocus}><Focus className="size-3.5" /> Focus</Button>
         <Button size="sm" variant="outline" onClick={p.onHide}><EyeOff className="size-3.5" /> Hide</Button>
         {node.kind === 'supplier' && !p.isSnapshotSupplier && (
-          <Button size="sm" variant="secondary" onClick={p.onAddSupplier}><Plus className="size-3.5" /> Add to snapshot</Button>
+          <Button size="sm" variant="secondary" onClick={p.onAddSupplier}><Plus className="size-3.5" /> Focus on supplier</Button>
         )}
       </div>
       <Tabs defaultValue="neighbours" className="min-h-0 flex-1 gap-0">

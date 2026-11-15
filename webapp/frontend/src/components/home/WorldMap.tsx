@@ -2,7 +2,7 @@ import type { EChartsCoreOption } from 'echarts/core'
 import { useMemo, useRef } from 'react'
 import { EChart, WORLD_MAP } from '@/components/charts/EChart'
 import { fmt } from '@/lib/format'
-import { toMap } from '@/lib/geo'
+import { CUT, toMap } from '@/lib/geo'
 import type { MapCompany } from '@/lib/network'
 import { CATEGORICAL, CHROME, MAP, type Mode } from '@/lib/palette'
 import type { Network } from '@/lib/types'
@@ -18,8 +18,30 @@ export function mapColors(mode: Mode) {
 const esc = (s: unknown) =>
   String(s ?? '').replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]!)
 
-function widthScale(max: number, lo = 1.2, hi = 7) {
+function widthScale(max: number, lo = 0.5, hi = 1.8) {
   return (n: number) => lo + (hi - lo) * Math.sqrt(n / Math.max(max, 1))
+}
+
+type Pt = [number, number]
+
+/**
+ * Project a [lon, lat] path into the Pacific-centred frame, splitting it where it
+ * crosses the map seam (CUT) so an Atlantic crossing does not streak across the map.
+ */
+function projectPath(path: Pt[]): Pt[][] {
+  const parts: Pt[][] = [[]]
+  path.forEach(([lon, lat], i) => {
+    if (i > 0) {
+      const [plon, plat] = path[i - 1]
+      if (plon >= CUT !== lon >= CUT && Math.abs(plon - lon) < 180) {
+        const y = plat + ((lat - plat) * (CUT - plon)) / (lon - plon)
+        parts[parts.length - 1].push(plon >= CUT ? [CUT, y] : [CUT + 360, y])
+        parts.push([plon >= CUT ? [CUT + 360, y] : [CUT, y]])
+      }
+    }
+    parts[parts.length - 1].push(toMap(lon, lat))
+  })
+  return parts.filter((p) => p.length > 1)
 }
 
 export const DEFAULT_VIEW = { center: [185, 24] as [number, number], zoom: 1.9 }
@@ -115,11 +137,12 @@ export function WorldMap({ network, companies, companyOfSupplier, view, mode, se
     // --- line layers
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const lines: any[] = []
-    const lineSeries = (name: string, data: unknown[], curveness: number, color: string, dashed = false) => ({
+    const lineSeries = (name: string, data: unknown[], curveness: number, color: string, dashed = false, polyline = false) => ({
       type: 'lines',
       name,
       coordinateSystem: 'geo',
       zlevel: 1,
+      polyline,
       data,
       lineStyle: { color, curveness, opacity: 0.55, cap: 'round', type: dashed ? [4, 4] : 'solid' },
       effect: { show: true, period: 5, trailLength: 0.25, symbol: 'circle', symbolSize: 3, color },
@@ -152,7 +175,8 @@ export function WorldMap({ network, companies, companyOfSupplier, view, mode, se
     } else {
       // Each route is supplier -> exit port -> entry port -> Dyson site, drawn
       // as three legs and aggregated per leg so shared legs read as one thicker line.
-      type Leg = { from: [number, number]; to: [number, number]; shipments: number; companies: Set<string>; title: string }
+      type Leg = { from: Pt; to: Pt; shipments: number; companies: Set<string>; title: string }
+      const seaPaths = new Map((network.sea_paths ?? []).map((p) => [`${p.exit_port}|${p.entry_port}`, p]))
       const legs = { land: new Map<string, Leg>(), sea: new Map<string, Leg>(), inland: new Map<string, Leg>() }
       const add = (m: Map<string, Leg>, k: string, from: [number, number], to: [number, number], n: number, ck: string, title: string) => {
         const cur = m.get(k) ?? { from, to, shipments: 0, companies: new Set<string>(), title }
@@ -178,22 +202,37 @@ export function WorldMap({ network, companies, companyOfSupplier, view, mode, se
         add(legs.inland, `${r.entry_port}|${r.buyer}`, E, B, r.shipments, ck!, `${en} → ${b.name}`)
       }
       const all = [...legs.land.values(), ...legs.sea.values(), ...legs.inland.values()]
-      const w = widthScale(Math.max(...all.map((l) => l.shipments), 1), 0.8, 6)
-      const toData = (m: Map<string, Leg>, label: string) =>
-        [...m.values()].map((l) => {
-          const off = selected != null && !l.companies.has(selected)
-          return {
-            coords: [l.from, l.to],
-            lineStyle: { width: w(l.shipments), opacity: off ? 0.05 : 0.6 },
-            tip: tooltipBox(l.title, [
-              ['Leg', label],
-              ['Shipments', fmt(l.shipments)],
-              ['Suppliers', [...l.companies].map((k) => byKey.get(k)?.company).join(', ')],
-            ]),
-          }
-        })
+      const w = widthScale(Math.max(...all.map((l) => l.shipments), 1), 0.4, 1.6)
+      const legData = (l: Leg, label: string, coords: Pt[], extra: [string, string][] = [], note?: string) => ({
+        coords,
+        lineStyle: { width: w(l.shipments), opacity: selected != null && !l.companies.has(selected) ? 0.05 : 0.6 },
+        tip: tooltipBox(l.title, [
+          ['Leg', label],
+          ['Shipments', fmt(l.shipments)],
+          ...extra,
+          ['Suppliers', [...l.companies].map((k) => byKey.get(k)?.company).join(', ')],
+        ], note),
+      })
+      const toData = (m: Map<string, Leg>, label: string) => [...m.values()].map((l) => legData(l, label, [l.from, l.to]))
+
+      // Ocean legs follow the likely sea lane (searoute) when the backend has one;
+      // otherwise (e.g. catch-all ports drawn at country level) a straight arc.
+      const seaRouted: unknown[] = []
+      const seaStraight: unknown[] = []
+      for (const [k, l] of legs.sea) {
+        const [xp, ep] = k.split('|')
+        const sp = seaPaths.get(`${xp}|${ep}`)
+        if (!sp) {
+          seaStraight.push(legData(l, 'Exit port → US entry port', [l.from, l.to], [], 'Straight line: no sea path for this port'))
+          continue
+        }
+        const extra: [string, string][] = [['Likely route', sp.via], ['Distance', `${fmt(sp.length_km)} km`]]
+        const note = 'Likely shortest sea lane, not the recorded vessel track'
+        for (const part of projectPath(sp.coords)) seaRouted.push(legData(l, 'Exit port → US entry port', part, extra, note))
+      }
       lines.push(lineSeries('Supplier → exit port', toData(legs.land, 'Supplier → exit port'), 0, col.supplier, true))
-      lines.push(lineSeries('Ocean leg', toData(legs.sea, 'Exit port → US entry port'), 0.22, col.supplier))
+      lines.push(lineSeries('Ocean leg', seaRouted, 0, col.supplier, false, true))
+      if (seaStraight.length) lines.push(lineSeries('Ocean leg (straight)', seaStraight, 0.22, col.supplier))
       lines.push(lineSeries('Entry port → Dyson', toData(legs.inland, 'US entry port → Dyson site'), 0, col.dyson, true))
     }
 

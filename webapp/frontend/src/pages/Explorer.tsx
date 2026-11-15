@@ -25,6 +25,8 @@ import { KIND_META, KIND_ORDER, type NodeKind } from '@/lib/kinds'
 import { useTheme } from '@/lib/theme'
 import type { DateFilter, GNode } from '@/lib/types'
 
+/** Cap on neighbours added by one expansion, so a busy node (Dyson has ~450 shipments) stays readable. */
+const EXPAND_LIMIT = 25
 const STUDY = { start: '2025-01-01', end: '2026-09-30' }
 const PRESETS: { label: string; from: string | null; to: string | null }[] = [
   { label: 'All dates', from: null, to: null },
@@ -69,10 +71,11 @@ function SupplierPicker({ selected, onChange }: { selected: string[]; onChange: 
   return (
     <div className="space-y-2">
       <div className="flex flex-wrap gap-1">
+        {selected.length === 0 && <Badge variant="outline" className="font-normal text-muted-foreground">All suppliers</Badge>}
         {selected.map((id) => (
           <Badge key={id} variant="secondary" className="max-w-full gap-1 pr-1">
             <span className="truncate">{nameOf.get(id) ?? id.replace('supplier:org:', '')}</span>
-            {selected.length > 1 && (
+            {(
               <button onClick={() => onChange(selected.filter((x) => x !== id))} aria-label="Remove" className="rounded hover:bg-foreground/10">
                 <X className="size-3" />
               </button>
@@ -83,7 +86,7 @@ function SupplierPicker({ selected, onChange }: { selected: string[]; onChange: 
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button variant="outline" size="sm" className="w-full justify-between font-normal">
-            Choose suppliers <ChevronDown className="size-4 opacity-60" />
+            Focus on a supplier <ChevronDown className="size-4 opacity-60" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-80 p-0" align="start">
@@ -185,7 +188,7 @@ export default function Explorer() {
   const canvas = useRef<GraphCanvasHandle>(null)
   const [selected, setSelected] = useState<Selection>(null)
   const [hiddenKinds, setHiddenKinds] = useState<Set<NodeKind>>(new Set())
-  const [layout, setLayout] = useState<LayoutName>('fcose')
+  const [layout, setLayout] = useState<LayoutName>('radial')
   const [busy, setBusy] = useState(false)
   const [showAdvanced, setShowAdvanced] = useState(full)
 
@@ -215,17 +218,17 @@ export default function Explorer() {
   const selectedEdge = selected?.type === 'edge' ? graph.state.edges.get(selected.id) : undefined
 
   const expandNode = useCallback(
-    async (id: string, aggregate = true) => {
+    async (id: string, aggregate = false) => {
       const node = graph.state.nodes.get(id)
       const agg = aggregate && node?.kind !== 'shipment'
       setBusy(true)
       try {
-        const res = await fetchNeighbours(id, dates, agg)
+        const res = await fetchNeighbours(id, dates, agg, agg ? undefined : EXPAND_LIMIT)
         graph.add([res.node, ...res.neighbours], res.edges)
         const newKinds = new Set(res.neighbours.map((n) => n.kind))
         if ([...newKinds].some((k) => hiddenKinds.has(k)))
           toast.info('Some new neighbours are of hidden node types', { description: 'Turn the type back on under Node types to see them.' })
-        if (res.truncated) toast.info(`Showing ${res.edges.length} of ${res.total} neighbours`)
+        if (res.truncated) toast.info(`Added the ${res.edges.length} most recent of ${fmt(res.total)} neighbours`, { description: 'Open the inspector to browse the rest.' })
       } catch (e) {
         toast.error('Could not expand', { description: (e as Error).message })
       } finally {
@@ -264,7 +267,7 @@ export default function Explorer() {
     setSelected({ type: 'node', id: n.id })
     if (hiddenKinds.has(n.kind)) setHiddenKinds((h) => { const x = new Set(h); x.delete(n.kind); return x })
     if (isNew) try {
-      const res = await fetchNeighbours(n.id, dates, n.kind !== 'shipment')
+      const res = await fetchNeighbours(n.id, dates, false)
       const present = new Set(graph.state.nodes.keys())
       const links = res.edges.filter((e) => present.has(e.source === n.id ? e.target : e.source))
       if (links.length) graph.add([], links)
@@ -281,7 +284,7 @@ export default function Explorer() {
     <div className="grid grid-rows-[auto_480px_auto] lg:h-full lg:min-h-[640px] lg:grid-cols-[272px_minmax(0,1fr)_auto] lg:grid-rows-1">
       {/* Controls */}
       <aside className="space-y-5 border-b p-4 lg:overflow-y-auto lg:border-r lg:border-b-0">
-        <Section title="Snapshot suppliers">
+        <Section title="Shipments to Dyson from">
           {full ? (
             <div className="rounded-md bg-muted px-2.5 py-2 text-xs text-muted-foreground">
               Showing the full graph.{' '}
@@ -355,6 +358,7 @@ export default function Explorer() {
             <Select value={layout} onValueChange={(v) => setLayout(v as LayoutName)}>
               <SelectTrigger size="sm" className="flex-1"><SelectValue /></SelectTrigger>
               <SelectContent>
+                <SelectItem value="radial">Radial (Dyson centre)</SelectItem>
                 <SelectItem value="fcose">Force-directed</SelectItem>
                 <SelectItem value="concentric">Concentric</SelectItem>
                 <SelectItem value="breadthfirst">Hierarchy</SelectItem>
@@ -400,16 +404,16 @@ export default function Explorer() {
           mode={mode}
           selected={selected}
           onSelect={setSelected}
-          onExpand={(id) => expandNode(id, true)}
+          onExpand={(id) => expandNode(id)}
           layoutName={layout}
-          roots={full ? [] : snapshotSuppliers}
+          roots={!full && snapshot.data?.center ? [snapshot.data.center] : []}
         />
         <div className="pointer-events-none absolute inset-x-3 top-3 flex items-start justify-between gap-2">
           <div className="pointer-events-auto rounded-md border bg-background/90 px-2.5 py-1.5 text-xs text-muted-foreground shadow-sm backdrop-blur">
             {snapshot.isFetching ? (
               <span className="flex items-center gap-1.5"><Loader2 className="size-3 animate-spin" /> Loading graph</span>
             ) : (
-              <>{fmt(total.nodes)} nodes · {fmt(total.edges)} links{!full && ' · shipments aggregated'}</>
+              <>{fmt(total.nodes)} nodes · {fmt(total.edges)} relationships</>
             )}
           </div>
           <div className="pointer-events-auto flex gap-1 rounded-md border bg-background/90 p-0.5 shadow-sm backdrop-blur">
@@ -446,7 +450,7 @@ export default function Explorer() {
         )}
         {!selected && !snapshot.isPending && (
           <div className="pointer-events-none absolute bottom-3 left-3 rounded-md border bg-background/90 px-2.5 py-1.5 text-[11px] text-muted-foreground shadow-sm backdrop-blur">
-            Click a node or link to inspect it · double-click a node to expand · scroll to zoom
+            Double-click a node to expand it · click to see its details · scroll to zoom
           </div>
         )}
       </div>
@@ -466,7 +470,7 @@ export default function Explorer() {
               onExpand={(agg) => expandNode(selectedNode.id, agg)}
               onHide={() => { graph.hide([selectedNode.id]); setSelected(null) }}
               onFocus={() => canvas.current?.fit([selectedNode.id])}
-              onAddSupplier={() => setSuppliers([...snapshotSuppliers, selectedNode.id])}
+              onAddSupplier={() => setSuppliers([selectedNode.id])}
               onAddNeighbour={(n, e) => graph.add([n], [e])}
             />
           )}

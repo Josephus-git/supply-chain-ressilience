@@ -82,12 +82,23 @@ export interface NetworkPort {
   shipments: number
 }
 
+export interface SeaPath {
+  exit_port: string
+  entry_port: string
+  coords: [number, number][]
+  length_km: number
+  passages: string[]
+  via: string
+}
+
 export interface Network {
   suppliers: NetworkSupplier[]
   buyers: NetworkBuyer[]
   ports: NetworkPort[]
   links: { supplier: string; buyer: string; shipments: number }[]
   routes: { supplier: string; exit_port: string; entry_port: string; buyer: string; shipments: number }[]
+  /** Likely sea lane per exit -> entry port pair (searoute), [lon, lat] points. */
+  sea_paths?: SeaPath[]
   missing_locations: string[]
   notes: string[]
 }
@@ -126,8 +137,11 @@ export interface DateFilter {
 }
 
 export interface Snapshot {
-  mode: 'snapshot' | 'full'
+  mode: 'start' | 'snapshot' | 'full'
   suppliers?: string[]
+  /** Start view: the Dyson buyer at the centre and the fully expanded shipment. */
+  center?: string
+  featured?: string
   filters: DateFilter
   nodes: GNode[]
   edges: GEdge[]

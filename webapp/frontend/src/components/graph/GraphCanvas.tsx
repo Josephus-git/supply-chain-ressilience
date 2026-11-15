@@ -7,14 +7,14 @@
 import cytoscape, { type Core, type ElementDefinition, type LayoutOptions, type StylesheetJson } from 'cytoscape'
 import fcose from 'cytoscape-fcose'
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
-import { KIND_META, kindColor, REL_LABEL } from '@/lib/kinds'
+import { KIND_META, kindColor, kindInk } from '@/lib/kinds'
 import { CHROME, type Mode } from '@/lib/palette'
 import type { GEdge, GNode } from '@/lib/types'
 
 cytoscape.use(fcose)
 
 export type Selection = { type: 'node' | 'edge'; id: string } | null
-export type LayoutName = 'fcose' | 'concentric' | 'breadthfirst' | 'circle' | 'grid'
+export type LayoutName = 'radial' | 'fcose' | 'concentric' | 'breadthfirst' | 'circle' | 'grid'
 
 export interface GraphCanvasHandle {
   fit: (ids?: string[]) => void
@@ -30,25 +30,26 @@ interface Props {
   onSelect: (s: Selection) => void
   onExpand: (nodeId: string) => void
   layoutName: LayoutName
-  /** Node IDs to emphasise (e.g. snapshot suppliers). */
+  /** Node IDs to keep at the centre (e.g. Dyson). */
   roots: string[]
 }
 
 const truncate = (s: string, n: number) => (s.length > n ? `${s.slice(0, n - 1)}…` : s)
 
-/** Always-on canvas label: short enough not to collide. The full name shows on hover and selection. */
-function shortLabel(n: GNode): string {
-  if (n.kind === 'vessel' || n.kind === 'shipment') return ''
+/** Caption drawn inside the circle, Bloom-style. The full name shows on selection and in the inspector. */
+function caption(n: GNode): string {
   if (n.kind === 'product') {
     const hs = n.properties.hs_code
-    return typeof hs === 'number' ? `HS ${String(hs).padStart(6, '0')}` : truncate(n.name, 14)
+    return typeof hs === 'number' ? `HS ${String(hs).padStart(6, '0')}` : truncate(n.name, 18)
   }
-  return truncate(n.name, 26)
+  if (n.kind === 'shipment') return truncate(n.name, 18)
+  return truncate(n.name, n.kind === 'buyer' ? 22 : 20)
 }
 
 function layoutOptions(name: LayoutName, randomize: boolean, roots: string[], count: number): LayoutOptions {
   const animate = count < 400
   switch (name) {
+    case 'radial': // incremental steps of the radial view settle with fcose, keeping placed nodes
     case 'fcose': {
       const big = count > 300
       return {
@@ -56,12 +57,14 @@ function layoutOptions(name: LayoutName, randomize: boolean, roots: string[], co
         // @ts-expect-error fcose-specific options
         quality: 'default',
         randomize,
+        // Keep the centre (Dyson) pinned in the middle on a fresh layout.
+        fixedNodeConstraint: randomize && roots.length ? roots.map((nodeId, i) => ({ nodeId, position: { x: i * 220, y: 0 } })) : undefined,
         animate,
         animationDuration: 450,
-        nodeRepulsion: big ? 6000 : 12000,
-        idealEdgeLength: big ? 70 : 130,
+        nodeRepulsion: big ? 6000 : 16000,
+        idealEdgeLength: big ? 80 : 170,
         edgeElasticity: 0.3,
-        nodeSeparation: big ? 40 : 90,
+        nodeSeparation: big ? 40 : 110,
         numIter: big ? 3000 : 2500,
         gravity: big ? 0.4 : 0.25,
         packComponents: true,
@@ -72,7 +75,7 @@ function layoutOptions(name: LayoutName, randomize: boolean, roots: string[], co
     case 'concentric':
       return {
         name: 'concentric', animate, padding: 40, minNodeSpacing: 18,
-        concentric: (n: cytoscape.NodeSingular) => (roots.includes(n.id()) ? 10 : n.data('kind') === 'shipment' ? 1 : n.data('kind') === 'parent' || n.data('kind') === 'buyer' ? 6 : 4),
+        concentric: (n: cytoscape.NodeSingular) => (roots.includes(n.id()) ? 10 : n.data('kind') === 'shipment' ? 6 : n.data('kind') === 'parent' ? 1 : 3),
         levelWidth: () => 1,
       } as LayoutOptions
     case 'breadthfirst':
@@ -85,70 +88,59 @@ function layoutOptions(name: LayoutName, randomize: boolean, roots: string[], co
 function stylesheet(mode: Mode): StylesheetJson {
   const ch = CHROME[mode]
   const selectRing = mode === 'dark' ? '#f0efec' : '#0b0b0b'
+  const edgeLine = mode === 'dark' ? '#8a8984' : '#9b9a94'
   return [
     {
       selector: 'node',
       style: {
         'background-color': 'data(color)',
-        shape: 'data(shape)' as never,
+        shape: 'ellipse',
         width: 'data(size)',
         height: 'data(size)',
-        'border-width': 2,
-        'border-color': ch.surface,
-        label: 'data(short)',
-        color: ch.ink2,
-        'font-size': 10,
+        'border-width': 0,
+        label: 'data(caption)',
+        color: 'data(ink)',
+        'font-size': 8,
         'font-family': 'Geist Variable, system-ui, sans-serif',
-        'text-valign': 'bottom',
-        'text-margin-y': 4,
-        'text-wrap': 'ellipsis',
-        'text-max-width': '130px',
-        'text-background-color': ch.surface,
-        'text-background-opacity': 0.75,
-        'text-background-padding': '1px',
-        'min-zoomed-font-size': 7,
+        'text-valign': 'center',
+        'text-halign': 'center',
+        'text-wrap': 'wrap',
+        'text-max-width': '46px',
+        'text-overflow-wrap': 'anywhere',
+        'line-height': 1.15,
+        'min-zoomed-font-size': 5,
         'transition-property': 'opacity',
         'transition-duration': 150,
       },
     },
-    { selector: 'node.root', style: { 'border-width': 3, 'border-color': ch.ink2, 'font-weight': 600, color: ch.ink, 'font-size': 12 } },
-
+    { selector: 'node.root', style: { 'font-size': 10, 'font-weight': 600, 'text-max-width': '62px' } },
     {
       selector: 'edge',
       style: {
         width: 'data(w)',
-        'line-color': ch.axis,
-        'target-arrow-color': ch.axis,
+        'line-color': edgeLine,
+        'target-arrow-color': edgeLine,
         'target-arrow-shape': 'triangle',
-        'arrow-scale': 0.7,
+        'arrow-scale': 0.8,
         'curve-style': 'bezier',
-        opacity: 0.9,
+        label: 'data(label)',
+        'font-size': 7,
+        'font-family': 'Geist Variable, system-ui, sans-serif',
+        color: ch.ink2,
+        'text-rotation': 'autorotate',
+        'text-background-color': ch.surface,
+        'text-background-opacity': 0.85,
+        'text-background-padding': '1px',
+        'min-zoomed-font-size': 6,
         'transition-property': 'opacity',
         'transition-duration': 150,
       },
     },
-    {
-      selector: 'edge[label]',
-      style: {
-        label: 'data(label)',
-        'font-size': 9,
-        color: ch.ink2,
-        'text-background-color': ch.surface,
-        'text-background-opacity': 1,
-        'text-background-padding': '2px',
-        'text-background-shape': 'roundrectangle',
-        'text-border-width': 1,
-        'text-border-color': ch.grid,
-        'text-border-opacity': 1,
-        'min-zoomed-font-size': 8,
-      },
-    },
-    { selector: 'edge.raw', style: { 'line-style': 'dashed', 'line-dash-pattern': [4, 3] } },
-    { selector: '.faded', style: { opacity: 0.12 } },
-    { selector: 'node.hl', style: { label: 'data(mid)', color: ch.ink, 'z-index': 8 } },
-    { selector: 'edge.hl', style: { 'line-color': ch.ink2, 'target-arrow-color': ch.ink2, opacity: 1, 'z-index': 9 } },
-    { selector: 'node:selected', style: { 'border-width': 3, 'border-color': selectRing, 'overlay-opacity': 0, label: 'data(name)', 'text-max-width': '220px', 'text-wrap': 'wrap', 'z-index': 10 } },
-    { selector: 'edge:selected', style: { 'line-color': selectRing, 'target-arrow-color': selectRing, width: 'mapData(w, 1, 8, 3, 9)', 'overlay-opacity': 0, opacity: 1, 'z-index': 10 } },
+    { selector: 'edge.agg', style: { 'line-style': 'dashed', 'line-dash-pattern': [5, 3] } },
+    { selector: '.faded', style: { opacity: 0.15 } },
+    { selector: 'edge.hl', style: { 'line-color': ch.ink2, 'target-arrow-color': ch.ink2, color: ch.ink, opacity: 1, 'z-index': 9 } },
+    { selector: 'node:selected', style: { 'border-width': 3, 'border-color': selectRing, 'overlay-opacity': 0, 'z-index': 10 } },
+    { selector: 'edge:selected', style: { 'line-color': selectRing, 'target-arrow-color': selectRing, width: 2.5, 'overlay-opacity': 0, opacity: 1, 'z-index': 10 } },
     { selector: 'node:active, edge:active', style: { 'overlay-opacity': 0.08 } },
   ]
 }
@@ -169,7 +161,22 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
     const cy = cyRef.current
     if (!cy || cy.nodes().length === 0) return
     const { layoutName: name, roots: r } = layoutRef.current
-    cy.layout(layoutOptions(name, randomize, r, cy.nodes().length)).run()
+    const opts = layoutOptions(name, randomize, r, cy.nodes().length)
+    const centre = r.length === 1 ? cy.getElementById(r[0]) : null
+    if (name === 'radial' && randomize && centre?.nonempty()) {
+      const pos = radialPositions(cy, centre)
+      cy.layout({ name: 'preset', positions: (n: cytoscape.NodeSingular) => pos.get(n.id()) ?? n.position(), fit: false, animate: false } as LayoutOptions).run()
+      centreOn(cy, centre)
+      return
+    }
+    if (randomize && centre?.nonempty() && (name === 'fcose' || name === 'concentric')) {
+      // Fit around the centre node rather than the bounding box, so Dyson sits mid-canvas.
+      const l = cy.layout({ ...opts, fit: false, animate: false } as LayoutOptions)
+      l.one('layoutstop', () => centreOn(cy, centre))
+      l.run()
+      return
+    }
+    cy.layout(opts).run()
   }
 
   useImperativeHandle(ref, () => ({
@@ -200,12 +207,22 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
     cyRef.current = cy
     // Dev only: lets browser tests and the console reach the instance.
     if (import.meta.env.DEV) (window as unknown as { __cy?: Core }).__cy = cy
-    cy.on('tap', 'node', (e) => handlers.current.onSelect({ type: 'node', id: e.target.id() }))
+    // Wait briefly before selecting a node: opening the inspector narrows the canvas,
+    // which would otherwise pull the node from under the second click of a double-click.
+    let tapTimer: ReturnType<typeof setTimeout> | undefined
+    cy.on('tap', 'node', (e) => {
+      const id = e.target.id()
+      clearTimeout(tapTimer)
+      tapTimer = setTimeout(() => handlers.current.onSelect({ type: 'node', id }), 320)
+    })
     cy.on('tap', 'edge', (e) => handlers.current.onSelect({ type: 'edge', id: e.target.id() }))
     cy.on('tap', (e) => {
       if (e.target === cy) handlers.current.onSelect(null)
     })
-    cy.on('dbltap', 'node', (e) => handlers.current.onExpand(e.target.id()))
+    cy.on('dbltap', 'node', (e) => {
+      clearTimeout(tapTimer)
+      handlers.current.onExpand(e.target.id())
+    })
     cy.on('mouseover', 'node', (e) => {
       const n = e.target
       cy.elements().addClass('faded')
@@ -216,7 +233,22 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
       applySelectionFocus(cy)
     })
     cy.on('position', 'node', (e) => positions.current.set(e.target.id(), { ...e.target.position() }))
+    // The canvas narrows when the inspector opens: tell Cytoscape, or taps land in the wrong place.
+    let lastW = container.current?.clientWidth ?? 0
+    let lastH = container.current?.clientHeight ?? 0
+    const ro = new ResizeObserver(() => {
+      const w = container.current?.clientWidth ?? 0
+      const h = container.current?.clientHeight ?? 0
+      cy.resize()
+      // Keep what was in the middle in the middle.
+      if (lastW && lastH) cy.panBy({ x: (w - lastW) / 2, y: (h - lastH) / 2 })
+      lastW = w
+      lastH = h
+    })
+    if (container.current) ro.observe(container.current)
     return () => {
+      ro.disconnect()
+      clearTimeout(tapTimer)
       cy.destroy()
       cyRef.current = null
     }
@@ -255,11 +287,10 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
         id: n.id,
         kind: n.kind,
         name: n.name,
-        short: shortLabel(n),
-        mid: truncate(n.name, 40),
-        color: kindColor(n.kind, mode),
-        shape: KIND_META[n.kind]?.shape ?? 'ellipse',
-        size: KIND_META[n.kind]?.size ?? 24,
+        caption: caption(n),
+        color: kindColor(n.kind),
+        ink: kindInk(n.kind),
+        size: KIND_META[n.kind]?.size ?? 54,
       }
       if (existing.nonempty()) {
         existing.data(data)
@@ -278,9 +309,8 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
           source: e.source,
           target: e.target,
           type: e.type,
-          label: e.aggregated && e.shipments ? String(e.shipments) : undefined,
-          title: REL_LABEL[e.type] ?? e.type,
-          w: e.aggregated && e.shipments ? 1 + 6 * Math.sqrt(e.shipments / maxShip) : 1.2,
+          label: e.aggregated && e.shipments ? `${e.type} · ${e.shipments}` : e.type,
+          w: e.aggregated && e.shipments ? 1 + 3 * Math.sqrt(e.shipments / maxShip) : 1,
         },
         classes: e.aggregated ? 'agg' : 'raw',
       })
@@ -336,6 +366,80 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
 
   return <div ref={container} className="graph-canvas" />
 })
+
+/**
+ * Radial tree around the centre node: a BFS tree where each subtree gets an arc
+ * proportional to its leaf count, one ring per hop. Nodes not reached go on an
+ * outer ring.
+ */
+function radialPositions(cy: Core, centre: cytoscape.NodeSingular) {
+  const RING = 170
+  const children = new Map<string, string[]>()
+  const depth = new Map<string, number>([[centre.id(), 0]])
+  const queue = [centre.id()]
+  while (queue.length) {
+    const id = queue.shift()!
+    const kids: string[] = []
+    cy.getElementById(id).neighborhood('node').forEach((m: cytoscape.NodeSingular) => {
+      if (depth.has(m.id())) return
+      depth.set(m.id(), depth.get(id)! + 1)
+      kids.push(m.id())
+      queue.push(m.id())
+    })
+    // Bigger subtrees are placed after leaves so the ring reads tidily.
+    children.set(id, kids)
+  }
+  const leaves = new Map<string, number>()
+  const count = (id: string): number => {
+    const k = children.get(id) ?? []
+    const n = k.length ? k.reduce((a, c) => a + count(c), 0) : 1
+    leaves.set(id, n)
+    return n
+  }
+  count(centre.id())
+  const c = centre.position()
+  const pos = new Map<string, { x: number; y: number }>([[centre.id(), { ...c }]])
+  const place = (id: string, from: number, to: number) => {
+    const kids = (children.get(id) ?? []).sort((a, b) => leaves.get(a)! - leaves.get(b)!)
+    const total = kids.reduce((a, k) => a + leaves.get(k)!, 0)
+    let at = from
+    for (const k of kids) {
+      const span = ((to - from) * leaves.get(k)!) / total
+      const angle = at + span / 2
+      const r = RING * depth.get(k)!
+      pos.set(k, { x: c.x + r * Math.cos(angle), y: c.y + r * Math.sin(angle) })
+      place(k, at, at + span)
+      at += span
+    }
+  }
+  place(centre.id(), -Math.PI / 2, (3 * Math.PI) / 2)
+  const maxDepth = Math.max(0, ...depth.values())
+  const stray = cy.nodes().filter((n: cytoscape.NodeSingular) => !pos.has(n.id()))
+  stray.forEach((n: cytoscape.NodeSingular, i: number) => {
+    const a = (2 * Math.PI * i) / Math.max(1, stray.length)
+    const r = RING * (maxDepth + 1)
+    pos.set(n.id(), { x: c.x + r * Math.cos(a), y: c.y + r * Math.sin(a) })
+  })
+  return pos
+}
+
+/** Zoom so every node fits while the given node stays in the middle of the canvas. */
+function centreOn(cy: Core, centre: cytoscape.NodeSingular) {
+  const c = centre.position()
+  let dx = 0
+  let dy = 0
+  cy.nodes().forEach((n) => {
+    const p = n.position()
+    const r = n.outerWidth() / 2
+    dx = Math.max(dx, Math.abs(p.x - c.x) + r)
+    dy = Math.max(dy, Math.abs(p.y - c.y) + r)
+  })
+  const pad = 40
+  const w = cy.width()
+  const h = cy.height()
+  const zoom = Math.min(1.6, (w / 2 - pad) / Math.max(dx, 1), (h / 2 - pad) / Math.max(dy, 1))
+  cy.viewport({ zoom, pan: { x: w / 2 - c.x * zoom, y: h / 2 - c.y * zoom } })
+}
 
 /** Fade everything except the selection and its immediate neighbourhood. */
 function applySelectionFocus(cy: Core) {

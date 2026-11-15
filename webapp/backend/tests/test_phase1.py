@@ -138,6 +138,16 @@ class HomeTests(unittest.TestCase):
         for s in n["suppliers"]:
             self.assertEqual(s["shipments"], sum(p["shipments"] for p in s["exit_ports"]), s["id"])
             self.assertIsNotNone(s["location"])
+        pairs = {(r["exit_port"], r["entry_port"]) for r in n["routes"]}
+        self.assertTrue(n["sea_paths"])
+        for sp in n["sea_paths"]:
+            self.assertIn((sp["exit_port"], sp["entry_port"]), pairs)
+            self.assertGreater(len(sp["coords"]), 1)
+            self.assertIn(sp["via"], {"Trans-Pacific", "Panama Canal", "Suez Canal", "Cape of Good Hope"})
+        # West-coast entries cross the Pacific; Newark from Asia has to use a canal or the Cape.
+        vias = {sp["via"] for sp in n["sea_paths"]}
+        self.assertIn("Trans-Pacific", vias)
+        self.assertTrue(vias & {"Panama Canal", "Suez Canal", "Cape of Good Hope"})
         ihastek = next(s for s in n["suppliers"] if s["supplier_id"] == "org:ihastek-malaysia-sdn-bhd")
         self.assertEqual("CN", ihastek["reported_country_code"])  # graph value kept ...
         self.assertEqual("MY", ihastek["location"]["country_code"])  # ... map uses the address
@@ -174,6 +184,22 @@ class GraphTests(unittest.TestCase):
         companies = get("/api/graph/suppliers")["companies"]
         self.assertEqual(10, len(companies))
         self.assertEqual(18, sum(len(c["suppliers"]) for c in companies))
+
+    def test_start_view_is_dyson_centred(self):
+        g = get("/api/graph/start")
+        self._check_graph(g)
+        self.assertEqual("buyer:org:dyson-inc", g["center"])
+        self.assertTrue(all(not e["aggregated"] for e in g["edges"]))
+        consigned = [e for e in g["edges"] if e["type"] == "CONSIGNED_TO"]
+        self.assertEqual(3, len(consigned))
+        self.assertTrue(all(e["target"] == g["center"] for e in consigned))
+        featured = {e["type"] for e in g["edges"] if g["featured"] in (e["source"], e["target"])}
+        self.assertTrue({"SHIPPED", "CONSIGNED_TO", "CONTAINS_PRODUCT", "DEPARTED_FROM", "ARRIVED_AT"} <= featured)
+        self.assertIn("SUBSIDIARY_OF", {e["type"] for e in g["edges"]})
+        one = get("/api/graph/start?suppliers=Vs%20Industrial%20Berhad&shipments=2")
+        self._check_graph(one)
+        self.assertEqual(2, sum(e["type"] == "CONSIGNED_TO" for e in one["edges"]))
+        get("/api/graph/start?suppliers=nobody", status=404)
 
     def test_default_snapshot_is_busiest_company(self):
         g = get("/api/graph/snapshot")

@@ -44,7 +44,7 @@ function MapLegend({ view }: { view: MapView }) {
           <Item><span className="w-4 border-t-2 border-dashed" style={{ borderColor: c.supplier }} /> Land leg</Item>
         </>
       )}
-      <Item><span className="h-1 w-4 rounded" style={{ background: c.supplier }} /> {view === 'routes' ? 'Ocean leg' : 'Shipments'} (width = count)</Item>
+      <Item><span className="h-1 w-4 rounded" style={{ background: c.supplier }} /> {view === 'routes' ? 'Likely sea lane' : 'Shipments'} (width = count)</Item>
     </div>
   )
 }
@@ -54,7 +54,7 @@ export default function Home() {
   const stats = useHomeStats()
   const network = useNetwork()
   const top = useTopSuppliers(10)
-  const [view, setView] = useState<MapView>('links')
+  const [view, setView] = useState<MapView>('routes')
   const [selected, setSelected] = useState<string | null>(null)
   const [chartView, setChartView] = useState<'chart' | 'table'>('chart')
   const [reset, setReset] = useState(0)
@@ -73,8 +73,6 @@ export default function Home() {
         </p>
       </div>
 
-      <KpiTiles stats={stats.data} />
-
       <Card className="gap-0 overflow-hidden py-0">
         <CardHeader className="border-b py-4">
           <CardTitle>Where shipments come from</CardTitle>
@@ -85,7 +83,7 @@ export default function Home() {
             </Button>
             <ToggleGroup type="single" variant="outline" size="sm" value={view} onValueChange={(v) => v && setView(v as MapView)}>
               <ToggleGroupItem value="links">Supplier → Dyson</ToggleGroupItem>
-              <ToggleGroupItem value="routes">Real routes</ToggleGroupItem>
+              <ToggleGroupItem value="routes">Shipping routes</ToggleGroupItem>
             </ToggleGroup>
           </CardAction>
         </CardHeader>
@@ -149,6 +147,8 @@ export default function Home() {
           )}
         </div>
       </Card>
+
+      <KpiTiles stats={stats.data} />
     </PageContainer>
   )
 }

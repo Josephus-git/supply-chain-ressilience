@@ -62,9 +62,11 @@ export const useSupplierPicker = () =>
 
 export const useSnapshot = (suppliers: string[], dates: DateFilter, full: boolean) =>
   useQuery({
-    queryKey: ['graph', 'snapshot', suppliers, dates, full],
+    queryKey: ['graph', full ? 'full' : 'start', suppliers, dates],
     queryFn: ({ signal }) =>
-      getJson<Snapshot>('/graph/snapshot', { suppliers: suppliers.join(',') || null, full, ...dates }, signal),
+      full
+        ? getJson<Snapshot>('/graph/snapshot', { full, ...dates }, signal)
+        : getJson<Snapshot>('/graph/start', { suppliers: suppliers.join(',') || null, ...dates }, signal),
     ...STATIC,
   })
 
@@ -77,8 +79,8 @@ export const useNeighbours = (nodeId: string | null, dates: DateFilter, aggregat
     ...STATIC,
   })
 
-export const fetchNeighbours = (nodeId: string, dates: DateFilter, aggregate: boolean) =>
-  getJson<Neighbours>(`/graph/nodes/${encodeURIComponent(nodeId)}/neighbours`, { aggregate, ...dates })
+export const fetchNeighbours = (nodeId: string, dates: DateFilter, aggregate: boolean, limit?: number) =>
+  getJson<Neighbours>(`/graph/nodes/${encodeURIComponent(nodeId)}/neighbours`, { aggregate, limit: limit ?? null, ...dates })
 
 export const fetchEdgeShipments = (source: string, target: string, dates: DateFilter) =>
   getJson<EdgeShipments>('/graph/edges/shipments', { source, target, ...dates })

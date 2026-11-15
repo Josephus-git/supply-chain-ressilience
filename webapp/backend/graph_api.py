@@ -7,6 +7,7 @@ Home
 
 Graph Explorer
     GET /api/graph/suppliers               companies and their Supplier nodes (picker)
+    GET /api/graph/start                   Dyson-centred starter view (real relationships)
     GET /api/graph/snapshot                aggregated view of one or more suppliers
     GET /api/graph/nodes/{id}/neighbours   a node, its properties and its neighbours
     GET /api/graph/edges/shipments         the shipments behind an aggregated link
@@ -21,6 +22,7 @@ from datetime import date
 from functools import lru_cache
 from typing import Any
 
+import searoute
 from fastapi import APIRouter, HTTPException, Query, Request
 
 from supplier_risk_engine.engine import describe_database
@@ -131,6 +133,37 @@ def _place(entry: dict[str, Any] | None) -> dict[str, Any] | None:
         "level": entry.get("level", "city"),
         "basis": entry.get("basis"),
         "source": "reference/locations.json",
+    }
+
+
+@lru_cache(maxsize=512)
+def _sea_route(from_lon: float, from_lat: float, to_lon: float, to_lat: float) -> dict[str, Any] | None:
+    """Likely ocean path between two ports along the searoute maritime network.
+
+    This is the shortest path over a generic network of shipping lanes, not the
+    vessel's recorded track: bills of lading give only the two ports.
+    """
+    try:
+        r = searoute.searoute(
+            [from_lon, from_lat], [to_lon, to_lat], append_orig_dest=True, return_passages=True
+        )
+    except Exception:  # noqa: BLE001 - an unroutable pair falls back to a straight arc
+        return None
+    coords = [[round(x, 3), round(y, 3)] for x, y in r.geometry["coordinates"]]
+    passages = r.properties.get("traversed_passages", [])
+    if "suez" in passages:
+        via = "Suez Canal"
+    elif "panama" in passages:
+        via = "Panama Canal"
+    elif any(y < -30 and 10 < x < 35 for x, y in coords):
+        via = "Cape of Good Hope"
+    else:
+        via = "Trans-Pacific"
+    return {
+        "coords": coords,
+        "length_km": round(r.properties["length"]),
+        "passages": passages,
+        "via": via,
     }
 
 
@@ -295,10 +328,23 @@ def home_network(request: Request) -> dict[str, Any]:
             }
         )
 
+    # One likely sea path per exit -> entry port pair. Catch-all ports drawn at
+    # country level have no real coastline point, so they keep a straight arc.
+    port_loc = {p["id"]: p["location"] for p in ports}
+    sea_paths = []
+    for xp, ep in dict.fromkeys((r["exit_port"], r["entry_port"]) for r in routes):
+        a, b = port_loc.get(xp), port_loc.get(ep)
+        if not a or not b or "country" in (a.get("level"), b.get("level")):
+            continue
+        path = _sea_route(a["lon"], a["lat"], b["lon"], b["lat"])
+        if path:
+            sea_paths.append({"exit_port": xp, "entry_port": ep, **path})
+
     return {
         "suppliers": suppliers,
         "buyers": buyers,
         "ports": ports,
+        "sea_paths": sea_paths,
         "links": [
             {"supplier": f"supplier:{s}", "buyer": f"buyer:{b}", "shipments": n}
             for (s, b), n in sorted(links.items(), key=lambda kv: -kv[1])
@@ -311,6 +357,8 @@ def home_network(request: Request) -> dict[str, Any]:
             "reported_country_code is the country ImportYeti reports and can differ from the "
             "address location (for example Ihastek Malaysia = CN).",
             "Catch-all ports ('All Other … Ports') are drawn at country level.",
+            "Sea paths are the likely shortest route along common shipping lanes (searoute), "
+            "not recorded vessel tracks: the shipment records name only the exit and entry ports.",
         ],
     }
 
@@ -434,6 +482,120 @@ def _default_supplier(client: ReadOnlyNeo4j) -> list[str]:
         name="default_supplier",
     )
     return sorted(r["id"] for r in rows)
+
+
+DYSON_BASENAME = "Dyson"
+DYSON_PRIMARY = "org:dyson-inc"
+
+
+@graph_router.get("/start")
+def graph_start(
+    request: Request,
+    suppliers: str | None = Query(
+        None,
+        description="Comma-separated Supplier IDs, supplier_ids or company basenames. "
+        "Default: shipments from any supplier.",
+    ),
+    shipments: int = Query(3, ge=1, le=10, description="How many shipments to attach to Dyson"),
+    date_from: str | None = Query(None),
+    date_to: str | None = Query(None),
+) -> dict[str, Any]:
+    """A small, clean starting graph with real relationships (no aggregation): a Dyson
+    buyer in the centre, its latest few shipments (one per supplier where possible), the
+    first shipment expanded into every relationship, and that shipment's supplier
+    expanded to its parent company."""
+    client = _client(request)
+    params = {"date_from": _date_param(date_from, "date_from"), "date_to": _date_param(date_to, "date_to")}
+    requested = [v.strip() for v in (suppliers or "").split(",") if v.strip()]
+    supplier_ids = _resolve_suppliers(client, requested) if requested else None
+    if requested and not supplier_ids:
+        raise HTTPException(404, f"No Supplier matches {requested}")
+
+    rows = client.read(
+        f"""
+        MATCH (s:Supplier)-[:SHIPPED]->(sh:Shipment)-[:CONSIGNED_TO]->(b:Buyer)
+        WHERE b.buyer_basename = $dyson AND {DATE_FILTER}
+          AND ($ids IS NULL OR s.supplier_id IN $ids)
+        RETURN b.buyer_id AS buyer, s.supplier_basename AS company, sh.shipment_id AS shipment
+        ORDER BY b.buyer_id = $primary DESC, sh.arrival_date DESC, sh.shipment_id
+        LIMIT 500
+        """,
+        {"dyson": DYSON_BASENAME, "primary": DYSON_PRIMARY, "ids": supplier_ids, **params},
+        name="start_shipments",
+    )
+    if not rows:
+        raise HTTPException(404, "No shipments to Dyson match these filters")
+    buyer_id = rows[0]["buyer"]
+    rows = [r for r in rows if r["buyer"] == buyer_id]
+    # Latest shipment per company first (variety), then fill with the next latest.
+    picked: list[str] = []
+    seen: set[str] = set()
+    for r in rows:
+        if r["company"] not in seen and len(picked) < shipments:
+            picked.append(r["shipment"])
+            seen.add(r["company"])
+    for r in rows:
+        if len(picked) >= shipments:
+            break
+        if r["shipment"] not in picked:
+            picked.append(r["shipment"])
+    featured = picked[0]
+
+    nodes: dict[str, dict[str, Any]] = {}
+    edges: dict[str, dict[str, Any]] = {}
+
+    def add(row: dict[str, Any], a: str, rel: str, b: str) -> None:
+        na = node_out(row[f"{a}_labels"], row[f"{a}_props"])
+        nb = node_out(row[f"{b}_labels"], row[f"{b}_props"])
+        nodes.setdefault(na["id"], na)
+        nodes.setdefault(nb["id"], nb)
+        e = _edge(na["id"], nb["id"], rel, aggregated=False)
+        edges.setdefault(e["id"], e)
+
+    for row in client.read(
+        f"""
+        MATCH (sh:Shipment)-[:CONSIGNED_TO]->(b:Buyer {{buyer_id: $buyer}})
+        WHERE sh.shipment_id IN $picked
+        RETURN {node_return('sh')}, {node_return('b')}
+        """,
+        {"buyer": buyer_id, "picked": picked},
+        name="start_consigned",
+    ):
+        add(row, "sh", "CONSIGNED_TO", "b")
+
+    for row in client.read(
+        f"""
+        MATCH (sh:Shipment {{shipment_id: $featured}})-[r]-(m)
+        RETURN {node_return('sh')}, type(r) AS rel, startNode(r) = sh AS outgoing, {node_return('m')}
+        """,
+        {"featured": featured},
+        name="start_featured",
+    ):
+        if row["outgoing"]:
+            add(row, "sh", row["rel"], "m")
+        else:
+            add(row, "m", row["rel"], "sh")
+
+    for row in client.read(
+        f"""
+        MATCH (s:Supplier)-[:SHIPPED]->(:Shipment {{shipment_id: $featured}})
+        MATCH (s)-[:SUBSIDIARY_OF]->(p:ParentCompany)
+        RETURN {node_return('s')}, {node_return('p')}
+        """,
+        {"featured": featured},
+        name="start_parent",
+    ):
+        add(row, "s", "SUBSIDIARY_OF", "p")
+
+    return {
+        "mode": "start",
+        "center": f"buyer:{buyer_id}",
+        "featured": f"shipment:{featured}",
+        "suppliers": [f"supplier:{i}" for i in supplier_ids or []],
+        "filters": params,
+        "nodes": list(nodes.values()),
+        "edges": list(edges.values()),
+    }
 
 
 @graph_router.get("/snapshot")
