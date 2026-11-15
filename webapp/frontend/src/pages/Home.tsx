@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react'
 import { PageContainer } from '@/components/layout/AppShell'
 import { ErrorBoundary } from '@/components/layout/ErrorBoundary'
 import { KpiTiles } from '@/components/home/KpiTiles'
+import { RelationshipsLegend, RelationshipsTree } from '@/components/home/RelationshipsTree'
 import { CompanyList, SupplierCard } from '@/components/home/SupplierCard'
 import { TopSuppliersChart, TopSuppliersTable } from '@/components/home/TopSuppliersChart'
 import { mapColors, WorldMap, type MapView } from '@/components/home/WorldMap'
@@ -122,6 +123,26 @@ export default function Home() {
             {network.data.missing_locations.length > 0 && <> Not plotted (no coordinates): {network.data.missing_locations.join(', ')}.</>}
           </div>
         )}
+      </Card>
+
+      <Card className="gap-0 py-0">
+        <CardHeader className="border-b py-4">
+          <CardTitle>Dyson's top 10 relationships</CardTitle>
+          <CardDescription className="text-xs"><RelationshipsLegend /></CardDescription>
+        </CardHeader>
+        <div className="p-4">
+          {top.isPending && <Skeleton className="h-[480px]" />}
+          {top.isError && <ErrorNote error={top.error} />}
+          {top.data && (
+            <ErrorBoundary label="The relationships chart">
+              <RelationshipsTree data={top.data} mode={mode} />
+            </ErrorBoundary>
+          )}
+        </div>
+        <div className="border-t px-4 py-2.5 text-[11px] leading-relaxed text-muted-foreground">
+          Suppliers grouped by company (Supplier.supplier_basename) and linked to their parent through SUBSIDIARY_OF in
+          the knowledge graph. Suppliers that share a parent sit together.
+        </div>
       </Card>
 
       <Card className="gap-0 py-0">
