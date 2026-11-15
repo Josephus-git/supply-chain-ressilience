@@ -6,8 +6,8 @@ not findings.
 
 ## 1. Goal and scope
 
-Build a reproducible Python engine that receives a payload of suppliers (name
-and country) and a query date, finds the stored evidence that could affect each
+Build a reproducible Python engine that receives a payload of candidate
+suppliers for one bill-of-materials (BOM) line and a query date, finds the stored evidence that could affect each
 supplier, and returns the matched records with their dated, source-attributed
 evidence reports and related context.
 
@@ -21,8 +21,9 @@ The engine should:
 - Accept one or many suppliers in a single request.
 - Treat each supplier as the subject of the query. The evidence describes the
   environment around a supplier, so a supplier does not need its own record.
-- Match evidence by company name, country, or vessel name, using the rules for
-  each risk type (section 7).
+- Match evidence by company name, country, port, carrier, vessel, HS code,
+  importing country, or currency, using the rules for each risk type
+  (section 7).
 - Report data gaps and limitations alongside results.
 - Keep retrieved reports separate from any conclusion about impact.
 
@@ -42,8 +43,9 @@ records do not contain:
 - A supplier registry. A supplier is never matched to a stored supplier ID.
 - Shipments, buyers, products, or port identifiers. The `supplier_ids` and
   `port_ids` fields are empty in every record.
-- Parent-company or ownership links. Parent names are supplied in the payload
-  (section 6.1), not stored in the records.
+- Parent-company or ownership links, carriers, vessels, ports, or HS codes for a
+  supplier. The caller derives these from the Neo4j graph and supplies them in
+  the payload (section 6.1). The engine matches them but never queries Neo4j.
 - Provenance fields such as `source_file` and `source_row`. Each record has its
   own `source` object with a URL and publisher instead.
 
@@ -54,7 +56,14 @@ on any supplier. Each record carries its own `verification_status` and
 ## 3. Architecture
 
 ```text
-Payload: suppliers, as_of_date, event_window_days
+Caller (LangChain layer, uses Neo4j)
+  - BOM line -> vector search on Product.embedding -> candidate products
+  - candidate products -> shipments -> suppliers
+  - aggregates each supplier's footprint into an exposure profile
+             |
+             v
+Payload: one BOM line, its supplier exposure profiles, as_of_date,
+         event_window_days
              |
              v
 Supplier risk evidence engine (standalone)
@@ -67,8 +76,9 @@ Supplier risk evidence engine (standalone)
 Adapters (outside the engine)
   - loader: reads the JSON database and passes records in
   - MCP server: exposes the engine to MCP clients on this machine
+  - CLI: for testing and evaluation runs
   - LangChain app (later): calls the MCP server as a client
-  - CLI: for testing
+  - Python import (later): a Python frontend or app calls the engine directly
 ```
 
 The engine receives records as plain input. It contains no file access, LLM,
@@ -94,8 +104,13 @@ The engine reports which records are linked to a supplier, and how. It does not
 decide that an event affected a supplier.
 
 - **Link basis:** every linked report states its basis: `company_name`,
-  `parent_company_name`, `carrier_name`, `vessel_name`, or `country_code`. A link
-  is relevant context, not evidence of impact.
+  `parent_company_name`, `carrier_name`, `vessel_name`, `port_code`,
+  `port_name`, `port_country`, `hs_code`, `importing_country`, `currency`, or
+  `country_code`. It also states a `link_strength` (`strong`, `medium`, or
+  `weak`). A link is relevant context, not evidence of impact.
+- **Exposure counts:** the payload's shipment counts for each port, carrier,
+  vessel, and HS code are echoed back on the matching link (`matched_exposure`),
+  unchanged. The engine never uses them to filter or rank.
 - **Parent companies:** a report about a parent company is linked to each
   subsidiary the payload names under it. The link runs one way, from parent to
   child. A report about a subsidiary is not linked to its parent. The caller
@@ -133,6 +148,26 @@ scoring.
 
 Under these rules, "Nexperia" matches "Nexperia Inc." but not "Nexperia
 Philippines Inc." (section 5.4, decision 2).
+
+- **Ports (lenient, tiered):** the evidence names ports in free text, and the
+  graph uses CBP codes. The evidence dataset is small, so strict matching would
+  rarely hit. Each port is tried in order, and the first tier that hits wins:
+  1. `port_code` (**strong**): the payload code equals a code on the record.
+     This applies only if a record carries a code.
+  2. `port_name` (**medium**): the normalised graph port name, with any
+     trailing state or province tag dropped ("Long Beach, Ca" becomes "long
+     beach"), appears as a whole-word substring of the normalised
+     `reported_port`, `location.label`, `location.affected_area`, or
+     `border_or_customs_location`. A name made only of generic words ("port",
+     "terminal", "pier", "harbour") never matches.
+  3. `port_country` (**weak**, location only): the port's country equals the
+     record's `country_code`.
+
+  This is deterministic substring containment, not fuzzy scoring.
+- **HS codes:** digits only. A record code matches when one code is a prefix of
+  the other, with a minimum of 6 digits ("850760" matches "8507.60.00").
+- **Currency:** the caller passes the supplier's currency (ISO 4217). It matches
+  a record whose `quote_currency` or `base_currency` equals it.
 
 ### 5.2 Dated retrieval
 
@@ -172,21 +207,23 @@ from `as_of_date`.
 
 Agree these before implementation:
 
-1. **Payload keys:** the proposed supplier keys are `supplier_name`, `country`,
-   and `parent_companies` (required), plus optional `vessel_names`. Carrier matching for `carrier_vessel_disruption`
-   and `goods_in_transit` needs a carrier key too. Should it be an optional
-   `carrier_names`?
+1. **Payload keys:** resolved. The caller builds an exposure profile for each
+   supplier from the graph (section 6.1). Each request covers one BOM line.
 2. **Company-name strictness:** exact equality after normalisation, as proposed,
    means "Nexperia" does not match "Nexperia Philippines Inc.". Is that the
    intended behaviour?
 3. **Data fixes needed before some risk types can be matched:**
-   - `natural_hazards`: add a `country_code` to each record. Only `location`
-     text exists now.
-   - `currency_fluctuations`: has no country or company field. Add a currency
-     key to the payload, or leave this risk type unmatched.
-   - `tariffs_and_duties`: needs product classification and importing country.
-     The dataset README says supplier country alone does not establish tariff
-     applicability, so leave this type unmatched until those keys exist.
+   - `natural_hazards`: resolved. `location.country_code` now exists.
+   - `currency_fluctuations`: resolved by the payload `currency` key.
+   - `tariffs_and_duties`: origin and importing country now come from the
+     payload. Most records have no commodity code. These link on origin and
+     importing country with `link_strength: weak`, labelled "country-wide
+     measure; product applicability not established". Records with a code also
+     need an `hs_code` match. Check graph `hs_code` precision before
+     implementing.
+   - `route_chokepoint_disruption`: records with empty `countries` (Red Sea,
+     Hormuz, Panama) cannot be linked. Return them once per response as
+     unlinked global context.
 4. **Country-name mapping:** who reviews the mapping from country names to
    codes?
 5. **Required request fields:** confirm that `event_window_days` is required in
@@ -206,16 +243,42 @@ separate project with its own plan and its own assumptions.
 
 ### 6.1 Request
 
+Values are illustrative. The caller builds every supplier key from the graph:
+
+| Payload key | Graph source |
+| --- | --- |
+| `supplier_id`, `supplier_name`, `country` | `Supplier.supplier_id`, `supplier_name`, `supplier_country_code` |
+| `parent_companies` | `(Supplier)-[:SUBSIDIARY_OF]->(ParentCompany).canonical_name` |
+| `hs_codes` | `(Shipment)-[:CONTAINS_PRODUCT]->(Product).hs_code` |
+| `exit_ports`, `entry_ports` | `DEPARTED_FROM` and `ARRIVED_AT` port names and codes |
+| `carriers`, `vessels` | `CARRIED_BY` and `TRANSPORTED_ON` |
+| `currency` | the supplier country, through a fixed ISO 4217 table |
+| `importing_country` | entry-port or buyer country |
+| `shipments`, `footprint_window` | counts and the range of `Shipment.arrival_date` |
+
 ```json
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "as_of_date": "2026-09-25",
   "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "BOM-001-L3",
+    "component_query": "lithium-ion battery pack",
+    "importing_country": "US"
+  },
   "suppliers": [
     {
+      "supplier_id": "S-123",
       "supplier_name": "Supplier A",
       "country": "MY",
-      "parent_companies": ["Flex Ltd"]
+      "parent_companies": ["Flex Ltd"],
+      "hs_codes":    [{"code": "850760", "shipments": 12}],
+      "exit_ports":  [{"name": "Tanjung Pelepas", "code": "00000", "country": "MY", "shipments": 9}],
+      "entry_ports": [{"name": "Los Angeles, Ca", "code": "2704", "country": "US", "shipments": 7}],
+      "carriers":    [{"name": "Maersk", "code": "MAEU", "shipments": 5}],
+      "vessels":     [{"name": "Kyparissia", "shipments": 2}],
+      "currency": "MYR",
+      "footprint_window": {"first_arrival": "2025-02-03", "last_arrival": "2026-09-01", "shipments": 31}
     }
   ]
 }
@@ -223,10 +286,15 @@ separate project with its own plan and its own assumptions.
 
 - `as_of_date`: ISO date. Required.
 - `event_window_days`: non-negative integer. Required. Returned in the response.
-- `suppliers`: non-empty array. Each entry needs `supplier_name`, `country`, and
-  `parent_companies`. `parent_companies` is a non-empty list of parent names,
-  from the nearest parent up to the ultimate parent. If the supplier has no
-  parent, the caller passes the supplier's own name. `vessel_names` is optional.
+- `request_context`: required. `importing_country` is required. `bom_line_id`
+  and `component_query` are echoed back and not matched.
+- `suppliers`: non-empty array. Each entry needs `supplier_name`, `country`,
+  `parent_companies`, and `currency`. `parent_companies` is a non-empty list of
+  parent names, from the nearest parent up to the ultimate parent. If the
+  supplier has no parent, the caller passes the supplier's own name.
+  `supplier_id` is echoed back and not matched. The list keys (`hs_codes`,
+  `exit_ports`, `entry_ports`, `carriers`, `vessels`) are optional. Their
+  `shipments` counts are echoed back unchanged.
 
 Two entries with the same normalised name and country are a validation error.
 
@@ -241,7 +309,7 @@ returned unchanged.
 
 ```json
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "status": "completed",
   "as_of_date": "2026-09-25",
   "event_window_days": 14,
@@ -264,6 +332,8 @@ returned unchanged.
           "in_scope_reason": "undated candidate: as_of_date within search_window",
           "link_basis": "parent_company_name",
           "matched_value": "Flex Ltd",
+          "link_strength": "strong",
+          "matched_exposure": null,
           "verification_status": "unverified_attacker_claim_source_reviewed",
           "limitations": [
             "SOCRadar labels the report alleged and says leak-site claims may not be independently verified or reflect confirmed breaches; a listing does not establish that an attack or breach occurred.",
@@ -273,6 +343,7 @@ returned unchanged.
       ]
     }
   ],
+  "unlinked_context": [],
   "warnings": []
 }
 ```
@@ -290,14 +361,17 @@ and no warning.
 | Empty `suppliers`, or a missing name, country, or `parent_companies` | Reject. |
 | Unrecognised country name or code | Reject. |
 | Duplicate supplier entry | Reject. |
-| Empty or whitespace-only name, parent, vessel, or carrier | Reject. |
+| Empty or whitespace-only name, parent, vessel, carrier, or port | Reject. |
+| Missing `request_context.importing_country` or supplier `currency` | Reject. |
+| Unknown ISO 4217 currency, or a non-digit HS code | Reject. |
+| Negative or non-integer `shipments` count | Reject. |
 | `as_of_date` outside the study window | Return no records. |
 
 ## 7. Fetch rules by risk type
 
 Each risk type has its own fields. The table shows what the engine matches on
 for each type, using the payload keys (supplier name, country, vessel name) and
-the optional carrier key proposed in section 5.4. Parent-company names are
+the graph-derived keys in section 6.1. Parent-company names are
 matched against the same company-name field as the supplier name, for each risk
 type that has one.
 
@@ -311,19 +385,19 @@ country match is returned without a name, vessel, or carrier match.
 | Supplier financial distress (`supplier_financial_distress.json`) | 5 | `reported_supplier` | `country_code` | none | observation point | allowed, labelled | `distress_indicator` is not used for ranking. |
 | Product quality or compliance (`product_quality_compliance.json`) | 7 | `reported_supplier`, split on `;`, role text removed | `country_code` | none | event interval | allowed, labelled | Product fields are not in the proposed key set. |
 | Labour disruption (`labour_disruption.json`) | 4 | `reported_organisation` | `country_code` | none | event interval | allowed, labelled | `location` text is not matched. |
-| Natural hazards (`natural_hazards.json`) | 5 | none | none. `location` is free text. | none | event interval | not possible | Add `country_code` to each record before country matching (section 5.4). |
-| Port disruption (`port_disruption.json`) | 7 | none | `country_code` | none | event interval | allowed, labelled as location | `reported_port` is not in the key set. |
+| Natural hazards (`natural_hazards.json`) | 5 | none | `location.country_code` | port name against `location.label` and `location.affected_area` (section 5.1) | event interval | allowed, labelled | |
+| Port disruption (`port_disruption.json`) | 7 | none | `country_code` | exit and entry ports against `reported_port`, tiered (section 5.1) | event interval | allowed as `port_country`, weak | |
 | Carrier or vessel disruption (`carrier_vessel_disruption.json`) | 6 | none | `country_code`, the incident location | `reported_vessel` (vessel name), `reported_carrier` (carrier, role text removed) | event interval | **not used** | The record states that the country is the incident location, not the vessel's flag or the supplier's country. |
-| Route or chokepoint disruption (`route_chokepoint_disruption.json`) | 5 | none | `countries[].country_code` | none | event interval | allowed, labelled | `route_or_chokepoint` text is not in the key set. |
-| Loss, theft, or damage in transit (`goods_in_transit.json`) | 8 | none | `country_code` | `reported_carrier` | event interval | allowed, labelled | `reported_shipment` is not matched. |
-| Tariffs and duties (`tariffs_and_duties.json`) | 15 | none | `origin_country_code`, `importing_country_code` | none | effective interval | **not used** | Needs product and importing-country keys (section 5.4). Unmatched until then. |
+| Route or chokepoint disruption (`route_chokepoint_disruption.json`) | 5 | none | `countries[].country_code` | none | event interval | allowed, labelled | Records with empty `countries` are returned once as unlinked global context. |
+| Loss, theft, or damage in transit (`goods_in_transit.json`) | 8 | none | `country_code` | `reported_carrier`, split on `;`, role text removed | event interval | allowed, labelled | `reported_shipment` is not matched. |
+| Tariffs and duties (`tariffs_and_duties.json`) | 15 | none | `origin_country_code` = supplier country and `importing_country_code` = `importing_country`, both required | `hs_codes` against `product_classification.code`, where present | effective interval | country pair only, weak, "country-wide measure" | A null origin means global: it matches on importing country alone. |
 | Government restrictions (`government_restrictions.json`) | 5 | `reported_organisation` | `affected_countries[]`, `issuing_country_code` | none | effective interval | allowed, labelled | `product_classification` is not in the key set. |
-| Border and customs delays (`border_customs_delays.json`) | 6 | none | `country_code` | none | event interval | allowed, labelled | `border_or_customs_location` is not matched. |
+| Border and customs delays (`border_customs_delays.json`) | 6 | none | `country_code` | port name against `border_or_customs_location` (section 5.1) | event interval | allowed, labelled | |
 | Geopolitical conflict (`geopolitical_conflict.json`) | 3 | none | `affected_countries[]` | none | event interval | allowed, labelled | `affected_area` text is not matched. |
 | Input or material shortage (`input_material_shortage.json`) | 5 | `reported_supplier` | `affected_countries[]` | none | event interval | allowed, labelled | `material` is not in the key set. |
 | Energy or transport cost increases (`energy_transport_cost_increase.json`) | 5 | none | `affected_countries[]` | none | observation start | allowed, labelled | Market context, not supplier costs. |
 | Supplier or route concentration (`supplier_route_concentration.json`) | 3 | `reported_entities_or_routes`, split into list items, `(unnamed)` ignored | `countries[].country_code` | none | observation start | allowed, labelled | |
-| Currency fluctuations (`currency_fluctuations.json`) | 6 | none | none | none | observation start | not possible | No country or company field. Needs a currency key (section 5.4). |
+| Currency fluctuations (`currency_fluctuations.json`) | 6 | none | none | `currency` against `quote_currency` and `base_currency` | observation start | not applicable | Records with null currencies are skipped. |
 
 ### 7.1 Worked example: carrier or vessel disruption
 
@@ -343,50 +417,123 @@ This type is matched on the vessel and carrier, not on the supplier.
 
 ## 8. Interfaces and integration
 
-These names are proposed, not an existing API:
+These names are proposed, not an existing API.
+
+### 8.1 Core function
 
 ```python
 result = lookup_suppliers(payload, records)
 ```
 
-- **MCP server:** the local interface. It exposes `lookup_suppliers` as an MCP
-  tool, reads the stored records, and calls the same function. It contains no
-  matching or retrieval logic of its own.
-- **CLI:** reads a payload file, prints the result with its warnings, and can
-  save the full JSON result. Used for testing without an MCP client.
-- **LangChain app (later):** connects to the local MCP server as a client and
-  passes the returned records to the LLM for explanation. The LLM may explain
-  returned records but must not add facts that are not in them.
+Every interface below is a thin adapter around this function. The adapters
+contain no matching or retrieval logic, so every adapter gives the same result
+for the same payload and records. The request (section 6.1) and the response
+(section 6.2) are plain JSON, so any adapter can send them unchanged.
 
-No remote servers, hosted web API, or live data sources are planned.
+### 8.2 Operations
+
+Each adapter exposes the same three operations:
+
+| Operation | Input | Returns |
+| --- | --- | --- |
+| `lookup_suppliers` | the payload (section 6.1) | linked reports for each supplier (section 6.2) |
+| `get_evidence` | `evidence_id` | the full stored record, with its source, limitations, and related IDs |
+| `describe_database` | none | the study window, risk types and record counts, data snapshot ID, and engine version |
+
+`lookup_suppliers` returns compact links. `get_evidence` lets a caller (an LLM,
+a user in a frontend, or an evaluation script) open the stored record behind
+any cited `evidence_id`.
+
+### 8.3 Adapters
+
+| Adapter | Status | Use |
+| --- | --- | --- |
+| CLI | in scope | Testing and evaluation runs. `query <payload.json> --out <result.json>` runs one payload. `run-all <dir> --out <dir>` runs a batch. `evidence <id>` and `describe` cover the other two operations. |
+| MCP server (stdio, local) | in scope | Used by the LangChain app as a client. The three operations are exposed as MCP tools. It can also be registered in `.vscode/mcp.json` for manual checks. |
+| Python import | available by design | A Python app (the LangChain app, or a Streamlit or Gradio frontend) can import `lookup_suppliers`, `get_evidence`, and `describe_database` and call them directly. No server is needed. |
+
+The engine has no HTTP endpoint of its own. The interactive frontend talks to
+the LangChain app, never to the engine. The app reaches the engine through MCP
+or a direct import:
+
+- With a Python frontend (for example Streamlit, which can also draw the Neo4j
+  graph view), everything runs in one process and needs no endpoint.
+- A browser (JavaScript) frontend would need HTTP, but on the LangChain app's
+  backend, not on the engine. If an HTTP connection to the engine is ever
+  needed, the same MCP server can switch to MCP's Streamable HTTP transport, so
+  no separate REST API is needed.
+
+So that any of these callers works without changing the engine:
+
+- Request and response models are defined once, in the engine package, and
+  serialise to JSON. Adapters do not reshape them.
+- The response echoes the caller's stable identifiers unchanged:
+  `supplier_id`, `bom_line_id`, and the port and carrier codes in
+  `matched_exposure`. The frontend can use them to open the matching Neo4j
+  nodes in a graph view. The engine itself never reads Neo4j.
+- Validation errors are returned as structured objects (`field`, `code`,
+  `message`), not as raw exceptions, so each adapter can map them to its own
+  error format: CLI exit codes, MCP tool errors, or Python exceptions.
+- The engine keeps no state between calls. Records are loaded once by the
+  loader and passed in.
+
+### 8.4 Later work, outside the engine
+
+- **LangChain app:** connects to the MCP server as a client and passes the
+  returned records to the LLM for explanation. The LLM may explain returned
+  records, but must not add facts that are not in them.
+- **Frontend:** talks to the LangChain app. It shows the engine's evidence
+  alongside a Neo4j graph view, using the echoed `supplier_id` and port and
+  carrier codes to link the two views.
+
+No remote or hosted servers, and no live data sources, are planned.
 
 ## 9. Implementation phases
 
 1. **Verify stored records.** Check the fields, IDs, and dates in each risk file
-   against section 7, and confirm every date falls within the study window.
-   Confirm the data fixes listed in section 5.4.
-2. **Settle open decisions.** Resolve section 5.4, including the payload keys,
-   company-name strictness, and the country-name mapping.
-3. **Implement the engine.** Add typed payload and result models, validation,
-   normalisation, per-type matching, and dated retrieval.
-   Output must be deterministic for the same payload and records.
+   against section 7, and confirm that every date falls within the study window.
+2. **Write fixture payloads.** Hand-write one payload for each supplier in
+   `data/raw_yeti_response/`, using the real ports, carriers, vessels, and HS
+   codes from those files. Pair each payload with the `evidence_id`s it is
+   expected to return (`examples/expected_ids.json`). These fixtures serve as
+   test input and as the retrieval gold set (section 10). The future graph stage
+   only has to produce the same JSON shape.
+3. **Implement the engine.** Add typed payload and result models, structured
+   validation errors, normalisation (including tiered port matching), matching
+   for each risk type, and dated retrieval. Output must be deterministic for the
+   same payload and records.
 4. **Test with fixed records.** Cover exact and near-miss names, role text,
    list-valued fields, unnamed entries, country-name conversion, parent-company
-   links in one direction only, country-only links for each type, the carrier/vessel no-country rule, window boundaries (on
-   the start, on the end, and one day outside), open end dates, undated
-   candidates, dates outside the study window, invalid input, and repeated runs producing
-   identical output.
-5. **Connect the application layer.** Add a loader for the JSON database, the MCP
-   server, and the CLI. Record the data snapshot and engine version in each
-   result.
-6. **Connect the LangChain app.** Separate work, planned after the engine and its
-   MCP server are tested. The app connects to the MCP server as a client and
-   uses the returned records unchanged.
+   links in one direction only, the three port tiers, HS-code prefixes,
+   currency, country-only links for each risk type, the carrier/vessel
+   no-country rule, and window boundaries (on the start, on the end, and one day
+   outside). Also cover open end dates, undated candidates, dates outside the
+   study window, invalid input, and repeated runs producing identical output.
+5. **Add the loader and CLI.** The loader reads the JSON database and computes
+   the data snapshot ID. The CLI exposes the three operations from section 8.2
+   and runs the fixture batch.
+6. **Add the MCP server.** Expose the same three operations as MCP tools.
+7. **Later, outside this scope:** the LangChain app and its frontend
+   (section 8.4).
+
+Proposed layout:
+
+```text
+supplier_risk_engine/
+  engine/        models.py, validate.py, normalise.py, match.py, dates.py, lookup.py
+  loader.py      reads risk_evidence/database/, computes the snapshot ID
+  cli.py
+  mcp_server.py
+  examples/      fixture payloads and expected_ids.json
+  tests/
+```
 
 ## 10. Evaluation and limitations
 
 - Test matching, normalisation, date handling, and linking against fixed records
   with known answers.
+- Measure retrieval against the fixture gold set (`examples/expected_ids.json`):
+  report missed and unexpected `evidence_id`s for each fixture.
 - Record the data snapshot fingerprint and engine version in every result.
 - Check that every returned fact traces to a stored record and its source. Any
   LLM explanation added later should be checked against the returned records.
