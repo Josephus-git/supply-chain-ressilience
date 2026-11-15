@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "description": "Retrieval gold set for the phase 2 fixture payloads (SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md, sections 9 and 10). Compare each fixture's returned evidence_ids with expected_ids and report missed and unexpected IDs. expected_links and expected_exclusions explain each entry; only expected_ids is the pass/fail comparison.",
-  "status": "draft: derived by applying the plan's rules to the stored records, then reviewed by hand. Not produced by the engine. Review the interpretations before treating it as final.",
+  "status": "agreed 2026-11-15: derived by applying the plan's rules to the stored records, then reviewed by hand. Not produced by the engine. The interpretations were agreed with the user on 2026-11-15.",
   "created_at": "2026-11-15",
   "evidence_database": {
     "path": "risk_evidence/database/",
@@ -13,23 +13,28 @@
   "interpretations": [
     {
       "id": "one_record_listed_once",
-      "rule": "A record is expected at most once per supplier. When several bases link it, the strongest is listed (strong > medium > weak) with every matched value."
+      "rule": "A record is expected at most once per supplier. When several bases link it, the strongest is listed (strong > medium > weak) with every matched value.",
+      "agreed": "2026-11-15"
     },
     {
       "id": "related_records_not_pulled_in",
-      "rule": "Records are expected only when they link on their own. A related record (related_evidence_ids) that does not link is not added to the expected set; section 4 'return them together' is read as grouping linked records."
+      "rule": "Records are expected only when they link on their own. A related record (related_evidence_ids) that does not link is not added to the expected set; section 4 'return them together' is read as grouping linked records.",
+      "agreed": "2026-11-15"
     },
     {
       "id": "undated_uses_plain_search_window",
-      "rule": "A record without its date field is expected only when as_of_date falls inside its search_window; event_window_days is not applied to search windows."
+      "rule": "A record without its date field is expected only when as_of_date falls inside its search_window; event_window_days is not applied to search windows.",
+      "agreed": "2026-11-15"
     },
     {
       "id": "effective_to_window_applies",
-      "rule": "The event window expands both ends of effective intervals, so a tariff ending 2025-11-09 is in scope on 2025-11-21 with a 14-day window."
+      "rule": "The event window expands both ends of effective intervals, so a tariff ending 2025-11-09 is in scope on 2025-11-21 with a 14-day window.",
+      "agreed": "2026-11-15"
     },
     {
       "id": "port_tiers_types",
-      "rule": "Port tiers (port_code, port_name, port_country) apply to port_disruption, natural_hazards and border_customs_delays, using both exit and entry ports. No graph port code equals a record code because records carry no port codes."
+      "rule": "Port tiers (port_code, port_name, port_country) apply to port_disruption, natural_hazards and border_customs_delays, using both exit and entry ports. No graph port code equals a record code because records carry no port codes.",
+      "agreed": "2026-11-15"
     },
     {
       "id": "port_country_on_hazard_and_customs",
@@ -47,27 +52,38 @@
         "18": [
           "HAZARD-2025-MY-FLOOD-001"
         ]
-      }
+      },
+      "agreed": "2026-11-15"
     },
     {
       "id": "port_disruption_no_supplier_country",
-      "rule": "port_disruption links by country only through a port's country (port_country), never through the supplier country (section 7: 'allowed as port_country')."
+      "rule": "port_disruption links by country only through a port's country (port_country), never through the supplier country (section 7: 'allowed as port_country').",
+      "agreed": "2026-11-15"
     },
     {
       "id": "supplier_country_only_for_other_types",
-      "rule": "For every other type that allows country-only links, the supplier country is compared with the record's country field; port countries and importing_country are not used, except importing_country for tariffs and trade lanes."
+      "rule": "For every other type that allows country-only links, the supplier country is compared with the record's country field; port countries and importing_country are not used, except importing_country for tariffs and trade lanes.",
+      "agreed": "2026-11-15"
     },
     {
       "id": "carrier_name_without_scac_prefix",
-      "rule": "Graph carrier names such as 'MAEU - Maersk Line' are sent as name 'Maersk Line' and code 'MAEU'. Under exact normalised equality 'Maersk Line' does not match 'Maersk (charterer)'."
+      "rule": "Graph carrier names such as 'MAEU - Maersk Line' are sent as name 'Maersk Line' and code 'MAEU'. Under exact normalised equality 'Maersk Line' does not match 'Maersk (charterer)'.",
+      "agreed": "2026-11-15"
     },
     {
       "id": "port_name_matches_any_facility_text",
-      "rule": "Port-name containment is applied literally, so exit port Manila links CUSTOMS-2026-PH-001 (Ninoy Aquino International Airport cargo facilities, Manila)."
+      "rule": "Port-name containment is applied literally, so exit port Manila links CUSTOMS-2026-PH-001 (Ninoy Aquino International Airport cargo facilities, Manila).",
+      "agreed": "2026-11-15"
     },
     {
       "id": "tariff_country_pair",
-      "rule": "Tariffs need origin = supplier country and importing = request importing_country; a null origin links on importing country alone (basis importing_country); a record with a code also needs an HS prefix match."
+      "rule": "Tariffs need origin = supplier country and importing = request importing_country; a null origin links on importing country alone (basis importing_country); a record with a code also needs an HS prefix match.",
+      "agreed": "2026-11-15"
+    },
+    {
+      "id": "full_footprint",
+      "rule": "Payloads carry the supplier's full shipment footprint, including shipments after as_of_date. The engine never filters on footprint dates.",
+      "agreed": "2026-11-15"
     }
   ],
   "fixtures": [

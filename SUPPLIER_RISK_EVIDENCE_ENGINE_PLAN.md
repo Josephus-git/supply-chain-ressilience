@@ -562,6 +562,16 @@ No remote or hosted servers, and no live data sources, are planned.
      have no country, so exit-port country comes from the Schedule K prefix.
      `supplier_country_code` sometimes differs from the shipment country, for
      example CN or HK for Malaysian entities.
+   - Rule readings agreed on 2026-11-15. Phase 3 must implement them:
+     - The `port_country` tier applies to natural hazards and border/customs
+       delays as well as port disruption.
+     - Only records that link on their own are returned. Related records are
+       listed by ID and are not pulled in.
+     - Undated candidates use the stored `search_window` without
+       `event_window_days`.
+     - Payloads carry the supplier's full shipment footprint. Shipments after
+       `as_of_date` are not removed, because the engine never filters on
+       them.
 3. **Implement the engine.** Add typed payload and result models, structured
    validation errors, normalisation (including tiered port matching), matching
    for each risk type, and dated retrieval. Output must be deterministic for the
