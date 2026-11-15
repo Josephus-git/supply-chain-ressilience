@@ -217,7 +217,11 @@
         {
           "url": "https://maritime-executive.com/article/boxship-departing-taiwan-clips-docked-ship-sending-containers-into-harbor",
           "outcome": "Reviewed the original secondary report identifying Kaohsiung and describing the collision and port response."
-        }
+        },
+        {"url": "https://maritime-executive.com/article/maersk-declares-general-average-after-container-fire-aboard-marie-maersk", "outcome": "Included the Marie Maersk fire and general-average declaration."},
+        {"url": "https://www.nst.com.my/amp/business/corporate/2025/04/1204672/dhl-suspend-global-shipments-over-us800-us-consumers", "outcome": "Included DHL Express's April 2025 suspension of US consumer shipments over US$800."},
+        {"url": "https://www.entrepreneur.com/business-news/dhl-suspending-shipments-over-800-to-us-consumers/490322", "outcome": "Used for the 28 April 2025 resumption."},
+        {"url": "https://www.dhl.com/us-en/home/important-information/2025/shipments-to-the-united-states-with-a-customs-value-exceeding-usd-800.html", "outcome": "Retrieval timed out twice; not reviewed."}
       ],
       "known_coverage_gaps": [
         "Exploratory research is not exhaustive across suppliers, vessels, languages, dates, carriers, or jurisdictions.",
@@ -234,7 +238,7 @@
       "files": [
         {
           "path": "carrier_vessel_disruption.json",
-          "sha256": "170c4b64ee0c4ef13d755b713def88c6fc1b961b0cfc09e5b4b57f104cd2bbf4"
+          "sha256": "dd8a41f76b6dc1fdd2f781b97abae1cb4c40d3d6e663906ba94e972e80956d6a"
         }
       ]
     },
@@ -468,7 +472,10 @@
         {
           "url": "https://carplus.my/2025/07/02/3-july-9-july-malaysia-fuel-price-update-3-sen-drop-for-ron97-and-diesel/",
           "outcome": "Reviewed the 3 to 9 July 2025 baseline diesel price and effective period."
-        }
+        },
+        {"url": "https://paultan.org/2025/06/20/big-changes-to-domestic-tnb-bill-structure-no-more-tiered-rates-base-tariff-up-by-13-64-from-july-2025/", "outcome": "Included the Peninsular Malaysia base tariff change from 1 July 2025."},
+        {"url": "https://www.freemalaysiatoday.com/category/nation/2025/06/20/new-tariff-schedule-to-benefit-23-6mil-domestic-users-in-peninsula", "outcome": "Used for the Energy Commission's overall-cost statement."},
+        {"url": "https://www.malaymail.com/amp/news/malaysia/2025/06/20/energy-commission-up-to-19pc-reduction-as-putrajaya-unveils-progressive-electricity-tariff-new-rebates-for-low-use-households/181076", "outcome": "Returned HTTP 403; not reviewed."}
       ],
       "known_coverage_gaps": [
         "Exploratory research is not exhaustive across dates, fuels, energy customers, routes, countries, and languages.",
@@ -485,7 +492,7 @@
       "files": [
         {
           "path": "energy_or_transport_cost_increase.json",
-          "sha256": "67e585f4270b92299943084d2df93d19db64e8627c50988d08057fa20e4713c9"
+          "sha256": "2fe9609a993e9d56ca4cb91c035742930c1fe294534f5794bff51b84d47b84d1"
         }
       ]
     },
@@ -767,7 +774,10 @@
         {
           "url": "https://www.customs.gov.sg/permits-and-licences/trade-controls-and-prohibitions/strategic-goods-control/strategic-goods-control-overview/",
           "outcome": "Reviewed Singapore Customs general framework; its 2026 order is stated to take effect after the study period."
-        }
+        },
+        {"url": "https://www.hklaw.com/en/insights/publications/2025/11/ustr-port-fee-suspension-what-you-need-to-know", "outcome": "Included Section 301 port-fee effective and suspension dates."},
+        {"url": "https://www.squirepattonboggs.com/media/5jbjuiqd/section-301-port-fees-on-chinese-vessels.pdf", "outcome": "Reviewed via search only; reported extension left unconfirmed."},
+        {"url": "https://www.govinfo.gov/content/pkg/FR-2025-08-19/html/2025-15819.htm", "outcome": "Section 232 derivative inclusions (August 2025): annex not retrieved, so coverage of HTS 8508 and 8516 was not established; no record added."}
       ],
       "known_coverage_gaps": [
         "Research is exploratory and not exhaustive across jurisdictions, products, trade routes, exemptions, dates, amendments or enforcement decisions.",
@@ -785,7 +795,7 @@
       "files": [
         {
           "path": "government_restrictions.json",
-          "sha256": "2d4f7aa23dd2948c2841ca718bd501ab62be49fd7bef329793a09ddac02d881d"
+          "sha256": "65b5d16c53f9f174e1ba7226cac1fbc4ed65230c120d366282c1d6f764586d19"
         }
       ]
     },
@@ -1038,7 +1048,13 @@
         {"url": "https://safety4sea.com/vessels-collide-in-kaohsiung-causing-containers-to-fall-overboard/", "outcome": "Included the reported local traffic suspension and approximate resumption following the collision."},
         {"url": "https://www.xeneta.com/blog/xeneta-schedule-reliability-scorecard-september-2026", "outcome": "Included the September Singapore aggregate vessel wait and queue from the analyst's scorecard; exact report publication date not verified."},
         {"url": "https://www.freightwaves.com/news/shippers-waiting-an-extra-week-for-us-bound-containers", "outcome": "Reviewed later reporting of Xeneta's September scorecard; publication was 13 October 2026, after the study period."},
-        {"url": "https://mykn.kuehne-nagel.com/news/article/psa-singapore-congestion-persists-as-terminal", "outcome": "Reviewed Singapore congestion discussion but did not include it because its publication date and observation period were not established."}
+        {"url": "https://mykn.kuehne-nagel.com/news/article/psa-singapore-congestion-persists-as-terminal", "outcome": "Reviewed Singapore congestion discussion but did not include it because its publication date and observation period were not established."},
+        {"url": "https://mykn.kuehne-nagel.com/news/article/typhoon-saudel-bears-down-on-east-china", "outcome": "Included Typhoon Saudel suspension and resumption times for Shanghai and Ningbo terminals."},
+        {"url": "https://www.chrobinson.com/resources/insights-and-advisories/client-advisories/2026q3/08-10-26-client-advisory-typhoon-dolphin-update/", "outcome": "Included Typhoon Dolphin suspensions at Shanghai and the Ningbo resumption; no suspension start given."},
+        {"url": "https://blogs.tradlinx.com/super-typhoon-dolphin-threatens-china-ports-still-clearing-july-backlogs/", "outcome": "Reviewed via search only; wait-time claims cited as unverified limitations."},
+        {"url": "https://portcalls.com/manilas-cargo-crisis-when-sea-and-air-grind-to-a-halt/", "outcome": "Included Manila terminal yard-congestion reporting for February to June 2026."},
+        {"url": "https://www.freightwaves.com/news/blizzard-shuts-down-container-terminals-at-northeast-ports", "outcome": "Included the 23 February 2026 Port Newark and Elizabeth terminal closures."},
+        {"url": "https://www.apmterminals.com/en/port-elizabeth/practical-information/news-and-alerts/2026/260225-Operations-Update-Blizzard-Update", "outcome": "Used for APM Terminals Elizabeth's 26 February reopening."}
       ],
       "known_coverage_gaps": [
         "Searches are exploratory and not exhaustive across ports, terminals, countries, products, dates, languages or sources.",
@@ -1054,7 +1070,7 @@
       "files": [
         {
           "path": "port_disruption.json",
-          "sha256": "1f7748d3675011095b6f9a0f7b5f4c2ec9f9d87b0a1d5ff2cf1dd572833f72bf"
+          "sha256": "138d2f97ebac37eda9d7611c9fbbb80743b21791abca08cb1a77408bf3a4dd6f"
         }
       ]
     },
@@ -1186,7 +1202,11 @@
         {"url": "https://www.businesstoday.com.my/2026/09/29/vs-industry-swings-to-rm55-million-loss-for-fy2026/", "outcome": "Additional financial-results report returned HTTP 403 and was not reviewed."},
         {"url": "https://theedgemalaysia.com/node/802262", "outcome": "Reviewed Industronics' reported PN17 classification; omitted because a relevant case-study product or supplier link was not established."},
         {"url": "https://pv-magazine-usa.com/2026/04/06/maxeon-filing-reveals-the-company-has-applied-for-restructuring-in-singapore-court/", "outcome": "Reviewed Maxeon's application for judicial management; omitted solar-panel case because case-study product relevance was not established."},
-        {"url": "https://www.sec.gov/Archives/edgar/data/1796898/000179689826000004/maxn_form_6-k_10_april_2.htm", "outcome": "Maxeon SEC filing returned HTTP 403 and was not independently reviewed."}
+        {"url": "https://www.sec.gov/Archives/edgar/data/1796898/000179689826000004/maxn_form_6-k_10_april_2.htm", "outcome": "Maxeon SEC filing returned HTTP 403 and was not independently reviewed."},
+        {"url": "https://www.thestar.com.my/business/business-news/2026/03/27/soft-sentiment-weighs-on-vs-industry", "outcome": "Included V.S. Industry's 2QFY26 net loss."},
+        {"url": "https://www.thestar.com.my/business/business-news/2026/06/19/vs-industry-posts-net-loss-of-rm3291mil-in-3q26-due-to-lower-orders", "outcome": "Included V.S. Industry's 3QFY26 net loss and Philippine segment losses."},
+        {"url": "https://stockanalysis.com/quote/tpe/2312/financials/income-statement/", "outcome": "Kinpo Electronics: 2025 profit fell about 10% on currency effects, but no loss or distress indicator; no record added."},
+        {"url": "https://www.rttnews.com/3638255/xiamen-intretech-inc-profit-advances-in-full-year.aspx", "outcome": "Xiamen Intretech: 2025 profit rose; no distress indicator; no record added."}
       ],
       "known_coverage_gaps": [
         "Searches are exploratory and not exhaustive across suppliers, entities, countries, registries, languages or dates; no conclusion of financial health follows from an absent record.",
@@ -1202,7 +1222,7 @@
       "files": [
         {
           "path": "supplier_financial_distress.json",
-          "sha256": "0f5a2afad5629f8109f3d96d49ae61fe6e11b5fab304ba5e9d633bc62b54472d"
+          "sha256": "9e539a01c36982bc1daf2f62c647f78f348f4d8cd4009b659b5badefb8a02c7a"
         }
       ]
     },

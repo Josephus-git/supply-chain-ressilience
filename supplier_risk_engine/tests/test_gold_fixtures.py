@@ -1,4 +1,4 @@
-"""The 37 fixture payloads against the gold set (plan section 10), plus the
+"""The 42 fixture payloads against the gold set (plan section 10), plus the
 stored database through all three operations."""
 
 import copy
@@ -24,7 +24,7 @@ class GoldFixtures(unittest.TestCase):
         cls.index = build_index(cls.records)
 
     def test_fixture_count(self):
-        self.assertEqual(len(self.gold["fixtures"]), 37)
+        self.assertEqual(len(self.gold["fixtures"]), 42)
 
     def test_each_fixture_returns_exactly_its_expected_ids(self):
         for fixture in self.gold["fixtures"]:
@@ -143,7 +143,7 @@ class Operations(unittest.TestCase):
 
     def test_describe_database(self):
         d = describe_database(self.index)
-        self.assertEqual(d["record_count"], 97)
+        self.assertEqual(d["record_count"], 109)
         self.assertEqual(len(d["risk_types"]), 18)
         self.assertEqual(d["study_window"], {"start": "2025-01-01", "end": "2026-09-30"})
         self.assertEqual(d["engine_version"], ENGINE_VERSION)

@@ -113,6 +113,80 @@
       ],
       "search_window": {"start": "2026-09-16", "end": "2026-10-14", "basis": "report_date_buffer", "note": "Fourteen days either side of the report date for retrieval only; the range does not measure the duration of a financial condition or operational impact.", "anchor_date": "2026-09-30", "anchor_basis": "report_date"},
       "scenario_recovery": null
+    },
+    {
+      "evidence_id": "FINANCE-2026-MY-VS-002",
+      "reported_supplier": "V.S. Industry Berhad",
+      "country_code": "MY",
+      "country_name": "Malaysia",
+      "observation_date": "2026-03-27",
+      "distress_indicator": "Reported quarterly net loss; financial-pressure indicator, not an insolvency finding.",
+      "reported_operational_impact": "The Star reported a group net loss of RM29.59 million for the second quarter ended 31 January 2026, versus a RM15.38 million profit a year earlier. The company cited weak global consumer sentiment, geopolitical tensions and lower orders from key customers.",
+      "related_evidence_ids": [
+        "FINANCE-2026-MY-VS-001",
+        "FINANCE-2026-MY-VS-003",
+        "OPERATIONS-2026-PH-VS-001"
+      ],
+      "source": {
+        "url": "https://www.thestar.com.my/business/business-news/2026/03/27/soft-sentiment-weighs-on-vs-industry",
+        "publisher": "The Star",
+        "published_at": "2026-03-27",
+        "retrieved_at": "2026-11-15",
+        "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_report_exchange_filing_attributed",
+      "limitations": [
+        "A quarterly loss does not establish insolvency, default, inability to supply or a probability of distress. The underlying exchange filing was not independently reviewed.",
+        "Figures are for the listed group, not any similarly named subsidiary or facility. Analyst reports attribute part of the loss to the Philippine operations, but this article does not.",
+        "The customers whose orders fell are not named; no Dyson order or case-study shipment has been verified.",
+        "The observation date is the report date, not the onset or end of financial pressure."
+      ],
+      "search_window": {
+        "start": "2026-03-13",
+        "end": "2026-04-10",
+        "basis": "report_date_buffer",
+        "note": "Fourteen days either side of the report date for retrieval only; it does not measure a financial condition's duration.",
+        "anchor_date": "2026-03-27",
+        "anchor_basis": "report_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "FINANCE-2026-MY-VS-003",
+      "reported_supplier": "V.S. Industry Berhad",
+      "country_code": "MY",
+      "country_name": "Malaysia",
+      "observation_date": "2026-06-19",
+      "distress_indicator": "Reported quarterly net loss and segment losses; financial-pressure indicator, not an insolvency finding.",
+      "reported_operational_impact": "The Star reported a group net loss of RM32.91 million for the third quarter ended 30 April 2026, versus a RM23.77 million profit a year earlier. Lower orders from key customers reduced capacity utilisation, so fixed costs were not absorbed; the Philippine unit lost RM7.0 million in the quarter and RM35.1 million over nine months.",
+      "related_evidence_ids": [
+        "FINANCE-2026-MY-VS-001",
+        "FINANCE-2026-MY-VS-002",
+        "OPERATIONS-2026-PH-VS-001"
+      ],
+      "source": {
+        "url": "https://www.thestar.com.my/business/business-news/2026/06/19/vs-industry-posts-net-loss-of-rm3291mil-in-3q26-due-to-lower-orders",
+        "publisher": "The Star",
+        "published_at": "2026-06-19",
+        "retrieved_at": "2026-11-15",
+        "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_report_exchange_filing_attributed",
+      "limitations": [
+        "A quarterly loss does not establish insolvency, default, inability to supply or a probability of distress. The underlying exchange filing was not independently reviewed.",
+        "Philippine segment losses are not attributed to a named legal entity or facility; do not assign them to a similarly named graph supplier without verification.",
+        "The managing director said customers remained cautious on procurement and inventory; the customers are not named, and no Dyson order or case-study shipment has been verified.",
+        "The observation date is the report date, not the onset or end of financial pressure."
+      ],
+      "search_window": {
+        "start": "2026-06-05",
+        "end": "2026-07-03",
+        "basis": "report_date_buffer",
+        "note": "Fourteen days either side of the report date for retrieval only; it does not measure a financial condition's duration.",
+        "anchor_date": "2026-06-19",
+        "anchor_basis": "report_date"
+      },
+      "scenario_recovery": null
     }
   ]
 }

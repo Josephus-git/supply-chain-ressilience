@@ -288,6 +288,83 @@
         "basis": "illustrative uncalibrated scenario; severity is a subjective handling assumption, not a measured incident severity",
         "confidence": "low"
       }
+    },
+    {
+      "evidence_id": "VESSEL-2025-MAERSK-MARIE-001",
+      "reported_carrier": "Maersk Line",
+      "reported_vessel": "Marie Maersk",
+      "country_code": null,
+      "country_name": null,
+      "event_start": "2025-08-13",
+      "event_end": null,
+      "disruption_type": "container fire; general average declared",
+      "reported_effect": "The crew detected smoke from containers on 13 August 2025 off West Africa; tugs reached the ship off Liberia and the spread was contained. After an expert team boarded on 19 August the voyage resumed. Maersk declared general average; the ship, earlier scheduled for China, was expected at Tanjung Pelepas, Malaysia, around 14 September, where cargo would be discharged and inspected.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://maritime-executive.com/article/maersk-declares-general-average-after-container-fire-aboard-marie-maersk",
+        "publisher": "The Maritime Executive",
+        "published_at": "2025-09-09",
+        "retrieved_at": "2026-11-15",
+        "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_source_carrier_statement_reviewed",
+      "limitations": [
+        "The voyage was Europe to Asia, not on a case-study Asia to US lane; it is carrier-level context only. Cargo owners must post general-average security before delivery, which can delay release; the extent of damage was unknown at publication.",
+        "The source names Maersk; 'Maersk Line' is the graph carrier name used for matching. See approximations.",
+        "country_code is null because the fire occurred at sea off Liberia; the Malaysian discharge port is the destination, not the incident location.",
+        "No case-study shipment or booking on this vessel has been matched."
+      ],
+      "approximations": [
+        {
+          "field": "reported_carrier",
+          "value": "Maersk Line",
+          "basis": "Analyst mapping: the source attributes the vessel and general-average declaration to Maersk, recorded under the graph's carrier name 'Maersk Line' (SCAC MAEU). The source does not use that name.",
+          "review_status": "unreviewed"
+        }
+      ],
+      "search_window": {
+        "start": "2025-08-13",
+        "end": "2025-09-28",
+        "basis": "report_date_buffer",
+        "note": "Fire date to 14 days after the reported Tanjung Pelepas ETA, for retrieval only; not an observed recovery date.",
+        "anchor_date": "2025-08-13",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "VESSEL-2025-US-DHL-B2C-001",
+      "reported_carrier": "DHL Express",
+      "reported_vessel": null,
+      "country_code": "US",
+      "country_name": "United States",
+      "event_start": "2025-04-21",
+      "event_end": "2025-04-28",
+      "disruption_type": "service suspension driven by a customs rule change",
+      "reported_effect": "Reuters, via the New Straits Times, reported that DHL Express would temporarily suspend shipments worth over US$800 to US consumers from 21 April 2025, after US formal-entry processing was required above US$800 (down from US$2,500 on 5 April). Business-to-business shipments over US$800 continued but could face delays. DHL resumed the consumer shipments on 28 April.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.nst.com.my/amp/business/corporate/2025/04/1204672/dhl-suspend-global-shipments-over-us800-us-consumers",
+        "publisher": "New Straits Times (Reuters)",
+        "published_at": "2025-04-20",
+        "retrieved_at": "2026-11-15",
+        "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_sources_reviewed",
+      "limitations": [
+        "The resumption date is from Entrepreneur (29 April 2025), citing Reuters: https://www.entrepreneur.com/business-news/dhl-suspending-shipments-over-800-to-us-consumers/490322. DHL's own notice timed out on retrieval and was not reviewed.",
+        "The suspension covered express parcels to private individuals. Case-study shipments with carrier code DMAL are ocean bills of lading to Dyson business entities, which were B2B and not suspended; at most they faced possible clearance delays.",
+        "No delayed case-study shipment has been matched."
+      ],
+      "search_window": {
+        "start": "2025-04-21",
+        "end": "2025-05-12",
+        "basis": "event_date_buffer",
+        "note": "Suspension to resumption plus a 14-day retrieval-only buffer.",
+        "anchor_date": "2025-04-21",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": null
     }
   ]
 }

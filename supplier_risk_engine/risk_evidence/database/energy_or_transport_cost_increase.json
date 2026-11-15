@@ -308,6 +308,65 @@
         "anchor_basis": null
       },
       "scenario_recovery": null
+    },
+    {
+      "evidence_id": "COST-2025-MY-ELECTRICITY-001",
+      "cost_type": "electricity_base_tariff",
+      "affected_countries": [
+        {
+          "country_code": "MY",
+          "country_name": "Malaysia"
+        }
+      ],
+      "reported_route_or_market": "Peninsular Malaysia average base electricity tariff, Regulatory Period 4",
+      "observation_start": "2025-06-30",
+      "observation_end": "2025-07-01",
+      "baseline": {
+        "value": 0.3995,
+        "unit": "kWh",
+        "currency": "MYR",
+        "date": "2025-06-30"
+      },
+      "observed": {
+        "value": 0.454,
+        "unit": "kWh",
+        "currency": "MYR",
+        "date": "2025-07-01"
+      },
+      "reported_change_percent": 13.64,
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://paultan.org/2025/06/20/big-changes-to-domestic-tnb-bill-structure-no-more-tiered-rates-base-tariff-up-by-13-64-from-july-2025/",
+        "publisher": "Paul Tan's Automotive News",
+        "published_at": "2025-06-20",
+        "retrieved_at": "2026-11-15",
+        "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_sources_reviewed",
+      "limitations": [
+        "The base tariff rose from 39.95 to 45.40 sen/kWh from 1 July 2025 to 31 December 2027, and the source reports the 13.64% change. Free Malaysia Today reported the same rates and the Energy Commission's statement that the total average cost would be 19% lower than in Regulatory Period 3, because other bill components changed: https://www.freemalaysiatoday.com/category/nation/2025/06/20/new-tariff-schedule-to-benefit-23-6mil-domestic-users-in-peninsula. The base-tariff rise is not a net bill increase.",
+        "The base tariff is a system average, not a commercial or industrial rate; the restructured tariffs by customer class were not reviewed.",
+        "Peninsular Malaysia only; Sabah and Sarawak tariffs differ. No supplier electricity contract, consumption or cost is established.",
+        "The baseline date is the last day of the prior rate; the prior rate applied from 2022."
+      ],
+      "known_from": "2025-06-20",
+      "approximations": [
+        {
+          "field": "known_from",
+          "value": "2025-06-20",
+          "basis": "Announced in advance: the Energy Commission announced the rate on 20 June 2025 for 1 July 2025 (source.published_at), so it was known before observation_start (plan section 5.2, rule 3).",
+          "review_status": "source_checked"
+        }
+      ],
+      "search_window": {
+        "start": "2025-06-30",
+        "end": "2025-07-01",
+        "basis": "observation_period",
+        "note": "Last day of the old base rate and first day of the new one.",
+        "anchor_date": "2025-07-01",
+        "anchor_basis": "effective_date"
+      },
+      "scenario_recovery": null
     }
   ]
 }

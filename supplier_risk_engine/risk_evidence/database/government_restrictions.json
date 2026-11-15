@@ -232,6 +232,67 @@
         "anchor_basis": "effective_date"
       },
       "scenario_recovery": null
+    },
+    {
+      "evidence_id": "RESTRICT-2025-US-PORT-FEES-001",
+      "issuing_country_code": "US",
+      "issuing_country_name": "United States",
+      "affected_countries": [
+        {
+          "country_code": "CN",
+          "country_name": "China"
+        }
+      ],
+      "reported_organisation": null,
+      "product_classification": {
+        "system": null,
+        "code": null
+      },
+      "restriction_type": "Section 301 port-entry fees on China-linked vessels",
+      "effective_from": "2025-10-14",
+      "effective_to": "2025-11-09",
+      "conditions_and_exclusions": [
+        "Fees applied to certain Chinese-built vessels, vessels with Chinese owners or operators, and foreign-built vehicle carriers calling at US ports.",
+        "USTR suspended the actions for one year from 10 November 2025 after the 1 November US-China trade announcement; China suspended its reciprocal special port fees on US-linked vessels for the same period."
+      ],
+      "reported_effect": "Holland & Knight reported that the fees took effect on 14 October 2025 and were suspended from 10 November 2025 for one year.",
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.hklaw.com/en/insights/publications/2025/11/ustr-port-fee-suspension-what-you-need-to-know",
+        "publisher": "Holland & Knight",
+        "published_at": "2025-11-12",
+        "retrieved_at": "2026-11-15",
+        "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_legal_summary_reviewed",
+      "limitations": [
+        "Fee amounts, exemptions and the USTR Federal Register notices were not reviewed. effective_to is the last day before the suspension, not a repeal; the fees could resume when the suspension ends.",
+        "A single law-firm source says the suspension was set to be extended to 9 January 2027 after a September 2026 summit; not confirmed against an official source: https://www.squirepattonboggs.com/media/5jbjuiqd/section-301-port-fees-on-chinese-vessels.pdf.",
+        "The fees attach to the vessel, not the cargo's origin. The affected_countries link to China-country suppliers is location context only; see approximations.",
+        "No case-study vessel's ownership, build country or fee liability, and no cost passed to a shipment, has been established."
+      ],
+      "approximations": [
+        {
+          "field": "affected_countries",
+          "value": [
+            {
+              "country_code": "CN",
+              "country_name": "China"
+            }
+          ],
+          "basis": "Analyst approximation: the measure targets China's maritime sector through vessel build, ownership and operation. Cargo of any origin on a covered vessel could bear the cost, and Chinese-origin cargo on other vessels would not.",
+          "review_status": "unreviewed"
+        }
+      ],
+      "search_window": {
+        "start": "2025-10-14",
+        "end": "2025-11-09",
+        "basis": "observation_period",
+        "note": "The period the fees were in effect before the suspension.",
+        "anchor_date": "2025-10-14",
+        "anchor_basis": "effective_date"
+      },
+      "scenario_recovery": null
     }
   ]
 }

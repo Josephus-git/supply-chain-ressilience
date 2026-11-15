@@ -1,0 +1,306 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2026-08-12",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-39",
+    "component_query": "Electronic Spare Accessories",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:wencor-m-sdn-bhd",
+      "supplier_name": "Wencor M Sdn Bhd",
+      "country": "TW",
+      "parent_companies": [
+        "WENCOR GROUP, LLC"
+      ],
+      "hs_codes": [
+        {
+          "code": "850870",
+          "shipments": 22
+        },
+        {
+          "code": "850811",
+          "shipments": 11
+        },
+        {
+          "code": "841490",
+          "shipments": 5
+        },
+        {
+          "code": "392690",
+          "shipments": 4
+        },
+        {
+          "code": "842139",
+          "shipments": 1
+        },
+        {
+          "code": "845129",
+          "shipments": 1
+        },
+        {
+          "code": "851690",
+          "shipments": 1
+        },
+        {
+          "code": "870899",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Tanjung Pelepas",
+          "code": "55750",
+          "country": "MY",
+          "shipments": 18
+        },
+        {
+          "name": "Singapore",
+          "code": "55976",
+          "country": "SG",
+          "shipments": 11
+        },
+        {
+          "name": "Ning Bo",
+          "code": "57020",
+          "country": "CN",
+          "shipments": 5
+        },
+        {
+          "name": "Yangshan",
+          "code": "57037",
+          "country": "CN",
+          "shipments": 5
+        },
+        {
+          "name": "Kaohsiung",
+          "code": "58309",
+          "country": "TW",
+          "shipments": 2
+        },
+        {
+          "name": "Shanghai",
+          "code": "57035",
+          "country": "CN",
+          "shipments": 2
+        },
+        {
+          "name": "Port Klang",
+          "code": "55751",
+          "country": "MY",
+          "shipments": 1
+        },
+        {
+          "name": "Pusan",
+          "code": "58023",
+          "country": "KR",
+          "shipments": 1
+        },
+        {
+          "name": "Xiamen",
+          "code": "57069",
+          "country": "CN",
+          "shipments": 1
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 20
+        },
+        {
+          "name": "Newark, Nj",
+          "code": "4601",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 15
+        },
+        {
+          "name": "Long Beach, Ca",
+          "code": "2709",
+          "country": "US",
+          "coast": "west",
+          "shipments": 5
+        },
+        {
+          "name": "Norfolk, Va.",
+          "code": "1401",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 3
+        },
+        {
+          "name": "Tacoma, Wa",
+          "code": "3002",
+          "country": "US",
+          "coast": "west",
+          "shipments": 2
+        },
+        {
+          "name": "Seattle, Wa",
+          "code": "3001",
+          "country": "US",
+          "coast": "west",
+          "shipments": 1
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 44
+        },
+        {
+          "name": "Dyson B2B Inc",
+          "shipments": 1
+        },
+        {
+          "name": "Dyson Canada Limited",
+          "shipments": 1
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Dsv Ocean Transport",
+          "code": "DSVF",
+          "shipments": 22
+        },
+        {
+          "name": "Maersk Line",
+          "code": "MAEU",
+          "shipments": 13
+        },
+        {
+          "name": "Dhl Express",
+          "code": "DMAL",
+          "shipments": 7
+        },
+        {
+          "name": "Pyramid Lines Singapore Pte Ltd",
+          "code": "PYMN",
+          "shipments": 4
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Ain Snan Express",
+          "shipments": 6
+        },
+        {
+          "name": "Cma Cgm Symi",
+          "shipments": 3
+        },
+        {
+          "name": "Cosco Thailand",
+          "shipments": 3
+        },
+        {
+          "name": "Dortmund Express",
+          "shipments": 3
+        },
+        {
+          "name": "Gerda Maersk",
+          "shipments": 3
+        },
+        {
+          "name": "Shanghai Express",
+          "shipments": 3
+        },
+        {
+          "name": "Cma Cgm Andromeda",
+          "shipments": 2
+        },
+        {
+          "name": "Cma Cgm J. Adams",
+          "shipments": 2
+        },
+        {
+          "name": "Hong Kong Express",
+          "shipments": 2
+        },
+        {
+          "name": "Umm Salal",
+          "shipments": 2
+        },
+        {
+          "name": "Apl Esplanade",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Chile",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Georgia",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Leo",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Panama",
+          "shipments": 1
+        },
+        {
+          "name": "Ever Shine",
+          "shipments": 1
+        },
+        {
+          "name": "Ever Steady",
+          "shipments": 1
+        },
+        {
+          "name": "Gerner Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Hmm Garnet",
+          "shipments": 1
+        },
+        {
+          "name": "Hyundai Jupiter",
+          "shipments": 1
+        },
+        {
+          "name": "Ludwigshafen Express",
+          "shipments": 1
+        },
+        {
+          "name": "Madrid Express",
+          "shipments": 1
+        },
+        {
+          "name": "Maersk Candor",
+          "shipments": 1
+        },
+        {
+          "name": "Maersk Cap Jervis",
+          "shipments": 1
+        },
+        {
+          "name": "Missouri Express",
+          "shipments": 1
+        },
+        {
+          "name": "Msc Ivana",
+          "shipments": 1
+        },
+        {
+          "name": "Potomac Express",
+          "shipments": 1
+        }
+      ],
+      "currency": "TWD",
+      "footprint_window": {
+        "first_arrival": "2025-02-02",
+        "last_arrival": "2026-09-27",
+        "shipments": 46
+      }
+    }
+  ]
+}

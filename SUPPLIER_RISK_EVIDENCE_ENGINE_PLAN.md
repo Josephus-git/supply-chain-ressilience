@@ -816,6 +816,23 @@ No remote or hosted servers, and no live data sources, are planned.
        they do not link (mostly US- and SG-country records), or they become
        known only after the study end. 157 tests pass, and the batch passes
        37 of 37.
+   - Data scrape round 2, 2026-11-15:
+     - 12 records were added (97 to 109), aimed at the graph's actual ports,
+       carriers, countries and parents. They cover the Saudel and Dolphin
+       closures at Shanghai, Yangshan and Ningbo, Manila yard congestion, the
+       February 2026 Newark blizzard, the Marie Maersk fire, DHL Express's
+       April 2025 suspension of US consumer shipments, the Section 301 port
+       fees on China-linked vessels, the Malaysian electricity base tariff,
+       and V.S. Industry's 2Q and 3Q FY26 losses. Three mappings are stored
+       as `approximations` and link weakly: the Ningbo port code, the carrier
+       name "Maersk Line", and China for the port fees.
+     - Six existing fixtures (07, 11, 17, 19, 22, 32) each gained one new
+       record, and no earlier expected ID changed. FIXTURE-38 to 42 were
+       added so that every new record is expected somewhere. The new
+       entries came from the engine and were reviewed link by link.
+     - The gold set now has 42 fixtures and covers 71 of 109 records. The
+       other 38 are the same unreturnable records as before. 157 tests pass,
+       and the batch passes 42 of 42.
 7. **Later, outside this scope:** the LangChain app and its frontend
    (section 8.4).
 

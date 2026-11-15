@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "description": "Retrieval gold set for the fixture payloads (18 from phase 2, 19 added in phase 6) (SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md, sections 9 and 10). Compare each fixture's returned evidence_ids with expected_ids and report missed and unexpected IDs. expected_links and expected_exclusions explain each entry; only expected_ids is the pass/fail comparison.",
+  "description": "Retrieval gold set for the fixture payloads (18 from phase 2, 19 added in phase 6, 5 added in data scrape round 2) (SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md, sections 9 and 10). Compare each fixture's returned evidence_ids with expected_ids and report missed and unexpected IDs. expected_links and expected_exclusions explain each entry; only expected_ids is the pass/fail comparison.",
   "status": "agreed 2026-11-15: derived by applying the plan's rules to the stored records, then reviewed by hand. Not produced by the engine. The interpretations were agreed with the user on 2026-11-15.",
   "created_at": "2026-11-15",
   "evidence_database": {
     "path": "risk_evidence/database/",
-    "manifest_sha256": "2d90a2d73d2e799d9c159e4f2117fbccc45ad976e3445d059be8f3438945304c",
-    "records": 97,
+    "manifest_sha256": "42ce086334f895e77735323c3a054df4744cc434a8052b71ada1f18335c8eee4",
+    "records": 109,
     "note": "If the database changes, recheck every fixture against the new records."
   },
   "payload_source": "build_payloads.py, from data/processed/*_shipments_clean.csv (the graph's import files) plus supplier country and parent from the Neo4j graph.",
@@ -482,6 +482,7 @@
         "PORT-2025-MY-PTP-001",
         "RESTRICT-2025-CN-001",
         "RESTRICT-2025-CN-002",
+        "RESTRICT-2025-US-PORT-FEES-001",
         "TARIFF-2025-US-CN-OPIOID-10B",
         "TARIFF-2025-US-CN-OPIOID-20",
         "TARIFF-2025-US-CN-RECIPROCAL",
@@ -526,6 +527,16 @@
           ],
           "in_scope": "dated",
           "known_from": "2025-04-04",
+          "known_from_rule": "start_date"
+        },
+        "RESTRICT-2025-US-PORT-FEES-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-10-14",
           "known_from_rule": "start_date"
         },
         "TARIFF-2025-US-CN-OPIOID-10B": {
@@ -715,9 +726,20 @@
       "event_window_days": 14,
       "as_of_date_basis": "Supplier country HK; vessel Oocl Sunflower in footprint while the OOCL Sunflower container-loss record is in date scope.",
       "expected_ids": [
+        "PORT-2026-US-NEWARK-BLIZZARD-001",
         "TARIFF-2026-US-GLOBAL-122"
       ],
       "expected_links": {
+        "PORT-2026-US-NEWARK-BLIZZARD-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Newark, Nj"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-02-23",
+          "known_from_rule": "start_date"
+        },
         "TARIFF-2026-US-GLOBAL-122": {
           "link_basis": "importing_country",
           "link_strength": "weak",
@@ -963,12 +985,33 @@
       "event_window_days": 14,
       "as_of_date_basis": "Parent V.S. INDUSTRY BERHAD against the undated PH operational disruption (search window 2026-03-20 to 2026-04-17). FX-2025-DYSON-QUALITATIVE-001: Added 2026-11-15 (late-report rule): known after its search window ended, so in scope for event_window_days from known_from.",
       "expected_ids": [
+        "FINANCE-2026-MY-VS-002",
         "FX-2025-DYSON-QUALITATIVE-001",
         "PORT-2026-TW-KAOHSIUNG-001",
         "ROUTE-2026-PANAMA-GATUN-001",
         "TARIFF-2026-US-GLOBAL-122"
       ],
       "expected_links": {
+        "FINANCE-2026-MY-VS-002": {
+          "link_basis": "parent_company_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "V.S. Industry Berhad"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-03-27",
+          "known_from_rule": "start_date"
+        },
+        "FX-2025-DYSON-QUALITATIVE-001": {
+          "link_basis": "buyer_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "Dyson"
+          ],
+          "in_scope": "undated candidate: known after search_window ended; as_of_date within event_window_days of known_from",
+          "known_from": "2026-03-26",
+          "known_from_rule": "source_published_at"
+        },
         "PORT-2026-TW-KAOHSIUNG-001": {
           "link_basis": "port_name",
           "link_strength": "medium",
@@ -998,16 +1041,6 @@
           "in_scope": "dated",
           "known_from": "2026-02-20",
           "known_from_rule": "stored_known_from"
-        },
-        "FX-2025-DYSON-QUALITATIVE-001": {
-          "link_basis": "buyer_name",
-          "link_strength": "strong",
-          "matched_values": [
-            "Dyson"
-          ],
-          "in_scope": "undated candidate: known after search_window ended; as_of_date within event_window_days of known_from",
-          "known_from": "2026-03-26",
-          "known_from_rule": "source_published_at"
         }
       },
       "expected_exclusions": {
@@ -1092,6 +1125,7 @@
       "expected_ids": [
         "CONCENTRATION-2025-MALACCA-OIL-001",
         "COST-2026-MY-DIESEL-001",
+        "FINANCE-2026-MY-VS-002",
         "FX-2025-DYSON-QUALITATIVE-001",
         "OPERATIONS-2026-PH-VS-001",
         "RESTRICT-2025-MY-001",
@@ -1118,6 +1152,16 @@
           "in_scope": "dated",
           "known_from": "2026-03-25",
           "known_from_rule": "stored_known_from"
+        },
+        "FINANCE-2026-MY-VS-002": {
+          "link_basis": "parent_company_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "V.S. Industry Berhad"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-03-27",
+          "known_from_rule": "start_date"
         },
         "FX-2025-DYSON-QUALITATIVE-001": {
           "link_basis": "buyer_name",
@@ -1309,6 +1353,7 @@
       "as_of_date_basis": "Malaysian diesel price (announced 2025-07-09) and the third CBP notification issue (published 2025-07-03), both within their windows.",
       "expected_ids": [
         "COST-2025-MY-DIESEL-001",
+        "COST-2025-MY-ELECTRICITY-001",
         "CUSTOMS-2025-US-003",
         "RESTRICT-2025-MY-001"
       ],
@@ -1321,6 +1366,16 @@
           ],
           "in_scope": "dated",
           "known_from": "2025-07-09",
+          "known_from_rule": "stored_known_from"
+        },
+        "COST-2025-MY-ELECTRICITY-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-06-20",
           "known_from_rule": "stored_known_from"
         },
         "CUSTOMS-2025-US-003": {
@@ -1894,6 +1949,7 @@
       "as_of_date_basis": "Undated Philippine customs record (published 2026-06-25) through the Manila exit port.",
       "expected_ids": [
         "CUSTOMS-2026-PH-001",
+        "PORT-2026-PH-MANILA-YARD-001",
         "TARIFF-2026-US-GLOBAL-122"
       ],
       "expected_links": {
@@ -1905,6 +1961,16 @@
           ],
           "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
           "known_from": "2026-06-25",
+          "known_from_rule": "source_published_at"
+        },
+        "PORT-2026-PH-MANILA-YARD-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Manila"
+          ],
+          "in_scope": "undated candidate: known after search_window ended; as_of_date within event_window_days of known_from",
+          "known_from": "2026-07-02",
           "known_from_rule": "source_published_at"
         },
         "TARIFF-2026-US-GLOBAL-122": {
@@ -2044,10 +2110,227 @@
         }
       },
       "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-38",
+      "payload": "payloads/38_ihastek-malaysia-sdn-bhd.json",
+      "supplier_id": "org:ihastek-malaysia-sdn-bhd",
+      "supplier_name": "Ihastek Malaysia Sdn Bhd",
+      "as_of_date": "2026-08-28",
+      "event_window_days": 14,
+      "as_of_date_basis": "Typhoon Saudel (Ningbo 2026-08-26 to 08-28, Shanghai 2026-08-27 to 08-28) against exit ports Shanghai, Yangshan and Ning Bo.",
+      "expected_ids": [
+        "PORT-2026-CN-SAUDEL-NINGBO-001",
+        "PORT-2026-CN-SAUDEL-SHANGHAI-001",
+        "RESTRICT-2025-CN-001",
+        "RESTRICT-2025-CN-002",
+        "TARIFF-2026-US-CN-FORCED-LABOR-301"
+      ],
+      "expected_links": {
+        "PORT-2026-CN-SAUDEL-NINGBO-001": {
+          "link_basis": "port_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "57020"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-08-26",
+          "known_from_rule": "start_date"
+        },
+        "PORT-2026-CN-SAUDEL-SHANGHAI-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Shanghai",
+            "Yangshan"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-08-27",
+          "known_from_rule": "start_date"
+        },
+        "RESTRICT-2025-CN-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-02-04",
+          "known_from_rule": "start_date"
+        },
+        "RESTRICT-2025-CN-002": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-04-04",
+          "known_from_rule": "start_date"
+        },
+        "TARIFF-2026-US-CN-FORCED-LABOR-301": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-07-24",
+          "known_from_rule": "start_date"
+        }
+      },
+      "expected_exclusions": {
+        "PORT-2026-CN-DOLPHIN-SHANGHAI-001": "Exit ports match, but the undated record's search window ended 2026-08-24 and it was known on 2026-08-10, before the window ended, so the late-report rule does not apply.",
+        "PORT-2026-CN-DOLPHIN-NINGBO-001": "Exit port Ning Bo matches by port code, but the undated record's search window ended 2026-08-24 (known 2026-08-10, before the window ended)."
+      }
+    },
+    {
+      "fixture": "FIXTURE-39",
+      "payload": "payloads/39_wencor-m-sdn-bhd.json",
+      "supplier_id": "org:wencor-m-sdn-bhd",
+      "supplier_name": "Wencor M Sdn Bhd",
+      "as_of_date": "2026-08-12",
+      "event_window_days": 14,
+      "as_of_date_basis": "Typhoon Dolphin advisory (2026-08-10; undated, search window 2026-07-27 to 2026-08-24) against exit ports Shanghai, Yangshan and Ning Bo.",
+      "expected_ids": [
+        "PORT-2026-CN-DOLPHIN-NINGBO-001",
+        "PORT-2026-CN-DOLPHIN-SHANGHAI-001",
+        "TARIFF-2026-US-TW-FORCED-LABOR-301"
+      ],
+      "expected_links": {
+        "PORT-2026-CN-DOLPHIN-NINGBO-001": {
+          "link_basis": "port_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "57020"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2026-08-10",
+          "known_from_rule": "source_published_at"
+        },
+        "PORT-2026-CN-DOLPHIN-SHANGHAI-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Shanghai",
+            "Yangshan"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window and on or after known_from",
+          "known_from": "2026-08-10",
+          "known_from_rule": "source_published_at"
+        },
+        "TARIFF-2026-US-TW-FORCED-LABOR-301": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "TW"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-07-24",
+          "known_from_rule": "start_date"
+        }
+      },
+      "expected_exclusions": {
+        "PORT-2026-CN-SAUDEL-SHANGHAI-001": "Exit ports match, but not yet known: event_start 2026-08-27 is after as_of_date 2026-08-12.",
+        "PORT-2026-CN-SAUDEL-NINGBO-001": "Exit port Ning Bo matches, but not yet known: event_start 2026-08-26 is after as_of_date 2026-08-12."
+      }
+    },
+    {
+      "fixture": "FIXTURE-40",
+      "payload": "payloads/40_kinpo-electronics-philippines-inc.json",
+      "supplier_id": "org:kinpo-electronics-philippines-inc",
+      "supplier_name": "Kinpo Electronics Philippines Inc",
+      "as_of_date": "2025-08-20",
+      "event_window_days": 14,
+      "as_of_date_basis": "Marie Maersk container fire (2025-08-13), within 14 days, against carrier Maersk Line.",
+      "expected_ids": [
+        "VESSEL-2025-MAERSK-MARIE-001"
+      ],
+      "expected_links": {
+        "VESSEL-2025-MAERSK-MARIE-001": {
+          "link_basis": "carrier_name",
+          "link_strength": "weak",
+          "matched_values": [
+            "Maersk Line"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-08-13",
+          "known_from_rule": "start_date"
+        }
+      },
+      "expected_exclusions": {
+        "VESSEL-2025-US-DHL-B2C-001": "Carrier Dhl Express matches, but the suspension ended 2025-04-28, more than 14 days before as_of_date."
+      }
+    },
+    {
+      "fixture": "FIXTURE-41",
+      "payload": "payloads/41_meiban-technologies-malaysia-sdn.json",
+      "supplier_id": "org:meiban-technologies-malaysia-sdn",
+      "supplier_name": "Meiban Technologies Malaysia Sdn",
+      "as_of_date": "2025-04-24",
+      "event_window_days": 14,
+      "as_of_date_basis": "DHL Express suspension of US consumer shipments (2025-04-21 to 2025-04-28) against carrier Dhl Express.",
+      "expected_ids": [
+        "VESSEL-2025-US-DHL-B2C-001"
+      ],
+      "expected_links": {
+        "VESSEL-2025-US-DHL-B2C-001": {
+          "link_basis": "carrier_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "DHL Express"
+          ],
+          "in_scope": "dated",
+          "known_from": "2025-04-21",
+          "known_from_rule": "start_date"
+        }
+      },
+      "expected_exclusions": {
+        "VESSEL-2025-MAERSK-MARIE-001": "Carrier Maersk Line matches, but not yet known: event_start 2025-08-13 is after as_of_date."
+      }
+    },
+    {
+      "fixture": "FIXTURE-42",
+      "payload": "payloads/42_vs-industrial-philippines-inc.json",
+      "supplier_id": "org:vs-industrial-philippines-inc",
+      "supplier_name": "Vs Industrial Philippines Inc",
+      "as_of_date": "2026-06-22",
+      "event_window_days": 14,
+      "as_of_date_basis": "V.S. Industry 3QFY26 loss report (2026-06-19), within 14 days, against parent V.S. INDUSTRY BERHAD.",
+      "expected_ids": [
+        "FINANCE-2026-MY-VS-003",
+        "TARIFF-2026-US-GLOBAL-122"
+      ],
+      "expected_links": {
+        "FINANCE-2026-MY-VS-003": {
+          "link_basis": "parent_company_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "V.S. Industry Berhad"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-06-19",
+          "known_from_rule": "start_date"
+        },
+        "TARIFF-2026-US-GLOBAL-122": {
+          "link_basis": "importing_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "US"
+          ],
+          "in_scope": "dated",
+          "known_from": "2026-02-20",
+          "known_from_rule": "stored_known_from"
+        }
+      },
+      "expected_exclusions": {
+        "PORT-2026-PH-MANILA-YARD-001": "Exit port Manila matches, but not yet known: known_from 2026-07-02 (source published) is after as_of_date.",
+        "FINANCE-2026-MY-VS-002": "Parent matches, but observation_date 2026-03-27 plus 14 days ended 2026-04-10."
+      }
     }
   ],
   "coverage": {
-    "records_expected_in_some_fixture": 59,
+    "records_expected_in_some_fixture": 71,
     "records_never_expected": [
       "COST-2026-SG-ELECTRICITY-001",
       "FINANCE-2025-US-IROBOT-001",
@@ -2248,6 +2531,85 @@
       "change": "Late-report rule added to the engine; Dyson FX added to FIXTURE-05, 09 and 17 and the Suez report to FIXTURE-06. FIXTURE-19 to 37 added (extra dates for existing suppliers, examples/build_payloads.py EXTRA_FIXTURES) so every record returnable for a graph supplier is expected somewhere. New fixtures' expected results were produced by the engine and then reviewed link by link against the agreed interpretations.",
       "removed": [],
       "removed_total": 0
+    },
+    {
+      "date": "2026-11-15",
+      "change": "Data scrape round 2: 12 records added (97 to 109). Six existing fixtures gained a new record each (07, 11, 17, 19, 22, 32). FIXTURE-38 to 42 added (examples/build_payloads.py EXTRA_FIXTURES) so every new record is expected somewhere. Expected results were produced by the engine and then reviewed link by link against the agreed interpretations; no earlier expected ID changed.",
+      "added": [
+        {
+          "fixture": "FIXTURE-07",
+          "added": [
+            "RESTRICT-2025-US-PORT-FEES-001"
+          ]
+        },
+        {
+          "fixture": "FIXTURE-11",
+          "added": [
+            "PORT-2026-US-NEWARK-BLIZZARD-001"
+          ]
+        },
+        {
+          "fixture": "FIXTURE-17",
+          "added": [
+            "FINANCE-2026-MY-VS-002"
+          ]
+        },
+        {
+          "fixture": "FIXTURE-19",
+          "added": [
+            "FINANCE-2026-MY-VS-002"
+          ]
+        },
+        {
+          "fixture": "FIXTURE-22",
+          "added": [
+            "COST-2025-MY-ELECTRICITY-001"
+          ]
+        },
+        {
+          "fixture": "FIXTURE-32",
+          "added": [
+            "PORT-2026-PH-MANILA-YARD-001"
+          ]
+        },
+        {
+          "fixture": "FIXTURE-38",
+          "added": [
+            "PORT-2026-CN-SAUDEL-NINGBO-001",
+            "PORT-2026-CN-SAUDEL-SHANGHAI-001",
+            "RESTRICT-2025-CN-001",
+            "RESTRICT-2025-CN-002",
+            "TARIFF-2026-US-CN-FORCED-LABOR-301"
+          ]
+        },
+        {
+          "fixture": "FIXTURE-39",
+          "added": [
+            "PORT-2026-CN-DOLPHIN-NINGBO-001",
+            "PORT-2026-CN-DOLPHIN-SHANGHAI-001",
+            "TARIFF-2026-US-TW-FORCED-LABOR-301"
+          ]
+        },
+        {
+          "fixture": "FIXTURE-40",
+          "added": [
+            "VESSEL-2025-MAERSK-MARIE-001"
+          ]
+        },
+        {
+          "fixture": "FIXTURE-41",
+          "added": [
+            "VESSEL-2025-US-DHL-B2C-001"
+          ]
+        },
+        {
+          "fixture": "FIXTURE-42",
+          "added": [
+            "FINANCE-2026-MY-VS-003",
+            "TARIFF-2026-US-GLOBAL-122"
+          ]
+        }
+      ]
     }
   ]
 }

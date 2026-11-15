@@ -168,6 +168,264 @@
       "approximations": [{"field": "known_from", "value": "2026-10-12", "basis": "No start date and no stored source.published_at. The Xeneta post is dated 12 October 2026 (checked 2026-11-15), after the study end, so this record is never in scope (plan section 5.2, rule 3).", "review_status": "source_checked"}],
       "search_window": {"start": "2026-09-01", "end": "2026-09-30", "basis": "observation_period", "note": "September 2026 scorecard period, not proof of continuous daily impact or recovery.", "anchor_date": "2026-09-01", "anchor_basis": "observation_period"},
       "scenario_recovery": null
+    },
+    {
+      "evidence_id": "PORT-2026-CN-SAUDEL-SHANGHAI-001",
+      "reported_port": "Yangshan and Waigaoqiao terminals, Port of Shanghai",
+      "country_code": "CN",
+      "country_name": "China",
+      "event_start": "2026-08-27",
+      "event_end": "2026-08-28",
+      "cause": "Typhoon Saudel (landfall in southern Zhejiang around midday on 28 August 2026)",
+      "reported_operational_impact": "Kuehne+Nagel reported that Yangshan halted empty-container operations at 04:00 and all operations at 06:00 on 27 August, and Waigaoqiao halted empty-container operations at 14:00 on 27 August. Waigaoqiao resumed at 12:00 and Yangshan at 14:00 on 28 August; Shanghai container yards resumed at 12:00 on 28 August.",
+      "reported_delay": {
+        "value": null,
+        "unit": null
+      },
+      "related_evidence_ids": [
+        "PORT-2026-CN-SAUDEL-NINGBO-001"
+      ],
+      "source": {
+        "url": "https://mykn.kuehne-nagel.com/news/article/typhoon-saudel-bears-down-on-east-china",
+        "publisher": "Kuehne+Nagel customer advisory",
+        "published_at": "2026-08-26",
+        "retrieved_at": "2026-11-15",
+        "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_source_forwarder_advisory_reviewed",
+      "limitations": [
+        "The advisory was first published on 26 August and updated on 27 and 28 August; times are China Standard Time as reported by a freight forwarder, not a port-authority notice.",
+        "Terminal resumption does not establish cleared backlogs or on-schedule vessel calls. The advisory reports no vessel wait times; a trade blog reported berthing queues after the storm but was not independently reviewed: https://blogs.tradlinx.com/4-31m-teu-is-waiting-to-berth-as-china-ports-recover-from-saudel/.",
+        "This is the same storm as the linked Ningbo record, not an independent event. No affected case-study shipment, vessel or booking has been matched."
+      ],
+      "search_window": {
+        "start": "2026-08-27",
+        "end": "2026-09-11",
+        "basis": "event_date_buffer",
+        "note": "Reported suspension and resumption dates plus a 14-day retrieval-only buffer after resumption; it does not assert continuing disruption.",
+        "anchor_date": "2026-08-27",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "PORT-2026-CN-SAUDEL-NINGBO-001",
+      "reported_port": "Ningbo terminals, Ningbo-Zhoushan Port",
+      "port_ids": [
+        "57020"
+      ],
+      "country_code": "CN",
+      "country_name": "China",
+      "event_start": "2026-08-26",
+      "event_end": "2026-08-28",
+      "cause": "Typhoon Saudel (landfall in southern Zhejiang around midday on 28 August 2026)",
+      "reported_operational_impact": "Kuehne+Nagel reported that Ningbo terminals stopped empty-container operations at 16:00 and all operations at 20:00 on 26 August, container yards closed from 06:00 on 27 August, and Ningbo raised its emergency response to Level I on 27 August. Terminals resumed at 15:00 and yards at 12:00 on 28 August, when the response was stepped down to Level II.",
+      "reported_delay": {
+        "value": null,
+        "unit": null
+      },
+      "related_evidence_ids": [
+        "PORT-2026-CN-SAUDEL-SHANGHAI-001"
+      ],
+      "source": {
+        "url": "https://mykn.kuehne-nagel.com/news/article/typhoon-saudel-bears-down-on-east-china",
+        "publisher": "Kuehne+Nagel customer advisory",
+        "published_at": "2026-08-26",
+        "retrieved_at": "2026-11-15",
+        "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_source_forwarder_advisory_reviewed",
+      "limitations": [
+        "Times are as reported by a freight forwarder in an advisory updated on 27 and 28 August, not a port-authority notice.",
+        "Terminal resumption does not establish cleared backlogs or on-schedule vessel calls; the advisory reports no wait times.",
+        "port_ids holds the graph code for 'Ning Bo' because the graph spelling does not match the source's 'Ningbo' by whole-word containment; see approximations.",
+        "This is the same storm as the linked Shanghai record, not an independent event. No affected case-study shipment has been matched."
+      ],
+      "approximations": [
+        {
+          "field": "port_ids",
+          "value": [
+            "57020"
+          ],
+          "basis": "Analyst mapping: the graph port 'Ning Bo' (code 57020) is taken to be the Ningbo terminals the source names. The source does not use graph codes.",
+          "review_status": "unreviewed"
+        }
+      ],
+      "search_window": {
+        "start": "2026-08-26",
+        "end": "2026-09-11",
+        "basis": "event_date_buffer",
+        "note": "Reported suspension and resumption dates plus a 14-day retrieval-only buffer after resumption; it does not assert continuing disruption.",
+        "anchor_date": "2026-08-26",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "PORT-2026-CN-DOLPHIN-SHANGHAI-001",
+      "reported_port": "Yangshan and Waigaoqiao terminals, Port of Shanghai",
+      "country_code": "CN",
+      "country_name": "China",
+      "event_start": null,
+      "event_end": null,
+      "cause": "Typhoon Dolphin",
+      "reported_operational_impact": "C.H. Robinson reported on 10 August 2026 that port operations at Yangshan and Waigaoqiao remained suspended, with container-yard closures and suspended terminal gate-in services affecting full-container-load movements. It expected ocean delays while ports cleared cargo and vessel backlogs, adding pressure to existing congestion at Shanghai and Ningbo.",
+      "reported_delay": {
+        "value": null,
+        "unit": null
+      },
+      "related_evidence_ids": [
+        "PORT-2026-CN-DOLPHIN-NINGBO-001"
+      ],
+      "source": {
+        "url": "https://www.chrobinson.com/resources/insights-and-advisories/client-advisories/2026q3/08-10-26-client-advisory-typhoon-dolphin-update/",
+        "publisher": "C.H. Robinson client advisory",
+        "published_at": "2026-08-10",
+        "retrieved_at": "2026-11-15",
+        "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_source_forwarder_advisory_reviewed",
+      "limitations": [
+        "The advisory gives no suspension start or resumption time, so event dates are null. Other secondary reports disagree, placing closures between 7 and 10 August; they were not independently reviewed.",
+        "A trade blog reported a 72-hour Yangshan wait for Gemini-service vessels attributed to Hapag-Lloyd, and berth waits of up to 12 days at some terminals; no primary carrier advisory was found: https://blogs.tradlinx.com/super-typhoon-dolphin-threatens-china-ports-still-clearing-july-backlogs/.",
+        "This is the same storm as the linked Ningbo record. No affected case-study shipment has been matched."
+      ],
+      "search_window": {
+        "start": "2026-07-27",
+        "end": "2026-08-24",
+        "basis": "report_date_buffer",
+        "note": "Fourteen days either side of the advisory date for retrieval only; the suspension's actual start and end are unknown.",
+        "anchor_date": "2026-08-10",
+        "anchor_basis": "report_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "PORT-2026-CN-DOLPHIN-NINGBO-001",
+      "reported_port": "Ningbo terminals, Ningbo-Zhoushan Port",
+      "port_ids": [
+        "57020"
+      ],
+      "country_code": "CN",
+      "country_name": "China",
+      "event_start": null,
+      "event_end": "2026-08-10",
+      "cause": "Typhoon Dolphin",
+      "reported_operational_impact": "C.H. Robinson reported that several Ningbo terminals suspended empty-container pickup and return and laden-container receiving and pickup, and that these operations resumed at 16:00 local time on 10 August 2026.",
+      "reported_delay": {
+        "value": null,
+        "unit": null
+      },
+      "related_evidence_ids": [
+        "PORT-2026-CN-DOLPHIN-SHANGHAI-001"
+      ],
+      "source": {
+        "url": "https://www.chrobinson.com/resources/insights-and-advisories/client-advisories/2026q3/08-10-26-client-advisory-typhoon-dolphin-update/",
+        "publisher": "C.H. Robinson client advisory",
+        "published_at": "2026-08-10",
+        "retrieved_at": "2026-11-15",
+        "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_source_forwarder_advisory_reviewed",
+      "limitations": [
+        "The suspension start is not given, so event_start is null. The resumption covers the named terminal services, not necessarily every Ningbo terminal or a cleared backlog.",
+        "port_ids holds the graph code for 'Ning Bo'; see approximations.",
+        "This is the same storm as the linked Shanghai record. No affected case-study shipment has been matched."
+      ],
+      "approximations": [
+        {
+          "field": "port_ids",
+          "value": [
+            "57020"
+          ],
+          "basis": "Analyst mapping: the graph port 'Ning Bo' (code 57020) is taken to be the Ningbo terminals the source names. The source does not use graph codes.",
+          "review_status": "unreviewed"
+        }
+      ],
+      "search_window": {
+        "start": "2026-07-27",
+        "end": "2026-08-24",
+        "basis": "report_date_buffer",
+        "note": "Fourteen days either side of the advisory date for retrieval only; the suspension start is unknown.",
+        "anchor_date": "2026-08-10",
+        "anchor_basis": "report_date"
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "PORT-2026-PH-MANILA-YARD-001",
+      "reported_port": "Manila International Container Terminal and Manila South Harbor, Manila",
+      "country_code": "PH",
+      "country_name": "Philippines",
+      "event_start": null,
+      "event_end": null,
+      "cause": "Yard congestion attributed variously to a seasonal import surge from mid-December, slow withdrawal of laden boxes, truck shortages, full empty-container depots and slowdowns of the Bureau of Customs e2M system.",
+      "reported_operational_impact": "PortCalls reported that reefer yard utilisation at MICT exceeded 100% on multiple days in the first two weeks of February 2026, with overall utilisation in the mid-80s; conditions improved in March after Bureau of Customs intervention and utilisation rose again from late April. Asian Terminals Inc. warned on 26 May of forced transfer of long-dwelling cleared boxes, and on 19 June the bureau set 75% as the normal operating level.",
+      "reported_delay": {
+        "value": null,
+        "unit": null
+      },
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://portcalls.com/manilas-cargo-crisis-when-sea-and-air-grind-to-a-halt/",
+        "publisher": "PortCalls",
+        "published_at": "2026-07-02",
+        "retrieved_at": "2026-11-15",
+        "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_source_reviewed",
+      "limitations": [
+        "The article is part 1 of a series and reports no dwell-time figures or vessel waiting times; congestion causes are contested between terminals, importers, brokers and shipping lines.",
+        "Event dates are null: the condition has no reported start or end. The search window spans the reported figures from February to the 19 June measures and is not an observed congestion interval.",
+        "The source was published after the reported period, so under the no-look-ahead rule it is a late report, known only from 2026-07-02.",
+        "Manila is an export port for Philippine case-study suppliers, but no affected shipment has been matched; import-side yard utilisation does not establish export delays."
+      ],
+      "search_window": {
+        "start": "2026-02-01",
+        "end": "2026-06-19",
+        "basis": "month_approximation",
+        "note": "February 2026 expanded to its first day through the 19 June 2026 customs measures, for retrieval only; not a verified congestion interval.",
+        "anchor_date": null,
+        "anchor_basis": null
+      },
+      "scenario_recovery": null
+    },
+    {
+      "evidence_id": "PORT-2026-US-NEWARK-BLIZZARD-001",
+      "reported_port": "Port Newark and Elizabeth container terminals, Port of New York and New Jersey",
+      "country_code": "US",
+      "country_name": "United States",
+      "event_start": "2026-02-23",
+      "event_end": "2026-02-26",
+      "cause": "Blizzard (13 inches of snow at Port Newark by 9 a.m. ET on 23 February 2026)",
+      "reported_operational_impact": "FreightWaves reported that container and ro-ro operations stopped on 23 February, with gates closed at APM Terminals, Port Newark Container Terminal, Maher Terminals, Ports America and Port Liberty, and chassis depots shut. APM Terminals Elizabeth said its gates and vessel operations would reopen at 8 a.m. on 26 February, with the Port Newark depot still closed that day.",
+      "reported_delay": {
+        "value": null,
+        "unit": null
+      },
+      "related_evidence_ids": [],
+      "source": {
+        "url": "https://www.freightwaves.com/news/blizzard-shuts-down-container-terminals-at-northeast-ports",
+        "publisher": "FreightWaves",
+        "published_at": "2026-02-23",
+        "retrieved_at": "2026-11-15",
+        "licence_notes": "Redistribution terms not independently verified; concise attributed summary and source link only."
+      },
+      "verification_status": "secondary_source_terminal_notice_reviewed",
+      "limitations": [
+        "event_end is APM Terminals Elizabeth's announced reopening: https://www.apmterminals.com/en/port-elizabeth/practical-information/news-and-alerts/2026/260225-Operations-Update-Blizzard-Update. Other terminals' reopening times were not reviewed, and a planned modified gate on 28 February indicates backlog recovery continued.",
+        "This is a different storm from the January 2026 winter-storm record (PORT-2026-US-WINTER-001).",
+        "Newark is an entry port for case-study shipments, but no affected shipment has been matched."
+      ],
+      "search_window": {
+        "start": "2026-02-23",
+        "end": "2026-03-12",
+        "basis": "event_date_buffer",
+        "note": "Closure to announced reopening plus a 14-day retrieval-only buffer; it does not assert continuing closure.",
+        "anchor_date": "2026-02-23",
+        "anchor_basis": "event_date"
+      },
+      "scenario_recovery": null
     }
   ]
 }

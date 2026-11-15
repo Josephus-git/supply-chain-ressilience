@@ -85,6 +85,13 @@ EXTRA_FIXTURES: dict[int, tuple[str, str]] = {
     35: ("org:hi-p-philippines-technology-corpora", "2026-09-27"),
     36: ("org:hi-p-philippines-technology-corpora", "2025-04-12"),
     37: ("org:hi-p-philippines-technology-corpora", "2025-02-01"),
+    # Data scrape round 2 (2026-11-15): dates that reach the new records no
+    # earlier fixture returns.
+    38: ("org:ihastek-malaysia-sdn-bhd", "2026-08-28"),
+    39: ("org:wencor-m-sdn-bhd", "2026-08-12"),
+    40: ("org:kinpo-electronics-philippines-inc", "2025-08-20"),
+    41: ("org:meiban-technologies-malaysia-sdn", "2025-04-24"),
+    42: ("org:vs-industrial-philippines-inc", "2026-06-22"),
 }
 
 # Section 6.1: currency from the supplier country through a fixed ISO 4217 table.

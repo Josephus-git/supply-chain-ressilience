@@ -42,9 +42,9 @@ class RealDatabase(unittest.TestCase):
         cls.db = load_database()
 
     def test_counts(self):
-        self.assertEqual(self.db.record_count, 97)
+        self.assertEqual(self.db.record_count, 109)
         self.assertEqual(len(self.db.records), 18)
-        self.assertEqual(describe_database(self.db.index)["record_count"], 97)
+        self.assertEqual(describe_database(self.db.index)["record_count"], 109)
 
     def test_manifest_hashes_verified_without_warnings(self):
         self.assertEqual(self.db.warnings, ())
