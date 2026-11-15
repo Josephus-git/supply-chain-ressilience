@@ -1,0 +1,367 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2026-04-01",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-09",
+    "component_query": "Vacuum Cleaner",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:kinpo-electronics-philippines-inc",
+      "supplier_name": "Kinpo Electronics Philippines Inc",
+      "country": "HK",
+      "parent_companies": [
+        "Kinpo Electronics, Inc."
+      ],
+      "hs_codes": [
+        {
+          "code": "850811",
+          "shipments": 23
+        },
+        {
+          "code": "851632",
+          "shipments": 9
+        },
+        {
+          "code": "851631",
+          "shipments": 6
+        },
+        {
+          "code": "080610",
+          "shipments": 3
+        },
+        {
+          "code": "401110",
+          "shipments": 2
+        },
+        {
+          "code": "610110",
+          "shipments": 2
+        },
+        {
+          "code": "851690",
+          "shipments": 2
+        },
+        {
+          "code": "481910",
+          "shipments": 1
+        },
+        {
+          "code": "732020",
+          "shipments": 1
+        },
+        {
+          "code": "841459",
+          "shipments": 1
+        },
+        {
+          "code": "850760",
+          "shipments": 1
+        },
+        {
+          "code": "850870",
+          "shipments": 1
+        },
+        {
+          "code": "858011",
+          "shipments": 1
+        },
+        {
+          "code": "870899",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Manila",
+          "code": "56549",
+          "country": "PH",
+          "shipments": 19
+        },
+        {
+          "name": "Kaohsiung",
+          "code": "58309",
+          "country": "TW",
+          "shipments": 9
+        },
+        {
+          "name": "Nansha",
+          "code": "57073",
+          "country": "CN",
+          "shipments": 7
+        },
+        {
+          "name": "Pusan",
+          "code": "58023",
+          "country": "KR",
+          "shipments": 5
+        },
+        {
+          "name": "Shanghai",
+          "code": "57035",
+          "country": "CN",
+          "shipments": 5
+        },
+        {
+          "name": "Ning Bo",
+          "code": "57020",
+          "country": "CN",
+          "shipments": 3
+        },
+        {
+          "name": "Hong Kong",
+          "code": "58201",
+          "country": "HK",
+          "shipments": 2
+        },
+        {
+          "name": "Tanjung Pelepas",
+          "code": "55750",
+          "country": "MY",
+          "shipments": 2
+        },
+        {
+          "name": "Singapore",
+          "code": "55976",
+          "country": "SG",
+          "shipments": 1
+        },
+        {
+          "name": "Yantian",
+          "code": "57078",
+          "country": "CN",
+          "shipments": 1
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 32
+        },
+        {
+          "name": "Long Beach, Ca",
+          "code": "2709",
+          "country": "US",
+          "coast": "west",
+          "shipments": 10
+        },
+        {
+          "name": "Newark, Nj",
+          "code": "4601",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 9
+        },
+        {
+          "name": "Tacoma, Wa",
+          "code": "3002",
+          "country": "US",
+          "coast": "west",
+          "shipments": 3
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 51
+        },
+        {
+          "name": "Dyson B2B Inc",
+          "shipments": 2
+        },
+        {
+          "name": "Dyson Canada Limited",
+          "shipments": 1
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Dhl Express",
+          "code": "DMAL",
+          "shipments": 21
+        },
+        {
+          "name": "Pyramid Lines Singapore Pte Ltd",
+          "code": "PYMN",
+          "shipments": 19
+        },
+        {
+          "name": "Maersk Line",
+          "code": "MAEU",
+          "shipments": 11
+        },
+        {
+          "name": "Maersk Logistics & Services Intl A/S",
+          "code": "MZLY",
+          "shipments": 2
+        },
+        {
+          "name": "Dsv Ocean Transport",
+          "code": "DSVF",
+          "shipments": 1
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Cma Cgm Georgia",
+          "shipments": 4
+        },
+        {
+          "name": "Cma Cgm White Shark",
+          "shipments": 4
+        },
+        {
+          "name": "Cma Cgm New Jersey",
+          "shipments": 3
+        },
+        {
+          "name": "Cma Cgm Virginia",
+          "shipments": 3
+        },
+        {
+          "name": "Ludwigshafen Express",
+          "shipments": 3
+        },
+        {
+          "name": "Cosco Shipping Denali",
+          "shipments": 2
+        },
+        {
+          "name": "Leverkusen Express",
+          "shipments": 2
+        },
+        {
+          "name": "Maersk Alfirk",
+          "shipments": 2
+        },
+        {
+          "name": "Oocl Poland",
+          "shipments": 2
+        },
+        {
+          "name": "Ym Utility",
+          "shipments": 2
+        },
+        {
+          "name": "Antwerpen Express",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Florida",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Manta Ray",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Tarpon",
+          "shipments": 1
+        },
+        {
+          "name": "Cosco Netherlands",
+          "shipments": 1
+        },
+        {
+          "name": "Cosco Shipping Alps",
+          "shipments": 1
+        },
+        {
+          "name": "Cosco Shipping Andes",
+          "shipments": 1
+        },
+        {
+          "name": "Cosco Shipping Panama",
+          "shipments": 1
+        },
+        {
+          "name": "Cosco Shipping Yangpu",
+          "shipments": 1
+        },
+        {
+          "name": "Dortmund Express",
+          "shipments": 1
+        },
+        {
+          "name": "Georg Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Gunvor Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Gustav Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Hansa Breitenburg",
+          "shipments": 1
+        },
+        {
+          "name": "Hyundai Forward",
+          "shipments": 1
+        },
+        {
+          "name": "Maersk Frankfurt",
+          "shipments": 1
+        },
+        {
+          "name": "Mol Premium",
+          "shipments": 1
+        },
+        {
+          "name": "Nhava Sheva Express",
+          "shipments": 1
+        },
+        {
+          "name": "Oocl Violet",
+          "shipments": 1
+        },
+        {
+          "name": "Ophelia",
+          "shipments": 1
+        },
+        {
+          "name": "Osaka Express",
+          "shipments": 1
+        },
+        {
+          "name": "President Grant",
+          "shipments": 1
+        },
+        {
+          "name": "President Jq Adams",
+          "shipments": 1
+        },
+        {
+          "name": "Ym Ubiquity",
+          "shipments": 1
+        },
+        {
+          "name": "Ym Unanimity",
+          "shipments": 1
+        },
+        {
+          "name": "Ym Unicorn",
+          "shipments": 1
+        },
+        {
+          "name": "Ym Uniform",
+          "shipments": 1
+        }
+      ],
+      "currency": "HKD",
+      "footprint_window": {
+        "first_arrival": "2025-01-12",
+        "last_arrival": "2026-09-23",
+        "shipments": 54
+      }
+    }
+  ]
+}

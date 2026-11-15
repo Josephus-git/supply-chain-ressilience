@@ -1,0 +1,1291 @@
+{
+  "schema_version": "1.0",
+  "description": "Retrieval gold set for the phase 2 fixture payloads (SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md, sections 9 and 10). Compare each fixture's returned evidence_ids with expected_ids and report missed and unexpected IDs. expected_links and expected_exclusions explain each entry; only expected_ids is the pass/fail comparison.",
+  "status": "draft: derived by applying the plan's rules to the stored records, then reviewed by hand. Not produced by the engine. Review the interpretations before treating it as final.",
+  "created_at": "2026-11-15",
+  "evidence_database": {
+    "path": "risk_evidence/database/",
+    "manifest_sha256": "2540a61bbede3d4892fd316f25de1df45f9d8fdc9fb51f4125fa7974c63785f6",
+    "records": 97,
+    "note": "If the database changes, recheck every fixture against the new records."
+  },
+  "payload_source": "build_payloads.py, from data/processed/*_shipments_clean.csv (the graph's import files) plus supplier country and parent from the Neo4j graph.",
+  "interpretations": [
+    {
+      "id": "one_record_listed_once",
+      "rule": "A record is expected at most once per supplier. When several bases link it, the strongest is listed (strong > medium > weak) with every matched value."
+    },
+    {
+      "id": "related_records_not_pulled_in",
+      "rule": "Records are expected only when they link on their own. A related record (related_evidence_ids) that does not link is not added to the expected set; section 4 'return them together' is read as grouping linked records."
+    },
+    {
+      "id": "undated_uses_plain_search_window",
+      "rule": "A record without its date field is expected only when as_of_date falls inside its search_window; event_window_days is not applied to search windows."
+    },
+    {
+      "id": "effective_to_window_applies",
+      "rule": "The event window expands both ends of effective intervals, so a tariff ending 2025-11-09 is in scope on 2025-11-21 with a 14-day window."
+    },
+    {
+      "id": "port_tiers_types",
+      "rule": "Port tiers (port_code, port_name, port_country) apply to port_disruption, natural_hazards and border_customs_delays, using both exit and entry ports. No graph port code equals a record code because records carry no port codes."
+    },
+    {
+      "id": "port_country_on_hazard_and_customs",
+      "rule": "The port_country tier also applies to natural_hazards and border_customs_delays (section 5.1 states the tiers generically). If it applies only to port_disruption, the dependent IDs listed here drop out.",
+      "dependent_ids": {
+        "05": [
+          "CUSTOMS-PILOT-001"
+        ],
+        "09": [
+          "CUSTOMS-PILOT-001"
+        ],
+        "11": [
+          "CUSTOMS-PILOT-001"
+        ],
+        "18": [
+          "HAZARD-2025-MY-FLOOD-001"
+        ]
+      }
+    },
+    {
+      "id": "port_disruption_no_supplier_country",
+      "rule": "port_disruption links by country only through a port's country (port_country), never through the supplier country (section 7: 'allowed as port_country')."
+    },
+    {
+      "id": "supplier_country_only_for_other_types",
+      "rule": "For every other type that allows country-only links, the supplier country is compared with the record's country field; port countries and importing_country are not used, except importing_country for tariffs and trade lanes."
+    },
+    {
+      "id": "carrier_name_without_scac_prefix",
+      "rule": "Graph carrier names such as 'MAEU - Maersk Line' are sent as name 'Maersk Line' and code 'MAEU'. Under exact normalised equality 'Maersk Line' does not match 'Maersk (charterer)'."
+    },
+    {
+      "id": "port_name_matches_any_facility_text",
+      "rule": "Port-name containment is applied literally, so exit port Manila links CUSTOMS-2026-PH-001 (Ninoy Aquino International Airport cargo facilities, Manila)."
+    },
+    {
+      "id": "tariff_country_pair",
+      "rule": "Tariffs need origin = supplier country and importing = request importing_country; a null origin links on importing country alone (basis importing_country); a record with a code also needs an HS prefix match."
+    }
+  ],
+  "fixtures": [
+    {
+      "fixture": "FIXTURE-01",
+      "payload": "payloads/01_flextronics-shah-alam.json",
+      "supplier_id": "org:flextronics-shah-alam",
+      "supplier_name": "Flextronics Shah Alam",
+      "as_of_date": "2026-09-25",
+      "event_window_days": 14,
+      "as_of_date_basis": "Parent FLEX LTD. against the undated Flex Ltd cyberattack claim (search window 2026-09-07 to 2026-10-05); exit port Singapore against the undated Singapore congestion record.",
+      "expected_ids": [
+        "CYBER-CLAIM-2026-001",
+        "FX-2025-2026-USD-CNY-001",
+        "PORT-2026-SG-CONGESTION-001",
+        "RESTRICT-2025-CN-001",
+        "RESTRICT-2025-CN-002",
+        "TARIFF-2026-US-CN-FORCED-LABOR-301"
+      ],
+      "expected_links": {
+        "CYBER-CLAIM-2026-001": {
+          "link_basis": "parent_company_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "Flex Ltd"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "FX-2025-2026-USD-CNY-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "CNY"
+          ],
+          "in_scope": "dated"
+        },
+        "PORT-2026-SG-CONGESTION-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Singapore"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "RESTRICT-2025-CN-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated"
+        },
+        "RESTRICT-2025-CN-002": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2026-US-CN-FORCED-LABOR-301": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {
+        "TARIFF-2026-US-CN-BATTERY-301": "In force and CN origin, but the footprint has no HS code sharing a 6-digit prefix with 8507.60.00.",
+        "FX-2025-DYSON-QUALITATIVE-001": "Buyer Dyson links by name, but the undated record's search window ends 2025-12-31."
+      }
+    },
+    {
+      "fixture": "FIXTURE-02",
+      "payload": "payloads/02_flextronics-shah-alam-sdn-bhd.json",
+      "supplier_id": "org:flextronics-shah-alam-sdn-bhd",
+      "supplier_name": "Flextronics Shah Alam Sdn Bhd",
+      "as_of_date": "2025-11-10",
+      "event_window_days": 14,
+      "as_of_date_basis": "Exit port Tanjung Pelepas three days after the PTP fire (2025-11-07); carrier 'Maersk Line' is a near miss for 'Maersk (charterer)'.",
+      "expected_ids": [
+        "FX-2025-2026-USD-MYR-001",
+        "FX-2025-DYSON-QUALITATIVE-001",
+        "PORT-2025-MY-PTP-001",
+        "RESTRICT-2025-MY-001",
+        "TARIFF-2025-US-MY-RECIPROCAL"
+      ],
+      "expected_links": {
+        "FX-2025-2026-USD-MYR-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "MYR"
+          ],
+          "in_scope": "dated"
+        },
+        "FX-2025-DYSON-QUALITATIVE-001": {
+          "link_basis": "buyer_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "Dyson"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "PORT-2025-MY-PTP-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Tanjung Pelepas"
+          ],
+          "in_scope": "dated"
+        },
+        "RESTRICT-2025-MY-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2025-US-MY-RECIPROCAL": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {
+        "VESSEL-2025-MY-001": "In date scope. Carrier 'Maersk Line' normalises to 'maersk line', not 'maersk'; vessel Kyparissia is not in the footprint; country links are not used for this type."
+      }
+    },
+    {
+      "fixture": "FIXTURE-03",
+      "payload": "payloads/03_flextronics-technology-penang-sdn.json",
+      "supplier_id": "org:flextronics-technology-penang-sdn",
+      "supplier_name": "Flextronics Technology Penang Sdn",
+      "as_of_date": "2026-09-28",
+      "event_window_days": 14,
+      "as_of_date_basis": "Last arrival in the footprint; parent FLEX LTD. cyberattack claim and the MY financial-distress observation (2026-09-30) by country only.",
+      "expected_ids": [
+        "CYBER-CLAIM-2026-001",
+        "FINANCE-2026-MY-VS-001",
+        "FX-2025-2026-USD-MYR-001",
+        "RESTRICT-2025-MY-001",
+        "TARIFF-2026-US-MY-FORCED-LABOR-301"
+      ],
+      "expected_links": {
+        "CYBER-CLAIM-2026-001": {
+          "link_basis": "parent_company_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "Flex Ltd"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "FINANCE-2026-MY-VS-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated"
+        },
+        "FX-2025-2026-USD-MYR-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "MYR"
+          ],
+          "in_scope": "dated"
+        },
+        "RESTRICT-2025-MY-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2026-US-MY-FORCED-LABOR-301": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-04",
+      "payload": "payloads/04_hi-p-philippines-technology-corp.json",
+      "supplier_id": "org:hi-p-philippines-technology-corp",
+      "supplier_name": "Hi P Philippines Technology Corp",
+      "as_of_date": "2025-11-10",
+      "event_window_days": 14,
+      "as_of_date_basis": "Exit port Manila one day after Typhoon Uwan landfall (2025-11-09); undated Manila terminal advisory and PH fan seizure.",
+      "expected_ids": [
+        "FX-2025-2026-USD-PHP-001",
+        "FX-2025-DYSON-QUALITATIVE-001",
+        "HAZARD-2025-PH-UWAN-001",
+        "PORT-2025-PH-UWAN-001",
+        "QUALITY-2025-PH-FANS-001",
+        "TARIFF-2025-US-PH-RECIPROCAL"
+      ],
+      "expected_links": {
+        "FX-2025-2026-USD-PHP-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "PHP"
+          ],
+          "in_scope": "dated"
+        },
+        "FX-2025-DYSON-QUALITATIVE-001": {
+          "link_basis": "buyer_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "Dyson"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "HAZARD-2025-PH-UWAN-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Manila"
+          ],
+          "in_scope": "dated"
+        },
+        "PORT-2025-PH-UWAN-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Manila"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "QUALITY-2025-PH-FANS-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "PH"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "TARIFF-2025-US-PH-RECIPROCAL": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "PH"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-05",
+      "payload": "payloads/05_hi-p-philippines-technology-corpora.json",
+      "supplier_id": "org:hi-p-philippines-technology-corpora",
+      "supplier_name": "Hi P Philippines Technology Corpora",
+      "as_of_date": "2026-04-01",
+      "event_window_days": 14,
+      "as_of_date_basis": "Exit port Kaohsiung on the Zeal Lumos collision date (2026-04-01); Newark entry tests the approximated Panama lane; carrier/vessel country rule.",
+      "expected_ids": [
+        "CUSTOMS-PILOT-001",
+        "FX-2025-2026-USD-TWD-001",
+        "PORT-2026-TW-KAOHSIUNG-001",
+        "ROUTE-2026-PANAMA-GATUN-001",
+        "TARIFF-2026-US-GLOBAL-122",
+        "TRANSIT-2026-TW-001"
+      ],
+      "expected_links": {
+        "CUSTOMS-PILOT-001": {
+          "link_basis": "port_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "Tanjung Pelepas"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "FX-2025-2026-USD-TWD-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "TWD"
+          ],
+          "in_scope": "dated"
+        },
+        "PORT-2026-TW-KAOHSIUNG-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Kaohsiung"
+          ],
+          "in_scope": "dated"
+        },
+        "ROUTE-2026-PANAMA-GATUN-001": {
+          "link_basis": "trade_lane",
+          "link_strength": "weak",
+          "matched_values": [
+            "east_gulf"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "TARIFF-2026-US-GLOBAL-122": {
+          "link_basis": "importing_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "US"
+          ],
+          "in_scope": "dated"
+        },
+        "TRANSIT-2026-TW-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "TW"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {
+        "VESSEL-2026-TW-001": "In date scope and the incident country equals the supplier country, but carrier/vessel records never link by country; Zeal Lumos and ONE are not in the footprint.",
+        "MATERIAL-2026-TW-FEEDSTOCK-001": "Country TW links, but the undated record's search window ends 2026-03-24; event_window_days does not extend search windows."
+      },
+      "interpretation_dependent_ids": [
+        "CUSTOMS-PILOT-001"
+      ]
+    },
+    {
+      "fixture": "FIXTURE-06",
+      "payload": "payloads/06_hip-philipines-technology-corp.json",
+      "supplier_id": "org:hip-philipines-technology-corp",
+      "supplier_name": "Hip Philipines Technology Corp",
+      "as_of_date": "2025-09-24",
+      "event_window_days": 14,
+      "as_of_date_basis": "Exit ports Yantian and Nansha on Typhoon Ragasa landfall (2025-09-24).",
+      "expected_ids": [
+        "CUSTOMS-2025-PH-001",
+        "FX-2025-2026-USD-PHP-001",
+        "FX-2025-DYSON-QUALITATIVE-001",
+        "HAZARD-2025-CN-RAGASA-001",
+        "PORT-2025-CN-RAGASA-001",
+        "QUALITY-2025-PH-FANS-001",
+        "TARIFF-2025-US-PH-RECIPROCAL"
+      ],
+      "expected_links": {
+        "CUSTOMS-2025-PH-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "PH"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "FX-2025-2026-USD-PHP-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "PHP"
+          ],
+          "in_scope": "dated"
+        },
+        "FX-2025-DYSON-QUALITATIVE-001": {
+          "link_basis": "buyer_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "Dyson"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "HAZARD-2025-CN-RAGASA-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Nansha",
+            "Yantian"
+          ],
+          "in_scope": "dated"
+        },
+        "PORT-2025-CN-RAGASA-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Nansha",
+            "Yantian"
+          ],
+          "in_scope": "dated"
+        },
+        "QUALITY-2025-PH-FANS-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "PH"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "TARIFF-2025-US-PH-RECIPROCAL": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "PH"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-07",
+      "payload": "payloads/07_ihastek-malaysia-sdn-bhd.json",
+      "supplier_id": "org:ihastek-malaysia-sdn-bhd",
+      "supplier_name": "Ihastek Malaysia Sdn Bhd",
+      "as_of_date": "2025-11-21",
+      "event_window_days": 14,
+      "as_of_date_basis": "Vessel One Henry Hudson (supplier shipment arrived 2025-11-19) on the fire date 2025-11-21; PTP record on its last in-scope day (2025-11-07 + 14).",
+      "expected_ids": [
+        "FX-2025-2026-USD-CNY-001",
+        "FX-2025-DYSON-QUALITATIVE-001",
+        "MATERIAL-2025-CN-CHIP-001",
+        "PORT-2025-MY-PTP-001",
+        "RESTRICT-2025-CN-001",
+        "RESTRICT-2025-CN-002",
+        "TARIFF-2025-US-CN-OPIOID-10B",
+        "TARIFF-2025-US-CN-OPIOID-20",
+        "TARIFF-2025-US-CN-RECIPROCAL",
+        "VESSEL-2025-US-001"
+      ],
+      "expected_links": {
+        "FX-2025-2026-USD-CNY-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "CNY"
+          ],
+          "in_scope": "dated"
+        },
+        "FX-2025-DYSON-QUALITATIVE-001": {
+          "link_basis": "buyer_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "Dyson"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "MATERIAL-2025-CN-CHIP-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "PORT-2025-MY-PTP-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Tanjung Pelepas"
+          ],
+          "in_scope": "dated"
+        },
+        "RESTRICT-2025-CN-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated"
+        },
+        "RESTRICT-2025-CN-002": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2025-US-CN-OPIOID-10B": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2025-US-CN-OPIOID-20": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2025-US-CN-RECIPROCAL": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated"
+        },
+        "VESSEL-2025-US-001": {
+          "link_basis": "vessel_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "ONE HENRY HUDSON"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-08",
+      "payload": "payloads/08_kinpo-electronics-philippines.json",
+      "supplier_id": "org:kinpo-electronics-philippines",
+      "supplier_name": "Kinpo Electronics Philippines",
+      "as_of_date": "2026-06-19",
+      "event_window_days": 14,
+      "as_of_date_basis": "The supplier's only shipment (Manila to Newark, 2026-06-19); undated Manila airport customs report.",
+      "expected_ids": [
+        "CUSTOMS-2026-PH-001",
+        "FX-2025-2026-USD-PHP-001",
+        "TARIFF-2026-US-GLOBAL-122"
+      ],
+      "expected_links": {
+        "CUSTOMS-2026-PH-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Manila"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "FX-2025-2026-USD-PHP-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "PHP"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2026-US-GLOBAL-122": {
+          "link_basis": "importing_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "US"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {
+        "TARIFF-2026-US-PH-FORCED-LABOR-301": "PH origin, but effective 2026-07-24, 35 days after as_of_date."
+      }
+    },
+    {
+      "fixture": "FIXTURE-09",
+      "payload": "payloads/09_kinpo-electronics-philippines-inc.json",
+      "supplier_id": "org:kinpo-electronics-philippines-inc",
+      "supplier_name": "Kinpo Electronics Philippines Inc",
+      "as_of_date": "2026-04-01",
+      "event_window_days": 14,
+      "as_of_date_basis": "Supplier country HK has no country records; Kaohsiung exit and a CN-only HS 850760 tariff test origin rules.",
+      "expected_ids": [
+        "CUSTOMS-PILOT-001",
+        "PORT-2026-TW-KAOHSIUNG-001",
+        "TARIFF-2026-US-GLOBAL-122"
+      ],
+      "expected_links": {
+        "CUSTOMS-PILOT-001": {
+          "link_basis": "port_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "Tanjung Pelepas"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "PORT-2026-TW-KAOHSIUNG-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Kaohsiung"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2026-US-GLOBAL-122": {
+          "link_basis": "importing_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "US"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {
+        "ROUTE-2026-PANAMA-GATUN-001": "Within the search window with a Newark (east_gulf) entry port, but HK is not in origin_country_codes.",
+        "TARIFF-2026-US-CN-BATTERY-301": "The footprint has HS 850760, but the supplier country is HK and the measure requires CN origin."
+      },
+      "interpretation_dependent_ids": [
+        "CUSTOMS-PILOT-001"
+      ]
+    },
+    {
+      "fixture": "FIXTURE-10",
+      "payload": "payloads/10_meiban-technologies-m-sdn-bhd.json",
+      "supplier_id": "org:meiban-technologies-m-sdn-bhd",
+      "supplier_name": "Meiban Technologies M Sdn Bhd",
+      "as_of_date": "2026-09-21",
+      "event_window_days": 14,
+      "as_of_date_basis": "The supplier's only shipment (Port Klang, 2026-09-21); MY financial-distress observation nine days later.",
+      "expected_ids": [
+        "FINANCE-2026-MY-VS-001",
+        "FX-2025-2026-USD-MYR-001",
+        "RESTRICT-2025-MY-001",
+        "TARIFF-2026-US-MY-FORCED-LABOR-301"
+      ],
+      "expected_links": {
+        "FINANCE-2026-MY-VS-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated"
+        },
+        "FX-2025-2026-USD-MYR-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "MYR"
+          ],
+          "in_scope": "dated"
+        },
+        "RESTRICT-2025-MY-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2026-US-MY-FORCED-LABOR-301": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-11",
+      "payload": "payloads/11_meiban-technologies-malaysia-sdn.json",
+      "supplier_id": "org:meiban-technologies-malaysia-sdn",
+      "supplier_name": "Meiban Technologies Malaysia Sdn",
+      "as_of_date": "2026-03-10",
+      "event_window_days": 14,
+      "as_of_date_basis": "Supplier country HK; vessel Oocl Sunflower in footprint while the OOCL Sunflower container-loss record is in date scope.",
+      "expected_ids": [
+        "CUSTOMS-PILOT-001",
+        "TARIFF-2026-US-GLOBAL-122"
+      ],
+      "expected_links": {
+        "CUSTOMS-PILOT-001": {
+          "link_basis": "port_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "Port Klang",
+            "Tanjung Pelepas"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "TARIFF-2026-US-GLOBAL-122": {
+          "link_basis": "importing_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "US"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {
+        "TRANSIT-2026-PACIFIC-001": "In date scope. The footprint vessel Oocl Sunflower appears only in reported_shipment, which is not matched; carrier OOCL is not in the footprint.",
+        "COST-2026-MY-DIESEL-001": "In date scope. The MY exit ports do not link energy-cost records; only the supplier country (HK) is compared."
+      },
+      "interpretation_dependent_ids": [
+        "CUSTOMS-PILOT-001"
+      ]
+    },
+    {
+      "fixture": "FIXTURE-12",
+      "payload": "payloads/12_syarikat-sin-kwang-plastic.json",
+      "supplier_id": "org:syarikat-sin-kwang-plastic",
+      "supplier_name": "Syarikat Sin Kwang Plastic",
+      "as_of_date": "2025-05-30",
+      "event_window_days": 14,
+      "as_of_date_basis": "Shanghai to Los Angeles only; CN-US freight index observation and the Suez lane with no east or Gulf coast entry port.",
+      "expected_ids": [
+        "COST-2025-CN-US-FREIGHT-001",
+        "FX-2025-2026-USD-CNY-001",
+        "FX-2025-DYSON-QUALITATIVE-001",
+        "RESTRICT-2025-CN-001",
+        "RESTRICT-2025-CN-002",
+        "TARIFF-2025-US-CN-OPIOID-20"
+      ],
+      "expected_links": {
+        "COST-2025-CN-US-FREIGHT-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated"
+        },
+        "FX-2025-2026-USD-CNY-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "CNY"
+          ],
+          "in_scope": "dated"
+        },
+        "FX-2025-DYSON-QUALITATIVE-001": {
+          "link_basis": "buyer_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "Dyson"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "RESTRICT-2025-CN-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated"
+        },
+        "RESTRICT-2025-CN-002": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2025-US-CN-OPIOID-20": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {
+        "ROUTE-2025-SUEZ-001": "Within the search window and CN is an origin, but the only entry port (Los Angeles) is on the west coast."
+      }
+    },
+    {
+      "fixture": "FIXTURE-13",
+      "payload": "payloads/13_syarikat-sin-kwang-plastic-ind-s-b.json",
+      "supplier_id": "org:syarikat-sin-kwang-plastic-ind-s-b",
+      "supplier_name": "Syarikat Sin Kwang Plastic Ind S/B",
+      "as_of_date": "2026-03-20",
+      "event_window_days": 14,
+      "as_of_date_basis": "MY diesel observation start (2026-03-19); undated PET shortage window starts 2026-03-27.",
+      "expected_ids": [
+        "COST-2026-MY-DIESEL-001",
+        "CUSTOMS-PILOT-001",
+        "FX-2025-2026-USD-MYR-001",
+        "RESTRICT-2025-MY-001",
+        "TARIFF-2026-US-GLOBAL-122"
+      ],
+      "expected_links": {
+        "COST-2026-MY-DIESEL-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated"
+        },
+        "CUSTOMS-PILOT-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "FX-2025-2026-USD-MYR-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "MYR"
+          ],
+          "in_scope": "dated"
+        },
+        "RESTRICT-2025-MY-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2026-US-GLOBAL-122": {
+          "link_basis": "importing_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "US"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {
+        "MATERIAL-2026-MY-PET-001": "Country MY links, but the undated record's search window starts 2026-03-27; event_window_days does not extend search windows."
+      }
+    },
+    {
+      "fixture": "FIXTURE-14",
+      "payload": "payloads/14_syarikat-sin-kwang-plastic-industri.json",
+      "supplier_id": "org:syarikat-sin-kwang-plastic-industri",
+      "supplier_name": "Syarikat Sin Kwang Plastic Industri",
+      "as_of_date": "2025-10-28",
+      "event_window_days": 14,
+      "as_of_date_basis": "Vessel Wan Hai A18 is a near miss for WAN HAI A17 (in date scope); PTP fire 10 days later is within the window.",
+      "expected_ids": [
+        "FX-2025-2026-USD-MYR-001",
+        "FX-2025-DYSON-QUALITATIVE-001",
+        "PORT-2025-MY-PTP-001",
+        "RESTRICT-2025-MY-001",
+        "TARIFF-2025-US-MY-RECIPROCAL"
+      ],
+      "expected_links": {
+        "FX-2025-2026-USD-MYR-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "MYR"
+          ],
+          "in_scope": "dated"
+        },
+        "FX-2025-DYSON-QUALITATIVE-001": {
+          "link_basis": "buyer_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "Dyson"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "PORT-2025-MY-PTP-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Tanjung Pelepas"
+          ],
+          "in_scope": "dated"
+        },
+        "RESTRICT-2025-MY-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2025-US-MY-RECIPROCAL": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {
+        "VESSEL-2025-CN-001": "In date scope. 'Wan Hai A18' does not equal 'WAN HAI A17' after normalisation; no carrier match."
+      }
+    },
+    {
+      "fixture": "FIXTURE-15",
+      "payload": "payloads/15_v-s-industrial-berhad.json",
+      "supplier_id": "org:v-s-industrial-berhad",
+      "supplier_name": "V S Industrial Berhad",
+      "as_of_date": "2026-09-16",
+      "event_window_days": 14,
+      "as_of_date_basis": "Parent V.S. INDUSTRY BERHAD against the financial-distress observation (2026-09-30) on the first in-scope day (2026-09-30 - 14).",
+      "expected_ids": [
+        "FINANCE-2026-MY-VS-001",
+        "FX-2025-2026-USD-MYR-001",
+        "PORT-2026-SG-CONGESTION-001",
+        "RESTRICT-2025-MY-001",
+        "TARIFF-2026-US-MY-FORCED-LABOR-301"
+      ],
+      "expected_links": {
+        "FINANCE-2026-MY-VS-001": {
+          "link_basis": "parent_company_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "V.S. Industry Berhad"
+          ],
+          "in_scope": "dated"
+        },
+        "FX-2025-2026-USD-MYR-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "MYR"
+          ],
+          "in_scope": "dated"
+        },
+        "PORT-2026-SG-CONGESTION-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Singapore"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "RESTRICT-2025-MY-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2026-US-MY-FORCED-LABOR-301": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "MY"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-16",
+      "payload": "payloads/16_vs-industrial-berhad.json",
+      "supplier_id": "org:vs-industrial-berhad",
+      "supplier_name": "Vs Industrial Berhad",
+      "as_of_date": "2025-03-01",
+      "event_window_days": 14,
+      "as_of_date_basis": "Parent V.S. INDUSTRY BERHAD against the concentration record for FY2024/25, which starts before the study window. The supplier's footprint begins 2025-09-13, after this date; the engine does not use the footprint to filter.",
+      "expected_ids": [
+        "CONCENTRATION-2025-MY-VS-001",
+        "FX-2025-2026-USD-CNY-001",
+        "FX-2025-DYSON-QUALITATIVE-001",
+        "RESTRICT-2025-CN-001",
+        "TARIFF-2025-US-CN-OPIOID-10A",
+        "TARIFF-2025-US-CN-OPIOID-20"
+      ],
+      "expected_links": {
+        "CONCENTRATION-2025-MY-VS-001": {
+          "link_basis": "parent_company_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "V.S. Industry Berhad"
+          ],
+          "in_scope": "dated"
+        },
+        "FX-2025-2026-USD-CNY-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "CNY"
+          ],
+          "in_scope": "dated"
+        },
+        "FX-2025-DYSON-QUALITATIVE-001": {
+          "link_basis": "buyer_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "Dyson"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "RESTRICT-2025-CN-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2025-US-CN-OPIOID-10A": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2025-US-CN-OPIOID-20": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "CN"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {
+        "RESTRICT-2025-CN-002": "CN links, but effective 2025-04-04, 34 days after as_of_date."
+      }
+    },
+    {
+      "fixture": "FIXTURE-17",
+      "payload": "payloads/17_vs-industrial-philippines-inc.json",
+      "supplier_id": "org:vs-industrial-philippines-inc",
+      "supplier_name": "Vs Industrial Philippines Inc",
+      "as_of_date": "2026-04-01",
+      "event_window_days": 14,
+      "as_of_date_basis": "Parent V.S. INDUSTRY BERHAD against the undated PH operational disruption (search window 2026-03-20 to 2026-04-17).",
+      "expected_ids": [
+        "FX-2025-2026-USD-PHP-001",
+        "OPERATIONS-2026-PH-VS-001",
+        "PORT-2026-TW-KAOHSIUNG-001",
+        "ROUTE-2026-PANAMA-GATUN-001",
+        "TARIFF-2026-US-GLOBAL-122"
+      ],
+      "expected_links": {
+        "FX-2025-2026-USD-PHP-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "PHP"
+          ],
+          "in_scope": "dated"
+        },
+        "OPERATIONS-2026-PH-VS-001": {
+          "link_basis": "parent_company_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "V.S. Industry Berhad"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "PORT-2026-TW-KAOHSIUNG-001": {
+          "link_basis": "port_name",
+          "link_strength": "medium",
+          "matched_values": [
+            "Kaohsiung"
+          ],
+          "in_scope": "dated"
+        },
+        "ROUTE-2026-PANAMA-GATUN-001": {
+          "link_basis": "trade_lane",
+          "link_strength": "weak",
+          "matched_values": [
+            "east_gulf"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "TARIFF-2026-US-GLOBAL-122": {
+          "link_basis": "importing_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "US"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {}
+    },
+    {
+      "fixture": "FIXTURE-18",
+      "payload": "payloads/18_wencor-m-sdn-bhd.json",
+      "supplier_id": "org:wencor-m-sdn-bhd",
+      "supplier_name": "Wencor M Sdn Bhd",
+      "as_of_date": "2025-12-29",
+      "event_window_days": 14,
+      "as_of_date_basis": "Taiwan military exercises (2025-12-29) with the related route warning and the Q4 2025 foundry concentration record.",
+      "expected_ids": [
+        "CONCENTRATION-2025-TW-FOUNDRY-001",
+        "FX-2025-2026-USD-TWD-001",
+        "FX-2025-DYSON-QUALITATIVE-001",
+        "GEO-2025-TW-002",
+        "HAZARD-2025-MY-FLOOD-001",
+        "ROUTE-2025-TW-DRILLS-001",
+        "TARIFF-2025-US-TW-RECIPROCAL"
+      ],
+      "expected_links": {
+        "CONCENTRATION-2025-TW-FOUNDRY-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "TW"
+          ],
+          "in_scope": "dated"
+        },
+        "FX-2025-2026-USD-TWD-001": {
+          "link_basis": "currency",
+          "link_strength": "medium",
+          "matched_values": [
+            "TWD"
+          ],
+          "in_scope": "dated"
+        },
+        "FX-2025-DYSON-QUALITATIVE-001": {
+          "link_basis": "buyer_name",
+          "link_strength": "strong",
+          "matched_values": [
+            "Dyson"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "GEO-2025-TW-002": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "TW"
+          ],
+          "in_scope": "dated"
+        },
+        "HAZARD-2025-MY-FLOOD-001": {
+          "link_basis": "port_country",
+          "link_strength": "weak",
+          "matched_values": [
+            "Port Klang",
+            "Tanjung Pelepas"
+          ],
+          "in_scope": "undated candidate: as_of_date within search_window"
+        },
+        "ROUTE-2025-TW-DRILLS-001": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "TW"
+          ],
+          "in_scope": "dated"
+        },
+        "TARIFF-2025-US-TW-RECIPROCAL": {
+          "link_basis": "country_code",
+          "link_strength": "weak",
+          "matched_values": [
+            "TW"
+          ],
+          "in_scope": "dated"
+        }
+      },
+      "expected_exclusions": {},
+      "interpretation_dependent_ids": [
+        "HAZARD-2025-MY-FLOOD-001"
+      ]
+    }
+  ],
+  "coverage": {
+    "records_expected_in_some_fixture": 43,
+    "records_never_expected": [
+      "CONCENTRATION-2025-MALACCA-OIL-001",
+      "COST-2025-MY-DIESEL-001",
+      "COST-2025-PH-ELECTRICITY-001",
+      "COST-2026-SG-ELECTRICITY-001",
+      "CUSTOMS-2025-US-001",
+      "CUSTOMS-2025-US-002",
+      "CUSTOMS-2025-US-003",
+      "FINANCE-2025-US-IROBOT-001",
+      "FINANCE-2025-US-KP-001",
+      "FINANCE-2025-US-WOLFSPEED-001",
+      "FINANCE-2026-US-PRETIUM-001",
+      "FX-2025-2026-USD-SGD-001",
+      "GEO-2025-TW-001",
+      "GEO-2026-SG-001",
+      "HAZARD-2025-TW-QUAKE-001",
+      "HAZARD-2026-US-WINTER-001",
+      "LABOUR-2025-PH-NEXPERIA-001",
+      "LABOUR-2026-US-AXLE-001",
+      "LABOUR-2026-US-PACKAGING-001",
+      "LABOUR-2026-US-WAREHOUSE-001",
+      "MATERIAL-2025-MY-PE-001",
+      "MATERIAL-2025-US-RARE-EARTH-001",
+      "MATERIAL-2026-MY-PET-001",
+      "MATERIAL-2026-TW-FEEDSTOCK-001",
+      "PORT-2025-US-LONG-BEACH-001",
+      "PORT-2026-US-WINTER-001",
+      "QUALITY-2025-US-HAIR-001",
+      "QUALITY-2025-US-POOL-001",
+      "QUALITY-2026-MY-COMPLIANCE-001",
+      "QUALITY-2026-US-FAN-001",
+      "QUALITY-2026-US-PURIFIER-001",
+      "QUALITY-2026-US-VACUUM-001",
+      "RESTRICT-2025-SG-001",
+      "RESTRICT-2025-US-001",
+      "ROUTE-2025-SG-ROBBERY-001",
+      "ROUTE-2025-SUEZ-001",
+      "ROUTE-2026-HORMUZ-001",
+      "TARIFF-2025-US-SG-RECIPROCAL",
+      "TARIFF-2026-US-CN-BATTERY-301",
+      "TARIFF-2026-US-PH-FORCED-LABOR-301",
+      "TARIFF-2026-US-SG-FORCED-LABOR-301",
+      "TARIFF-2026-US-TW-FORCED-LABOR-301",
+      "TRANSIT-2025-PH-001",
+      "TRANSIT-2025-US-001",
+      "TRANSIT-2025-US-BATTERY-001",
+      "TRANSIT-2025-US-BATTERY-002",
+      "TRANSIT-2025-US-BATTERY-003",
+      "TRANSIT-2026-PACIFIC-001",
+      "TRANSIT-2026-STRAIT-001",
+      "VESSEL-2025-CN-001",
+      "VESSEL-2025-MY-001",
+      "VESSEL-2026-PH-001",
+      "VESSEL-2026-STRAIT-001",
+      "VESSEL-2026-TW-001"
+    ],
+    "note": "No supplier in the graph is in the US or SG, so US- and SG-country records link only through ports, lanes or names, and most do not appear."
+  }
+}

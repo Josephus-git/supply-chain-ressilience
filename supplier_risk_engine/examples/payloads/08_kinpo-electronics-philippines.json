@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2026-06-19",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-08",
+    "component_query": "Said Pallet Pallet Hair Styler Sna Country Delivery",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:kinpo-electronics-philippines",
+      "supplier_name": "Kinpo Electronics Philippines",
+      "country": "PH",
+      "parent_companies": [
+        "Kinpo Electronics, Inc."
+      ],
+      "hs_codes": [
+        {
+          "code": "851690",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Manila",
+          "code": "56549",
+          "country": "PH",
+          "shipments": 1
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Newark, Nj",
+          "code": "4601",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 1
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 1
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Pyramid Lines Singapore Pte Ltd",
+          "code": "PYMN",
+          "shipments": 1
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Oocl Egypt",
+          "shipments": 1
+        }
+      ],
+      "currency": "PHP",
+      "footprint_window": {
+        "first_arrival": "2026-06-19",
+        "last_arrival": "2026-06-19",
+        "shipments": 1
+      }
+    }
+  ]
+}

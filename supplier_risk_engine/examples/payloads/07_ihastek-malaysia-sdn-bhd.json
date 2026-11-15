@@ -1,0 +1,383 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2025-11-21",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-07",
+    "component_query": "Activated Carbon Filter Retail",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:ihastek-malaysia-sdn-bhd",
+      "supplier_name": "Ihastek Malaysia Sdn Bhd",
+      "country": "CN",
+      "parent_companies": [
+        "Xiamen Intretech Inc."
+      ],
+      "hs_codes": [
+        {
+          "code": "842139",
+          "shipments": 38
+        },
+        {
+          "code": "842199",
+          "shipments": 12
+        },
+        {
+          "code": "392690",
+          "shipments": 8
+        },
+        {
+          "code": "380210",
+          "shipments": 7
+        },
+        {
+          "code": "731815",
+          "shipments": 4
+        },
+        {
+          "code": "841459",
+          "shipments": 1
+        },
+        {
+          "code": "843149",
+          "shipments": 1
+        },
+        {
+          "code": "847990",
+          "shipments": 1
+        },
+        {
+          "code": "850811",
+          "shipments": 1
+        },
+        {
+          "code": "853650",
+          "shipments": 1
+        },
+        {
+          "code": "853710",
+          "shipments": 1
+        },
+        {
+          "code": "854442",
+          "shipments": 1
+        },
+        {
+          "code": "854449",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Tanjung Pelepas",
+          "code": "55750",
+          "country": "MY",
+          "shipments": 39
+        },
+        {
+          "name": "Singapore",
+          "code": "55976",
+          "country": "SG",
+          "shipments": 17
+        },
+        {
+          "name": "Shanghai",
+          "code": "57035",
+          "country": "CN",
+          "shipments": 7
+        },
+        {
+          "name": "Yangshan",
+          "code": "57037",
+          "country": "CN",
+          "shipments": 6
+        },
+        {
+          "name": "Port Klang",
+          "code": "55751",
+          "country": "MY",
+          "shipments": 3
+        },
+        {
+          "name": "Ning Bo",
+          "code": "57020",
+          "country": "CN",
+          "shipments": 2
+        },
+        {
+          "name": "Xiamen",
+          "code": "57069",
+          "country": "CN",
+          "shipments": 2
+        },
+        {
+          "name": "Nansha",
+          "code": "57073",
+          "country": "CN",
+          "shipments": 1
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Newark, Nj",
+          "code": "4601",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 39
+        },
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 34
+        },
+        {
+          "name": "Long Beach, Ca",
+          "code": "2709",
+          "country": "US",
+          "coast": "west",
+          "shipments": 3
+        },
+        {
+          "name": "Tacoma, Wa",
+          "code": "3002",
+          "country": "US",
+          "coast": "west",
+          "shipments": 1
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 68
+        },
+        {
+          "name": "Dyson B2B Inc",
+          "shipments": 8
+        },
+        {
+          "name": "Dyson Canada Ltd",
+          "shipments": 1
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Dsv Ocean Transport",
+          "code": "DSVF",
+          "shipments": 33
+        },
+        {
+          "name": "Maersk Line",
+          "code": "MAEU",
+          "shipments": 29
+        },
+        {
+          "name": "Pyramid Lines Singapore Pte Ltd",
+          "code": "PYMN",
+          "shipments": 8
+        },
+        {
+          "name": "Maersk Logistics & Services Intl A/S",
+          "code": "MZLY",
+          "shipments": 6
+        },
+        {
+          "name": "Dhl Express",
+          "code": "DMAL",
+          "shipments": 1
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Ludwigshafen Express",
+          "shipments": 6
+        },
+        {
+          "name": "Antwerpen Express",
+          "shipments": 4
+        },
+        {
+          "name": "Rome Express",
+          "shipments": 4
+        },
+        {
+          "name": "Shanghai Express",
+          "shipments": 4
+        },
+        {
+          "name": "Basle Express",
+          "shipments": 3
+        },
+        {
+          "name": "Dortmund Express",
+          "shipments": 3
+        },
+        {
+          "name": "Nyk Vesta",
+          "shipments": 3
+        },
+        {
+          "name": "Tangier Express",
+          "shipments": 3
+        },
+        {
+          "name": "Cisnes",
+          "shipments": 2
+        },
+        {
+          "name": "Cma Cgm Georgia",
+          "shipments": 2
+        },
+        {
+          "name": "Cma Cgm T. Roosevelt",
+          "shipments": 2
+        },
+        {
+          "name": "Gerda Maersk",
+          "shipments": 2
+        },
+        {
+          "name": "Leverkusen Express",
+          "shipments": 2
+        },
+        {
+          "name": "One Orpheus",
+          "shipments": 2
+        },
+        {
+          "name": "Southampton Express",
+          "shipments": 2
+        },
+        {
+          "name": "Synergy Keelung",
+          "shipments": 2
+        },
+        {
+          "name": "Ulsan Express",
+          "shipments": 2
+        },
+        {
+          "name": "Ym Unicorn",
+          "shipments": 2
+        },
+        {
+          "name": "Ain Snan Express",
+          "shipments": 1
+        },
+        {
+          "name": "Al Qibla Express",
+          "shipments": 1
+        },
+        {
+          "name": "Apl Yangshan",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Florida",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Virginia",
+          "shipments": 1
+        },
+        {
+          "name": "Cscl Indian Ocean",
+          "shipments": 1
+        },
+        {
+          "name": "Ever Magic",
+          "shipments": 1
+        },
+        {
+          "name": "Ever Mild",
+          "shipments": 1
+        },
+        {
+          "name": "Georg Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Gerd Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Gerner Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Gjertrud Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Gunde Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Gunhilde Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Hong Kong Express",
+          "shipments": 1
+        },
+        {
+          "name": "Hudson Express",
+          "shipments": 1
+        },
+        {
+          "name": "Maersk Candor",
+          "shipments": 1
+        },
+        {
+          "name": "Mol Creation",
+          "shipments": 1
+        },
+        {
+          "name": "Nyk Vega",
+          "shipments": 1
+        },
+        {
+          "name": "One Hamburg",
+          "shipments": 1
+        },
+        {
+          "name": "One Hannover",
+          "shipments": 1
+        },
+        {
+          "name": "One Helsinki",
+          "shipments": 1
+        },
+        {
+          "name": "One Henry Hudson",
+          "shipments": 1
+        },
+        {
+          "name": "One Sprinter",
+          "shipments": 1
+        },
+        {
+          "name": "Potomac Express",
+          "shipments": 1
+        },
+        {
+          "name": "Umm Salal",
+          "shipments": 1
+        },
+        {
+          "name": "Ym Maturity",
+          "shipments": 1
+        }
+      ],
+      "currency": "CNY",
+      "footprint_window": {
+        "first_arrival": "2025-09-15",
+        "last_arrival": "2026-08-21",
+        "shipments": 77
+      }
+    }
+  ]
+}

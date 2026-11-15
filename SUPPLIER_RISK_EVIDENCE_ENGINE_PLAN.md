@@ -548,6 +548,20 @@ No remote or hosted servers, and no live data sources, are planned.
    expected to return (`examples/expected_ids.json`). These fixtures serve as
    test input and as the retrieval gold set (section 10). The future graph stage
    only has to produce the same JSON shape.
+   - Done on 2026-11-15, as a draft gold set. There are 18 payloads, one for
+     each graph `Supplier` node, in `examples/payloads/`, built by
+     `examples/build_payloads.py` from the cleaned CSVs the graph is loaded
+     from. Supplier country and parent are copied from the graph, and every
+     count matches the graph.
+   - Each fixture's `as_of_date` is chosen to exercise specific records, and
+     `expected_ids.json` records the reason. It also lists near-miss
+     exclusions and the rule interpretations used. 43 of 97 records are
+     expected in at least one fixture.
+   - Graph data the caller must handle: HS and port codes are stored as
+     integers and lose leading zeros. Carrier names carry a SCAC prefix. Ports
+     have no country, so exit-port country comes from the Schedule K prefix.
+     `supplier_country_code` sometimes differs from the shipment country, for
+     example CN or HK for Malaysian entities.
 3. **Implement the engine.** Add typed payload and result models, structured
    validation errors, normalisation (including tiered port matching), matching
    for each risk type, and dated retrieval. Output must be deterministic for the

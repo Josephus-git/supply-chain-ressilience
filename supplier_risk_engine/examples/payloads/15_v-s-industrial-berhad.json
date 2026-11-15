@@ -1,0 +1,192 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2026-09-16",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-15",
+    "component_query": "Universal Stand Retail",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:v-s-industrial-berhad",
+      "supplier_name": "V S Industrial Berhad",
+      "country": "MY",
+      "parent_companies": [
+        "V.S. INDUSTRY BERHAD"
+      ],
+      "hs_codes": [
+        {
+          "code": "842139",
+          "shipments": 3
+        },
+        {
+          "code": "850811",
+          "shipments": 3
+        },
+        {
+          "code": "392690",
+          "shipments": 2
+        },
+        {
+          "code": "851629",
+          "shipments": 2
+        },
+        {
+          "code": "851632",
+          "shipments": 2
+        },
+        {
+          "code": "851690",
+          "shipments": 2
+        },
+        {
+          "code": "940521",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Singapore",
+          "code": "55976",
+          "country": "SG",
+          "shipments": 6
+        },
+        {
+          "name": "Tanjung Pelepas",
+          "code": "55750",
+          "country": "MY",
+          "shipments": 6
+        },
+        {
+          "name": "Shanghai",
+          "code": "57035",
+          "country": "CN",
+          "shipments": 3
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Newark, Nj",
+          "code": "4601",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 7
+        },
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 6
+        },
+        {
+          "name": "Long Beach, Ca",
+          "code": "2709",
+          "country": "US",
+          "coast": "west",
+          "shipments": 1
+        },
+        {
+          "name": "Norfolk, Va.",
+          "code": "1401",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 1
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 15
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Dsv Ocean Transport",
+          "code": "DSVF",
+          "shipments": 8
+        },
+        {
+          "name": "Dhl Express",
+          "code": "DMAL",
+          "shipments": 3
+        },
+        {
+          "name": "Pyramid Lines Singapore Pte Ltd",
+          "code": "PYMN",
+          "shipments": 3
+        },
+        {
+          "name": "C. H. Robinson",
+          "code": "CHSL",
+          "shipments": 1
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Cma Cgm New Jersey",
+          "shipments": 2
+        },
+        {
+          "name": "Ain Snan Express",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Virginia",
+          "shipments": 1
+        },
+        {
+          "name": "Dortmund Express",
+          "shipments": 1
+        },
+        {
+          "name": "Hmm Raon",
+          "shipments": 1
+        },
+        {
+          "name": "Hong Kong Express",
+          "shipments": 1
+        },
+        {
+          "name": "Madrid Express",
+          "shipments": 1
+        },
+        {
+          "name": "One Wren",
+          "shipments": 1
+        },
+        {
+          "name": "Rome Express",
+          "shipments": 1
+        },
+        {
+          "name": "San Francisca",
+          "shipments": 1
+        },
+        {
+          "name": "Seattle Bridge",
+          "shipments": 1
+        },
+        {
+          "name": "Tempanos",
+          "shipments": 1
+        },
+        {
+          "name": "Ym Modesty",
+          "shipments": 1
+        },
+        {
+          "name": "Ym Unanimity",
+          "shipments": 1
+        }
+      ],
+      "currency": "MYR",
+      "footprint_window": {
+        "first_arrival": "2025-01-08",
+        "last_arrival": "2026-09-16",
+        "shipments": 15
+      }
+    }
+  ]
+}

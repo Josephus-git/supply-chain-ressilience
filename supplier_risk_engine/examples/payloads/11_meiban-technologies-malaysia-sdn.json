@@ -1,0 +1,296 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2026-03-10",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-11",
+    "component_query": "Air Purifier",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:meiban-technologies-malaysia-sdn",
+      "supplier_name": "Meiban Technologies Malaysia Sdn",
+      "country": "HK",
+      "parent_companies": [
+        "MEIBAN TECHNOLOGIES (MALAYSIA) SDN. BHD."
+      ],
+      "hs_codes": [
+        {
+          "code": "842139",
+          "shipments": 22
+        },
+        {
+          "code": "848180",
+          "shipments": 14
+        },
+        {
+          "code": "841451",
+          "shipments": 9
+        },
+        {
+          "code": "845129",
+          "shipments": 4
+        },
+        {
+          "code": "841459",
+          "shipments": 2
+        },
+        {
+          "code": "850811",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Tanjung Pelepas",
+          "code": "55750",
+          "country": "MY",
+          "shipments": 33
+        },
+        {
+          "name": "Singapore",
+          "code": "55976",
+          "country": "SG",
+          "shipments": 8
+        },
+        {
+          "name": "Port Klang",
+          "code": "55751",
+          "country": "MY",
+          "shipments": 4
+        },
+        {
+          "name": "Hong Kong",
+          "code": "58201",
+          "country": "HK",
+          "shipments": 2
+        },
+        {
+          "name": "Xiamen",
+          "code": "57069",
+          "country": "CN",
+          "shipments": 2
+        },
+        {
+          "name": "Yangshan",
+          "code": "57037",
+          "country": "CN",
+          "shipments": 2
+        },
+        {
+          "name": "Ning Bo",
+          "code": "57020",
+          "country": "CN",
+          "shipments": 1
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Newark, Nj",
+          "code": "4601",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 36
+        },
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 10
+        },
+        {
+          "name": "Long Beach, Ca",
+          "code": "2709",
+          "country": "US",
+          "coast": "west",
+          "shipments": 4
+        },
+        {
+          "name": "Tacoma, Wa",
+          "code": "3002",
+          "country": "US",
+          "coast": "west",
+          "shipments": 2
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 44
+        },
+        {
+          "name": "Dyson B2B Inc",
+          "shipments": 6
+        },
+        {
+          "name": "Dyson Canada Limited",
+          "shipments": 1
+        },
+        {
+          "name": "Dyson Canada Ltd",
+          "shipments": 1
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Maersk Line",
+          "code": "MAEU",
+          "shipments": 21
+        },
+        {
+          "name": "Dsv Ocean Transport",
+          "code": "DSVF",
+          "shipments": 17
+        },
+        {
+          "name": "Dhl Express",
+          "code": "DMAL",
+          "shipments": 8
+        },
+        {
+          "name": "Maersk Logistics & Services Intl A/S",
+          "code": "MZLY",
+          "shipments": 6
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Shanghai Express",
+          "shipments": 8
+        },
+        {
+          "name": "Antwerpen Express",
+          "shipments": 3
+        },
+        {
+          "name": "Basle Express",
+          "shipments": 3
+        },
+        {
+          "name": "Hong Kong Express",
+          "shipments": 3
+        },
+        {
+          "name": "Madrid Express",
+          "shipments": 3
+        },
+        {
+          "name": "Cma Cgm Brazil",
+          "shipments": 2
+        },
+        {
+          "name": "Essen Express",
+          "shipments": 2
+        },
+        {
+          "name": "Georg Maersk",
+          "shipments": 2
+        },
+        {
+          "name": "Ludwigshafen Express",
+          "shipments": 2
+        },
+        {
+          "name": "Umm Salal",
+          "shipments": 2
+        },
+        {
+          "name": "Ain Snan Express",
+          "shipments": 1
+        },
+        {
+          "name": "Al Qibla Express",
+          "shipments": 1
+        },
+        {
+          "name": "Apl Sentosa",
+          "shipments": 1
+        },
+        {
+          "name": "Cautin",
+          "shipments": 1
+        },
+        {
+          "name": "Cisnes",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Osiris",
+          "shipments": 1
+        },
+        {
+          "name": "Cosco Shipping Andes",
+          "shipments": 1
+        },
+        {
+          "name": "Dortmund Express",
+          "shipments": 1
+        },
+        {
+          "name": "Edison",
+          "shipments": 1
+        },
+        {
+          "name": "Ever Eagle",
+          "shipments": 1
+        },
+        {
+          "name": "Ever Most",
+          "shipments": 1
+        },
+        {
+          "name": "Hyundai Jupiter",
+          "shipments": 1
+        },
+        {
+          "name": "One Falcon",
+          "shipments": 1
+        },
+        {
+          "name": "One Hamburg",
+          "shipments": 1
+        },
+        {
+          "name": "One Manhattan",
+          "shipments": 1
+        },
+        {
+          "name": "Oocl Sunflower",
+          "shipments": 1
+        },
+        {
+          "name": "Potomac Express",
+          "shipments": 1
+        },
+        {
+          "name": "Southampton Express",
+          "shipments": 1
+        },
+        {
+          "name": "Synergy Busan",
+          "shipments": 1
+        },
+        {
+          "name": "Synergy Keelung",
+          "shipments": 1
+        },
+        {
+          "name": "Ulsan Express",
+          "shipments": 1
+        },
+        {
+          "name": "Ym Mobility",
+          "shipments": 1
+        }
+      ],
+      "currency": "HKD",
+      "footprint_window": {
+        "first_arrival": "2025-02-14",
+        "last_arrival": "2026-09-24",
+        "shipments": 52
+      }
+    }
+  ]
+}

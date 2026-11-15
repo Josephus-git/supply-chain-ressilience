@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2026-09-28",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-03",
+    "component_query": "Vacuum Cleaner",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:flextronics-technology-penang-sdn",
+      "supplier_name": "Flextronics Technology Penang Sdn",
+      "country": "MY",
+      "parent_companies": [
+        "FLEX LTD."
+      ],
+      "hs_codes": [
+        {
+          "code": "850811",
+          "shipments": 2
+        },
+        {
+          "code": "850870",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Hai Phong",
+          "code": "55201",
+          "country": "VN",
+          "shipments": 1
+        },
+        {
+          "name": "Port Klang",
+          "code": "55751",
+          "country": "MY",
+          "shipments": 1
+        },
+        {
+          "name": "Tanjung Pelepas",
+          "code": "55750",
+          "country": "MY",
+          "shipments": 1
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Long Beach, Ca",
+          "code": "2709",
+          "country": "US",
+          "coast": "west",
+          "shipments": 1
+        },
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 1
+        },
+        {
+          "name": "New York, N.Y.",
+          "code": "1001",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 1
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 3
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Dhl Express",
+          "code": "DMAL",
+          "shipments": 3
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Cma Cgm Amazon",
+          "shipments": 1
+        },
+        {
+          "name": "Ganges",
+          "shipments": 1
+        },
+        {
+          "name": "Maersk Sydney",
+          "shipments": 1
+        }
+      ],
+      "currency": "MYR",
+      "footprint_window": {
+        "first_arrival": "2025-01-16",
+        "last_arrival": "2026-09-28",
+        "shipments": 3
+      }
+    }
+  ]
+}

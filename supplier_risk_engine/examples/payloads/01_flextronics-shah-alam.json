@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2026-09-25",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-01",
+    "component_query": "Cyclone Konical Car Cleaning Kit Moulded Vinca Matt Black Costco Vacuum Cleaner Tmc Ceva Hbl Jhb Scac Pymn",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:flextronics-shah-alam",
+      "supplier_name": "Flextronics Shah Alam",
+      "country": "CN",
+      "parent_companies": [
+        "FLEX LTD."
+      ],
+      "hs_codes": [
+        {
+          "code": "850811",
+          "shipments": 7
+        },
+        {
+          "code": "170113",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Shanghai",
+          "code": "57035",
+          "country": "CN",
+          "shipments": 7
+        },
+        {
+          "name": "Singapore",
+          "code": "55976",
+          "country": "SG",
+          "shipments": 1
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 8
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 8
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Pyramid Lines Singapore Pte Ltd",
+          "code": "PYMN",
+          "shipments": 8
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Cma Cgm New Jersey",
+          "shipments": 2
+        },
+        {
+          "name": "Cma Cgm Swordfish",
+          "shipments": 2
+        },
+        {
+          "name": "Cma Cgm Georgia",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Lyra",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Virginia",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm White Shark",
+          "shipments": 1
+        }
+      ],
+      "currency": "CNY",
+      "footprint_window": {
+        "first_arrival": "2026-02-24",
+        "last_arrival": "2026-06-01",
+        "shipments": 8
+      }
+    }
+  ]
+}

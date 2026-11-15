@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2025-05-30",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-12",
+    "component_query": "Vacuum Cleaner Handheld Amazon Msv Quantity Comm Vacuum Cleaner Eori Ceva Hbl Jhb Scac Pymn Intended Transshipment Ray Gvmge Subject Change Without Prior Notice",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:syarikat-sin-kwang-plastic",
+      "supplier_name": "Syarikat Sin Kwang Plastic",
+      "country": "CN",
+      "parent_companies": [
+        "SYARIKAT SIN KWANG PLASTIC INDUSTRIES SDN. BHD."
+      ],
+      "hs_codes": [
+        {
+          "code": "610110",
+          "shipments": 2
+        },
+        {
+          "code": "850811",
+          "shipments": 2
+        },
+        {
+          "code": "842139",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Shanghai",
+          "code": "57035",
+          "country": "CN",
+          "shipments": 5
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 5
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 5
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Pyramid Lines Singapore Pte Ltd",
+          "code": "PYMN",
+          "shipments": 5
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Cma Cgm Georgia",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Manta Ray",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm New Jersey",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Swordfish",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Virginia",
+          "shipments": 1
+        }
+      ],
+      "currency": "CNY",
+      "footprint_window": {
+        "first_arrival": "2025-10-28",
+        "last_arrival": "2026-05-06",
+        "shipments": 5
+      }
+    }
+  ]
+}

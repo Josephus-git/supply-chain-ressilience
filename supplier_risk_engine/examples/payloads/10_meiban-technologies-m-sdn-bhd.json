@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2026-09-21",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-10",
+    "component_query": "Low Voltage Airblade Hand Dryer Wall Global Tap Hand Dryer",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:meiban-technologies-m-sdn-bhd",
+      "supplier_name": "Meiban Technologies M Sdn Bhd",
+      "country": "MY",
+      "parent_companies": [
+        "MEIBAN TECHNOLOGIES (MALAYSIA) SDN. BHD."
+      ],
+      "hs_codes": [
+        {
+          "code": "841459",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Port Klang",
+          "code": "55751",
+          "country": "MY",
+          "shipments": 1
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 1
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 1
+        }
+      ],
+      "carriers": [
+        {
+          "name": "C. H. Robinson",
+          "code": "CHSL",
+          "shipments": 1
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Cma Cgm Libra",
+          "shipments": 1
+        }
+      ],
+      "currency": "MYR",
+      "footprint_window": {
+        "first_arrival": "2026-09-21",
+        "last_arrival": "2026-09-21",
+        "shipments": 1
+      }
+    }
+  ]
+}

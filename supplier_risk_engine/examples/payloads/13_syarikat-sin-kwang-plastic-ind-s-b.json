@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2026-03-20",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-13",
+    "component_query": "Motorba",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:syarikat-sin-kwang-plastic-ind-s-b",
+      "supplier_name": "Syarikat Sin Kwang Plastic Ind S/B",
+      "country": "MY",
+      "parent_companies": [
+        "SYARIKAT SIN KWANG PLASTIC INDUSTRIES SDN. BHD."
+      ],
+      "hs_codes": [
+        {
+          "code": "850811",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "All Other Viet Nam Ports",
+          "code": "55200",
+          "country": "VN",
+          "shipments": 1
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 1
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 1
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Dhl Express",
+          "code": "DMAL",
+          "shipments": 1
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Danube",
+          "shipments": 1
+        }
+      ],
+      "currency": "MYR",
+      "footprint_window": {
+        "first_arrival": "2026-08-05",
+        "last_arrival": "2026-08-05",
+        "shipments": 1
+      }
+    }
+  ]
+}

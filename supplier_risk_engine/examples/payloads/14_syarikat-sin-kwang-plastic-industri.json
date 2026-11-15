@@ -1,0 +1,281 @@
+{
+  "schema_version": "1.1",
+  "as_of_date": "2025-10-28",
+  "event_window_days": 14,
+  "request_context": {
+    "bom_line_id": "FIXTURE-14",
+    "component_query": "Vacuum Cleaner",
+    "importing_country": "US"
+  },
+  "suppliers": [
+    {
+      "supplier_id": "org:syarikat-sin-kwang-plastic-industri",
+      "supplier_name": "Syarikat Sin Kwang Plastic Industri",
+      "country": "MY",
+      "parent_companies": [
+        "SYARIKAT SIN KWANG PLASTIC INDUSTRIES SDN. BHD."
+      ],
+      "hs_codes": [
+        {
+          "code": "850811",
+          "shipments": 23
+        },
+        {
+          "code": "851631",
+          "shipments": 3
+        },
+        {
+          "code": "841459",
+          "shipments": 2
+        },
+        {
+          "code": "842139",
+          "shipments": 2
+        },
+        {
+          "code": "850870",
+          "shipments": 1
+        },
+        {
+          "code": "960329",
+          "shipments": 1
+        }
+      ],
+      "exit_ports": [
+        {
+          "name": "Tanjung Pelepas",
+          "code": "55750",
+          "country": "MY",
+          "shipments": 15
+        },
+        {
+          "name": "Singapore",
+          "code": "55976",
+          "country": "SG",
+          "shipments": 6
+        },
+        {
+          "name": "Yangshan",
+          "code": "57037",
+          "country": "CN",
+          "shipments": 5
+        },
+        {
+          "name": "Port Klang",
+          "code": "55751",
+          "country": "MY",
+          "shipments": 2
+        },
+        {
+          "name": "Hai Phong",
+          "code": "55201",
+          "country": "VN",
+          "shipments": 1
+        },
+        {
+          "name": "Kaohsiung",
+          "code": "58309",
+          "country": "TW",
+          "shipments": 1
+        },
+        {
+          "name": "Ning Bo",
+          "code": "57020",
+          "country": "CN",
+          "shipments": 1
+        },
+        {
+          "name": "Tianjin",
+          "code": "57043",
+          "country": "CN",
+          "shipments": 1
+        }
+      ],
+      "entry_ports": [
+        {
+          "name": "Newark, Nj",
+          "code": "4601",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 16
+        },
+        {
+          "name": "Los Angeles, Ca",
+          "code": "2704",
+          "country": "US",
+          "coast": "west",
+          "shipments": 12
+        },
+        {
+          "name": "Long Beach, Ca",
+          "code": "2709",
+          "country": "US",
+          "coast": "west",
+          "shipments": 2
+        },
+        {
+          "name": "Norfolk, Va.",
+          "code": "1401",
+          "country": "US",
+          "coast": "east_gulf",
+          "shipments": 1
+        },
+        {
+          "name": "Tacoma, Wa",
+          "code": "3002",
+          "country": "US",
+          "coast": "west",
+          "shipments": 1
+        }
+      ],
+      "buyers": [
+        {
+          "name": "Dyson Inc",
+          "shipments": 31
+        },
+        {
+          "name": "Dyson Canada Ltd",
+          "shipments": 1
+        }
+      ],
+      "carriers": [
+        {
+          "name": "Maersk Line",
+          "code": "MAEU",
+          "shipments": 17
+        },
+        {
+          "name": "Dsv Ocean Transport",
+          "code": "DSVF",
+          "shipments": 10
+        },
+        {
+          "name": "Dhl Express",
+          "code": "DMAL",
+          "shipments": 4
+        },
+        {
+          "name": "Kerry Freight (Usa) Inc",
+          "code": "KFUN",
+          "shipments": 1
+        }
+      ],
+      "vessels": [
+        {
+          "name": "Ludwigshafen Express",
+          "shipments": 3
+        },
+        {
+          "name": "Dortmund Express",
+          "shipments": 2
+        },
+        {
+          "name": "Gunde Maersk",
+          "shipments": 2
+        },
+        {
+          "name": "Ulsan Express",
+          "shipments": 2
+        },
+        {
+          "name": "Ain Snan Express",
+          "shipments": 1
+        },
+        {
+          "name": "Al Qibla Express",
+          "shipments": 1
+        },
+        {
+          "name": "Antwerpen Express",
+          "shipments": 1
+        },
+        {
+          "name": "Apl Yangshan",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Amazon",
+          "shipments": 1
+        },
+        {
+          "name": "Cma Cgm Laperouse",
+          "shipments": 1
+        },
+        {
+          "name": "Cosco Spain",
+          "shipments": 1
+        },
+        {
+          "name": "Essen Express",
+          "shipments": 1
+        },
+        {
+          "name": "Ever Match",
+          "shipments": 1
+        },
+        {
+          "name": "Ganges",
+          "shipments": 1
+        },
+        {
+          "name": "Gerner Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Gustav Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Guthorm Maersk",
+          "shipments": 1
+        },
+        {
+          "name": "Hyundai Jupiter",
+          "shipments": 1
+        },
+        {
+          "name": "Leverkusen Express",
+          "shipments": 1
+        },
+        {
+          "name": "Madrid Express",
+          "shipments": 1
+        },
+        {
+          "name": "One Apus",
+          "shipments": 1
+        },
+        {
+          "name": "Potomac Express",
+          "shipments": 1
+        },
+        {
+          "name": "Rdo Endeavour",
+          "shipments": 1
+        },
+        {
+          "name": "Rome Express",
+          "shipments": 1
+        },
+        {
+          "name": "Umm Salal",
+          "shipments": 1
+        },
+        {
+          "name": "Wan Hai A18",
+          "shipments": 1
+        },
+        {
+          "name": "Ym Unanimity",
+          "shipments": 1
+        }
+      ],
+      "currency": "MYR",
+      "footprint_window": {
+        "first_arrival": "2025-01-02",
+        "last_arrival": "2026-09-28",
+        "shipments": 32
+      }
+    }
+  ]
+}
