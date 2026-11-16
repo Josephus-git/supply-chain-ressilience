@@ -28,7 +28,7 @@ function fmtValue(v: unknown): string {
   return String(v)
 }
 
-function PropertyTable({ props }: { props: Record<string, unknown> }) {
+export function PropertyTable({ props }: { props: Record<string, unknown> }) {
   const [q, setQ] = useState('')
   const entries = Object.entries(props)
     .filter(([k, v]) => !q || k.toLowerCase().includes(q.toLowerCase()) || fmtValue(v).toLowerCase().includes(q.toLowerCase()))

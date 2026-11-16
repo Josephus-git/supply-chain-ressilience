@@ -1,9 +1,8 @@
 # App plan: Dyson supply-chain risk decision-support web app
 
-**Status (2026-11-16):** phases 1 and 2 are done and committed (backend, Home, Graph
-Explorer). Ask the Graph, Evidence Library and Risk Assessment (with Run History) are
-placeholder pages. On 2026-11-16 the pages and the build order were changed to: Ask the
-Graph → Evidence Library → Risk Assessment last. Phase 3 (Ask the Graph) is next.
+**Status (2026-11-16):** phases 1–3 are done (backend, Home, Graph Explorer, Ask the
+Graph). Evidence Library and Risk Assessment (with its History tab) are placeholder pages.
+Phase 4 (Evidence Library) is next.
 
 ## Context
 Research brief: "KG and LLM-based decision support for supply-chain resilience and supplier
@@ -213,6 +212,7 @@ schema 1.1; see SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md section 6.1) → `lookup_e
 - `GET /api/evidence/{id}`
 - `POST /api/assess` (SSE)
 - `POST /api/ask` (SSE)
+- `GET /api/ask/examples`, `GET /api/ask/runs`, `GET /api/ask/runs/{id}`
 - `GET /api/runs`
 - `GET /api/runs/{id}`
 
@@ -223,9 +223,23 @@ schema 1.1; see SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md section 6.1) → `lookup_e
    history as reference. The `rag/` deletion is intentional, so it is not restored.
 2. **Done (6063c00 to 1b8f540).** Frontend shell (navigation, theme), Home page (map,
    relationships tree, top-10 chart, KPI tiles) and Graph Explorer.
-3. **Next.** Ask the Graph: `webapp/backend/ask/` (see the Ask the Graph pipeline section),
-   `POST /api/ask` (SSE), the page UI, and reordering the sidebar nav to the new page order.
-4. Evidence Library (`/api/evidence` endpoints and the evidence cards).
+3. **Done (2026-11-16).** Ask the Graph: `webapp/backend/ask/` (safety, prompts, llm,
+   pipeline, api), `runs_store.py`, `POST /api/ask` (SSE) plus `GET /api/ask/examples`,
+   `/api/ask/runs` and `/api/ask/runs/{id}`, the page (`pages/Ask.tsx`,
+   `components/ask/`), and the sidebar in the new order (`/runs` redirects to `/assess`).
+   22 tests in `tests/test_ask.py` use a LangChain fake chat model, so no OpenAI calls.
+   Notes from building it:
+   - `check_cypher` also reads the EXPLAIN notifications: a label, relationship type or
+     property that does not exist (GQL 01N50/01N51/01N52) fails the check and triggers
+     the retry. The example-questions test relies on the same check.
+   - A no-rows retry tells the model to match a shorter fragment of a name. With that,
+     "VS Industry" recovers "Vs Industrial …" on the second attempt.
+   - When the rows hold nodes, one extra read-only query adds the relationships among
+     them, so the small graph is connected. The prompt asks for nodes only when the
+     question asks to show nodes or a graph; otherwise the model returns named columns.
+   - Rows are capped at 200 (LIMIT added or lowered, and the driver stops reading).
+     The answer prompt sees at most 60 rows.
+4. **Next.** Evidence Library (`/api/evidence` endpoints and the evidence cards).
 5. Risk Assessment: the assessment pipeline, SSE, trace timeline, report with citations,
    and the History tab.
 6. Later: the evaluation design discussion, plus optional criticality and link-prediction

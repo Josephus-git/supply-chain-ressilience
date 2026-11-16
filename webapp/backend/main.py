@@ -12,6 +12,7 @@ exists (after `vite build`), it is served at `/`.
 from __future__ import annotations
 
 from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import Any
 
 from fastapi import FastAPI, HTTPException
@@ -21,19 +22,27 @@ from fastapi.staticfiles import StaticFiles
 from supplier_risk_engine.engine import describe_database
 from supplier_risk_engine.loader import LoadedDatabase, load_database
 
-from .config import FRONTEND_DIST
+from .ask.api import ask_router
+from .config import ASK_RUNS_DIR, FRONTEND_DIST
 from .graph_api import graph_router, home_router
 from .neo4j_client import ReadOnlyNeo4j
 
 
 def create_app(
-    *, neo4j_client: ReadOnlyNeo4j | None = None, evidence_db: LoadedDatabase | None = None
+    *,
+    neo4j_client: ReadOnlyNeo4j | None = None,
+    evidence_db: LoadedDatabase | None = None,
+    ask_llm: Any = None,
+    ask_runs_dir: Path | None = None,
 ) -> FastAPI:
+    """`ask_llm` and `ask_runs_dir` let tests swap in a fake chat model and a temp folder."""
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         owns_client = neo4j_client is None
         app.state.neo4j = neo4j_client or ReadOnlyNeo4j()
         app.state.evidence_db = evidence_db or load_database()
+        app.state.ask_llm = ask_llm  # None: build cypher_llm() on first question
+        app.state.ask_runs_dir = ask_runs_dir or ASK_RUNS_DIR
         try:
             yield
         finally:
@@ -43,6 +52,7 @@ def create_app(
     app = FastAPI(title="Dyson supply-chain risk", version="0.1.0", lifespan=lifespan)
     app.include_router(home_router)
     app.include_router(graph_router)
+    app.include_router(ask_router)
 
     @app.get("/api/health", tags=["meta"])
     def health() -> dict[str, Any]:

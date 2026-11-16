@@ -10,6 +10,7 @@ timing). The assessment trace and `runs/` use this to show every query run.
 
 from __future__ import annotations
 
+import logging
 import time
 from datetime import date, datetime
 from typing import Any, Iterable
@@ -21,6 +22,10 @@ from neo4j.time import Date as NeoDate
 from neo4j.time import DateTime as NeoDateTime
 
 from .config import Neo4jSettings, neo4j_settings
+
+# The driver logs every server notification as a warning; EXPLAIN checks in
+# Ask the Graph read them from the summary instead, so keep the console quiet.
+logging.getLogger("neo4j.notifications").setLevel(logging.ERROR)
 
 # Large properties that are never sent to the browser.
 HIDDEN_PROPERTIES = {"embedding"}
@@ -94,6 +99,7 @@ class ReadOnlyNeo4j:
         name: str | None = None,
         raw: bool = False,
         log_params: Iterable[str] | None = None,
+        max_rows: int | None = None,
     ) -> list[dict[str, Any]]:
         """Run `cypher` in a read transaction and return rows as dicts.
 
@@ -101,12 +107,23 @@ class ReadOnlyNeo4j:
         objects); otherwise rows are converted with `to_jsonable`.
         `log_params` limits which parameters are logged (e.g. to leave out a
         1536-dim query vector).
+        `max_rows` stops reading after that many rows (the rest are discarded
+        server-side), so a runaway query cannot flood the browser.
         """
         params = params or {}
         started = time.perf_counter()
 
         def work(tx: neo4j.ManagedTransaction) -> list[neo4j.Record]:
-            return list(tx.run(cypher, params))
+            result = tx.run(cypher, params)
+            if max_rows is None:
+                return list(result)
+            out: list[neo4j.Record] = []
+            for record in result:
+                out.append(record)
+                if len(out) >= max_rows:
+                    break
+            result.consume()
+            return out
 
         with self._session() as session:
             records = session.execute_read(work)
@@ -125,3 +142,23 @@ class ReadOnlyNeo4j:
                 }
             )
         return rows
+
+    def explain(self, cypher: str) -> list[dict[str, str]]:
+        """Plan `cypher` without running it (`EXPLAIN`, in a read transaction).
+
+        Raises the driver's error (e.g. `CypherSyntaxError`) if it does not
+        compile. Returns the server's GQL status notifications, such as
+        01N50/01N51/01N52 (label, relationship type or property not in the
+        database), as `{"code", "description"}` dicts.
+        """
+
+        def work(tx: neo4j.ManagedTransaction) -> neo4j.ResultSummary:
+            return tx.run(f"EXPLAIN {cypher}").consume()
+
+        with self._session() as session:
+            summary = session.execute_read(work)
+        return [
+            {"code": g.gql_status, "description": g.status_description}
+            for g in summary.gql_status_objects
+            if not g.gql_status.startswith("00")  # 00xxx = successful completion
+        ]

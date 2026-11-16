@@ -1,5 +1,5 @@
 import {
-  BookOpenText, Gauge, History, Home, Menu, MessagesSquare, Monitor, Moon, Network, Sun,
+  BookOpenText, Gauge, Home, Menu, MessagesSquare, Monitor, Moon, Network, Sun,
 } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
@@ -17,10 +17,9 @@ import { ErrorBoundary } from './ErrorBoundary'
 export const NAV = [
   { to: '/', label: 'Home', icon: Home, end: true },
   { to: '/explorer', label: 'Graph Explorer', icon: Network },
-  { to: '/assess', label: 'Risk Assessment', icon: Gauge, phase: 3 },
+  { to: '/ask', label: 'Ask the Graph', icon: MessagesSquare },
   { to: '/evidence', label: 'Evidence Library', icon: BookOpenText, phase: 4 },
-  { to: '/runs', label: 'Run History', icon: History, phase: 4 },
-  { to: '/ask', label: 'Ask the Graph', icon: MessagesSquare, phase: 5 },
+  { to: '/assess', label: 'Risk Assessment', icon: Gauge, phase: 5 },
 ]
 
 function NavItems({ onNavigate }: { onNavigate?: () => void }) {

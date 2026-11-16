@@ -25,6 +25,11 @@ CHAT_MODEL = "gpt-5.2"
 
 load_dotenv(REPO_ROOT / ".env")
 
+# Ask the Graph has its own Cypher-writing model; Risk Assessment will use REPORT_MODEL.
+ASK_CYPHER_MODEL = os.getenv("ASK_CYPHER_MODEL") or CHAT_MODEL
+REPORT_MODEL = os.getenv("REPORT_MODEL") or CHAT_MODEL
+ASK_RUNS_DIR = RUNS_DIR / "ask"
+
 
 @dataclass(frozen=True)
 class Neo4jSettings:
