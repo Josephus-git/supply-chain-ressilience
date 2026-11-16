@@ -41,6 +41,11 @@ export interface RowsGraph {
   edges: GEdge[]
   omitted: boolean
   node_count: number
+  /** 'rows': nodes found in the result rows; 'query': rows held only values, so a companion query fetched the nodes they came from. */
+  source?: 'rows' | 'query'
+  /** The companion query, when source is 'query'. */
+  cypher?: string
+  rows_capped?: boolean
 }
 
 export interface RunStep {

@@ -7,6 +7,7 @@ import { toast } from 'sonner'
 import { GraphCanvas, type GraphCanvasHandle, type LayoutName, type Selection } from '@/components/graph/GraphCanvas'
 import { EdgeInspector, NodeInspector } from '@/components/graph/Inspector'
 import { KindSwatch } from '@/components/graph/KindBadge'
+import { pickStartNodes } from '@/components/graph/startView'
 import { useGraphState } from '@/components/graph/useGraphState'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -30,6 +31,8 @@ interface AskGraph {
   nodes: GNode[]
   edges: GEdge[]
   question?: string
+  /** Ids the Ask page was showing; the rest start hidden (unhide or expand to see them). */
+  shown?: string[]
 }
 
 /** Cap on neighbours added by one expansion, so a busy node (Dyson has ~450 shipments) stays readable. */
@@ -209,6 +212,9 @@ export default function Explorer() {
   useEffect(() => {
     if (askGraph) {
       graph.reset(askGraph.nodes, askGraph.edges)
+      const shown = askGraph.shown ? new Set(askGraph.shown) : pickStartNodes(askGraph.nodes, askGraph.edges)
+      const rest = askGraph.nodes.filter((n) => !shown.has(n.id)).map((n) => n.id)
+      if (rest.length) graph.hide(rest)
       setSelected(null)
     } else if (snapshot.data) {
       graph.reset(snapshot.data.nodes, snapshot.data.edges)

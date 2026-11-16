@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import re
 import time
 from functools import lru_cache
 from pathlib import Path
@@ -38,7 +39,7 @@ from ..graph_model import label_of, node_out
 from ..neo4j_client import ReadOnlyNeo4j, to_jsonable
 from ..runs_store import new_run_id, now_iso, save_run
 from .prompts import FEW_SHOT, RETRY_FEEDBACK, answer_prompt, cypher_prompt
-from .safety import MAX_ROWS, CheckResult, explain_check, static_checks
+from .safety import MAX_ROWS, CheckResult, explain_check, mask_literals, static_checks
 
 ASK_DIR = Path(__file__).resolve().parent
 SCHEMA_PATH = ASK_DIR / "schema.txt"
@@ -48,8 +49,11 @@ MAX_ATTEMPTS = 2
 # Rows passed to the answer prompt (the page shows all fetched rows).
 ANSWER_ROWS = 60
 ANSWER_CHARS = 12_000
-# Above this many nodes the rows are not drawn as a graph.
-GRAPH_NODE_CAP = 150
+# Most nodes handed to the page for a result's graph (the inline view draws up
+# to 150 of them; the Graph Explorer takes the rest).
+GRAPH_NODE_CAP = 800
+# Row cap for the companion query that fetches the nodes behind value-only rows.
+NODE_QUERY_ROWS = 2000
 
 Event = dict[str, Any]
 
@@ -112,6 +116,8 @@ def run_query(client: ReadOnlyNeo4j, cypher: str, *, max_rows: int = MAX_ROWS) -
     columns = list(raw_rows[0].keys()) if raw_rows else []
     rows = [{k: _cell(v) for k, v in r.items()} for r in raw_rows]
     graph = rows_graph(client, raw_rows)
+    if graph is None and raw_rows:
+        graph = companion_graph(client, cypher)
     return {
         "ok": True,
         "columns": columns,
@@ -195,8 +201,82 @@ CONNECT_QUERY = """
 MATCH (a)-[r]->(b)
 WHERE elementId(a) IN $ids AND elementId(b) IN $ids
 RETURN elementId(a) AS source, type(r) AS type, elementId(b) AS target
-LIMIT 1000
+LIMIT 5000
 """
+
+
+_NODE_VAR = re.compile(r"\(\s*([A-Za-z_]\w*)\s*(?=[:){])")
+_REL_VAR = re.compile(r"\[\s*([A-Za-z_]\w*)\s*(?=[:\]*{])")
+_PATH_VAR = re.compile(r"\b([A-Za-z_]\w*)\s*=\s*(?:shortestPath|allShortestPaths)?\s*\(")
+_NOT_DEFINED = re.compile(r"Variable `([^`]+)` not defined")
+_KEYWORDS = {"distinct", "not", "and", "or", "xor", "in", "is", "null", "true", "false", "case", "exists"}
+
+
+def _last_top_level_return(masked: str) -> int | None:
+    """Offset of the final RETURN outside any (), [] or {} (so not a subquery's)."""
+    depth, last = 0, None
+    for m in re.finditer(r"[()\[\]{}]|\bRETURN\b|\bUNION\b", masked, re.I):
+        tok = m.group(0)
+        if tok in "([{":
+            depth += 1
+        elif tok in ")]}":
+            depth -= 1
+        elif depth == 0:
+            if tok.upper() == "UNION":
+                return None  # several RETURNs feed one result; not worth rewriting
+            last = m.start()
+    return last
+
+
+def node_query(cypher: str) -> tuple[str, list[str]] | None:
+    """The same query with its final RETURN swapped for the variables it matched.
+
+    Rows of plain values (names, counts) carry no nodes to draw; this returns
+    the nodes and relationships behind them instead. Variables that are out of
+    scope at the RETURN are dropped later, by `companion_graph`, using EXPLAIN.
+    """
+    masked = mask_literals(cypher)
+    at = _last_top_level_return(masked)
+    if at is None:
+        return None
+    head = masked[:at]
+    names: list[str] = []
+    for rx in (_NODE_VAR, _REL_VAR, _PATH_VAR):
+        for m in rx.finditer(head):
+            v = m.group(1)
+            if v.lower() not in _KEYWORDS and v not in names:
+                names.append(v)
+    if not names:
+        return None
+    return cypher[:at].rstrip(), names
+
+
+def companion_graph(client: ReadOnlyNeo4j, cypher: str) -> dict[str, Any] | None:
+    built = node_query(cypher)
+    if built is None:
+        return None
+    head, names = built
+    while names:
+        q = f"{head}\nRETURN DISTINCT {', '.join(names)}\nLIMIT {NODE_QUERY_ROWS}"
+        if not static_checks(q, max_rows=NODE_QUERY_ROWS).ok:
+            return None
+        try:
+            client.explain(q)
+        except Neo4jError as e:
+            m = _NOT_DEFINED.search(e.message or str(e))
+            if m and m.group(1) in names:
+                names.remove(m.group(1))
+                continue
+            return None
+        try:
+            raw_rows = client.read(q, raw=True, max_rows=NODE_QUERY_ROWS + 1)
+        except Neo4jError:
+            return None
+        graph = rows_graph(client, raw_rows[:NODE_QUERY_ROWS])
+        if graph is not None:
+            graph.update(source="query", cypher=q, rows_capped=len(raw_rows) > NODE_QUERY_ROWS)
+        return graph
+    return None
 
 
 def rows_graph(client: ReadOnlyNeo4j, raw_rows: list[dict[str, Any]]) -> dict[str, Any] | None:
@@ -212,7 +292,7 @@ def rows_graph(client: ReadOnlyNeo4j, raw_rows: list[dict[str, Any]]) -> dict[st
     if not found:
         return None
     if len(found) > GRAPH_NODE_CAP:
-        return {"nodes": [], "edges": [], "omitted": True, "node_count": len(found)}
+        return {"nodes": [], "edges": [], "omitted": True, "node_count": len(found), "source": "rows"}
     by_element: dict[str, dict[str, Any]] = {}
     for element_id, node in found.items():
         if label_of(sorted(node.labels)) is None:
@@ -229,7 +309,7 @@ def rows_graph(client: ReadOnlyNeo4j, raw_rows: list[dict[str, Any]]) -> dict[st
         if src in by_element and tgt in by_element:
             s, t = by_element[src]["id"], by_element[tgt]["id"]
             edges.append({"id": f"rel|{s}|{rel}|{t}", "source": s, "target": t, "type": rel, "aggregated": False})
-    return {"nodes": list(by_element.values()), "edges": edges, "omitted": False, "node_count": len(by_element)}
+    return {"nodes": list(by_element.values()), "edges": edges, "omitted": False, "node_count": len(by_element), "source": "rows"}
 
 
 def _neo4j_message(e: Neo4jError) -> str:

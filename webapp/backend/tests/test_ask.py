@@ -18,7 +18,7 @@ from pathlib import Path
 
 from langchain_core.language_models.fake_chat_models import FakeListChatModel
 
-from webapp.backend.ask.pipeline import ask, check_cypher, load_examples, run_query
+from webapp.backend.ask.pipeline import ask, check_cypher, load_examples, node_query, run_query
 from webapp.backend.ask.safety import MAX_ROWS, mask_literals, static_checks, strip_fences
 from webapp.backend.neo4j_client import ReadOnlyNeo4j
 from webapp.backend.runs_store import load_run
@@ -140,6 +140,23 @@ class ExampleQuestionTests(unittest.TestCase):
                 self.assertGreater(result["row_count"], 0)
 
 
+class NodeQueryTests(unittest.TestCase):
+    def test_swaps_final_return_for_matched_variables(self):
+        head, names = node_query(
+            "MATCH (s:Supplier)-[r:SUBSIDIARY_OF]->(pc:ParentCompany) WHERE s.name = 'a (b:C)' "
+            "RETURN s.name AS n, count(pc) AS k ORDER BY k DESC LIMIT 5"
+        )
+        self.assertEqual(names, ["s", "pc", "r"])
+        self.assertTrue(head.endswith("= 'a (b:C)'"))
+
+    def test_ignores_subquery_return_and_union(self):
+        head, names = node_query("MATCH (s:Supplier) CALL { WITH s MATCH (s)-[:SHIPPED]->(x) RETURN x } RETURN s.name")
+        self.assertIn("CALL {", head)
+        self.assertIn("x", names)  # dropped later by EXPLAIN if out of scope
+        self.assertIsNone(node_query("MATCH (a:Supplier) RETURN a.name AS n UNION MATCH (b:Buyer) RETURN b.name AS n"))
+        self.assertIsNone(node_query("RETURN 1 AS one"))
+
+
 class RunQueryTests(unittest.TestCase):
     def test_nodes_become_chips_and_graph(self):
         c = _live()
@@ -164,10 +181,26 @@ class RunQueryTests(unittest.TestCase):
         result = run_query(c, "MATCH (s:Supplier)-[:SUBSIDIARY_OF]->(pc:ParentCompany) RETURN s, pc LIMIT 3")
         self.assertGreater(len(result["graph"]["edges"]), 0)
 
-    def test_scalar_rows_have_no_graph(self):
+    def test_scalar_rows_get_the_nodes_behind_them(self):
+        # Value-only rows: a companion query returns the matched nodes instead.
         result = run_query(_live(), "MATCH (s:Supplier) RETURN count(s) AS n")
-        self.assertIsNone(result["graph"])
         self.assertEqual(result["columns"], ["n"])
+        g = result["graph"]
+        self.assertEqual(g["source"], "query")
+        self.assertEqual(g["node_count"], result["rows"][0]["n"])
+        self.assertTrue(all(n["kind"] == "supplier" for n in g["nodes"]))
+
+    def test_companion_drops_out_of_scope_variables(self):
+        # `sh` is not carried past the WITH, so EXPLAIN rejects it and it is dropped.
+        result = run_query(
+            _live(),
+            "MATCH (s:Supplier)-[:SHIPPED]->(sh:Shipment) WITH s, count(sh) AS n "
+            "MATCH (s)-[:SUBSIDIARY_OF]->(pc:ParentCompany) RETURN pc.canonical_name AS parent, n",
+        )
+        g = result["graph"]
+        self.assertIsNotNone(g)
+        self.assertNotIn("sh", g["cypher"].split("RETURN DISTINCT")[1])
+        self.assertEqual({n["kind"] for n in g["nodes"]}, {"supplier", "parent"})
 
     def test_row_cap(self):
         result = run_query(_live(), "MATCH (sh:Shipment) RETURN sh.shipment_id AS id", max_rows=10)

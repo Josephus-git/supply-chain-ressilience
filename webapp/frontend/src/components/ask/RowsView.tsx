@@ -1,8 +1,10 @@
 import { Download, Expand, Maximize, Network, X } from 'lucide-react'
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 import { GraphCanvas, type GraphCanvasHandle, type Selection } from '@/components/graph/GraphCanvas'
 import { PropertyTable } from '@/components/graph/Inspector'
+import { hiddenNeighbours, pickStartNodes } from '@/components/graph/startView'
 import { KindSwatch } from '@/components/graph/KindBadge'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
@@ -83,16 +85,42 @@ export function RowsGraphView({ graph, question }: { graph: RowsGraph; question?
   const navigate = useNavigate()
   const ref = useRef<GraphCanvasHandle>(null)
   const [selected, setSelected] = useState<Selection>(null)
-  const roots = useMemo(() => graph.nodes.filter((n) => n.kind === 'buyer').map((n) => n.id), [graph.nodes])
-  const kinds = useMemo(() => KIND_ORDER.filter((k) => graph.nodes.some((n) => n.kind === k)), [graph.nodes])
+  // Start with ~15 nodes; double-clicking a node reveals more of its links from the result.
+  const [shown, setShown] = useState(() => pickStartNodes(graph.nodes, graph.edges))
+  useEffect(() => setShown(pickStartNodes(graph.nodes, graph.edges)), [graph])
+  const visible = useMemo(() => {
+    const nodes = graph.nodes.filter((n) => shown.has(n.id))
+    const edges = graph.edges.filter((e) => shown.has(e.source) && shown.has(e.target))
+    return { nodes, edges }
+  }, [graph, shown])
+  const reveal = (id: string) => {
+    const { ids, remaining } = hiddenNeighbours(id, graph.edges, shown)
+    if (ids.length === 0) {
+      toast.info('Every link of this node in the result is already shown')
+      return
+    }
+    setShown((s) => new Set([...s, ...ids]))
+    if (remaining > 0) toast.info(`Showing ${ids.length} more; double-click again for the other ${remaining}`)
+  }
+  const roots = useMemo(() => visible.nodes.filter((n) => n.kind === 'buyer').map((n) => n.id), [visible.nodes])
+  const kinds = useMemo(() => KIND_ORDER.filter((k) => visible.nodes.some((n) => n.kind === k)), [visible.nodes])
   const node = selected?.type === 'node' ? graph.nodes.find((n) => n.id === selected.id) : undefined
+
+  const openInExplorer = () => navigate('/explorer', { state: { askGraph: { nodes: graph.nodes, edges: graph.edges, question, shown: [...shown] } } })
+  const fromQuery = graph.source === 'query' && (
+    <div className="text-[11px] text-muted-foreground" title={graph.cypher}>
+      The rows hold values, not nodes, so these are the nodes the query matched to produce them.
+      {graph.rows_capped && ' (capped)'}
+    </div>
+  )
 
   if (graph.omitted) {
     return (
       <div className="grid h-full min-h-40 place-items-center rounded-md border border-dashed p-4 text-center text-xs text-muted-foreground">
-        <div>
-          <Network className="mx-auto mb-2 size-5" />
-          The rows hold {graph.node_count} nodes, too many to draw here. Use the Graph Explorer for big views.
+        <div className="space-y-2">
+          <Network className="mx-auto size-5" />
+          <p>The result touches {graph.node_count} nodes, too many to draw. Narrow the question to explore them.</p>
+          {fromQuery}
         </div>
       </div>
     )
@@ -102,12 +130,12 @@ export function RowsGraphView({ graph, question }: { graph: RowsGraph; question?
       <div className="relative min-h-[400px] flex-1 overflow-hidden rounded-md border bg-card">
         <GraphCanvas
           ref={ref}
-          nodes={graph.nodes}
-          edges={graph.edges}
+          nodes={visible.nodes}
+          edges={visible.edges}
           mode={mode}
           selected={selected}
           onSelect={setSelected}
-          onExpand={() => {}}
+          onExpand={reveal}
           layoutName="fcose"
           roots={roots}
         />
@@ -124,7 +152,7 @@ export function RowsGraphView({ graph, question }: { graph: RowsGraph; question?
             <TooltipTrigger asChild>
               <Button
                 variant="outline" size="icon" className="size-7" aria-label="Open in Graph Explorer"
-                onClick={() => navigate('/explorer', { state: { askGraph: { nodes: graph.nodes, edges: graph.edges, question } } })}
+                onClick={openInExplorer}
               >
                 <Expand className="size-3.5" />
               </Button>
@@ -154,9 +182,12 @@ export function RowsGraphView({ graph, question }: { graph: RowsGraph; question?
         </div>
       ) : (
         <div className="text-[11px] text-muted-foreground">
-          {graph.nodes.length} nodes · {graph.edges.length} relationships. Click a node for its properties.
+          {visible.nodes.length < graph.nodes.length
+            ? `Showing ${visible.nodes.length} of ${graph.nodes.length} nodes. Double-click a node to show more of its links; click for its properties.`
+            : `${graph.nodes.length} nodes · ${graph.edges.length} relationships. Click a node for its properties.`}
         </div>
       )}
+      {fromQuery}
     </div>
   )
 }
