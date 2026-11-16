@@ -123,10 +123,10 @@ export function NodeInspector(p: NodeProps) {
           <Button size="sm" variant="secondary" onClick={p.onAddSupplier}><Plus className="size-3.5" /> Focus on supplier</Button>
         )}
       </div>
-      <Tabs defaultValue="neighbours" className="min-h-0 flex-1 gap-0">
+      <Tabs defaultValue="properties" className="min-h-0 flex-1 gap-0">
         <TabsList className="mx-3 mt-3 w-[calc(100%-1.5rem)]">
-          <TabsTrigger value="neighbours">Neighbours{nb.data ? ` (${nb.data.total})` : ''}</TabsTrigger>
           <TabsTrigger value="properties">Properties ({Object.keys(node.properties).length})</TabsTrigger>
+          <TabsTrigger value="neighbours">Neighbours{nb.data ? ` (${nb.data.total})` : ''}</TabsTrigger>
         </TabsList>
         <TabsContent value="properties" className="min-h-0 overflow-y-auto p-3">
           <PropertyTable props={node.properties} />
