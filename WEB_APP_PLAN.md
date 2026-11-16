@@ -27,8 +27,8 @@ every run so that discussion has data to work with.
   Evidence Library (shown as Risk Library) → Risk Assessment. Risk Assessment is last because it is the main
   result of the app and the research. Run History is a tab inside Risk Assessment, not a
   separate page.
-- Risk Assessment covers **one component (BOM line) per run**. Several parts mean several
-  runs, compared in the history. A batch BOM mode can be added later on top of it.
+- ~~Risk Assessment covers one component per run.~~ **Revised 2026-11-16:** one run covers
+  a whole parts list (capped at 20 items) or a free-text description; see Pages §4.
 - Evaluation design is deferred.
 - Home page charts and the map use **Apache ECharts** (`echarts-for-react`). One library
   covers the world map with animated route lines and the line chart. The world GeoJSON is
@@ -165,21 +165,67 @@ runs/       one JSON file per assessment run (payload, retrieved context, Cypher
      Nothing is read again from disk and Neo4j is not needed, except for the supplier
      list used by the graph link.
 4. **Risk Assessment** (main workflow, last page)
-   - Inputs: one BOM line (one component per run) and a simulated `as_of_date`, limited to
-     the study window 2025-01-01 to 2026-09-30.
-   - A live step timeline shows:
-     a. vector search, with the products found and their scores
-     b. each Cypher query and its rows
-     c. a supplier exposure profile for each supplier (schema 1.1)
-     d. the engine's evidence records for each supplier
-     e. the LLM report, streamed
-   - Citation chips in the report link to evidence cards and to the graph elements they
-     cite. A mini graph highlights the candidate suppliers.
-   - Note: the page needs both Neo4j (retrieval, profiles) and the evidence engine. The
-     header health dot reports them separately (c70697a), so the page should say which
-     part is missing if Neo4j is down.
-   - **History tab:** reopen any past run with its full trace. This data will feed the
-     evaluation.
+   **Input (agreed 2026-11-16).** The research goal is to start from what a buyer has: a list
+   of items, plus what they want to achieve. Two modes, chosen with a toggle at the top:
+   - **Parts list:** a numbered list of items (one per line, typed or pasted from a
+     spreadsheet), capped at **20 items**. Under it, an optional "What do you want to know?"
+     box with example goal chips (best supplier per item, risks to watch, single points of
+     failure). An empty goal defaults to "assess supplier risk for these items".
+   - **Describe your need:** a single free-text box, e.g. "Who supplies parts for air
+     filters?", with example chips.
+   - Both modes take a simulated `as_of_date` and produce the same output layout.
+   - **Date (agreed 2026-11-16):** the user picks any date, or presses **Random** to have
+     one drawn uniformly from the study window. Dates are limited to the study window
+     2025-01-01 to 2026-09-30, because outside it there is no shipment or evidence data.
+     The run stores the date and whether it was chosen or random (`date_mode`).
+
+   **Output (agreed 2026-11-16).** Three layers, each one click deeper, so it is easy to
+   read but every claim can be traced to raw data:
+   - **Layer 1, summary:** one or two sentences answering the user's goal. In parts list
+     mode, a table below it with one row per item: item, recommended supplier, closest
+     alternative, main risk (with citation chip) and deciding factor (match, risk or track
+     record). Describe mode gets the sentences plus a short ranked list. Items with no
+     support say "I don't have enough data to support that".
+   - **Layer 2, reasoning per item** (expand a row): every candidate the risk LLM
+     considered, in rank order, each with why it matches the query, its risks, its track
+     record and the factor that decided its place; candidates it set aside and why; and
+     country-level notes when the fallback was used (marked as coming from a Cypher LLM
+     suggestion where that applies). Every claim carries citation chips (evidence id or
+     graph figure), each marked verified or not found, and a "show in trace" link that
+     jumps to the exact input in layer 3.
+   - **Layer 3, "How this answer was reached"** (collapsed): the Cypher LLM's queries and their rows,
+     the fixed profile queries, the supplier profiles and risk engine evidence, i.e.
+     exactly what was sent to the risk LLM. "Reasoning" here means that input, not the
+     model's hidden reasoning.
+   - Every node links to Graph Explorer and every evidence id to `/evidence/:id`, so a
+     wrong answer can be traced and debugged.
+   - **Citation check, flag only:** each citation is checked against what the risk LLM was
+     actually given and marked verified or not found. Wrong citations are **not removed or
+     corrected**: the run keeps the model's raw output so its mistakes can be studied
+     (research decision; see METHODOLOGY_NOTES.md).
+   - **Mini graph (agreed 2026-11-16):** the same component as Ask the Graph (Bloom style,
+     starts with about 15 nodes via `startView.ts`, expand on demand, "Open in Graph
+     Explorer" handoff), shown **only in the detailed views** (layers 2 and 3), not in
+     the summary. It shows the nodes the Cypher LLM retrieved, with the candidate
+     suppliers highlighted.
+   - **Live progress (agreed 2026-11-16):** the timeline follows exactly how the data was
+     retrieved and reviewed, in pipeline order: Cypher LLM (query, checks, rows, any
+     retry and any labelled country suggestion) → fixed profile queries → risk engine
+     evidence → risk LLM writing the report → citation check. Each step appears as it
+     starts, fills in when done, and the finished timeline becomes layer 3.
+   - **Service status (agreed 2026-11-16):** the header health indicator (c70697a) is the
+     one place that shows if anything is down. It gains OpenAI (key present and API
+     reachable, checked without spending tokens, e.g. listing models) next to Neo4j and
+     the evidence engine, plus today's token use against the 250,000 free tokens. If a
+     service fails during a run, the failing step in the timeline shows the error.
+   - **History tab (agreed 2026-11-16):** a list of past runs (when it ran, mode, first
+     items or the description, item count, `as_of_date` and whether it was random, tokens
+     used), filterable by mode. Opening a run shows it in the normal three-layer view
+     with its full trace.
+     - **No side-by-side view.** Instead, "Re-run" opens the main Assess page pre-filled
+       with the run's mode, items and goal, where the user sets a new date (or Random) and
+       runs it. The result is a **new, separate run record**, linked to the original by
+       `rerun_of`. This data will feed the evaluation.
 
 ## Ask the Graph pipeline (Text2Cypher, `webapp/backend/ask/`)
 All Cypher-LLM logic lives in `ask/`, separate from the Risk Assessment `pipeline/`.
@@ -232,16 +278,72 @@ a plain Python async generator in `ask/pipeline.py`, which yields one SSE event 
   no evidence and no `as_of_date` rule.
 
 ## Assessment pipeline (LangChain + plain Python, `pipeline/`)
-`retrieve_products` (vector index) → `build_profiles` (Cypher aggregation into payload
-schema 1.1; see SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md section 6.1) → `lookup_evidence`
-(`lookup_suppliers` with a fixed `as_of_date`) → `write_report`.
+**Revised 2026-11-16:** two separate LLMs. A **Cypher LLM** finds the data; a **risk LLM**
+compares the evidence and decides.
+
+`find_candidates` (Cypher LLM writes read-only Cypher mapping the items or description to
+products and suppliers; shown in the trace; reuses the `ask/` safety checks) →
+`build_profiles` (**fixed** Cypher aggregation into payload schema 1.1 with the
+`as_of_date` filter; see SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md section 6.1) →
+`lookup_evidence` (`lookup_suppliers` with a fixed `as_of_date`) → `write_report` (risk LLM)
+→ `check_citations` (flag only).
+- **Why the profile query is fixed:** the no-look-ahead rule and the engine's exact payload
+  format must not depend on the LLM remembering a date filter. The Cypher LLM may still
+  make mistakes in *finding* candidates; that is allowed and visible (research decision).
+- **Nothing found is not the end:** if the Cypher LLM returns no supplier or product, the
+  risk engine is still asked for evidence related to the question, at least by the
+  countries it mentions (e.g. a question about China returns ongoing China risks with no
+  supplier). The risk LLM can then answer at country level ("consider another country
+  because …"). The engine has no country-only lookup today (`lookup_suppliers` takes
+  supplier payloads), so this needs a small country lookup with the same date rules.
+- **Countries for the engine (agreed 2026-11-16):** the Cypher LLM's job stays retrieval.
+  Countries come from what its Cypher returned. When it has to approximate (nothing
+  returned, or a region such as "Southeast Asia"), it may add suggested countries in the
+  same response, explicitly labelled as a **recommendation to the risk engine**, not a
+  retrieved fact. The trace and the final answer say when country evidence came from such
+  a suggestion. The engine itself stays deterministic.
+- **Retry:** the Cypher LLM keeps Ask's one automatic retry (error or no rows); both
+  attempts stay in the trace, so first-attempt accuracy can be measured.
+- **Ranking (agreed 2026-11-16), done by the risk LLM following this priority:**
+  1. **Closest match to the query:** how well the supplier's products match the item or
+     description. This decides what is returned at all.
+  2. **Risk:** among close matches, fewer and less severe evidence records as of the date
+     is better.
+  3. **Track record, when risk does not separate them:** e.g. "supplier X has delivered
+     more shipments than Y". The graph has no failed or late deliveries (customs records
+     are completed arrivals), so track record means the profile's shipment count up to
+     `as_of_date`, how recent the last arrival is, and how long the relationship has run
+     (`footprint_window`). The answer must say which of the three decided each ranking.
+- **No support at all:** when neither the graph nor the engine returns anything relevant,
+  the answer is "I don't have enough data to support that". The prompt also requires this
+  for any claim it cannot cite.
 - `write_report` uses `report_llm` (gpt-5.2) **without tools**. The supplier profiles and
   their evidence records go straight into the prompt, so the trace shows exactly what the
   LLM saw. This also avoids LangChain's agent helper, which runs on LangGraph.
-- Its output is structured: the ranked suppliers, each with reasons, and each reason cites
-  an `evidence_id` or a graph figure.
-- The LLM never chooses the date and never writes Cypher in this pipeline.
+- Its output is structured (LangChain `with_structured_output`), so layers 1 and 2 are
+  rendered from fields, not parsed from prose. Per item: `status` (answered,
+  country_level or insufficient_data); `candidates[]` in rank order, each with
+  `supplier_id`, `match_reason`, `risks[]` and `track_record` as claims with `citations[]`
+  (evidence ids or graph figures such as a profile's shipment count), and
+  `deciding_factor` (match, risk or track_record); `set_aside[]` with reasons;
+  `country_notes[]`. Plus a top-level `summary` answering the goal. The summary table is
+  built from these fields, so it cannot say something the reasoning does not.
+- The LLMs never choose the date. The Cypher LLM writes only the candidate-finding queries.
 - Each step logs its inputs and outputs to the trace and to `runs/`.
+
+## API credit safety (agreed 2026-11-16)
+The OpenAI account gets 250,000 free tokens a day, so the app warns before that is reached.
+- Every run (Ask and Assess) records its token usage (LangChain `usage_metadata`) in its
+  run JSON, which also gives the evaluation cost data.
+- The backend sums today's usage; the page shows it and **warns** near the free amount
+  (default at 80%, set in `.env`) and again past it. It warns, it does not block.
+  Assumption to check: the free-token day resets at 00:00 UTC, and which models count.
+- Every LLM call gets a `max_tokens` cap, a timeout and `max_retries=1`. Calls per run are
+  bounded (e.g. one Cypher call for the whole list, not one per item). The Assess button
+  is disabled while a run is going.
+- Today the backend binds to 127.0.0.1 only and Ask makes at most 3 calls per question,
+  but there are no token caps, timeouts or usage records yet.
+- A spend limit in the OpenAI dashboard is the only hard guarantee.
 
 ## API
 - `GET /api/home/network`
