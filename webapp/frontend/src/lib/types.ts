@@ -2,7 +2,8 @@ import type { NodeKind } from './kinds'
 
 export interface Health {
   status: string
-  neo4j: string
+  neo4j: 'connected' | 'unavailable'
+  neo4j_error: string | null
   evidence_records: number
   evidence_snapshot_id: string
   engine_version: string

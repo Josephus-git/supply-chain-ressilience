@@ -58,11 +58,18 @@ def create_app(
 
     @app.get("/api/health", tags=["meta"])
     def health() -> dict[str, Any]:
-        app.state.neo4j.verify()
+        """Two independent parts: the Neo4j knowledge graph, and the evidence
+        engine (local JSON files loaded at startup, no Neo4j)."""
+        neo4j_error = None
+        try:
+            app.state.neo4j.verify()
+        except Exception as e:  # report it; the evidence engine still works
+            neo4j_error = str(e)
         db = describe_database(app.state.evidence_db.index)
         return {
-            "status": "ok",
-            "neo4j": "connected",
+            "status": "ok" if neo4j_error is None else "degraded",
+            "neo4j": "connected" if neo4j_error is None else "unavailable",
+            "neo4j_error": neo4j_error,
             "evidence_records": db["record_count"],
             "evidence_snapshot_id": db["data_snapshot_id"],
             "engine_version": db["engine_version"],

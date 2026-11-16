@@ -69,7 +69,15 @@ function Brand() {
 
 function HealthDot() {
   const { data, isError, isPending } = useHealth()
-  const state = isPending ? 'checking' : isError ? 'down' : 'ok'
+  // The dot and label describe Neo4j only. The evidence engine is separate
+  // (local JSON loaded at startup) and gets its own section in the tooltip.
+  const state = isPending ? 'checking' : isError ? 'down' : data.neo4j === 'connected' ? 'ok' : 'graph-down'
+  const label = {
+    ok: 'Neo4j connected',
+    'graph-down': 'Neo4j unavailable',
+    down: 'Backend unreachable',
+    checking: 'Connecting…',
+  }[state]
   return (
     <Tooltip>
       <TooltipTrigger asChild>
@@ -78,21 +86,29 @@ function HealthDot() {
             className={cn(
               'size-2 rounded-full',
               state === 'ok' && 'bg-emerald-500',
-              state === 'down' && 'bg-red-500',
+              (state === 'down' || state === 'graph-down') && 'bg-red-500',
               state === 'checking' && 'animate-pulse bg-amber-400',
             )}
           />
-          <span className="hidden sm:inline">
-            {state === 'ok' ? 'Neo4j connected' : state === 'down' ? 'Backend unreachable' : 'Connecting…'}
-          </span>
+          <span className="hidden sm:inline">{label}</span>
         </div>
       </TooltipTrigger>
       <TooltipContent side="bottom" className="max-w-xs">
         {data ? (
-          <div className="space-y-0.5">
-            <div>Neo4j: {data.neo4j} (read-only)</div>
-            <div>Evidence: {data.evidence_records} records · engine {data.engine_version}</div>
-            <div className="font-mono text-[10px] opacity-80">{data.evidence_snapshot_id}</div>
+          <div className="space-y-2">
+            <div className="space-y-0.5">
+              <div className="font-medium">Knowledge graph (Neo4j)</div>
+              <div>
+                {data.neo4j === 'connected' ? 'Connected, read-only' : 'Unavailable'}
+                {data.neo4j === 'connected' && ' · Home, Graph Explorer, Ask the Graph'}
+              </div>
+              {data.neo4j_error && <div className="line-clamp-3 opacity-80">{data.neo4j_error}</div>}
+            </div>
+            <div className="space-y-0.5 border-t border-current/20 pt-2">
+              <div className="font-medium">Risk evidence engine (local JSON, not Neo4j)</div>
+              <div>{data.evidence_records} records · engine {data.engine_version}</div>
+              <div className="font-mono text-[10px] opacity-80">{data.evidence_snapshot_id}</div>
+            </div>
           </div>
         ) : isError ? (
           'Start the backend: .venv/bin/uvicorn webapp.backend.main:app --port 8000'
