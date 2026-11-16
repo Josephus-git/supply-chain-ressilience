@@ -1,9 +1,11 @@
-import { Download, Maximize, Network, X } from 'lucide-react'
+import { Download, Expand, Maximize, Network, X } from 'lucide-react'
 import { useMemo, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { GraphCanvas, type GraphCanvasHandle, type Selection } from '@/components/graph/GraphCanvas'
 import { PropertyTable } from '@/components/graph/Inspector'
 import { KindSwatch } from '@/components/graph/KindBadge'
 import { Button } from '@/components/ui/button'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import type { RowsGraph, RunStep } from '@/lib/ask'
 import { KIND_META, KIND_ORDER } from '@/lib/kinds'
@@ -76,8 +78,9 @@ export function RowsTable({ result, fileName }: { result: RunStep; fileName: str
 }
 
 /** Bloom-style view of the nodes in the rows (and the relationships among them). */
-export function RowsGraphView({ graph }: { graph: RowsGraph }) {
+export function RowsGraphView({ graph, question }: { graph: RowsGraph; question?: string }) {
   const { mode } = useTheme()
+  const navigate = useNavigate()
   const ref = useRef<GraphCanvasHandle>(null)
   const [selected, setSelected] = useState<Selection>(null)
   const roots = useMemo(() => graph.nodes.filter((n) => n.kind === 'buyer').map((n) => n.id), [graph.nodes])
@@ -108,9 +111,27 @@ export function RowsGraphView({ graph }: { graph: RowsGraph }) {
           layoutName="fcose"
           roots={roots}
         />
-        <Button variant="outline" size="icon" className="absolute top-2 right-2 size-7" onClick={() => ref.current?.fit()} aria-label="Fit graph">
-          <Maximize className="size-3.5" />
-        </Button>
+        <div className="absolute top-2 right-2 flex gap-1">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="outline" size="icon" className="size-7" onClick={() => ref.current?.fit()} aria-label="Fit graph">
+                <Maximize className="size-3.5" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Fit to view</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="outline" size="icon" className="size-7" aria-label="Open in Graph Explorer"
+                onClick={() => navigate('/explorer', { state: { askGraph: { nodes: graph.nodes, edges: graph.edges, question } } })}
+              >
+                <Expand className="size-3.5" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Open in Graph Explorer</TooltipContent>
+          </Tooltip>
+        </div>
       </div>
       <div className="flex flex-wrap gap-x-3 gap-y-1 text-[11px] text-muted-foreground">
         {kinds.map((k) => (

@@ -122,7 +122,7 @@ function AttemptSteps({ run, a, start, problem, model }: { run: LiveRun; a: Atte
             {/* Wide screens: table and graph side by side; narrow: tabs. */}
             <div className="hidden gap-3 xl:grid xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
               <RowsTable result={r} fileName={`${run.run_id}-attempt${a.attempt}`} />
-              <RowsGraphView graph={graph} />
+              <RowsGraphView graph={graph} question={run.question} />
             </div>
             <Tabs defaultValue="table" className="xl:hidden">
               <TabsList>
@@ -130,7 +130,7 @@ function AttemptSteps({ run, a, start, problem, model }: { run: LiveRun; a: Atte
                 <TabsTrigger value="graph">Graph</TabsTrigger>
               </TabsList>
               <TabsContent value="table"><RowsTable result={r} fileName={`${run.run_id}-attempt${a.attempt}`} /></TabsContent>
-              <TabsContent value="graph" className="h-[420px]"><RowsGraphView graph={graph} /></TabsContent>
+              <TabsContent value="graph" className="h-[420px]"><RowsGraphView graph={graph} question={run.question} /></TabsContent>
             </Tabs>
           </>
         )}

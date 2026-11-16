@@ -2,7 +2,7 @@ import {
   AlertTriangle, Check, ChevronDown, Download, Eye, Loader2, Maximize, RefreshCw, Search, Settings2, X,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { toast } from 'sonner'
 import { GraphCanvas, type GraphCanvasHandle, type LayoutName, type Selection } from '@/components/graph/GraphCanvas'
 import { EdgeInspector, NodeInspector } from '@/components/graph/Inspector'
@@ -23,7 +23,14 @@ import { fetchEdgeShipments, fetchNeighbours, useSearch, useSnapshot, useSupplie
 import { fmt } from '@/lib/format'
 import { KIND_META, KIND_ORDER, type NodeKind } from '@/lib/kinds'
 import { useTheme } from '@/lib/theme'
-import type { DateFilter, GNode } from '@/lib/types'
+import type { DateFilter, GEdge, GNode } from '@/lib/types'
+
+/** A query result handed over from Ask the Graph (router state, so it survives a reload but not a new tab). */
+interface AskGraph {
+  nodes: GNode[]
+  edges: GEdge[]
+  question?: string
+}
 
 /** Cap on neighbours added by one expansion, so a busy node (Dyson has ~450 shipments) stays readable. */
 const EXPAND_LIMIT = 25
@@ -169,6 +176,11 @@ export default function Explorer() {
   const urlSuppliers = useMemo(() => (params.get('suppliers') ?? '').split(',').filter(Boolean), [params])
   const dates: DateFilter = useMemo(() => ({ date_from: params.get('from'), date_to: params.get('to') }), [params])
   const full = params.get('full') === '1'
+  const location = useLocation()
+  const navigate = useNavigate()
+  const askGraph = (location.state as { askGraph?: AskGraph } | null)?.askGraph
+  const askRoots = useMemo(() => askGraph?.nodes.filter((n) => n.kind === 'buyer').map((n) => n.id) ?? [], [askGraph])
+  const leaveAsk = () => navigate('/explorer', { replace: true, state: null })
 
   const setParam = useCallback(
     (patch: Record<string, string | null>) =>
@@ -188,19 +200,22 @@ export default function Explorer() {
   const canvas = useRef<GraphCanvasHandle>(null)
   const [selected, setSelected] = useState<Selection>(null)
   const [hiddenKinds, setHiddenKinds] = useState<Set<NodeKind>>(new Set())
-  const [layout, setLayout] = useState<LayoutName>('radial')
+  const [layout, setLayout] = useState<LayoutName>(() => (askGraph && askRoots.length === 0 ? 'fcose' : 'radial'))
   const [busy, setBusy] = useState(false)
   const [showAdvanced, setShowAdvanced] = useState(full)
 
   const snapshotSuppliers = snapshot.data?.suppliers ?? []
 
   useEffect(() => {
-    if (snapshot.data) {
+    if (askGraph) {
+      graph.reset(askGraph.nodes, askGraph.edges)
+      setSelected(null)
+    } else if (snapshot.data) {
       graph.reset(snapshot.data.nodes, snapshot.data.edges)
       setSelected(null)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [snapshot.data])
+  }, [snapshot.data, askGraph])
 
   const visible = useMemo(() => {
     const nodes = graph.visible.nodes.filter((n) => !hiddenKinds.has(n.kind))
@@ -284,6 +299,16 @@ export default function Explorer() {
     <div className="grid grid-rows-[auto_480px_auto] lg:h-full lg:min-h-[640px] lg:grid-cols-[272px_minmax(0,1fr)_auto] lg:grid-rows-1">
       {/* Controls */}
       <aside className="space-y-5 border-b p-4 lg:overflow-y-auto lg:border-r lg:border-b-0">
+        {askGraph && (
+          <div className="space-y-1.5 rounded-md border border-primary/30 bg-primary/5 px-2.5 py-2 text-xs">
+            <div className="font-medium">Showing an Ask the Graph result</div>
+            {askGraph.question && <p className="line-clamp-3 text-muted-foreground" title={askGraph.question}>“{askGraph.question}”</p>}
+            <div className="flex gap-3">
+              <button className="underline underline-offset-2" onClick={() => navigate(-1)}>Back to the answer</button>
+              <button className="text-muted-foreground underline underline-offset-2 hover:text-foreground" onClick={leaveAsk}>Dyson snapshot</button>
+            </div>
+          </div>
+        )}
         <Section title="Shipments to Dyson from">
           {full ? (
             <div className="rounded-md bg-muted px-2.5 py-2 text-xs text-muted-foreground">
@@ -406,11 +431,11 @@ export default function Explorer() {
           onSelect={setSelected}
           onExpand={(id) => expandNode(id)}
           layoutName={layout}
-          roots={!full && snapshot.data?.center ? [snapshot.data.center] : []}
+          roots={askGraph ? askRoots : !full && snapshot.data?.center ? [snapshot.data.center] : []}
         />
         <div className="pointer-events-none absolute inset-x-3 top-3 flex items-start justify-between gap-2">
           <div className="pointer-events-auto rounded-md border bg-background/90 px-2.5 py-1.5 text-xs text-muted-foreground shadow-sm backdrop-blur">
-            {snapshot.isFetching ? (
+            {snapshot.isFetching && !askGraph ? (
               <span className="flex items-center gap-1.5"><Loader2 className="size-3 animate-spin" /> Loading graph</span>
             ) : (
               <>{fmt(total.nodes)} nodes · {fmt(total.edges)} relationships</>
@@ -441,7 +466,7 @@ export default function Explorer() {
             </Tooltip>
           </div>
         </div>
-        {snapshot.isError && (
+        {snapshot.isError && !askGraph && (
           <div className="absolute inset-0 grid place-items-center">
             <div className="flex items-center gap-2 rounded-md border bg-background px-3 py-2 text-sm shadow-sm">
               <AlertTriangle className="size-4 text-destructive" /> {(snapshot.error as Error).message}
