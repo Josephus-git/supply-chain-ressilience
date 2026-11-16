@@ -138,3 +138,95 @@ export function humanise(s: string | null | undefined): string {
 export function explorerHref(supplierIds: string[]): string {
   return `/explorer?suppliers=${encodeURIComponent(supplierIds.join(','))}`
 }
+
+export type RiskGroupKey = 'supplier' | 'logistics' | 'policy' | 'hazard'
+
+export interface RiskGroup {
+  key: RiskGroupKey
+  label: string
+  blurb: string
+  /** Tailwind class for the group's colour dot. */
+  dot: string
+  types: string[]
+}
+
+/** Four broad groups, so the 18 risk types read as a short outline, not a flat list. */
+export const RISK_GROUPS: RiskGroup[] = [
+  {
+    key: 'supplier',
+    label: 'Supplier and operations',
+    blurb: 'Problems at or around the supplier itself.',
+    dot: 'bg-violet-500',
+    types: [
+      'supplier_operational_disruption',
+      'supplier_financial_distress',
+      'product_quality_compliance',
+      'labour_disruption',
+      'cyberattack',
+      'supplier_or_route_concentration',
+    ],
+  },
+  {
+    key: 'logistics',
+    label: 'Logistics and transport',
+    blurb: 'Disruption to goods on the move between supplier and Dyson.',
+    dot: 'bg-sky-500',
+    types: [
+      'port_disruption',
+      'carrier_vessel_disruption',
+      'route_chokepoint_disruption',
+      'goods_in_transit_loss_theft_or_damage',
+      'border_customs_delays',
+    ],
+  },
+  {
+    key: 'policy',
+    label: 'Trade policy and markets',
+    blurb: 'Government action, conflict, and cost or supply shifts in markets.',
+    dot: 'bg-amber-500',
+    types: [
+      'tariffs_and_duties',
+      'government_restrictions',
+      'geopolitical_conflict',
+      'currency_fluctuations',
+      'energy_or_transport_cost_increase',
+      'input_material_shortage',
+    ],
+  },
+  {
+    key: 'hazard',
+    label: 'Natural hazards',
+    blurb: 'Earthquakes, storms, floods and other natural events.',
+    dot: 'bg-rose-500',
+    types: ['natural_hazards'],
+  },
+]
+
+const GROUP_BY_TYPE: Record<string, RiskGroup> = Object.fromEntries(
+  RISK_GROUPS.flatMap((g) => g.types.map((t) => [t, g])),
+)
+
+/** The group a risk type belongs to (unknown types fall back to trade policy and markets). */
+export const riskGroup = (riskType: string): RiskGroup => GROUP_BY_TYPE[riskType] ?? RISK_GROUPS[2]
+
+/** One plain line per risk type, shown on the overview tiles and the type header. */
+export const RISK_BLURB: Record<string, string> = {
+  supplier_operational_disruption: 'Fires, outages and shutdowns that stop a supplier producing.',
+  supplier_financial_distress: 'Losses, insolvency or credit warnings at a supplier.',
+  product_quality_compliance: 'Recalls, defects and failed regulatory checks.',
+  labour_disruption: 'Strikes, walkouts and labour shortages.',
+  cyberattack: 'Ransomware and other attacks that halt systems.',
+  supplier_or_route_concentration: 'Heavy reliance on one supplier, country or route.',
+  port_disruption: 'Closures, congestion and delays at ports.',
+  carrier_vessel_disruption: 'Problems with shipping lines, vessels or aircraft.',
+  route_chokepoint_disruption: 'Blocked or diverted straits, canals and key routes.',
+  goods_in_transit_loss_theft_or_damage: 'Cargo lost, stolen or damaged on the way.',
+  border_customs_delays: 'Holds, inspections and slow clearance at borders.',
+  tariffs_and_duties: 'New or changed duties on imported goods.',
+  government_restrictions: 'Export controls, sanctions, bans and similar rules.',
+  geopolitical_conflict: 'Wars, unrest and political tension between countries.',
+  currency_fluctuations: 'Exchange rate moves that change what parts cost.',
+  energy_or_transport_cost_increase: 'Rising fuel, power or freight prices.',
+  input_material_shortage: 'Shortages or price spikes in raw materials and parts.',
+  natural_hazards: 'Earthquakes, storms, floods and other natural events.',
+}

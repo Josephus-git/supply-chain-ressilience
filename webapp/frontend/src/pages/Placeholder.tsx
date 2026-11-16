@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 export function Placeholder({
   title, phase, icon: Icon, points,
-}: { title: string; phase: number; icon: LucideIcon; points: string[] }) {
+}: { title: string; phase?: number; icon: LucideIcon; points: string[] }) {
   return (
     <PageContainer className="max-w-3xl">
       <Card>
@@ -13,7 +13,7 @@ export function Placeholder({
             <Icon className="size-5 text-muted-foreground" />
           </div>
           <CardTitle>{title}</CardTitle>
-          <CardDescription>Arrives in phase {phase} of the web app plan.</CardDescription>
+          {phase != null && <CardDescription>Arrives in phase {phase} of the web app plan.</CardDescription>}
         </CardHeader>
         <CardContent>
           <ul className="list-disc space-y-1.5 pl-5 text-sm text-muted-foreground">

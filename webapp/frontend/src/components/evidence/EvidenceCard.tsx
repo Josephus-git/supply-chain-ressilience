@@ -6,7 +6,9 @@ import { dateLabel } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import { Countries, DateLine, Measures, RiskBadge } from './parts'
 
-export function EvidenceCard({ record, href, active }: { record: EvidenceSummary; href: string; active?: boolean }) {
+export function EvidenceCard({
+  record, href, active, hideType,
+}: { record: EvidenceSummary; href: string; active?: boolean; hideType?: boolean }) {
   const entities = record.entities.slice(0, 3)
   return (
     <Link
@@ -16,8 +18,8 @@ export function EvidenceCard({ record, href, active }: { record: EvidenceSummary
         active && 'border-primary/60 ring-2 ring-primary/20',
       )}
     >
-      <div className="flex items-start justify-between gap-2">
-        <RiskBadge riskType={record.risk_type} label={record.risk_label} className="max-w-[70%] truncate" />
+      <div className={cn('flex items-start gap-2', hideType ? 'justify-end' : 'justify-between')}>
+        {!hideType && <RiskBadge riskType={record.risk_type} label={record.risk_label} className="max-w-[70%] truncate" />}
         <Countries record={record} max={4} />
       </div>
 

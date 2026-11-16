@@ -18,7 +18,7 @@ export const NAV = [
   { to: '/', label: 'Home', icon: Home, end: true },
   { to: '/explorer', label: 'Graph Explorer', icon: Network },
   { to: '/ask', label: 'Ask the Graph', icon: MessagesSquare },
-  { to: '/evidence', label: 'Evidence Library', icon: BookOpenText },
+  { to: '/evidence', label: 'Risk Library', icon: BookOpenText },
   { to: '/assess', label: 'Risk Assessment', icon: Gauge, phase: 5 },
 ]
 

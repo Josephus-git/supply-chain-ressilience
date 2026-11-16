@@ -2,49 +2,20 @@ import { CalendarRange, CircleDashed } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { dateLabel } from '@/lib/format'
-import { FAMILY_LABEL, type EvidenceDates, type EvidenceMeasure, type EvidenceSummary } from '@/lib/evidence'
+import { FAMILY_LABEL, riskGroup, type EvidenceDates, type EvidenceMeasure, type EvidenceSummary } from '@/lib/evidence'
 import { cn } from '@/lib/utils'
-
-/** Four broad groups, so 18 risk types stay readable at a glance. */
-const GROUP: Record<string, 'supplier' | 'logistics' | 'policy' | 'hazard'> = {
-  supplier_operational_disruption: 'supplier',
-  supplier_financial_distress: 'supplier',
-  product_quality_compliance: 'supplier',
-  labour_disruption: 'supplier',
-  cyberattack: 'supplier',
-  supplier_or_route_concentration: 'supplier',
-  port_disruption: 'logistics',
-  carrier_vessel_disruption: 'logistics',
-  route_chokepoint_disruption: 'logistics',
-  goods_in_transit_loss_theft_or_damage: 'logistics',
-  border_customs_delays: 'logistics',
-  tariffs_and_duties: 'policy',
-  government_restrictions: 'policy',
-  geopolitical_conflict: 'policy',
-  currency_fluctuations: 'policy',
-  energy_or_transport_cost_increase: 'policy',
-  input_material_shortage: 'policy',
-  natural_hazards: 'hazard',
-}
-
-const GROUP_DOT = {
-  supplier: 'bg-violet-500',
-  logistics: 'bg-sky-500',
-  policy: 'bg-amber-500',
-  hazard: 'bg-rose-500',
-}
 
 export function RiskBadge({ riskType, label, className }: { riskType: string; label: string; className?: string }) {
   return (
     <Badge variant="outline" className={cn('gap-1.5 font-normal', className)}>
-      <span className={cn('size-1.5 rounded-full', GROUP_DOT[GROUP[riskType] ?? 'policy'])} />
+      <span className={cn('size-1.5 rounded-full', riskGroup(riskType).dot)} />
       {label}
     </Badge>
   )
 }
 
 export function RiskDot({ riskType }: { riskType: string }) {
-  return <span className={cn('inline-block size-1.5 shrink-0 rounded-full', GROUP_DOT[GROUP[riskType] ?? 'policy'])} />
+  return <span className={cn('inline-block size-1.5 shrink-0 rounded-full', riskGroup(riskType).dot)} />
 }
 
 /** The family's start and end, as stored; open or missing ends are said plainly. */

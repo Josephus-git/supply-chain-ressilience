@@ -33,7 +33,7 @@ export default function App() {
         />
         {/* Run History is now a tab inside Risk Assessment. */}
         <Route path="runs" element={<Navigate to="/assess" replace />} />
-        <Route path="*" element={<Placeholder title="Not found" phase={0} icon={Gauge} points={['No page at this address.']} />} />
+        <Route path="*" element={<Placeholder title="Not found" icon={Gauge} points={['No page at this address.']} />} />
       </Route>
     </Routes>
   )
