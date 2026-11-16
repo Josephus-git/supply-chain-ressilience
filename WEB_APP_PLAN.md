@@ -1,8 +1,10 @@
 # App plan: Dyson supply-chain risk decision-support web app
 
 **Status (2026-11-16):** phases 1–3 are done (backend, Home, Graph Explorer, Ask the
-Graph). Evidence Library and Risk Assessment (with its History tab) are placeholder pages.
-Phase 4 (Evidence Library) is next.
+Graph), plus the phase 3 follow-ups (Ask → Graph Explorer handoff, value-only rows drawn
+as a graph, Inspector opening on Properties; up to 13fd71c). Evidence Library and Risk
+Assessment (with its History tab) are placeholder pages. Phase 4 (Evidence Library) is
+next. Tests: 45 backend, 157 engine, all passing; `tsc` clean.
 
 ## Context
 Research brief: "KG and LLM-based decision support for supply-chain resilience and supplier
@@ -111,12 +113,17 @@ runs/       one JSON file per assessment run (payload, retrieved context, Cypher
    - **Start view** (`GET /api/graph/start`): Dyson Inc at the centre with about 3
      shipments attached. One shipment is fully expanded, and its supplier is expanded to
      its parent company. A supplier picker can restrict the shipments to chosen suppliers.
-   - Details appear only on click (inspector panel with properties and neighbours) or on
-     expand (double-click). Actions: expand neighbours, expand an aggregated link into its
+   - Details appear only on click (inspector panel with properties and neighbours; it
+     opens on the Properties tab) or on expand (double-click). Actions: expand neighbours, expand an aggregated link into its
      shipments, hide.
    - Filters by node type and date range, plus a search box. The view state lives in the
      URL. A "show full graph" option (the aggregated `/api/graph/snapshot`) sits in the
      advanced settings.
+   - **Handoff from other pages:** a result can be opened here through router state
+     (`location.state.askGraph`: nodes, edges, question). The Explorer then shows that
+     graph instead of the start view, with a banner and a "back to the normal view"
+     action. It survives a reload but not a new tab. The Evidence Library and Risk
+     Assessment use URL params instead (`?suppliers=`, `from`, `to`), so links can be shared.
    - The first version (an 80-node aggregated supplier hub with stars, triangles and
      pentagons) was rejected as cluttered. Later graph views, such as the Risk Assessment
      mini graph, should follow the same Bloom style and start small.
@@ -128,8 +135,27 @@ runs/       one JSON file per assessment run (payload, retrieved context, Cypher
      applied.
    - It is also a contrast case for the evaluation: the Cypher is shown, so its mistakes
      can be seen.
-3. **Evidence Library:** browse and filter the 109 records by risk type, country and date.
-   Risk Assessment citations later link to these evidence cards.
+3. **Evidence Library** (`pages/Evidence.tsx`, `components/evidence/`)
+   - Browse the 109 engine records (18 risk types) as cards. Filters: risk type, country
+     (from `countries[].country_code`), date range and a text search over the id, scope,
+     entities and publisher. Filter state lives in the URL.
+   - **Dates:** each risk type has its own date fields (`DATE_FAMILY` / `FAMILY_FIELDS` in
+     `engine/dates.py`: event, observation point, observation window, effective interval).
+     The card shows that family's start and end, plus `source.published_at`. The date
+     filter keeps a record whose start–end range overlaps the chosen range. A record with
+     no end date counts as a single day, except effective intervals, which stay open to
+     the end of the study window (the same rule as the engine).
+   - **Card:** id, risk type, scope, countries, dates, measure (name, value, unit),
+     reported entities or routes, verification status, limitations, source (publisher,
+     link, licence notes) and related evidence ids (as links to those cards).
+   - **Addressable:** each card has its own URL (`/evidence/:id`, which opens the card in a
+     detail panel over the filtered list). Risk Assessment citation chips link here.
+   - **Graph link:** where a record's countries match suppliers in the graph, a "show in
+     Graph Explorer" action opens `/explorer?suppliers=…`. The match is by
+     `supplier_country_code` only; the evidence has no supplier ids.
+   - The data comes from `app.state.evidence_db`, which is already loaded at startup.
+     Nothing is read again from disk and Neo4j is not needed, except for the supplier
+     list used by the graph link.
 4. **Risk Assessment** (main workflow, last page)
    - Inputs: one BOM line (one component per run) and a simulated `as_of_date`, limited to
      the study window 2025-01-01 to 2026-09-30.
@@ -173,6 +199,14 @@ a plain Python async generator in `ask/pipeline.py`, which yields one SSE event 
 - **UI:** a question box with example chips. Each step is shown in order: Cypher (copyable),
   checks, rows table, answer. When the rows contain nodes, a small Bloom-style graph
   appears next to the table. Single questions, with no follow-up chat in this version.
+  - **Value-only rows** (names, counts) also get a graph: `companion_graph` re-runs the
+    query with its final top-level RETURN replaced by the matched variables (`RETURN
+    DISTINCT …`, up to 2000 rows). Variables out of scope at the RETURN are dropped using
+    EXPLAIN errors. UNION queries are skipped. The result's `source` is `rows` or `query`.
+  - Up to 800 nodes are sent to the page (`GRAPH_NODE_CAP`). The inline view starts with
+    about 15 (`components/graph/startView.ts`: non-shipment nodes first, busiest first,
+    then shipments) and shows more as nodes are expanded. "Open in Graph Explorer" hands
+    the whole result to the Explorer.
 - **Stored:** each question, its Cypher attempts, rows and answer go to `runs/ask/`
   (`runs/` is git-ignored; the user curates what to keep), to be
   used in the evaluation (for example, scoring against hand-written Cypher for 20–30
@@ -239,7 +273,18 @@ schema 1.1; see SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md section 6.1) → `lookup_e
      question asks to show nodes or a graph; otherwise the model returns named columns.
    - Rows are capped at 200 (LIMIT added or lowered, and the driver stops reading).
      The answer prompt sees at most 60 rows.
-4. **Next.** Evidence Library (`/api/evidence` endpoints and the evidence cards).
+   - Follow-ups (971fc8f, 2758d9f, 13fd71c): the result rows can be opened in Graph
+     Explorer, value-only rows get a graph through `companion_graph`, the start view
+     comes from `startView.ts`, and the node inspector opens on Properties.
+     (Commit f8d0662 is labelled "phase 4" but holds phase 3. 971fc8f says "evidence
+     library" but changes the Ask page.)
+4. **Next.** Evidence Library:
+   - Backend `evidence_api.py`: `GET /api/evidence` with filters (`risk_type`, `country`,
+     `date_from`, `date_to`, `q`) that returns the records, their date family and the
+     facet counts. `GET /api/evidence/{id}` wraps `get_evidence` (404 when not found).
+   - Frontend `pages/Evidence.tsx` + `components/evidence/` (filters, card list, detail
+     panel at `/evidence/:id`). It replaces the placeholder route in `App.tsx`.
+   - `tests/test_evidence.py` (see Verification).
 5. Risk Assessment: the assessment pipeline, SSE, trace timeline, report with citations,
    and the History tab.
 6. Later: the evaluation design discussion, plus optional criticality and link-prediction
@@ -251,6 +296,12 @@ schema 1.1; see SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md section 6.1) → `lookup_e
   - Profiles built for VS Industry Berhad match a hand-written Cypher query.
   - `lookup_evidence` on fixture payloads matches `expected_ids.json`.
   - Writes are rejected by the read-only session.
+  - Evidence (`tests/test_evidence.py`): the endpoint with no filters returns 109
+    records, and the facet counts match `db.records`; each filter (risk type, country,
+    date overlap, text) narrows the results to a hand-checked set; an open-ended
+    effective interval matches dates up to the end of the study window; `/api/evidence/{id}`
+    returns the record, and an unknown id gives 404; every `related_evidence_ids` entry
+    resolves.
 - Run the app and do one assessment end to end. Check that every citation chip resolves
   to a returned evidence record, and that the run JSON is saved.
 - Existing engine tests still pass:
