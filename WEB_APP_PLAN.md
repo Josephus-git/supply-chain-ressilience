@@ -171,6 +171,25 @@ runs/       one JSON file per assessment run (payload, retrieved context, Cypher
      spreadsheet), capped at **20 items**. Under it, an optional "What do you want to know?"
      box with example goal chips (best supplier per item, risks to watch, single points of
      failure). An empty goal defaults to "assess supplier risk for these items".
+   - **Product catalogue (agreed 2026-11-16):** not every product is in the graph, so a
+     "Browse products" panel beside the parts list shows what is (43 products from customs
+     lines, not a parts breakdown). Items can be **added from the catalogue with one click
+     or typed freely**, including things not in the list. Each item records its `source`
+     (`catalogue` or `typed`) in the run, for comparison in the evaluation.
+     - **Category tiles** with `lucide-react` icons (e.g. Floorcare, Hair care, Air
+       treatment, Spares and accessories, Cables and electrical, Other), each with product
+       and supplier counts. Opening one lists its products: cleaned name, raw description
+       underneath, HS code, shipments, suppliers and an **Add** button.
+     - **Search** over all products with shadcn Command (`cmdk`, MIT); the same search is
+       autocomplete while typing an item. Both libraries are already installed.
+     - **No exploded parts drawing:** the data has no parts breakdown, so a drawing would
+       suggest parts the graph does not have, and Dyson's drawings are copyrighted.
+     - **Categories and cleaned names** come from a hand-reviewed
+       `reference/product_categories.json` (drafted by Claude, reviewed by the user), like
+       `locations.json`, because the HS codes are unreliable (see L5 in
+       METHODOLOGY_NOTES.md). The graph is not changed.
+     - `GET /api/products` reads the products live from Neo4j, with shipment and supplier
+       counts up to the chosen `as_of_date` (no look-ahead).
    - **Describe your need:** a single free-text box, e.g. "Who supplies parts for air
      filters?", with example chips.
    - Both modes take a simulated `as_of_date` and produce the same output layout.
@@ -356,6 +375,7 @@ The OpenAI account gets 250,000 free tokens a day, so the app warns before that 
 - `GET /api/graph/edges/shipments` (shipments behind an aggregated link)
 - `GET /api/graph/search`
 - `GET /api/evidence`
+- `GET /api/products?as_of=` (catalogue for Risk Assessment)
 - `GET /api/evidence/{id}`
 - `POST /api/assess` (SSE)
 - `POST /api/ask` (SSE)
