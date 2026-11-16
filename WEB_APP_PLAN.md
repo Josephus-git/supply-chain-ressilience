@@ -1,10 +1,10 @@
 # App plan: Dyson supply-chain risk decision-support web app
 
-**Status (2026-11-16):** phases 1–4 are done and committed (backend, Home, Graph
-Explorer, Ask the Graph, and the Evidence Library, now shown as **Risk Library**; up to
-f2a0cfd). Risk Assessment (with its History tab) is the last placeholder page and is
-next; its spec is open for discussion before building. Tests: 61 backend, 157 engine,
-all passing; `tsc` and oxlint clean.
+**Status (2026-11-16):** phases 1–5 are built: backend, Home, Graph Explorer, Ask the
+Graph, the Evidence Library (shown as **Risk Library**; committed up to f2a0cfd) and
+Risk Assessment with its History tab (phase 5, built 2026-11-16, not yet committed).
+Tests: 78 backend, 157 engine, all passing; `tsc` clean, oxlint warnings only. Next:
+the user reviews `reference/product_categories.json` (draft), then the evaluation design.
 
 ## Context
 Research brief: "KG and LLM-based decision support for supply-chain resilience and supplier
@@ -67,11 +67,14 @@ every run so that discussion has data to work with.
 ```
 webapp/
   backend/  main.py, config.py, neo4j_client.py (read-only),
-            graph_api.py, evidence_api.py, runs_store.py,
+            graph_api.py, evidence_api.py, products_api.py, runs_store.py, usage.py,
             ask/ (Ask the Graph: schema.txt, prompts.py, llm.py, safety.py, pipeline.py, api.py)
-            pipeline/ (state.py, retrieve.py, profiles.py, evidence.py, report.py, graph.py)
+            pipeline/ (Risk Assessment: retrieve.py, profiles.py, evidence.py, prompts.py,
+                       report.py, llm.py, assess.py, api.py)
             reference/locations.json (reviewed site coordinates, see Home)
-  frontend/ src/pages/{Home,Explorer,Ask,Evidence,Assess}.tsx (Run History is a tab in Assess), src/components/graph/…
+            reference/product_categories.json (draft catalogue categories, for review)
+  frontend/ src/pages/{Home,Explorer,Ask,Evidence,Assess}.tsx (Run History is a tab in Assess),
+            src/components/{graph,ask,evidence,assess}/…
 runs/       one JSON file per assessment run (payload, retrieved context, Cypher, evidence, LLM output)
 ```
 
@@ -377,15 +380,17 @@ The OpenAI account gets 250,000 free tokens a day, so the app warns before that 
 - `GET /api/evidence`
 - `GET /api/products?as_of=` (catalogue for Risk Assessment)
 - `GET /api/evidence/{id}`
-- `POST /api/assess` (SSE)
+- `POST /api/assess` (SSE; 409 while another assessment runs)
 - `POST /api/ask` (SSE)
 - `GET /api/ask/examples`, `GET /api/ask/runs`, `GET /api/ask/runs/{id}`
-- `GET /api/runs`
+- `GET /api/runs?mode=` (assessment history, summaries)
 - `GET /api/runs/{id}`
 - `GET /api/health`: Neo4j and the evidence engine reported separately (c70697a). If
   Neo4j is down, `status` is `degraded`, `neo4j` is `unavailable` and `neo4j_error`
   holds the reason; the evidence engine still works. The header dot describes Neo4j only
-  and its tooltip has a section for each part.
+  and its tooltip has a section for each part. Phase 5 added `openai` (key present and
+  API reachable, by listing models, cached five minutes; no tokens spent) and
+  `tokens_today` (used, limit, warn level), shown in the header as "Nk / 250k tokens".
 
 ## Phases
 1. **Done (5b867bf).** Backend skeleton, read-only Neo4j client, `reference/locations.json`, and the home and
@@ -442,9 +447,41 @@ The OpenAI account gets 250,000 free tokens a day, so the app warns before that 
    - Follow-ups: the health check no longer claims Neo4j is connected when it is not
      (c70697a), and the page was renamed Risk Library and reorganised as a drill-down
      (f2a0cfd; see Pages). `Placeholder` takes an optional `phase`.
-5. **Next (to discuss first).** Risk Assessment: the assessment pipeline, SSE, trace
-   timeline, report with citations, and the History tab. The page spec above is still the
-   2026-11-15 outline and should be detailed and approved before building.
+5. **Built (2026-11-16, not yet committed).** Risk Assessment and its History tab.
+   Backend: `pipeline/` (`profiles.py`, `evidence.py`, `prompts.py`, `report.py`,
+   `llm.py`, `assess.py`, `api.py`), `products_api.py`, `usage.py`,
+   `reference/product_categories.json` (draft), health additions, token usage in Ask runs.
+   Frontend: `pages/Assess.tsx`, `components/assess/` (`ItemsEditor`, `Catalogue`,
+   `Report`, `Citations`, `Timeline`, `History`), `lib/assess.ts`; `GraphCanvas` gained a
+   `highlight` prop (ringed candidate suppliers). 17 tests in `tests/test_assess.py`
+   (fake structured-output LLM, live Neo4j, real evidence). Notes from building it:
+   - **Profiles equal the fixtures:** at `as_of_date` 2026-09-30 the fixed Neo4j queries
+     give exactly the 18 fixture payloads built from the CSVs (tested key for key). One
+     query per payload key (base, HS codes, exit/entry ports, buyers, carriers, vessels),
+     each in the trace.
+   - **Candidate step:** one structured Cypher-LLM call (`cypher`, labelled
+     `suggested_countries`, `interpretation`) for the whole list, with the Ask safety
+     checks and one retry (also on unparsable replies or missing `item`/`supplier_id`
+     columns). Catalogue items reach it as `[catalogue product_id: hs:…]`. Its query is
+     not date-filtered; the matched (item, supplier, product) triples are recounted up to
+     the date, and suppliers with no shipment by then get no profile (R14).
+   - **Engine calls:** one `lookup_suppliers` call per supplier (avoids duplicate-name
+     rejections). Country lookups use a placeholder-supplier payload with the country's
+     currency, so the engine's own country rules apply (R17). Countries named in the request
+     are detected deterministically (`mentioned`); the Cypher LLM's are `suggested` (R16).
+   - **Report:** `with_structured_output(AssessmentReport, include_raw=True)`; supplier
+     profiles and evidence are listed once (not per item) to bound the prompt. Graph
+     figures have citation ids (`graph:<sid>:<field>`, `match:<item>:<sid>`, R18). If
+     nothing relevant was found, the risk LLM is not called (R7).
+   - **Citation check:** verified or not found, plus a scope note when a real id was cited
+     for another supplier, item or country; uncited claims are listed. Nothing is changed.
+   - **Page:** form (mode toggle, items with autocomplete and paste, catalogue tiles and
+     search, goal chips, date picker with Random), then layer 1 (answer + table), layer 2
+     (expand a row; mini graph with ranked suppliers ringed), layer 3 (collapsible
+     timeline, open while running). Chips link evidence to `/evidence/:id` and jump to the
+     exact input in layer 3. `?run=`, `?tab=history`, `?rerun=` in the URL.
+   - **First real run** (2026-11-16, 2 items, as of 2026-04-01): 2 LLM calls, 22,510
+     tokens, 71 citations, all verified, 2 with a scope note.
 6. Later: the evaluation design discussion, plus optional criticality and link-prediction
    views (brief outputs 2 and 3).
 
@@ -460,7 +497,13 @@ The OpenAI account gets 250,000 free tokens a day, so the app warns before that 
     effective interval matches dates up to the end of the study window; `/api/evidence/{id}`
     returns the record, and an unknown id gives 404; every `related_evidence_ids` entry
     resolves.
+- Assessment (`tests/test_assess.py`): profiles equal the fixture payloads at the end of
+  the study window and respect `as_of_date`; inactive and unknown suppliers; the candidate
+  example compiles; country lookups follow engine rules; the citation check flags without
+  changing; full pipeline, retry, R7 (no LLM call) and country-fallback runs with fake
+  LLMs; SSE, history, re-run linkage, token totals and validation through the API; the
+  catalogue covers all 43 products.
 - Run the app and do one assessment end to end. Check that every citation chip resolves
-  to a returned evidence record, and that the run JSON is saved.
+  to a returned evidence record, and that the run JSON is saved. Done 2026-11-16.
 - Existing engine tests still pass:
   `python -m unittest discover -s supplier_risk_engine/tests -t .`

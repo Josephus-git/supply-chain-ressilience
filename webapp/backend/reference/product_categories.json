@@ -1,0 +1,265 @@
+{
+  "_status": "DRAFT 2026-11-16, drafted by Claude from the 43 Product nodes; to be reviewed by the user (like locations.json). The graph is not changed.",
+  "_basis": "Category and cleaned name follow the product description, not the HS code, because HS codes are sometimes misdeclared (L5 in METHODOLOGY_NOTES.md). 'note' records the HS code meaning and any doubt.",
+  "categories": [
+    {
+      "key": "floorcare",
+      "label": "Floorcare",
+      "description": "Vacuum cleaners, wet cleaners and floor-cleaning items",
+      "icon": "brush-cleaning"
+    },
+    {
+      "key": "hair_care",
+      "label": "Hair care",
+      "description": "Stylers, dryers, brushes and hair-care products",
+      "icon": "wind"
+    },
+    {
+      "key": "air_treatment",
+      "label": "Air treatment",
+      "description": "Fans, heaters, purifiers, their filters, and hand dryers",
+      "icon": "fan"
+    },
+    {
+      "key": "lighting",
+      "label": "Lighting",
+      "description": "Table and floor lamps",
+      "icon": "lamp"
+    },
+    {
+      "key": "spares",
+      "label": "Spares and accessories",
+      "description": "Spare parts, assemblies and accessories",
+      "icon": "wrench"
+    },
+    {
+      "key": "electrical",
+      "label": "Cables and electrical",
+      "description": "Power cords, harnesses, batteries and electrical parts",
+      "icon": "cable"
+    },
+    {
+      "key": "other",
+      "label": "Other or unclear",
+      "description": "Lines whose description does not name a recognisable product",
+      "icon": "circle-help"
+    }
+  ],
+  "products": {
+    "hs:850811": {
+      "category": "floorcare",
+      "name": "Vacuum cleaners and vacuum spares",
+      "note": "Description says spares and accessories; HS 8508.11 is vacuum cleaners up to 1,500 W."
+    },
+    "hs:851632": {
+      "category": "hair_care",
+      "name": "Airwrap hair styler",
+      "note": "Description includes a delivery address."
+    },
+    "hs:842139": {
+      "category": "spares",
+      "name": "Electronic spares and accessories",
+      "note": "HS 8421.39 is gas filtering or purifying machinery; no product named."
+    },
+    "hs:850870": {
+      "category": "spares",
+      "name": "Vacuum cleaner and hair dryer spares",
+      "note": "HS 8508.70 is parts of vacuum cleaners."
+    },
+    "hs:851631": {
+      "category": "floorcare",
+      "name": "Vacuum cleaner",
+      "note": "Description says vacuum cleaner; HS 8516.31 is hair dryers. Category follows the description."
+    },
+    "hs:848180": {
+      "category": "other",
+      "name": "Wall Global (unclear)",
+      "note": "No product named; HS 8481.80 is taps, cocks and valves."
+    },
+    "hs:392690": {
+      "category": "spares",
+      "name": "Plastic spares for vacuum cleaners, hair dryers and fans",
+      "note": "HS 3926.90 is other articles of plastic."
+    },
+    "hs:842199": {
+      "category": "electrical",
+      "name": "Power cord assembly",
+      "note": "HS 8421.99 is parts of filtering machinery."
+    },
+    "hs:841451": {
+      "category": "air_treatment",
+      "name": "Fan",
+      "note": "HS 8414.51 is table, floor, wall or ceiling fans. Description includes freight terms."
+    },
+    "hs:841459": {
+      "category": "air_treatment",
+      "name": "Hand dryer",
+      "note": "HS 8414.59 is other fans."
+    },
+    "hs:851690": {
+      "category": "spares",
+      "name": "Electronic spares and accessories (heating and hair appliances)",
+      "note": "HS 8516.90 is parts of electric heating and hairdressing appliances."
+    },
+    "hs:960390": {
+      "category": "spares",
+      "name": "Motorbar cleaner head",
+      "note": "Description includes a delivery address; HS 9603.90 is other brushes."
+    },
+    "hs:380210": {
+      "category": "air_treatment",
+      "name": "Activated carbon filter",
+      "note": "Purifier filter; HS 3802.10 is activated carbon."
+    },
+    "hs:401110": {
+      "category": "other",
+      "name": "No product named (delivery address only)",
+      "note": "HS 4011.10 is car tyres; the description holds only a delivery address."
+    },
+    "hs:841490": {
+      "category": "spares",
+      "name": "Vacuum cleaner and hair dryer spares (fan and compressor parts)",
+      "note": "HS 8414.90 is parts of fans and compressors."
+    },
+    "hs:845129": {
+      "category": "spares",
+      "name": "Spares for vacuum cleaners and hair dryers",
+      "note": "HS 8451.29 is drying machines; likely misdeclared."
+    },
+    "hs:850980": {
+      "category": "floorcare",
+      "name": "Wash hard floor wet cleaner",
+      "note": "HS 8509.80 is other domestic electromechanical appliances."
+    },
+    "hs:851629": {
+      "category": "air_treatment",
+      "name": "Fan heater",
+      "note": "HS 8516.29 is other space heaters."
+    },
+    "hs:392490": {
+      "category": "floorcare",
+      "name": "Floorcare items",
+      "note": "HS 3924.90 is plastic household articles; no product named beyond 'floorcare'."
+    },
+    "hs:610110": {
+      "category": "spares",
+      "name": "Vacuum cleaner motorbar",
+      "note": "Misdeclared: HS 6101.10 is men's overcoats (L5 in METHODOLOGY_NOTES.md)."
+    },
+    "hs:731815": {
+      "category": "air_treatment",
+      "name": "Air purifier",
+      "note": "HS 7318.15 is screws and bolts; likely misdeclared."
+    },
+    "hs:080610": {
+      "category": "floorcare",
+      "name": "Vacuum cleaner",
+      "note": "Misdeclared: HS 0806.10 is fresh grapes, stored as 80610 (L5)."
+    },
+    "hs:170113": {
+      "category": "spares",
+      "name": "Car cleaning kit (cyclone vacuum accessories)",
+      "note": "Misdeclared: HS 1701.13 is cane sugar (L5)."
+    },
+    "hs:850990": {
+      "category": "spares",
+      "name": "Dirty tank lid assembly",
+      "note": "HS 8509.90 is parts of domestic appliances; for the wet cleaner."
+    },
+    "hs:853710": {
+      "category": "floorcare",
+      "name": "Wash hard floor wet cleaner",
+      "note": "HS 8537.10 is control panels; description says wet cleaner."
+    },
+    "hs:870899": {
+      "category": "spares",
+      "name": "Fan spares and accessories",
+      "note": "HS 8708.99 is motor vehicle parts; likely misdeclared."
+    },
+    "hs:940521": {
+      "category": "lighting",
+      "name": "Table and floor lighting",
+      "note": "HS 9405.21 is LED table and floor lamps."
+    },
+    "hs:950300": {
+      "category": "hair_care",
+      "name": "Airwrap styler",
+      "note": "HS 9503.00 is toys; likely misdeclared."
+    },
+    "hs:853650": {
+      "category": "air_treatment",
+      "name": "Activated carbon filter",
+      "note": "HS 8536.50 is switches; description says carbon filter."
+    },
+    "hs:854442": {
+      "category": "electrical",
+      "name": "Electronic appliances, unspecified",
+      "note": "HS 8544.42 is cables with connectors; description is a generic list."
+    },
+    "hs:854449": {
+      "category": "electrical",
+      "name": "Sensor harness assembly",
+      "note": "HS 8544.49 is other electric conductors."
+    },
+    "hs:858011": {
+      "category": "floorcare",
+      "name": "Vacuum cleaner",
+      "note": "HS 8580.11 is not a valid HS code; description includes contact details."
+    },
+    "hs:940360": {
+      "category": "lighting",
+      "name": "Table and floor lighting",
+      "note": "HS 9403.60 is wooden furniture; likely misdeclared."
+    },
+    "hs:960329": {
+      "category": "hair_care",
+      "name": "Round brush",
+      "note": "Hair brush; HS 9603.29 is other toilet brushes."
+    },
+    "hs:960350": {
+      "category": "spares",
+      "name": "Front debris brushbar assembly",
+      "note": "HS 9603.50 is brushes forming parts of appliances."
+    },
+    "hs:843149": {
+      "category": "spares",
+      "name": "Motor bucket assembly",
+      "note": "HS 8431.49 is parts of lifting and handling machinery."
+    },
+    "hs:847950": {
+      "category": "spares",
+      "name": "Cyclone service assembly",
+      "note": "Description 'Big Body Big Cyc Svc Assy'; HS 8479.50 is industrial robots."
+    },
+    "hs:847990": {
+      "category": "air_treatment",
+      "name": "Electrostatic filter",
+      "note": "HS 8479.90 is parts of machines n.e.s."
+    },
+    "hs:850760": {
+      "category": "electrical",
+      "name": "Spare vacuum cleaner battery (lithium-ion)",
+      "note": "HS 8507.60 is lithium-ion batteries."
+    },
+    "hs:230910": {
+      "category": "other",
+      "name": "Extra Sams (unclear)",
+      "note": "Misdeclared: HS 2309.10 is dog or cat food (L5)."
+    },
+    "hs:330499": {
+      "category": "hair_care",
+      "name": "Hair care products",
+      "note": "HS 3304.99 is beauty preparations."
+    },
+    "hs:481910": {
+      "category": "other",
+      "name": "AFP extra (unclear; possibly packaging)",
+      "note": "HS 4819.10 is corrugated cartons and boxes."
+    },
+    "hs:732020": {
+      "category": "spares",
+      "name": "Filter tray mesh",
+      "note": "HS 7320.20 is helical springs."
+    }
+  }
+}

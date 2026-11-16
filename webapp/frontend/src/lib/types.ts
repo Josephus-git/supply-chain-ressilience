@@ -8,6 +8,18 @@ export interface Health {
   evidence_snapshot_id: string
   engine_version: string
   warnings: string[]
+  openai: { status: 'reachable' | 'unreachable' | 'no_key' | 'not_checked'; error: string | null; checked_at?: string }
+  tokens_today: TokensToday
+}
+
+export interface TokensToday {
+  day_utc: string
+  used: number
+  runs: number
+  limit: number
+  warn_at: number
+  level: 'ok' | 'warn' | 'over'
+  note: string
 }
 
 export interface HomeStats {

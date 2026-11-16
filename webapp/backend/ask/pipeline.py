@@ -29,6 +29,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, AsyncIterator
 
+from langchain_core.callbacks import UsageMetadataCallbackHandler
 from langchain_core.language_models import BaseChatModel
 from langchain_core.output_parsers import StrOutputParser
 from neo4j.exceptions import Neo4jError
@@ -38,6 +39,7 @@ from ..config import ASK_CYPHER_MODEL, ASK_RUNS_DIR
 from ..graph_model import label_of, node_out
 from ..neo4j_client import ReadOnlyNeo4j, to_jsonable
 from ..runs_store import new_run_id, now_iso, save_run
+from ..usage import usage_totals
 from .prompts import FEW_SHOT, RETRY_FEEDBACK, answer_prompt, cypher_prompt
 from .safety import MAX_ROWS, CheckResult, explain_check, mask_literals, static_checks
 
@@ -75,7 +77,7 @@ def _ms(started: float) -> float:
 
 
 async def generate_cypher(
-    llm: BaseChatModel, question: str, previous: dict[str, Any] | None = None
+    llm: BaseChatModel, question: str, previous: dict[str, Any] | None = None, *, config: dict[str, Any] | None = None
 ) -> dict[str, Any]:
     feedback = ""
     if previous is not None:
@@ -83,7 +85,7 @@ async def generate_cypher(
     values = {"examples": FEW_SHOT, "schema": schema_text(), "question": question, "feedback": feedback}
     prompt_text = cypher_prompt.format(**values)
     started = time.perf_counter()
-    raw = await (cypher_prompt | llm | StrOutputParser()).ainvoke(values)
+    raw = await (cypher_prompt | llm | StrOutputParser()).ainvoke(values, config=config)
     return {
         "prompt": prompt_text,
         "feedback": previous,
@@ -357,8 +359,12 @@ async def ask(
         "max_rows": MAX_ROWS,
         "attempts": [],
         "answer": None,
+        "usage": None,
         "error": None,
     }
+    usage = UsageMetadataCallbackHandler()
+    llm_config = {"callbacks": [usage]}
+    calls = 0
     yield {"event": "run", "run": {k: run[k] for k in ("run_id", "question", "model", "started_at", "max_rows")}}
 
     try:
@@ -369,7 +375,8 @@ async def ask(
             run["attempts"].append(attempt)
 
             yield {"event": "step", "step": "generate_cypher", "attempt": n, "status": "running", "data": {"retry_of": previous}}
-            gen = await generate_cypher(llm, question, previous)
+            calls += 1
+            gen = await generate_cypher(llm, question, previous, config=llm_config)
             attempt["generate"] = gen
             yield {"event": "step", "step": "generate_cypher", "attempt": n, "status": "done", "data": gen}
 
@@ -411,7 +418,8 @@ async def ask(
             run["answer"] = answer
             yield {"event": "step", "step": "write_answer", "attempt": None, "status": "running", "data": {"prompt": answer["prompt"]}}
             started = time.perf_counter()
-            async for chunk in (answer_prompt | llm | StrOutputParser()).astream(values):
+            calls += 1
+            async for chunk in (answer_prompt | llm | StrOutputParser()).astream(values, config=llm_config):
                 if chunk:
                     answer["text"] += chunk
                     yield {"event": "token", "text": chunk}
@@ -430,6 +438,7 @@ async def ask(
         yield {"event": "error", "message": run["error"]}
     finally:
         run["finished_at"] = now_iso()
+        run["usage"] = {**usage_totals(usage), "calls": calls}
         if runs_dir is not None and question:
             save_run(runs_dir, run)
     yield {"event": "done", "run": run}
