@@ -1,8 +1,9 @@
 # App plan: Dyson supply-chain risk decision-support web app
 
 **Status (2026-11-16):** phases 1 and 2 are done and committed (backend, Home, Graph
-Explorer). Risk Assessment, Evidence Library, Run History and Ask the Graph are
-placeholder pages. Phase 3 is next, after a design review.
+Explorer). Ask the Graph, Evidence Library and Risk Assessment (with Run History) are
+placeholder pages. On 2026-11-16 the pages and the build order were changed to: Ask the
+Graph → Evidence Library → Risk Assessment last. Phase 3 (Ask the Graph) is next.
 
 ## Context
 Research brief: "KG and LLM-based decision support for supply-chain resilience and supplier
@@ -17,8 +18,16 @@ every run so that discussion has data to work with.
 ## Decisions confirmed (2026-11-15)
 - Local web app: React, Vite and TypeScript, with Tailwind and shadcn/ui.
 - The graph is drawn with Cytoscape.js.
-- LangChain and LangGraph orchestrate the workflow, with OpenAI gpt-5.2.
+- LangChain orchestrates the workflow, with OpenAI gpt-5.2. **No LangGraph** (revised
+  2026-11-16): both pipelines are straight sequences of steps, so plain Python async
+  generators that call LangChain chains are enough. The user knows LangChain but not LangGraph.
 - The first version has a Home page plus all five pages.
+- **Page and build order (revised 2026-11-16):** Home → Graph Explorer → Ask the Graph →
+  Evidence Library → Risk Assessment. Risk Assessment is last because it is the main
+  result of the app and the research. Run History is a tab inside Risk Assessment, not a
+  separate page.
+- Risk Assessment covers **one component (BOM line) per run**. Several parts mean several
+  runs, compared in the history. A batch BOM mode can be added later on top of it.
 - Evaluation design is deferred.
 - Home page charts and the map use **Apache ECharts** (`echarts-for-react`). One library
   covers the world map with animated route lines and the line chart. The world GeoJSON is
@@ -33,7 +42,8 @@ every run so that discussion has data to work with.
   - Imports `supplier_risk_engine` directly (`load_database()` once at startup). The engine
     still has no HTTP layer. Only the app has endpoints.
   - Uses the `neo4j` driver with **read-only sessions** (`default_access_mode=READ`).
-  - LangChain and LangGraph (already installed) orchestrate the workflow.
+  - LangChain (`init_chat_model`, prompt templates, `|` chains, `.ainvoke`/`.astream`)
+    plus plain Python orchestrates the workflow. LangGraph is not used.
   - `init_chat_model("gpt-5.2", model_provider="openai")`. Embeddings use
     `text-embedding-3-small` against the vector index `embedding` on `Product.embedding`,
     the same model as `rag/update_embeddings.py`.
@@ -43,8 +53,9 @@ every run so that discussion has data to work with.
   - React is worth it here: a graph you can click through, linked side panels and a live
     trace are hard to build in Streamlit.
   - Node 24 and npm 11 are installed.
-- **Streaming:** the backend sends LangGraph `astream_events` to the browser over
-  Server-Sent Events. The trace panel fills in live.
+- **Streaming:** each pipeline is an async generator that yields one event per step (and
+  answer tokens from LangChain `.astream()`). FastAPI sends them to the browser as
+  Server-Sent Events, so the trace panel fills in live.
 - **Dev:** `npm start` in `webapp/backend` (uvicorn with reload, port 8000, using the
   repo `.venv`) and `npm run dev` in `webapp/frontend` (Vite with an `/api` proxy).
   `npm test` in `webapp/backend` runs the backend tests.
@@ -56,9 +67,10 @@ every run so that discussion has data to work with.
 webapp/
   backend/  main.py, config.py, neo4j_client.py (read-only),
             graph_api.py, evidence_api.py, runs_store.py,
+            ask/ (Ask the Graph: schema.txt, prompts.py, llm.py, safety.py, pipeline.py, api.py)
             pipeline/ (state.py, retrieve.py, profiles.py, evidence.py, report.py, graph.py)
             reference/locations.json (reviewed site coordinates, see Home)
-  frontend/ src/pages/{Home,Explorer,Assess,Evidence,Runs,Ask}.tsx, src/components/graph/…
+  frontend/ src/pages/{Home,Explorer,Ask,Evidence,Assess}.tsx (Run History is a tab in Assess), src/components/graph/…
 runs/       one JSON file per assessment run (payload, retrieved context, Cypher, evidence, LLM output)
 ```
 
@@ -109,9 +121,19 @@ runs/       one JSON file per assessment run (payload, retrieved context, Cypher
    - The first version (an 80-node aggregated supplier hub with stars, triangles and
      pentagons) was rejected as cluttered. Later graph views, such as the Risk Assessment
      mini graph, should follow the same Bloom style and start small.
-2. **Risk Assessment** (main workflow)
-   - Inputs: a BOM line and a simulated `as_of_date`, limited to the study window
-     2025-01-01 to 2026-09-30.
+2. **Ask the Graph:** natural-language Q&A that reuses the prompt in
+   `langchain/cypher_qa.py`. It shows the generated Cypher and its rows before the answer,
+   and runs read-only.
+   - Its role is exploratory: questions there is no page for. The LLM writes the Cypher,
+     so the answers are less reliable than Risk Assessment and no `as_of_date` rule is
+     applied.
+   - It is also a contrast case for the evaluation: the Cypher is shown, so its mistakes
+     can be seen.
+3. **Evidence Library:** browse and filter the 109 records by risk type, country and date.
+   Risk Assessment citations later link to these evidence cards.
+4. **Risk Assessment** (main workflow, last page)
+   - Inputs: one BOM line (one component per run) and a simulated `as_of_date`, limited to
+     the study window 2025-01-01 to 2026-09-30.
    - A live step timeline shows:
      a. vector search, with the products found and their scores
      b. each Cypher query and its rows
@@ -120,23 +142,62 @@ runs/       one JSON file per assessment run (payload, retrieved context, Cypher
      e. the LLM report, streamed
    - Citation chips in the report link to evidence cards and to the graph elements they
      cite. A mini graph highlights the candidate suppliers.
-3. **Evidence Library:** browse and filter the 109 records by risk type, country and date.
-4. **Run History:** reopen any past run with its full trace. This data will feed the
-   evaluation.
-5. **Ask the Graph:** natural-language Q&A that reuses the prompt in
-   `langchain/cypher_qa.py`. It shows the generated Cypher and its rows before the answer,
-   and runs read-only.
+   - **History tab:** reopen any past run with its full trace. This data will feed the
+     evaluation.
 
-## Assessment pipeline (LangGraph StateGraph)
+## Ask the Graph pipeline (Text2Cypher, `webapp/backend/ask/`)
+All Cypher-LLM logic lives in `ask/`, separate from the Risk Assessment `pipeline/`.
+Orchestration is LangChain (`init_chat_model`, prompt templates, `|` chains) called from
+a plain Python async generator in `ask/pipeline.py`, which yields one SSE event per step.
+`GraphCypherQAChain` is not used, because it hides the intermediate steps.
+- **Own LLM:** `ask/llm.py` builds `cypher_llm` from `ASK_CYPHER_MODEL` (default gpt-5.2).
+  Risk Assessment uses a separate `report_llm` from `REPORT_MODEL`.
+- **Schema:** `langchain/schema.txt` is **copied** to `ask/schema.txt`. `langchain/` was a
+  prototype and stays untouched. `Product.embedding` is removed from the copy.
+  **Done 2026-11-16:** the copy has property types and value hints, checked against the live
+  graph. It covers DATETIME dates compared with `date()`, INTEGER HS and port codes,
+  grouping by `supplier_basename`, ISO country codes, and one product per shipment.
+- **Example questions:** `ask/example_questions.json` holds 8 drafts for the user to review.
+  Each has a hand-written `reference_cypher`, checked against the graph, as a candidate
+  gold answer for the evaluation. The reference Cypher is not shown to the LLM. A
+  test checks that each label, property and relationship in the file exists in Neo4j.
+- **Steps** (functions in `ask/pipeline.py`):
+  1. `generate_cypher`: `cypher_llm` gets the schema, the few-shot examples (starting with
+     the one in `cypher_qa.py`) and the question, and returns only Cypher.
+  2. `check_cypher`: refuses write clauses (CREATE, MERGE, DELETE, SET, REMOVE, DROP,
+     LOAD CSV, CALL of write procedures), runs `EXPLAIN` to check syntax, and adds a row
+     limit.
+  3. `run_query`: runs through `ReadOnlyNeo4j`. If the query errors or returns nothing, the
+     error goes back to `generate_cypher` for one retry. Both attempts appear in the trace.
+  4. `write_answer`: `cypher_llm` answers from the question and the rows only. If there are
+     no rows, it says so.
+- **UI:** a question box with example chips. Each step is shown in order: Cypher (copyable),
+  checks, rows table, answer. When the rows contain nodes, a small Bloom-style graph
+  appears next to the table. Single questions, with no follow-up chat in this version.
+- **Stored:** each question, its Cypher attempts, rows and answer go to `runs/ask/`
+  (`runs/` is git-ignored; the user curates what to keep), to be
+  used in the evaluation (for example, scoring against hand-written Cypher for 20–30
+  questions).
+- **Known data quirk (left as is, by user decision 2026-11-16):** Hi-P's single plant
+  (Bldg X2, Lot 11A, First Philippine Industrial Park, Tanauan, PH) has two
+  `supplier_basename` values: "Hi P Philippines Technology Corpora" (reported as TW, 47
+  shipments) and "Hip Philipines Technology" (PH, 49). Per-company answers show it as two
+  suppliers. This is an entity-resolution limitation of customs data, to note in the write-up.
+- **Research role:** an exploratory, LLM-written-query baseline. It contrasts with Risk
+  Assessment's fixed queries, enforced dates and citations. It sees the graph only, with
+  no evidence and no `as_of_date` rule.
+
+## Assessment pipeline (LangChain + plain Python, `pipeline/`)
 `retrieve_products` (vector index) → `build_profiles` (Cypher aggregation into payload
 schema 1.1; see SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md section 6.1) → `lookup_evidence`
 (`lookup_suppliers` with a fixed `as_of_date`) → `write_report`.
-- `write_report` is gpt-5.2 with only the read-only tools `get_evidence` and
-  `describe_database`.
+- `write_report` uses `report_llm` (gpt-5.2) **without tools**. The supplier profiles and
+  their evidence records go straight into the prompt, so the trace shows exactly what the
+  LLM saw. This also avoids LangChain's agent helper, which runs on LangGraph.
 - Its output is structured: the ranked suppliers, each with reasons, and each reason cites
   an `evidence_id` or a graph figure.
 - The LLM never chooses the date and never writes Cypher in this pipeline.
-- Each node logs its inputs and outputs to the trace and to `runs/`.
+- Each step logs its inputs and outputs to the trace and to `runs/`.
 
 ## API
 - `GET /api/home/network`
@@ -162,9 +223,11 @@ schema 1.1; see SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md section 6.1) → `lookup_e
    history as reference. The `rag/` deletion is intentional, so it is not restored.
 2. **Done (6063c00 to 1b8f540).** Frontend shell (navigation, theme), Home page (map,
    relationships tree, top-10 chart, KPI tiles) and Graph Explorer.
-3. **Next.** The LangGraph assessment pipeline, SSE and the trace timeline UI.
-4. Report with citations, Evidence Library and Run History.
-5. Ask the Graph page.
+3. **Next.** Ask the Graph: `webapp/backend/ask/` (see the Ask the Graph pipeline section),
+   `POST /api/ask` (SSE), the page UI, and reordering the sidebar nav to the new page order.
+4. Evidence Library (`/api/evidence` endpoints and the evidence cards).
+5. Risk Assessment: the assessment pipeline, SSE, trace timeline, report with citations,
+   and the History tab.
 6. Later: the evaluation design discussion, plus optional criticality and link-prediction
    views (brief outputs 2 and 3).
 

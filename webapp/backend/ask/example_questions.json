@@ -1,0 +1,53 @@
+{
+  "_note": "DRAFT for user review (2026-11-16). Shown as example chips on Ask the Graph. reference_cypher was hand-written and checked against the live graph; it is a candidate gold answer for the evaluation, not shown to the LLM.",
+  "questions": [
+    {
+      "id": "q01",
+      "question": "Who are the top 3 suppliers of vacuum cleaners shipping from Tanjung Pelepas?",
+      "angle": "Product + port dependency (the prototype's original question)",
+      "reference_cypher": "MATCH (s:Supplier)-[:SHIPPED]->(sh:Shipment)-[:CONTAINS_PRODUCT]->(p:Product), (sh)-[:DEPARTED_FROM]->(e:`Exit Port`) WHERE toLower(p.product_description) CONTAINS 'vacuum' AND toLower(e.exit_port) CONTAINS 'tanjung pelepas' RETURN s.supplier_basename AS company, count(sh) AS shipments ORDER BY shipments DESC LIMIT 3"
+    },
+    {
+      "id": "q02",
+      "question": "How many different exit ports does each supplier company ship from?",
+      "angle": "Port concentration: fewer ports means less routing flexibility",
+      "reference_cypher": "MATCH (s:Supplier)-[:SHIPPED]->(sh:Shipment)-[:DEPARTED_FROM]->(e:`Exit Port`) RETURN s.supplier_basename AS company, count(DISTINCT e) AS exit_ports, count(sh) AS shipments ORDER BY exit_ports, shipments DESC"
+    },
+    {
+      "id": "q03",
+      "question": "Which ports does VS Industry ship from, and how often?",
+      "angle": "Single-supplier dependency; also tests loose name matching ('VS Industry' vs 'Vs Industrial Berhad')",
+      "reference_cypher": "MATCH (s:Supplier)-[:SHIPPED]->(sh:Shipment)-[:DEPARTED_FROM]->(e:`Exit Port`) WHERE toLower(s.supplier_basename) CONTAINS 'vs industrial berhad' RETURN e.exit_port AS port, count(sh) AS shipments ORDER BY shipments DESC"
+    },
+    {
+      "id": "q04",
+      "question": "What are the parent companies of Dyson's suppliers, and where are they registered?",
+      "angle": "Ownership and jurisdiction exposure",
+      "reference_cypher": "MATCH (s:Supplier)-[:SUBSIDIARY_OF]->(pc:ParentCompany) RETURN pc.canonical_name AS parent, pc.jurisdiction AS jurisdiction, collect(DISTINCT s.supplier_basename) AS companies"
+    },
+    {
+      "id": "q05",
+      "question": "Which carriers move the most Dyson shipments?",
+      "angle": "Logistics concentration on a few carriers",
+      "reference_cypher": "MATCH (sh:Shipment)-[:CARRIED_BY]->(c:Carrier) RETURN c.carrier_name AS carrier, count(sh) AS shipments ORDER BY shipments DESC LIMIT 5"
+    },
+    {
+      "id": "q06",
+      "question": "Which US ports receive Dyson shipments, and how many supplier companies use each?",
+      "angle": "Inbound chokepoints",
+      "reference_cypher": "MATCH (s:Supplier)-[:SHIPPED]->(sh:Shipment)-[:ARRIVED_AT]->(p:`Entry Port`) RETURN p.entry_port AS port, count(sh) AS shipments, count(DISTINCT s.supplier_basename) AS companies ORDER BY shipments DESC"
+    },
+    {
+      "id": "q07",
+      "question": "Which suppliers ship vacuum cleaner products under HS heading 8508?",
+      "angle": "Tariff-code exposure; tests the integer HS-code prefix hint",
+      "reference_cypher": "MATCH (s:Supplier)-[:SHIPPED]->(sh:Shipment)-[:CONTAINS_PRODUCT]->(p:Product) WHERE toString(p.hs_code) STARTS WITH '8508' RETURN s.supplier_basename AS company, count(sh) AS shipments ORDER BY shipments DESC"
+    },
+    {
+      "id": "q08",
+      "question": "Which suppliers' shipments arrive latest compared with their estimated arrival date?",
+      "angle": "Delivery reliability; tests the datetime hint",
+      "reference_cypher": "MATCH (s:Supplier)-[:SHIPPED]->(sh:Shipment) RETURN s.supplier_basename AS company, round(avg(duration.inDays(sh.estimated_arrival_date, sh.arrival_date).days), 1) AS avg_days_late ORDER BY avg_days_late DESC LIMIT 5"
+    }
+  ]
+}

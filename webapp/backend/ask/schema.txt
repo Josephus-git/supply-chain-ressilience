@@ -1,0 +1,49 @@
+Graph: Dyson's inbound supply chain (US customs bill-of-lading data, 2025-01-02 to 2026-09-28).
+Labels with spaces must be written in backticks: `Entry Port`, `Exit Port`.
+
+Node properties (name: type):
+- Shipment {shipment_id: STRING, bol_number: STRING, bol_type: STRING, arrival_date: DATETIME, estimated_arrival_date: DATETIME, quantity: INTEGER, weight: INTEGER, teu: FLOAT, cif: BOOLEAN, place_of_receipt: STRING, voyage: STRING, shipping_cost: FLOAT}
+- Supplier {supplier_id: STRING, supplier_name: STRING, supplier_basename: STRING, supplier_country_code: STRING, supplier_country: STRING, supplier_address_country_code: STRING, supplier_address: STRING, supplier_total_shipments: INTEGER}
+- Buyer {buyer_id: STRING, buyer_name: STRING, buyer_basename: STRING, buyer_country_code: STRING, buyer_country: STRING, buyer_address: STRING, uflpa_buyer: BOOLEAN, buyer_total_shipments: INTEGER}
+- `Entry Port` {entry_port_id: STRING, entry_port: STRING, entry_port_code: INTEGER, entry_port_lat: FLOAT, entry_port_lon: FLOAT}
+- `Exit Port` {exit_port_id: STRING, exit_port: STRING, exit_port_code: INTEGER, exit_port_lat: FLOAT, exit_port_lon: FLOAT}
+- Carrier {carrier_id: STRING, carrier_code: STRING, carrier_name: STRING}
+- Vessel {vessel_id: STRING, vessel_name: STRING, vessel_country_code: STRING, vessel_code: FLOAT}
+- Product {product_id: STRING, product_description: STRING, hs_code: INTEGER, hs_code_description: STRING, full_hs_code_description: STRING}
+- ParentCompany {company_number: STRING, canonical_name: STRING, jurisdiction: STRING, status: STRING, company_type: STRING, parent_holding: STRING, verification_status: STRING, updated_at: DATETIME, extra_notes: STRING}
+
+Relationships (none carry properties):
+- (:Supplier)-[:SHIPPED]->(:Shipment)
+- (:Shipment)-[:CONSIGNED_TO]->(:Buyer)
+- (:Shipment)-[:CONTAINS_PRODUCT]->(:Product)
+- (:Shipment)-[:DEPARTED_FROM]->(:`Exit Port`)
+- (:Shipment)-[:ARRIVED_AT]->(:`Entry Port`)
+- (:Shipment)-[:CARRIED_BY]->(:Carrier)
+- (:Shipment)-[:TRANSPORTED_ON]->(:Vessel)
+- (:Supplier)-[:SUBSIDIARY_OF]->(:ParentCompany)
+
+Value hints:
+- Dates: arrival_date, estimated_arrival_date and updated_at are DATETIME values, not strings.
+  Compare with date(), e.g. WHERE date(s.arrival_date) >= date('2025-06-01').
+  Group by month with date.truncate('month', s.arrival_date).
+- Each Shipment has exactly one Product, one Supplier, one Buyer, one Exit Port, one
+  Entry Port, one Carrier and one Vessel.
+- Supplier companies: one company can have several Supplier nodes (sites or name
+  variants). Group by supplier_basename to count per company; 18 Supplier nodes form
+  10 companies. supplier_name is the exact site name.
+- Countries are ISO 3166-1 alpha-2 codes ('MY', 'CN', 'PH', 'TW', 'HK', 'US').
+  supplier_country_code is the country reported in the customs data; supplier_country
+  is its name (e.g. 'Malaysia'). Prefer supplier_country_code for filters.
+- Buyers are Dyson entities (e.g. 'Dyson Inc', 'Dyson B2B Inc', 'Dyson Canada Ltd').
+- Ports: exit ports are foreign loading ports (e.g. 'Port Klang', 'Tanjung Pelepas',
+  'Singapore', 'Shanghai', 'Yangshan'); entry ports are US ports with a state suffix
+  (e.g. 'Los Angeles, Ca', 'Long Beach, Ca', 'Newark, Nj'). Port codes are INTEGER
+  US customs codes (e.g. 2709), never quoted.
+- Carrier names start with their SCAC code (e.g. 'MAEU - Maersk Line'); carrier_code is
+  the SCAC alone ('MAEU').
+- Products: product_description is noisy free text; match it with
+  toLower(p.product_description) CONTAINS 'vacuum'. hs_code is a 6-digit INTEGER
+  (e.g. 850870); match a heading prefix with toString(p.hs_code) STARTS WITH '8508'.
+- Text matching: names are title case in the data; use toLower(...) CONTAINS toLower(...)
+  rather than exact equality for names typed by users.
+- shipping_cost is 0 for shipments with no reported cost; exclude 0 when averaging.
