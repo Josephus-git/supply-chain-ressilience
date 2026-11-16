@@ -1,7 +1,8 @@
-import { BookOpenText, Gauge } from 'lucide-react'
+import { Gauge } from 'lucide-react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { AppShell } from '@/components/layout/AppShell'
 import Ask from '@/pages/Ask'
+import Evidence from '@/pages/Evidence'
 import Explorer from '@/pages/Explorer'
 import Home from '@/pages/Home'
 import { Placeholder } from '@/pages/Placeholder'
@@ -13,17 +14,7 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="explorer" element={<Explorer />} />
         <Route path="ask" element={<Ask />} />
-        <Route
-          path="evidence"
-          element={
-            <Placeholder
-              title="Evidence Library"
-              phase={4}
-              icon={BookOpenText}
-              points={['Browse and filter the 109 evidence records by risk type, country and date.']}
-            />
-          }
-        />
+        <Route path="evidence/:id?" element={<Evidence />} />
         <Route
           path="assess"
           element={

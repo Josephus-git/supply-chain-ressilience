@@ -24,6 +24,7 @@ from supplier_risk_engine.loader import LoadedDatabase, load_database
 
 from .ask.api import ask_router
 from .config import ASK_RUNS_DIR, FRONTEND_DIST
+from .evidence_api import evidence_router
 from .graph_api import graph_router, home_router
 from .neo4j_client import ReadOnlyNeo4j
 
@@ -53,6 +54,7 @@ def create_app(
     app.include_router(home_router)
     app.include_router(graph_router)
     app.include_router(ask_router)
+    app.include_router(evidence_router)
 
     @app.get("/api/health", tags=["meta"])
     def health() -> dict[str, Any]:

@@ -1,10 +1,10 @@
 # App plan: Dyson supply-chain risk decision-support web app
 
-**Status (2026-11-16):** phases 1–3 are done (backend, Home, Graph Explorer, Ask the
-Graph), plus the phase 3 follow-ups (Ask → Graph Explorer handoff, value-only rows drawn
-as a graph, Inspector opening on Properties; up to 13fd71c). Evidence Library and Risk
-Assessment (with its History tab) are placeholder pages. Phase 4 (Evidence Library) is
-next. Tests: 45 backend, 157 engine, all passing; `tsc` clean.
+**Status (2026-11-16):** phases 1–4 are done (backend, Home, Graph Explorer, Ask the
+Graph, Evidence Library), plus the phase 3 follow-ups (Ask → Graph Explorer handoff,
+value-only rows drawn as a graph, Inspector opening on Properties; up to 13fd71c). Risk
+Assessment (with its History tab) is the remaining placeholder page and is next. Tests:
+61 backend, 157 engine, all passing; `tsc` and oxlint clean.
 
 ## Context
 Research brief: "KG and LLM-based decision support for supply-chain resilience and supplier
@@ -137,7 +137,7 @@ runs/       one JSON file per assessment run (payload, retrieved context, Cypher
      can be seen.
 3. **Evidence Library** (`pages/Evidence.tsx`, `components/evidence/`)
    - Browse the 109 engine records (18 risk types) as cards. Filters: risk type, country
-     (from `countries[].country_code`), date range and a text search over the id, scope,
+     (from every country-code field; see phase 4 notes), date range and a text search over the id, scope,
      entities and publisher. Filter state lives in the URL.
    - **Dates:** each risk type has its own date fields (`DATE_FAMILY` / `FAMILY_FIELDS` in
      `engine/dates.py`: event, observation point, observation window, effective interval).
@@ -278,14 +278,31 @@ schema 1.1; see SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md section 6.1) → `lookup_e
      comes from `startView.ts`, and the node inspector opens on Properties.
      (Commit f8d0662 is labelled "phase 4" but holds phase 3. 971fc8f says "evidence
      library" but changes the Ask page.)
-4. **Next.** Evidence Library:
-   - Backend `evidence_api.py`: `GET /api/evidence` with filters (`risk_type`, `country`,
-     `date_from`, `date_to`, `q`) that returns the records, their date family and the
-     facet counts. `GET /api/evidence/{id}` wraps `get_evidence` (404 when not found).
-   - Frontend `pages/Evidence.tsx` + `components/evidence/` (filters, card list, detail
-     panel at `/evidence/:id`). It replaces the placeholder route in `App.tsx`.
-   - `tests/test_evidence.py` (see Verification).
-5. Risk Assessment: the assessment pipeline, SSE, trace timeline, report with citations,
+4. **Done (2026-11-16).** Evidence Library: `evidence_api.py` (`GET /api/evidence`,
+   `GET /api/evidence/{id}`), `pages/Evidence.tsx` (route `evidence/:id?`),
+   `components/evidence/` (`EvidenceCard`, `EvidenceDetail`, `parts`), `lib/evidence.ts`,
+   and 16 tests in `tests/test_evidence.py` (fake Neo4j, real records). Notes from building it:
+   - Records are heterogeneous (each risk type has its own fields), so the backend builds one
+     summary per record (`EvidenceView`, cached on `app.state`): a title from per-type
+     fields (`TITLE_FIELDS`), a description, measures (delay, rate, measure, baseline and
+     observed, FX rates, change percent), reported entities, and the family's dates.
+   - **Countries** come from every `*country_code(s)` field, not only `countries[]`
+     (`country_code`, `affected_countries`, `origin/importing/issuing_country_code`,
+     `location.country_code`, `trade_lanes` origins and destination). Import-side codes
+     (`importing_country_code`, `destination_country_code`: the US on every tariff) count for
+     the country filter but not for the graph link. Some records carry no country (the FX
+     series, some vessel and transit records).
+   - **Undated records** (no start date; 30 of 109) are filtered by their search window, and
+     the card says "Undated". This was not in the spec; without it they could never match a
+     date filter.
+   - Text search covers id, title, description, entities, country names, risk label and
+     publisher (the spec named id, scope, entities and publisher).
+   - Facet counts apply every filter except the facet's own. Filters are single-select in the
+     UI (`type`, `country`, `from`, `to`, `q` in the URL); the API also takes comma lists.
+   - Graph link: supplier nodes are read once from Neo4j and cached. If Neo4j is down the
+     library still works and the panel says the link is unavailable. Country-only matching
+     is broad (MY links all 6 Malaysian supplier nodes); the panel says so.
+5. **Next.** Risk Assessment: the assessment pipeline, SSE, trace timeline, report with citations,
    and the History tab.
 6. Later: the evaluation design discussion, plus optional criticality and link-prediction
    views (brief outputs 2 and 3).
