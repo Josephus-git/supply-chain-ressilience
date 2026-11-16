@@ -1,5 +1,9 @@
 # App plan: Dyson supply-chain risk decision-support web app
 
+**Status (2026-11-16):** phases 1 and 2 are done and committed (backend, Home, Graph
+Explorer). Risk Assessment, Evidence Library, Run History and Ask the Graph are
+placeholder pages. Phase 3 is next, after a design review.
+
 ## Context
 Research brief: "KG and LLM-based decision support for supply-chain resilience and supplier
 risk explanation". Case study: Dyson and its top suppliers (10 supplier CSVs, 478 shipments,
@@ -19,8 +23,8 @@ every run so that discussion has data to work with.
 - Home page charts and the map use **Apache ECharts** (`echarts-for-react`). One library
   covers the world map with animated route lines and the line chart. The world GeoJSON is
   bundled, so the map works offline with no map key or tile server.
-- The Graph Explorer opens on a simple snapshot of one or two suppliers, not the full
-  graph.
+- The Graph Explorer opens on a small Dyson-centred view in the style of Neo4j Bloom, not
+  the full graph (revised 2026-11-15; see Pages).
 - Supplier exposure profiles count only shipments with `arrival_date <= as_of_date`. This
   is the same no-look-ahead rule the engine applies to evidence.
 
@@ -41,8 +45,11 @@ every run so that discussion has data to work with.
   - Node 24 and npm 11 are installed.
 - **Streaming:** the backend sends LangGraph `astream_events` to the browser over
   Server-Sent Events. The trace panel fills in live.
-- **Dev:** `uvicorn` plus `vite dev` with an `/api` proxy. For a demo, run
-  `vite build` and let FastAPI serve the files, so one command starts the app.
+- **Dev:** `npm start` in `webapp/backend` (uvicorn with reload, port 8000, using the
+  repo `.venv`) and `npm run dev` in `webapp/frontend` (Vite with an `/api` proxy).
+  `npm test` in `webapp/backend` runs the backend tests.
+  For a demo, run `npm run build` in the frontend and let FastAPI serve `dist/`
+  (restart the backend after a build), so one command starts the app.
 
 ## Layout
 ```
@@ -61,8 +68,13 @@ runs/       one JSON file per assessment run (payload, retrieved context, Cypher
      - Shows every supplier company linked to Dyson by animated arcs. Arc width shows
        shipment count.
      - Hover or click a supplier for its shipments, products and ports. A toggle shows the
-       real route instead: supplier → exit port → entry port → Dyson site.
+       real route instead: supplier → exit port → entry port → Dyson site. The ocean leg
+       follows a likely sea path from the `searoute` package.
      - The backend fetches all suppliers live from Neo4j (`GET /api/home/network`).
+   - **"Dyson's top 10 relationships" tree** (`RelationshipsTree.tsx`), above the line
+     chart: Dyson → its 10 supplier companies → their parent companies (`SUBSIDIARY_OF`).
+     It shows knowledge-graph data only. The scrape is Dyson-only, so suppliers' other
+     customers are not available, and a hand-copied ImportYeti column was tried and removed.
    - **Top 10 suppliers chart,** in the style of ImportYeti:
      - Monthly shipments per supplier from 2025-01 to 2026-09, one line each, from
        `GET /api/home/top-suppliers`.
@@ -81,18 +93,22 @@ runs/       one JSON file per assessment run (payload, retrieved context, Cypher
      sometimes differs from the address (for example Ihastek Malaysia = CN). The map plots
      the address location and shows the reported country as a separate label. The engine
      keeps using the graph value, as before.
-1. **Graph Explorer**
-   - **Opens on a simple snapshot:** one or two suppliers (default: the top supplier),
-     chosen from a supplier picker.
-     - Each supplier is linked straight to its parent company, products, vessels,
-       carriers, exit and entry ports and Dyson buyers.
-     - Each link is labelled with its shipment count. This is an aggregated view: shipment
-       nodes are hidden.
-   - Click a node or relationship to open an inspector panel with its properties and
-     neighbours. Actions: expand neighbours, expand a link into its underlying shipments,
-     hide, add another supplier.
-   - Filters by node type and date range, plus a search box. A "show full graph" option
-     sits in the advanced settings.
+1. **Graph Explorer** (Neo4j Bloom style; revised 2026-11-15)
+   - **Look:** plain coloured circles with the caption inside, and the relationship type
+     written on each edge. No icons or varied shapes. Real relationships are shown by
+     default, not aggregated shipment counts.
+   - **Start view** (`GET /api/graph/start`): Dyson Inc at the centre with about 3
+     shipments attached. One shipment is fully expanded, and its supplier is expanded to
+     its parent company. A supplier picker can restrict the shipments to chosen suppliers.
+   - Details appear only on click (inspector panel with properties and neighbours) or on
+     expand (double-click). Actions: expand neighbours, expand an aggregated link into its
+     shipments, hide.
+   - Filters by node type and date range, plus a search box. The view state lives in the
+     URL. A "show full graph" option (the aggregated `/api/graph/snapshot`) sits in the
+     advanced settings.
+   - The first version (an 80-node aggregated supplier hub with stars, triangles and
+     pentagons) was rejected as cluttered. Later graph views, such as the Risk Assessment
+     mini graph, should follow the same Bloom style and start small.
 2. **Risk Assessment** (main workflow)
    - Inputs: a BOM line and a simulated `as_of_date`, limited to the study window
      2025-01-01 to 2026-09-30.
@@ -126,8 +142,11 @@ schema 1.1; see SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md section 6.1) → `lookup_e
 - `GET /api/home/network`
 - `GET /api/home/top-suppliers`
 - `GET /api/home/stats`
-- `GET /api/graph/snapshot?suppliers=…`
+- `GET /api/graph/suppliers` (picker)
+- `GET /api/graph/start` (Dyson-centred start view)
+- `GET /api/graph/snapshot` (aggregated, used for the full graph)
 - `GET /api/graph/nodes/{id}/neighbours`
+- `GET /api/graph/edges/shipments` (shipments behind an aggregated link)
 - `GET /api/graph/search`
 - `GET /api/evidence`
 - `GET /api/evidence/{id}`
@@ -137,20 +156,20 @@ schema 1.1; see SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md section 6.1) → `lookup_e
 - `GET /api/runs/{id}`
 
 ## Phases
-1. Backend skeleton, read-only Neo4j client, `reference/locations.json`, and the home and
+1. **Done (5b867bf).** Backend skeleton, read-only Neo4j client, `reference/locations.json`, and the home and
    graph endpoints. Rebuild vector search in
    `pipeline/retrieve.py`, using the deleted `rag/vector_cypher_retriever.py` from git
    history as reference. The `rag/` deletion is intentional, so it is not restored.
-2. Frontend shell (navigation, theme), Home page (map, top-10 chart, KPI tiles) and Graph
-   Explorer.
-3. The LangGraph assessment pipeline, SSE and the trace timeline UI.
+2. **Done (6063c00 to 1b8f540).** Frontend shell (navigation, theme), Home page (map,
+   relationships tree, top-10 chart, KPI tiles) and Graph Explorer.
+3. **Next.** The LangGraph assessment pipeline, SSE and the trace timeline UI.
 4. Report with citations, Evidence Library and Run History.
 5. Ask the Graph page.
 6. Later: the evaluation design discussion, plus optional criticality and link-prediction
    views (brief outputs 2 and 3).
 
 ## Verification
-- Backend unittest tests:
+- Backend unittest tests (`npm test` in `webapp/backend`):
   - The graph endpoints return the right shapes.
   - Profiles built for VS Industry Berhad match a hand-written Cypher query.
   - `lookup_evidence` on fixture payloads matches `expected_ids.json`.
