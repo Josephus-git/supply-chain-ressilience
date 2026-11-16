@@ -1,10 +1,10 @@
 # App plan: Dyson supply-chain risk decision-support web app
 
-**Status (2026-11-16):** phases 1–4 are done (backend, Home, Graph Explorer, Ask the
-Graph, Evidence Library), plus the phase 3 follow-ups (Ask → Graph Explorer handoff,
-value-only rows drawn as a graph, Inspector opening on Properties; up to 13fd71c). Risk
-Assessment (with its History tab) is the remaining placeholder page and is next. Tests:
-61 backend, 157 engine, all passing; `tsc` and oxlint clean.
+**Status (2026-11-16):** phases 1–4 are done and committed (backend, Home, Graph
+Explorer, Ask the Graph, and the Evidence Library, now shown as **Risk Library**; up to
+f2a0cfd). Risk Assessment (with its History tab) is the last placeholder page and is
+next; its spec is open for discussion before building. Tests: 61 backend, 157 engine,
+all passing; `tsc` and oxlint clean.
 
 ## Context
 Research brief: "KG and LLM-based decision support for supply-chain resilience and supplier
@@ -24,7 +24,7 @@ every run so that discussion has data to work with.
   generators that call LangChain chains are enough. The user knows LangChain but not LangGraph.
 - The first version has a Home page plus all five pages.
 - **Page and build order (revised 2026-11-16):** Home → Graph Explorer → Ask the Graph →
-  Evidence Library → Risk Assessment. Risk Assessment is last because it is the main
+  Evidence Library (shown as Risk Library) → Risk Assessment. Risk Assessment is last because it is the main
   result of the app and the research. Run History is a tab inside Risk Assessment, not a
   separate page.
 - Risk Assessment covers **one component (BOM line) per run**. Several parts mean several
@@ -135,7 +135,15 @@ runs/       one JSON file per assessment run (payload, retrieved context, Cypher
      applied.
    - It is also a contrast case for the evaluation: the Cypher is shown, so its mistakes
      can be seen.
-3. **Evidence Library** (`pages/Evidence.tsx`, `components/evidence/`)
+3. **Risk Library** (built as the Evidence Library; `pages/Evidence.tsx`, `components/evidence/`)
+   - **Name:** renamed to "Risk Library" in the nav and page title only (f2a0cfd). The
+     route stays `/evidence/:id?`, the API stays `/api/evidence`, and code names stay
+     `Evidence*`. A second `/risk-library` route was tried and dropped: one page, one URL.
+   - **Drill-down layout** (f2a0cfd): 4 risk groups (`RISK_GROUPS` in `lib/evidence.ts`:
+     supplier and operations, logistics and transport, trade policy and markets, natural
+     hazards) → a tile per risk type with a one-line blurb (`RISK_BLURB`) and its record
+     count and date span → `?type=` card list with chips for the sibling types → the
+     detail sheet. A text search with no type chosen groups its results by type.
    - Browse the 109 engine records (18 risk types) as cards. Filters: risk type, country
      (from every country-code field; see phase 4 notes), date range and a text search over the id, scope,
      entities and publisher. Filter state lives in the URL.
@@ -167,6 +175,9 @@ runs/       one JSON file per assessment run (payload, retrieved context, Cypher
      e. the LLM report, streamed
    - Citation chips in the report link to evidence cards and to the graph elements they
      cite. A mini graph highlights the candidate suppliers.
+   - Note: the page needs both Neo4j (retrieval, profiles) and the evidence engine. The
+     header health dot reports them separately (c70697a), so the page should say which
+     part is missing if Neo4j is down.
    - **History tab:** reopen any past run with its full trace. This data will feed the
      evaluation.
 
@@ -249,6 +260,10 @@ schema 1.1; see SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md section 6.1) → `lookup_e
 - `GET /api/ask/examples`, `GET /api/ask/runs`, `GET /api/ask/runs/{id}`
 - `GET /api/runs`
 - `GET /api/runs/{id}`
+- `GET /api/health`: Neo4j and the evidence engine reported separately (c70697a). If
+  Neo4j is down, `status` is `degraded`, `neo4j` is `unavailable` and `neo4j_error`
+  holds the reason; the evidence engine still works. The header dot describes Neo4j only
+  and its tooltip has a section for each part.
 
 ## Phases
 1. **Done (5b867bf).** Backend skeleton, read-only Neo4j client, `reference/locations.json`, and the home and
@@ -278,7 +293,7 @@ schema 1.1; see SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md section 6.1) → `lookup_e
      comes from `startView.ts`, and the node inspector opens on Properties.
      (Commit f8d0662 is labelled "phase 4" but holds phase 3. 971fc8f says "evidence
      library" but changes the Ask page.)
-4. **Done (2026-11-16).** Evidence Library: `evidence_api.py` (`GET /api/evidence`,
+4. **Done (2026-11-16; 8e83375, c70697a, f2a0cfd).** Evidence Library (shown as Risk Library): `evidence_api.py` (`GET /api/evidence`,
    `GET /api/evidence/{id}`), `pages/Evidence.tsx` (route `evidence/:id?`),
    `components/evidence/` (`EvidenceCard`, `EvidenceDetail`, `parts`), `lib/evidence.ts`,
    and 16 tests in `tests/test_evidence.py` (fake Neo4j, real records). Notes from building it:
@@ -302,8 +317,12 @@ schema 1.1; see SUPPLIER_RISK_EVIDENCE_ENGINE_PLAN.md section 6.1) → `lookup_e
    - Graph link: supplier nodes are read once from Neo4j and cached. If Neo4j is down the
      library still works and the panel says the link is unavailable. Country-only matching
      is broad (MY links all 6 Malaysian supplier nodes); the panel says so.
-5. **Next.** Risk Assessment: the assessment pipeline, SSE, trace timeline, report with citations,
-   and the History tab.
+   - Follow-ups: the health check no longer claims Neo4j is connected when it is not
+     (c70697a), and the page was renamed Risk Library and reorganised as a drill-down
+     (f2a0cfd; see Pages). `Placeholder` takes an optional `phase`.
+5. **Next (to discuss first).** Risk Assessment: the assessment pipeline, SSE, trace
+   timeline, report with citations, and the History tab. The page spec above is still the
+   2026-11-15 outline and should be detailed and approved before building.
 6. Later: the evaluation design discussion, plus optional criticality and link-prediction
    views (brief outputs 2 and 3).
 
