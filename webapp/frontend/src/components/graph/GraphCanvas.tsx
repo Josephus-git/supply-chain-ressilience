@@ -32,6 +32,8 @@ interface Props {
   layoutName: LayoutName
   /** Node IDs to keep at the centre (e.g. Dyson). */
   roots: string[]
+  /** Node IDs drawn with a ring (e.g. Risk Assessment's candidate suppliers). */
+  highlight?: string[]
 }
 
 
@@ -139,6 +141,7 @@ function stylesheet(mode: Mode): StylesheetJson {
       },
     },
     { selector: 'node.root', style: { 'font-size': 13, 'font-weight': 600 } },
+    { selector: 'node.cand', style: { 'border-width': 4, 'border-color': mode === 'dark' ? '#fbbf24' : '#b45309', 'border-opacity': 1 } },
     {
       selector: 'edge',
       style: {
@@ -171,7 +174,7 @@ function stylesheet(mode: Mode): StylesheetJson {
 }
 
 export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCanvas(
-  { nodes, edges, mode, selected, onSelect, onExpand, layoutName, roots },
+  { nodes, edges, mode, selected, onSelect, onExpand, layoutName, roots, highlight },
   ref,
 ) {
   const container = useRef<HTMLDivElement>(null)
@@ -375,6 +378,14 @@ export const GraphCanvas = forwardRef<GraphCanvasHandle, Props>(function GraphCa
       n.toggleClass('root', roots.includes(n.id()))
     })
   }, [roots])
+
+  // Ring the highlighted nodes (after any element diff).
+  useEffect(() => {
+    const ids = new Set(highlight ?? [])
+    cyRef.current?.nodes().forEach((n) => {
+      n.toggleClass('cand', ids.has(n.id()))
+    })
+  }, [highlight, nodes])
 
   // Re-run the layout when the user picks another one.
   useEffect(() => {

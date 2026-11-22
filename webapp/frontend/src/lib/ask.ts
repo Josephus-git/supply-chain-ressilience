@@ -158,11 +158,16 @@ export function reduceEvent(state: LiveRun | null, e: AskEvent): LiveRun | null 
 // ---------------------------------------------------------------------------- SSE over POST
 
 /** POST the question and call `onEvent` for each Server-Sent Event until the stream ends. */
-export async function streamAsk(question: string, onEvent: (e: AskEvent) => void, signal: AbortSignal): Promise<void> {
-  const res = await fetch('/api/ask', {
+export function streamAsk(question: string, onEvent: (e: AskEvent) => void, signal: AbortSignal): Promise<void> {
+  return postSSE('/api/ask', { question }, onEvent, signal)
+}
+
+/** POST a JSON body and call `onEvent` for each Server-Sent Event until the stream ends. */
+export async function postSSE<E>(url: string, body: unknown, onEvent: (e: E) => void, signal: AbortSignal): Promise<void> {
+  const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
-    body: JSON.stringify({ question }),
+    body: JSON.stringify(body),
     signal,
   })
   if (!res.ok || !res.body) {
@@ -186,7 +191,7 @@ export async function streamAsk(question: string, onEvent: (e: AskEvent) => void
       const block = buf.slice(0, cut)
       buf = buf.slice(cut + 2)
       const data = block.split('\n').filter((l) => l.startsWith('data: ')).map((l) => l.slice(6)).join('\n')
-      if (data) onEvent(JSON.parse(data) as AskEvent)
+      if (data) onEvent(JSON.parse(data) as E)
     }
   }
 }

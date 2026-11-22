@@ -80,14 +80,20 @@ export function RowsTable({ result, fileName }: { result: RunStep; fileName: str
 }
 
 /** Bloom-style view of the nodes in the rows (and the relationships among them). */
-export function RowsGraphView({ graph, question }: { graph: RowsGraph; question?: string }) {
+export function RowsGraphView({ graph, question, highlight }: { graph: RowsGraph; question?: string; highlight?: string[] }) {
   const { mode } = useTheme()
   const navigate = useNavigate()
   const ref = useRef<GraphCanvasHandle>(null)
   const [selected, setSelected] = useState<Selection>(null)
   // Start with ~15 nodes; double-clicking a node reveals more of its links from the result.
-  const [shown, setShown] = useState(() => pickStartNodes(graph.nodes, graph.edges))
-  useEffect(() => setShown(pickStartNodes(graph.nodes, graph.edges)), [graph])
+  const start = useMemo(() => {
+    const s = pickStartNodes(graph.nodes, graph.edges)
+    const ids = new Set(graph.nodes.map((n) => n.id))
+    for (const id of highlight ?? []) if (ids.has(id)) s.add(id)
+    return s
+  }, [graph, highlight])
+  const [shown, setShown] = useState(start)
+  useEffect(() => setShown(start), [start])
   const visible = useMemo(() => {
     const nodes = graph.nodes.filter((n) => shown.has(n.id))
     const edges = graph.edges.filter((e) => shown.has(e.source) && shown.has(e.target))
@@ -138,6 +144,7 @@ export function RowsGraphView({ graph, question }: { graph: RowsGraph; question?
           onExpand={reveal}
           layoutName="fcose"
           roots={roots}
+          highlight={highlight}
         />
         <div className="absolute top-2 right-2 flex gap-1">
           <Tooltip>

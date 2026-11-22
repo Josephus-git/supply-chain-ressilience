@@ -19,13 +19,13 @@ export const NAV = [
   { to: '/explorer', label: 'Graph Explorer', icon: Network },
   { to: '/ask', label: 'Ask the Graph', icon: MessagesSquare },
   { to: '/evidence', label: 'Risk Library', icon: BookOpenText },
-  { to: '/assess', label: 'Risk Assessment', icon: Gauge, phase: 5 },
+  { to: '/assess', label: 'Risk Assessment', icon: Gauge },
 ]
 
 function NavItems({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <nav className="flex flex-col gap-0.5">
-      {NAV.map(({ to, label, icon: Icon, end, phase }) => (
+      {NAV.map(({ to, label, icon: Icon, end }) => (
         <NavLink
           key={to}
           to={to}
@@ -42,11 +42,6 @@ function NavItems({ onNavigate }: { onNavigate?: () => void }) {
         >
           <Icon className="size-4 shrink-0" />
           <span className="flex-1 truncate">{label}</span>
-          {phase && (
-            <span className="rounded border border-sidebar-border px-1 text-[10px] text-muted-foreground">
-              soon
-            </span>
-          )}
         </NavLink>
       ))}
     </nav>
@@ -78,6 +73,8 @@ function HealthDot() {
     down: 'Backend unreachable',
     checking: 'Connecting…',
   }[state]
+  const openaiOk = data?.openai?.status === 'reachable' || data?.openai?.status === 'not_checked'
+  const tokens = data?.tokens_today
   return (
     <Tooltip>
       <TooltipTrigger asChild>
@@ -91,6 +88,23 @@ function HealthDot() {
             )}
           />
           <span className="hidden sm:inline">{label}</span>
+          {data && !openaiOk && (
+            <span className="flex items-center gap-1 text-amber-700 dark:text-amber-300">
+              <span className="size-2 rounded-full bg-amber-500" />
+              <span className="hidden sm:inline">OpenAI {data.openai.status === 'no_key' ? 'key missing' : 'unreachable'}</span>
+            </span>
+          )}
+          {tokens && (
+            <span
+              className={cn(
+                'hidden rounded border px-1.5 py-px tabular md:inline',
+                tokens.level === 'warn' && 'border-amber-500/50 bg-amber-500/10 text-amber-800 dark:text-amber-300',
+                tokens.level === 'over' && 'border-red-500/50 bg-red-500/10 text-red-700 dark:text-red-300',
+              )}
+            >
+              {Math.round(tokens.used / 1000)}k / {Math.round(tokens.limit / 1000)}k tokens
+            </span>
+          )}
         </div>
       </TooltipTrigger>
       <TooltipContent side="bottom" className="max-w-xs">
@@ -108,6 +122,20 @@ function HealthDot() {
               <div className="font-medium">Risk evidence engine (local JSON, not Neo4j)</div>
               <div>{data.evidence_records} records · engine {data.engine_version}</div>
               <div className="font-mono text-[10px] opacity-80">{data.evidence_snapshot_id}</div>
+            </div>
+            <div className="space-y-0.5 border-t border-current/20 pt-2">
+              <div className="font-medium">OpenAI (Ask the Graph, Risk Assessment)</div>
+              <div>
+                {{ reachable: 'Key set, API reachable', unreachable: 'API unreachable', no_key: 'No OPENAI_API_KEY in .env', not_checked: 'Not checked' }[data.openai.status]}
+                {data.openai.status === 'reachable' && ' (checked by listing models; no tokens spent)'}
+              </div>
+              {data.openai.error && <div className="line-clamp-3 opacity-80">{data.openai.error}</div>}
+              <div>
+                Today ({data.tokens_today.day_utc}, UTC): {data.tokens_today.used.toLocaleString('en-GB')} of {data.tokens_today.limit.toLocaleString('en-GB')} free tokens
+                {' '}in {data.tokens_today.runs} run{data.tokens_today.runs === 1 ? '' : 's'}
+                {data.tokens_today.level !== 'ok' && ` (${data.tokens_today.level === 'over' ? 'past the allowance' : 'near the allowance'})`}.
+              </div>
+              <div className="opacity-70">Warning only; runs are never blocked. Reset assumed at 00:00 UTC.</div>
             </div>
           </div>
         ) : isError ? (

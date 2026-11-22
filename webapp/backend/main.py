@@ -23,10 +23,13 @@ from supplier_risk_engine.engine import describe_database
 from supplier_risk_engine.loader import LoadedDatabase, load_database
 
 from .ask.api import ask_router
-from .config import ASK_RUNS_DIR, FRONTEND_DIST
+from .config import ASK_RUNS_DIR, ASSESS_RUNS_DIR, FRONTEND_DIST
 from .evidence_api import evidence_router
 from .graph_api import graph_router, home_router
 from .neo4j_client import ReadOnlyNeo4j
+from .pipeline.api import assess_router
+from .products_api import products_router
+from .usage import openai_status, tokens_today
 
 
 def create_app(
@@ -35,8 +38,13 @@ def create_app(
     evidence_db: LoadedDatabase | None = None,
     ask_llm: Any = None,
     ask_runs_dir: Path | None = None,
+    assess_cypher_llm: Any = None,
+    assess_report_llm: Any = None,
+    assess_runs_dir: Path | None = None,
+    check_openai: bool = True,
 ) -> FastAPI:
-    """`ask_llm` and `ask_runs_dir` let tests swap in a fake chat model and a temp folder."""
+    """The LLM and runs-dir arguments let tests swap in fake chat models and temp folders;
+    `check_openai=False` keeps the health check from calling OpenAI."""
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         owns_client = neo4j_client is None
@@ -44,6 +52,10 @@ def create_app(
         app.state.evidence_db = evidence_db or load_database()
         app.state.ask_llm = ask_llm  # None: build cypher_llm() on first question
         app.state.ask_runs_dir = ask_runs_dir or ASK_RUNS_DIR
+        app.state.assess_cypher_llm = assess_cypher_llm  # None: cypher_llm() on first run
+        app.state.assess_report_llm = assess_report_llm  # None: report_llm() on first run
+        app.state.assess_runs_dir = assess_runs_dir or ASSESS_RUNS_DIR
+        app.state.assess_cache = {}
         try:
             yield
         finally:
@@ -55,11 +67,15 @@ def create_app(
     app.include_router(graph_router)
     app.include_router(ask_router)
     app.include_router(evidence_router)
+    app.include_router(products_router)
+    app.include_router(assess_router)
 
     @app.get("/api/health", tags=["meta"])
     def health() -> dict[str, Any]:
-        """Two independent parts: the Neo4j knowledge graph, and the evidence
-        engine (local JSON files loaded at startup, no Neo4j)."""
+        """Three independent parts: the Neo4j knowledge graph, the evidence
+        engine (local JSON files loaded at startup, no Neo4j), and OpenAI (key
+        present and API reachable, checked by listing models, so no tokens are
+        spent; cached for five minutes). Plus today's token use."""
         neo4j_error = None
         try:
             app.state.neo4j.verify()
@@ -74,6 +90,8 @@ def create_app(
             "evidence_snapshot_id": db["data_snapshot_id"],
             "engine_version": db["engine_version"],
             "warnings": list(app.state.evidence_db.warnings),
+            "openai": openai_status() if check_openai else {"status": "not_checked", "error": None},
+            "tokens_today": tokens_today(app.state.ask_runs_dir, app.state.assess_runs_dir),
         }
 
     if FRONTEND_DIST.is_dir():

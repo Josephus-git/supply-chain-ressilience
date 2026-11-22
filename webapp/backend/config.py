@@ -12,6 +12,7 @@ BACKEND_DIR = Path(__file__).resolve().parent
 REPO_ROOT = BACKEND_DIR.parents[1]
 REFERENCE_DIR = BACKEND_DIR / "reference"
 LOCATIONS_PATH = REFERENCE_DIR / "locations.json"
+PRODUCT_CATEGORIES_PATH = REFERENCE_DIR / "product_categories.json"
 RUNS_DIR = REPO_ROOT / "runs"
 FRONTEND_DIST = REPO_ROOT / "webapp" / "frontend" / "dist"
 
@@ -29,6 +30,33 @@ load_dotenv(REPO_ROOT / ".env")
 ASK_CYPHER_MODEL = os.getenv("ASK_CYPHER_MODEL") or CHAT_MODEL
 REPORT_MODEL = os.getenv("REPORT_MODEL") or CHAT_MODEL
 ASK_RUNS_DIR = RUNS_DIR / "ask"
+ASSESS_RUNS_DIR = RUNS_DIR / "assess"
+
+
+def _int_env(name: str, default: int) -> int:
+    try:
+        return int(os.getenv(name) or default)
+    except ValueError:
+        return default
+
+
+def _float_env(name: str, default: float) -> float:
+    try:
+        return float(os.getenv(name) or default)
+    except ValueError:
+        return default
+
+
+# API credit safety (C1, C2 in METHODOLOGY_NOTES.md). Every LLM call has an
+# output cap (reasoning tokens included), a timeout and one retry at most.
+CYPHER_MAX_TOKENS = _int_env("CYPHER_MAX_TOKENS", 6_000)
+CYPHER_TIMEOUT_S = _float_env("CYPHER_TIMEOUT_S", 120)
+REPORT_MAX_TOKENS = _int_env("REPORT_MAX_TOKENS", 16_000)
+REPORT_TIMEOUT_S = _float_env("REPORT_TIMEOUT_S", 300)
+LLM_MAX_RETRIES = 1
+# The OpenAI free-token allowance per day, and the share at which the app warns.
+DAILY_FREE_TOKENS = _int_env("DAILY_FREE_TOKENS", 250_000)
+TOKEN_WARN_FRACTION = _float_env("TOKEN_WARN_FRACTION", 0.8)
 
 
 @dataclass(frozen=True)
