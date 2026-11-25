@@ -187,6 +187,9 @@ ITEMS (with their candidates and matched products):
 SUPPLIERS (profiles as of {as_of_date}, with the evidence linked to each):
 {suppliers}
 
+SHARED EVIDENCE (linked in exactly the same way to every supplier in SUPPLIERS):
+{shared}
+
 COUNTRY EVIDENCE (country-level lookups):
 {countries}
 

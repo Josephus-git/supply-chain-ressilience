@@ -339,6 +339,7 @@ async def assess(
             run["report"] = {
                 "source": "llm",
                 "prompt": prompt_text,
+                "shared_evidence": inputs["shared_evidence"],
                 "raw": _raw_text(out.get("raw")),
                 "parsed": parsed,
                 "parsing_error": str(out["parsing_error"]) if out.get("parsing_error") else None,

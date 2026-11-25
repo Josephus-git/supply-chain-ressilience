@@ -17,6 +17,7 @@ from typing import Any
 
 from .prompts import INSUFFICIENT
 
+LINK_FIELDS = ("evidence_id", "risk_type", "link_basis", "link_strength", "matched_values", "date_status")
 DESCRIPTION_CHARS = 320
 LIMITATION_CHARS = 220
 
@@ -88,6 +89,24 @@ def report_inputs(
         row["candidates"] = cands or "none found in the graph"
         item_rows.append(row)
 
+    # R22: a link that is identical for every profiled supplier (same record, basis, strength,
+    # matched values and date status) is listed once under SHARED EVIDENCE instead of under
+    # each supplier. Only with two or more suppliers. The run's evidence dict is unchanged,
+    # so the citation check (R18) still sees these ids as linked to each supplier.
+    def link_row(l: dict[str, Any]) -> dict[str, Any]:
+        return {k: l[k] for k in LINK_FIELDS}
+
+    def link_key(l: dict[str, Any]) -> str:
+        return json.dumps(link_row(l), sort_keys=True, default=str)
+
+    shared_keys: set[str] = set()
+    if len(profiles) >= 2:
+        per_supplier = [
+            {link_key(l) for l in (evidence["by_supplier"].get(sid) or {}).get("links", [])} for sid in profiles
+        ]
+        shared_keys = set.intersection(*per_supplier)
+    shared_rows = sorted((json.loads(k) for k in shared_keys), key=lambda r: (r["evidence_id"], r["link_basis"]))
+
     supplier_rows = []
     for sid, p in sorted(profiles.items()):
         fw = p["footprint_window"]
@@ -103,17 +122,15 @@ def report_inputs(
         for fid in facts:
             cites[fid] = {"kind": "graph", "supplier_id": sid}
         links = (evidence["by_supplier"].get(sid) or {}).get("links", [])
+        own = [link_row(l) for l in links if link_key(l) not in shared_keys]
         supplier_rows.append(
             {
                 "supplier_id": sid,
                 "supplier_name": p["supplier_name"],
                 "company": (p.get("_context") or {}).get("company"),
                 "figures": facts,
-                "evidence_links": [
-                    {k: l[k] for k in ("evidence_id", "risk_type", "link_basis", "link_strength", "matched_values", "date_status")}
-                    for l in links
-                ]
-                or "none linked as of the date",
+                "evidence_links": own
+                or ("none beyond SHARED EVIDENCE" if shared_rows else "none linked as of the date"),
             }
         )
 
@@ -153,10 +170,12 @@ def report_inputs(
         "sections": {
             "items": _dump(item_rows),
             "suppliers": _dump(supplier_rows),
+            "shared": _dump(shared_rows),
             "countries": _dump(country_rows),
             "evidence": _dump(records),
         },
         "citations": cites,
+        "shared_evidence": sorted({r["evidence_id"] for r in shared_rows}),
     }
 
 
