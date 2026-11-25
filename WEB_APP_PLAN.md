@@ -507,3 +507,33 @@ The OpenAI account gets 250,000 free tokens a day, so the app warns before that 
   to a returned evidence record, and that the run JSON is saved. Done 2026-11-16.
 - Existing engine tests still pass:
   `python -m unittest discover -s supplier_risk_engine/tests -t .`
+
+## Deferred: embedding-based product matching (recorded 2026-11-25, not started)
+
+**Status:** planned. To be built only after the evaluation design is complete and understood.
+
+**Idea (the original plan):** when a user types a product, picks one, or describes a product
+in free text, the graph should find similar products through embeddings, not only through
+the Cypher LLM's keyword matching (`toLower(...) CONTAINS ...`).
+
+**What already exists**
+- `pipeline/retrieve.py` (phase 1) does vector search over `Product.embedding` with the
+  `embedding` index and `text-embedding-3-small`. It returns products with shipment and
+  supplier counts up to `as_of_date`.
+- It is **not called** anywhere in Risk Assessment today. Candidate finding is done only by
+  the Cypher LLM (R3, R15).
+- `langchain/schema.txt` lists `Product.embedding`; the Ask copy removes it.
+
+**Questions to settle before building**
+- Check that every `Product` node still has an embedding (the script that filled them,
+  `rag/update_embeddings.py`, was deleted).
+- Where it plugs in: replace the Cypher LLM's candidate query, run alongside it and merge,
+  or act only as a fallback when the Cypher query returns no rows.
+- A score threshold (`min_score`) and `top_k`, and how they are chosen.
+- The embedding model is OpenAI. In the M2 (Ollama) and M3 (Claude) arms, candidate
+  finding would still use an OpenAI embedding, which must be stated.
+
+**Effect on the evaluation**
+- It changes what the risk LLM sees, so it needs a new METHODOLOGY_NOTES row before it is built.
+- Runs made before and after it are different systems. Either build it before the
+  evaluation runs, or treat it as a later version and compare it as its own arm.

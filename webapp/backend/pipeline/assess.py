@@ -32,7 +32,7 @@ from langchain_core.language_models import BaseChatModel
 from supplier_risk_engine.loader import LoadedDatabase
 
 from ..ask.pipeline import check_cypher, run_query, schema_text
-from ..config import ASK_CYPHER_MODEL, ASSESS_RUNS_DIR, REPORT_MODEL
+from ..config import ASK_CYPHER_MODEL, ASSESS_GRAPH_OFF, ASSESS_RUNS_DIR, REPORT_MODEL
 from ..evidence_api import EvidenceView
 from ..neo4j_client import ReadOnlyNeo4j
 from ..runs_store import new_run_id, now_iso, save_run
@@ -178,7 +178,11 @@ async def assess(
     runs_dir: Path | None = ASSESS_RUNS_DIR,
     cypher_model: str = ASK_CYPHER_MODEL,
     report_model: str = REPORT_MODEL,
+    graph_off: bool = ASSESS_GRAPH_OFF,
 ) -> AsyncIterator[Event]:
+    """`graph_off=True` is the D11 no-graph baseline: no Cypher LLM, no graph profiles or
+    matches. Countries come only from the request text, and the risk LLM sees only
+    country-level engine evidence (the R4 path)."""
     items = [{**it, "n": i} for i, it in enumerate(items[:MAX_ITEMS], start=1)]
     goal = (goal or "").strip() or (None if mode == "describe" else DEFAULT_GOAL)
     run: dict[str, Any] = {
@@ -191,6 +195,7 @@ async def assess(
         "date_mode": date_mode,
         "rerun_of": rerun_of,
         "models": {"cypher": cypher_model, "report": report_model},
+        "graph_off": graph_off,
         "started_at": now_iso(),
         "finished_at": None,
         "status": "running",
@@ -204,7 +209,7 @@ async def assess(
         "error": None,
         "failed_step": None,
     }
-    header_keys = ("run_id", "kind", "mode", "items", "goal", "as_of_date", "date_mode", "rerun_of", "models", "started_at")
+    header_keys = ("run_id", "kind", "mode", "items", "goal", "as_of_date", "date_mode", "rerun_of", "models", "graph_off", "started_at")
     yield {"event": "run", "run": {k: run[k] for k in header_keys}}
 
     usage: dict[str, Any] = {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0, "reasoning_tokens": 0, "by_model": {}}
@@ -217,7 +222,7 @@ async def assess(
         # ---------------------------------------------------------------- 1. find candidates
         previous: dict[str, Any] | None = None
         final: dict[str, Any] | None = None
-        for n in range(1, MAX_ATTEMPTS + 1):
+        for n in range(1, (0 if graph_off else MAX_ATTEMPTS) + 1):
             attempt: dict[str, Any] = {"attempt": n, "generate": None, "check": None, "run": None, "problem": None}
             run["attempts"].append(attempt)
 
@@ -252,7 +257,7 @@ async def assess(
             previous = {"cypher": check.cypher or gen["cypher"], "problem": problem}
 
         # The labelled suggestions of the attempt that was used (or the last one).
-        used_gen = (final or {}).get("generate") or run["attempts"][-1]["generate"] or {}
+        used_gen = (final or {}).get("generate") or (run["attempts"][-1]["generate"] if run["attempts"] else None) or {}
         rows = (final or {}).get("result", {}).get("rows") or []
         cand = candidates_from_rows(rows, len(items))
 
@@ -261,10 +266,16 @@ async def assess(
         yield {"event": "step", "step": step, "attempt": None, "status": "running", "data": {}}
         started = time.perf_counter()
         queries: list[dict[str, Any]] = []
-        supplier_ids = sorted({c["supplier_id"] for cs in cand.values() for c in cs})
-        built = await asyncio.to_thread(build_profiles, client, supplier_ids, as_of, log=queries)
-        pairs = [{"item": n, "supplier_id": c["supplier_id"], "product_id": pid} for n, cs in cand.items() for c in cs for pid in c["product_ids"]]
-        matched = await asyncio.to_thread(match_products, client, pairs, as_of, log=queries)
+        if graph_off:
+            # D11: no graph profiles or matches are built; no Neo4j query runs in this step.
+            built = {"profiles": {}, "inactive": [], "unknown": []}
+            pairs: list[dict[str, Any]] = []
+            matched: list[dict[str, Any]] = []
+        else:
+            supplier_ids = sorted({c["supplier_id"] for cs in cand.values() for c in cs})
+            built = await asyncio.to_thread(build_profiles, client, supplier_ids, as_of, log=queries)
+            pairs = [{"item": n, "supplier_id": c["supplier_id"], "product_id": pid} for n, cs in cand.items() for c in cs for pid in c["product_ids"]]
+            matched = await asyncio.to_thread(match_products, client, pairs, as_of, log=queries)
         by_pair: dict[tuple[int, str], list[dict[str, Any]]] = {}
         for m in matched:
             by_pair.setdefault((m["item"], m["supplier_id"]), []).append(m)

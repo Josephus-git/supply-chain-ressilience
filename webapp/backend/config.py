@@ -29,6 +29,12 @@ load_dotenv(REPO_ROOT / ".env")
 # Ask the Graph has its own Cypher-writing model; Risk Assessment will use REPORT_MODEL.
 ASK_CYPHER_MODEL = os.getenv("ASK_CYPHER_MODEL") or CHAT_MODEL
 REPORT_MODEL = os.getenv("REPORT_MODEL") or CHAT_MODEL
+# LangChain provider for each model (e.g. "openai", "anthropic", "ollama"). Changing a
+# model's provider is a methodology change: see METHODOLOGY_NOTES.md (M1-M3).
+ASK_CYPHER_PROVIDER = os.getenv("ASK_CYPHER_PROVIDER") or "openai"
+REPORT_PROVIDER = os.getenv("REPORT_PROVIDER") or "openai"
+# D11 no-graph baseline. "1" makes Risk Assessment skip the Cypher LLM and graph profiles by default.
+ASSESS_GRAPH_OFF = (os.getenv("ASSESS_GRAPH_OFF") or "").strip() == "1"
 ASK_RUNS_DIR = RUNS_DIR / "ask"
 ASSESS_RUNS_DIR = RUNS_DIR / "assess"
 

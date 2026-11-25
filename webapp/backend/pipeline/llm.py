@@ -13,14 +13,14 @@ from functools import lru_cache
 from langchain.chat_models import init_chat_model
 from langchain_core.language_models import BaseChatModel
 
-from ..config import LLM_MAX_RETRIES, REPORT_MAX_TOKENS, REPORT_MODEL, REPORT_TIMEOUT_S
+from ..config import LLM_MAX_RETRIES, REPORT_MAX_TOKENS, REPORT_MODEL, REPORT_PROVIDER, REPORT_TIMEOUT_S
 
 
 @lru_cache(maxsize=1)
 def report_llm() -> BaseChatModel:
     return init_chat_model(
         REPORT_MODEL,
-        model_provider="openai",
+        model_provider=REPORT_PROVIDER,
         max_tokens=REPORT_MAX_TOKENS,
         timeout=REPORT_TIMEOUT_S,
         max_retries=LLM_MAX_RETRIES,

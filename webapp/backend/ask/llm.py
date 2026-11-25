@@ -18,14 +18,14 @@ from functools import lru_cache
 from langchain.chat_models import init_chat_model
 from langchain_core.language_models import BaseChatModel
 
-from ..config import ASK_CYPHER_MODEL, CYPHER_MAX_TOKENS, CYPHER_TIMEOUT_S, LLM_MAX_RETRIES
+from ..config import ASK_CYPHER_MODEL, ASK_CYPHER_PROVIDER, CYPHER_MAX_TOKENS, CYPHER_TIMEOUT_S, LLM_MAX_RETRIES
 
 
 @lru_cache(maxsize=1)
 def cypher_llm() -> BaseChatModel:
     return init_chat_model(
         ASK_CYPHER_MODEL,
-        model_provider="openai",
+        model_provider=ASK_CYPHER_PROVIDER,
         max_tokens=CYPHER_MAX_TOKENS,
         timeout=CYPHER_TIMEOUT_S,
         max_retries=LLM_MAX_RETRIES,
