@@ -1,0 +1,326 @@
+group,query,rank,score,product_id,product_description
+in_scope,cordless vacuum cleaner,1,0.7312,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+in_scope,cordless vacuum cleaner,2,0.7281,hs:850760,Sna Spare Vacuum Cleaner
+in_scope,cordless vacuum cleaner,3,0.6944,hs:853710,Vacuum Cleaners Dyson Wash Hard Floor Wet Cleaner After Assembly Process Delivery Address Ups West Chester Saint Drwest Chesterohusa
+in_scope,cordless vacuum cleaner,4,0.6939,hs:858011,Said Vacuum Cleaner Delivery Expeditors Contact Person Add Nerissa Alred Expeditors Expeditors Contact
+in_scope,cordless vacuum cleaner,5,0.6913,hs:850870,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+in_scope,stick vacuum,1,0.6668,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+in_scope,stick vacuum,2,0.6514,hs:851631,Vacuum Cleaner
+in_scope,stick vacuum,3,0.6487,hs:853710,Vacuum Cleaners Dyson Wash Hard Floor Wet Cleaner After Assembly Process Delivery Address Ups West Chester Saint Drwest Chesterohusa
+in_scope,stick vacuum,4,0.6487,hs:850760,Sna Spare Vacuum Cleaner
+in_scope,stick vacuum,5,0.6461,hs:841490,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+in_scope,vacuum spare parts,1,0.7908,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+in_scope,vacuum spare parts,2,0.7741,hs:850870,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+in_scope,vacuum spare parts,3,0.7599,hs:841490,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+in_scope,vacuum spare parts,4,0.7522,hs:850760,Sna Spare Vacuum Cleaner
+in_scope,vacuum spare parts,5,0.7458,hs:858011,Said Vacuum Cleaner Delivery Expeditors Contact Person Add Nerissa Alred Expeditors Expeditors Contact
+in_scope,vacuum cleaner battery,1,0.7776,hs:850760,Sna Spare Vacuum Cleaner
+in_scope,vacuum cleaner battery,2,0.7453,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+in_scope,vacuum cleaner battery,3,0.7056,hs:853710,Vacuum Cleaners Dyson Wash Hard Floor Wet Cleaner After Assembly Process Delivery Address Ups West Chester Saint Drwest Chesterohusa
+in_scope,vacuum cleaner battery,4,0.7026,hs:850870,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+in_scope,vacuum cleaner battery,5,0.6995,hs:858011,Said Vacuum Cleaner Delivery Expeditors Contact Person Add Nerissa Alred Expeditors Expeditors Contact
+in_scope,hair dryer,1,0.725,hs:851632,Airwrap Styler Hair Styler Delivery Address Logistics Blvdwaltonky
+in_scope,hair dryer,2,0.7176,hs:851631,Vacuum Cleaner
+in_scope,hair dryer,3,0.7048,hs:841459,Hand Dryer
+in_scope,hair dryer,4,0.6981,hs:851629,Fan Heater Pallet Fre All Including Destination Charges
+in_scope,hair dryer,5,0.6932,hs:845129,Electronics Spare Accessories Vacuum Cleaner Hair Dryer
+in_scope,hair styler,1,0.7088,hs:851632,Airwrap Styler Hair Styler Delivery Address Logistics Blvdwaltonky
+in_scope,hair styler,2,0.6436,hs:851631,Vacuum Cleaner
+in_scope,hair styler,3,0.6383,hs:851690,Electronic Spare Accessories
+in_scope,hair styler,4,0.6364,hs:330499,Hair Care
+in_scope,hair styler,5,0.6286,hs:960329,Dyson Round Brush
+in_scope,air purifier,1,0.6748,hs:841459,Hand Dryer
+in_scope,air purifier,2,0.6702,hs:853650,Activated Carbon Filter Retail
+in_scope,air purifier,3,0.6674,hs:841451,Fan Pallet Free All Freightprepaid Including Destination Charges
+in_scope,air purifier,4,0.6673,hs:841490,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+in_scope,air purifier,5,0.6565,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+in_scope,desk fan,1,0.7085,hs:841451,Fan Pallet Free All Freightprepaid Including Destination Charges
+in_scope,desk fan,2,0.6947,hs:851629,Fan Heater Pallet Fre All Including Destination Charges
+in_scope,desk fan,3,0.679,hs:870899,Electronics Spare Accessories Fan
+in_scope,desk fan,4,0.6679,hs:841459,Hand Dryer
+in_scope,desk fan,5,0.6441,hs:392690,Electronics Spare Accessories Vacuum Cleaner Hair Dryer Fan
+in_scope,fan heater,1,0.7332,hs:851629,Fan Heater Pallet Fre All Including Destination Charges
+in_scope,fan heater,2,0.7016,hs:841451,Fan Pallet Free All Freightprepaid Including Destination Charges
+in_scope,fan heater,3,0.6965,hs:841459,Hand Dryer
+in_scope,fan heater,4,0.6897,hs:851631,Vacuum Cleaner
+in_scope,fan heater,5,0.6821,hs:851690,Electronic Spare Accessories
+in_scope,hand dryer,1,0.7403,hs:841459,Hand Dryer
+in_scope,hand dryer,2,0.7006,hs:851631,Vacuum Cleaner
+in_scope,hand dryer,3,0.6923,hs:960329,Dyson Round Brush
+in_scope,hand dryer,4,0.6912,hs:845129,Electronics Spare Accessories Vacuum Cleaner Hair Dryer
+in_scope,hand dryer,5,0.6833,hs:851632,Airwrap Styler Hair Styler Delivery Address Logistics Blvdwaltonky
+in_scope,replacement filter,1,0.6949,hs:853650,Activated Carbon Filter Retail
+in_scope,replacement filter,2,0.6752,hs:380210,Activated Carbon Filter Retail
+in_scope,replacement filter,3,0.6593,hs:847990,Electrostatic Filter Retail Ceva Hbl Jhb Scac Pymn
+in_scope,replacement filter,4,0.6592,hs:732020,Filter Tray Mesh
+in_scope,replacement filter,5,0.6516,hs:842139,Electronic Spare Accessories
+in_scope,power cable,1,0.6921,hs:842199,Powercord Assy
+in_scope,power cable,2,0.6877,hs:854449,Sensor Harness Assy
+in_scope,power cable,3,0.672,hs:854442,Without Batteries Electronics Electronic Appliances Audio Video Equipment Telecommunication Equipment
+in_scope,power cable,4,0.6664,hs:853650,Activated Carbon Filter Retail
+in_scope,power cable,5,0.6548,hs:853710,Vacuum Cleaners Dyson Wash Hard Floor Wet Cleaner After Assembly Process Delivery Address Ups West Chester Saint Drwest Chesterohusa
+in_scope,floor lamp,1,0.7384,hs:940521,Table Floor Lighting
+in_scope,floor lamp,2,0.6963,hs:940360,Tablefloor Lighting Plastic Pallet All Including Destination Charges
+in_scope,floor lamp,3,0.616,hs:841451,Fan Pallet Free All Freightprepaid Including Destination Charges
+in_scope,floor lamp,4,0.6126,hs:853650,Activated Carbon Filter Retail
+in_scope,floor lamp,5,0.6086,hs:853710,Vacuum Cleaners Dyson Wash Hard Floor Wet Cleaner After Assembly Process Delivery Address Ups West Chester Saint Drwest Chesterohusa
+in_scope,wet floor cleaner,1,0.6938,hs:392490,Floorcare
+in_scope,wet floor cleaner,2,0.6745,hs:960390,Said Motorbar Cleanerhead Delivery Ups West Chester Saint West Chester Usa
+in_scope,wet floor cleaner,3,0.6736,hs:850980,Dyson Wash Hard Floor Wet Cleane
+in_scope,wet floor cleaner,4,0.6682,hs:853710,Vacuum Cleaners Dyson Wash Hard Floor Wet Cleaner After Assembly Process Delivery Address Ups West Chester Saint Drwest Chesterohusa
+in_scope,wet floor cleaner,5,0.6513,hs:960350,Front Debris Brushbar Assy
+in_scope,brush bar,1,0.7676,hs:960350,Front Debris Brushbar Assy
+in_scope,brush bar,2,0.741,hs:960329,Dyson Round Brush
+in_scope,brush bar,3,0.7369,hs:960390,Said Motorbar Cleanerhead Delivery Ups West Chester Saint West Chester Usa
+in_scope,brush bar,4,0.6306,hs:850980,Dyson Wash Hard Floor Wet Cleane
+in_scope,brush bar,5,0.6258,hs:610110,Vacuum Cleaner Motorbar Snk Comm Intended Transhipment Cma Cgm Virginia Gvl Vacuum Cleaner Eori Subject Change Without Prior Notice
+out_of_scope,bicycle tyres,1,0.6898,hs:401110,Addressed Delivery Address Ups Walton Dyson Logistics Blvd Walton Usa
+out_of_scope,bicycle tyres,2,0.6233,hs:950300,Said Long Bnk Bco Air Wrap Styler Delivery Ups Walton Dyson Logistics Blvd Walton Usa
+out_of_scope,bicycle tyres,3,0.6033,hs:870899,Electronics Spare Accessories Fan
+out_of_scope,bicycle tyres,4,0.5887,hs:850760,Sna Spare Vacuum Cleaner
+out_of_scope,bicycle tyres,5,0.5863,hs:392490,Floorcare
+out_of_scope,ground coffee,1,0.6222,hs:380210,Activated Carbon Filter Retail
+out_of_scope,ground coffee,2,0.6158,hs:170113,Cyclone Konical Car Cleaning Kit Moulded Vinca Matt Black Costco Vacuum Cleaner Tmc Ceva Hbl Jhb Scac Pymn
+out_of_scope,ground coffee,3,0.6011,hs:230910,Extra Sams
+out_of_scope,ground coffee,4,0.5947,hs:848180,Wall Global
+out_of_scope,ground coffee,5,0.5935,hs:845129,Electronics Spare Accessories Vacuum Cleaner Hair Dryer
+out_of_scope,steel beams,1,0.6755,hs:732020,Filter Tray Mesh
+out_of_scope,steel beams,2,0.6754,hs:731815,Air Purifier Dsinv Ceva Hbl Jhb Scac Pymn Solid Wood
+out_of_scope,steel beams,3,0.6204,hs:940360,Tablefloor Lighting Plastic Pallet All Including Destination Charges
+out_of_scope,steel beams,4,0.619,hs:848180,Wall Global
+out_of_scope,steel beams,5,0.6177,hs:843149,Motor Bucket Assy
+out_of_scope,frozen shrimp,1,0.6098,hs:080610,Said Vacuum Cleaner Delivery Dyson Ups Logistics Blvd Walton Contact Person Rob Stewart Add Rlstewart Ups Contact Contact Person Nerissa Alred Add Nerissa Alred Expeditors Phx Dyson Expeditors Contact
+out_of_scope,frozen shrimp,2,0.6078,hs:230910,Extra Sams
+out_of_scope,frozen shrimp,3,0.6051,hs:610110,Vacuum Cleaner Motorbar Snk Comm Intended Transhipment Cma Cgm Virginia Gvl Vacuum Cleaner Eori Subject Change Without Prior Notice
+out_of_scope,frozen shrimp,4,0.6038,hs:732020,Filter Tray Mesh
+out_of_scope,frozen shrimp,5,0.593,hs:851629,Fan Heater Pallet Fre All Including Destination Charges
+out_of_scope,cotton t-shirts,1,0.6171,hs:610110,Vacuum Cleaner Motorbar Snk Comm Intended Transhipment Cma Cgm Virginia Gvl Vacuum Cleaner Eori Subject Change Without Prior Notice
+out_of_scope,cotton t-shirts,2,0.6047,hs:401110,Addressed Delivery Address Ups Walton Dyson Logistics Blvd Walton Usa
+out_of_scope,cotton t-shirts,3,0.6031,hs:950300,Said Long Bnk Bco Air Wrap Styler Delivery Ups Walton Dyson Logistics Blvd Walton Usa
+out_of_scope,cotton t-shirts,4,0.5971,hs:170113,Cyclone Konical Car Cleaning Kit Moulded Vinca Matt Black Costco Vacuum Cleaner Tmc Ceva Hbl Jhb Scac Pymn
+out_of_scope,cotton t-shirts,5,0.5948,hs:380210,Activated Carbon Filter Retail
+out_of_scope,red wine,1,0.5732,hs:080610,Said Vacuum Cleaner Delivery Dyson Ups Logistics Blvd Walton Contact Person Rob Stewart Add Rlstewart Ups Contact Contact Person Nerissa Alred Add Nerissa Alred Expeditors Phx Dyson Expeditors Contact
+out_of_scope,red wine,2,0.5639,hs:230910,Extra Sams
+out_of_scope,red wine,3,0.5558,hs:170113,Cyclone Konical Car Cleaning Kit Moulded Vinca Matt Black Costco Vacuum Cleaner Tmc Ceva Hbl Jhb Scac Pymn
+out_of_scope,red wine,4,0.553,hs:380210,Activated Carbon Filter Retail
+out_of_scope,red wine,5,0.5504,hs:481910,Afp Extra
+out_of_scope,timber planks,1,0.6405,hs:940360,Tablefloor Lighting Plastic Pallet All Including Destination Charges
+out_of_scope,timber planks,2,0.6108,hs:940521,Table Floor Lighting
+out_of_scope,timber planks,3,0.6106,hs:392490,Floorcare
+out_of_scope,timber planks,4,0.6051,hs:481910,Afp Extra
+out_of_scope,timber planks,5,0.599,hs:731815,Air Purifier Dsinv Ceva Hbl Jhb Scac Pymn Solid Wood
+out_of_scope,office chairs,1,0.6329,hs:940360,Tablefloor Lighting Plastic Pallet All Including Destination Charges
+out_of_scope,office chairs,2,0.6327,hs:940521,Table Floor Lighting
+out_of_scope,office chairs,3,0.6112,hs:853710,Vacuum Cleaners Dyson Wash Hard Floor Wet Cleaner After Assembly Process Delivery Address Ups West Chester Saint Drwest Chesterohusa
+out_of_scope,office chairs,4,0.6061,hs:960390,Said Motorbar Cleanerhead Delivery Ups West Chester Saint West Chester Usa
+out_of_scope,office chairs,5,0.6021,hs:950300,Said Long Bnk Bco Air Wrap Styler Delivery Ups Walton Dyson Logistics Blvd Walton Usa
+out_of_scope,football boots,1,0.6002,hs:870899,Electronics Spare Accessories Fan
+out_of_scope,football boots,2,0.5983,hs:610110,Vacuum Cleaner Motorbar Snk Comm Intended Transhipment Cma Cgm Virginia Gvl Vacuum Cleaner Eori Subject Change Without Prior Notice
+out_of_scope,football boots,3,0.5969,hs:940521,Table Floor Lighting
+out_of_scope,football boots,4,0.5945,hs:841451,Fan Pallet Free All Freightprepaid Including Destination Charges
+out_of_scope,football boots,5,0.5929,hs:401110,Addressed Delivery Address Ups Walton Dyson Logistics Blvd Walton Usa
+out_of_scope,portland cement,1,0.6053,hs:401110,Addressed Delivery Address Ups Walton Dyson Logistics Blvd Walton Usa
+out_of_scope,portland cement,2,0.5878,hs:380210,Activated Carbon Filter Retail
+out_of_scope,portland cement,3,0.5837,hs:731815,Air Purifier Dsinv Ceva Hbl Jhb Scac Pymn Solid Wood
+out_of_scope,portland cement,4,0.5817,hs:481910,Afp Extra
+out_of_scope,portland cement,5,0.5793,hs:940360,Tablefloor Lighting Plastic Pallet All Including Destination Charges
+out_of_scope,printer paper,1,0.683,hs:481910,Afp Extra
+out_of_scope,printer paper,2,0.6046,hs:960390,Said Motorbar Cleanerhead Delivery Ups West Chester Saint West Chester Usa
+out_of_scope,printer paper,3,0.6005,hs:853650,Activated Carbon Filter Retail
+out_of_scope,printer paper,4,0.5961,hs:380210,Activated Carbon Filter Retail
+out_of_scope,printer paper,5,0.5925,hs:845129,Electronics Spare Accessories Vacuum Cleaner Hair Dryer
+out_of_scope,dog food,1,0.7184,hs:230910,Extra Sams
+out_of_scope,dog food,2,0.6193,hs:080610,Said Vacuum Cleaner Delivery Dyson Ups Logistics Blvd Walton Contact Person Rob Stewart Add Rlstewart Ups Contact Contact Person Nerissa Alred Add Nerissa Alred Expeditors Phx Dyson Expeditors Contact
+out_of_scope,dog food,3,0.6112,hs:170113,Cyclone Konical Car Cleaning Kit Moulded Vinca Matt Black Costco Vacuum Cleaner Tmc Ceva Hbl Jhb Scac Pymn
+out_of_scope,dog food,4,0.6109,hs:380210,Activated Carbon Filter Retail
+out_of_scope,dog food,5,0.5964,hs:392490,Floorcare
+catalogue,AFP extra (unclear; possibly packaging),1,0.7547,hs:481910,Afp Extra
+catalogue,AFP extra (unclear; possibly packaging),2,0.6817,hs:230910,Extra Sams
+catalogue,AFP extra (unclear; possibly packaging),3,0.6629,hs:392690,Electronics Spare Accessories Vacuum Cleaner Hair Dryer Fan
+catalogue,AFP extra (unclear; possibly packaging),4,0.6628,hs:853650,Activated Carbon Filter Retail
+catalogue,AFP extra (unclear; possibly packaging),5,0.6621,hs:870899,Electronics Spare Accessories Fan
+catalogue,Activated carbon filter,1,0.7703,hs:380210,Activated Carbon Filter Retail
+catalogue,Activated carbon filter,2,0.736,hs:853650,Activated Carbon Filter Retail
+catalogue,Activated carbon filter,3,0.6522,hs:847990,Electrostatic Filter Retail Ceva Hbl Jhb Scac Pymn
+catalogue,Activated carbon filter,4,0.6448,hs:841490,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Activated carbon filter,5,0.6431,hs:732020,Filter Tray Mesh
+catalogue,Air purifier,1,0.6928,hs:841459,Hand Dryer
+catalogue,Air purifier,2,0.686,hs:841490,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Air purifier,3,0.6854,hs:853650,Activated Carbon Filter Retail
+catalogue,Air purifier,4,0.6843,hs:841451,Fan Pallet Free All Freightprepaid Including Destination Charges
+catalogue,Air purifier,5,0.6784,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+catalogue,Airwrap hair styler,1,0.7572,hs:851632,Airwrap Styler Hair Styler Delivery Address Logistics Blvdwaltonky
+catalogue,Airwrap hair styler,2,0.6674,hs:851631,Vacuum Cleaner
+catalogue,Airwrap hair styler,3,0.6652,hs:950300,Said Long Bnk Bco Air Wrap Styler Delivery Ups Walton Dyson Logistics Blvd Walton Usa
+catalogue,Airwrap hair styler,4,0.6609,hs:960329,Dyson Round Brush
+catalogue,Airwrap hair styler,5,0.6535,hs:851690,Electronic Spare Accessories
+catalogue,Airwrap styler,1,0.7389,hs:851632,Airwrap Styler Hair Styler Delivery Address Logistics Blvdwaltonky
+catalogue,Airwrap styler,2,0.6606,hs:950300,Said Long Bnk Bco Air Wrap Styler Delivery Ups Walton Dyson Logistics Blvd Walton Usa
+catalogue,Airwrap styler,3,0.6529,hs:960329,Dyson Round Brush
+catalogue,Airwrap styler,4,0.647,hs:851631,Vacuum Cleaner
+catalogue,Airwrap styler,5,0.6416,hs:851629,Fan Heater Pallet Fre All Including Destination Charges
+catalogue,Car cleaning kit (cyclone vacuum accessories),1,0.7495,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+catalogue,Car cleaning kit (cyclone vacuum accessories),2,0.7327,hs:960390,Said Motorbar Cleanerhead Delivery Ups West Chester Saint West Chester Usa
+catalogue,Car cleaning kit (cyclone vacuum accessories),3,0.7244,hs:960350,Front Debris Brushbar Assy
+catalogue,Car cleaning kit (cyclone vacuum accessories),4,0.7228,hs:850870,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Car cleaning kit (cyclone vacuum accessories),5,0.7164,hs:960329,Dyson Round Brush
+catalogue,Cyclone service assembly,1,0.6923,hs:847950,Big Bodybig Cyc Svc Assy Nkrd
+catalogue,Cyclone service assembly,2,0.6838,hs:853710,Vacuum Cleaners Dyson Wash Hard Floor Wet Cleaner After Assembly Process Delivery Address Ups West Chester Saint Drwest Chesterohusa
+catalogue,Cyclone service assembly,3,0.6739,hs:610110,Vacuum Cleaner Motorbar Snk Comm Intended Transhipment Cma Cgm Virginia Gvl Vacuum Cleaner Eori Subject Change Without Prior Notice
+catalogue,Cyclone service assembly,4,0.6727,hs:842199,Powercord Assy
+catalogue,Cyclone service assembly,5,0.6717,hs:170113,Cyclone Konical Car Cleaning Kit Moulded Vinca Matt Black Costco Vacuum Cleaner Tmc Ceva Hbl Jhb Scac Pymn
+catalogue,Dirty tank lid assembly,1,0.7622,hs:850990,Dirty Tank Lid Assy
+catalogue,Dirty tank lid assembly,2,0.6487,hs:843149,Motor Bucket Assy
+catalogue,Dirty tank lid assembly,3,0.6459,hs:960350,Front Debris Brushbar Assy
+catalogue,Dirty tank lid assembly,4,0.6387,hs:847950,Big Bodybig Cyc Svc Assy Nkrd
+catalogue,Dirty tank lid assembly,5,0.6343,hs:732020,Filter Tray Mesh
+catalogue,"Electronic appliances, unspecified",1,0.7842,hs:854442,Without Batteries Electronics Electronic Appliances Audio Video Equipment Telecommunication Equipment
+catalogue,"Electronic appliances, unspecified",2,0.7791,hs:851690,Electronic Spare Accessories
+catalogue,"Electronic appliances, unspecified",3,0.7722,hs:851631,Vacuum Cleaner
+catalogue,"Electronic appliances, unspecified",4,0.7716,hs:850980,Dyson Wash Hard Floor Wet Cleane
+catalogue,"Electronic appliances, unspecified",5,0.7578,hs:853710,Vacuum Cleaners Dyson Wash Hard Floor Wet Cleaner After Assembly Process Delivery Address Ups West Chester Saint Drwest Chesterohusa
+catalogue,Electronic spares and accessories,1,0.7848,hs:870899,Electronics Spare Accessories Fan
+catalogue,Electronic spares and accessories,2,0.7758,hs:851690,Electronic Spare Accessories
+catalogue,Electronic spares and accessories,3,0.7672,hs:850870,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Electronic spares and accessories,4,0.751,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+catalogue,Electronic spares and accessories,5,0.7468,hs:850760,Sna Spare Vacuum Cleaner
+catalogue,Electronic spares and accessories (heating and hair appliances),1,0.8531,hs:851690,Electronic Spare Accessories
+catalogue,Electronic spares and accessories (heating and hair appliances),2,0.8088,hs:851631,Vacuum Cleaner
+catalogue,Electronic spares and accessories (heating and hair appliances),3,0.8078,hs:850870,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Electronic spares and accessories (heating and hair appliances),4,0.8053,hs:851632,Airwrap Styler Hair Styler Delivery Address Logistics Blvdwaltonky
+catalogue,Electronic spares and accessories (heating and hair appliances),5,0.7925,hs:392690,Electronics Spare Accessories Vacuum Cleaner Hair Dryer Fan
+catalogue,Electrostatic filter,1,0.706,hs:853650,Activated Carbon Filter Retail
+catalogue,Electrostatic filter,2,0.6813,hs:847990,Electrostatic Filter Retail Ceva Hbl Jhb Scac Pymn
+catalogue,Electrostatic filter,3,0.675,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+catalogue,Electrostatic filter,4,0.6674,hs:850760,Sna Spare Vacuum Cleaner
+catalogue,Electrostatic filter,5,0.6662,hs:732020,Filter Tray Mesh
+catalogue,Extra Sams (unclear),1,0.7575,hs:230910,Extra Sams
+catalogue,Extra Sams (unclear),2,0.6469,hs:960390,Said Motorbar Cleanerhead Delivery Ups West Chester Saint West Chester Usa
+catalogue,Extra Sams (unclear),3,0.6396,hs:950300,Said Long Bnk Bco Air Wrap Styler Delivery Ups Walton Dyson Logistics Blvd Walton Usa
+catalogue,Extra Sams (unclear),4,0.6341,hs:080610,Said Vacuum Cleaner Delivery Dyson Ups Logistics Blvd Walton Contact Person Rob Stewart Add Rlstewart Ups Contact Contact Person Nerissa Alred Add Nerissa Alred Expeditors Phx Dyson Expeditors Contact
+catalogue,Extra Sams (unclear),5,0.6321,hs:847950,Big Bodybig Cyc Svc Assy Nkrd
+catalogue,Fan,1,0.6651,hs:841451,Fan Pallet Free All Freightprepaid Including Destination Charges
+catalogue,Fan,2,0.6461,hs:841459,Hand Dryer
+catalogue,Fan,3,0.6343,hs:841490,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Fan,4,0.6311,hs:870899,Electronics Spare Accessories Fan
+catalogue,Fan,5,0.629,hs:851629,Fan Heater Pallet Fre All Including Destination Charges
+catalogue,Fan heater,1,0.749,hs:851629,Fan Heater Pallet Fre All Including Destination Charges
+catalogue,Fan heater,2,0.707,hs:841451,Fan Pallet Free All Freightprepaid Including Destination Charges
+catalogue,Fan heater,3,0.7065,hs:841459,Hand Dryer
+catalogue,Fan heater,4,0.7051,hs:851631,Vacuum Cleaner
+catalogue,Fan heater,5,0.6978,hs:851690,Electronic Spare Accessories
+catalogue,Fan spares and accessories,1,0.768,hs:870899,Electronics Spare Accessories Fan
+catalogue,Fan spares and accessories,2,0.7244,hs:841490,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Fan spares and accessories,3,0.7207,hs:851690,Electronic Spare Accessories
+catalogue,Fan spares and accessories,4,0.7128,hs:392690,Electronics Spare Accessories Vacuum Cleaner Hair Dryer Fan
+catalogue,Fan spares and accessories,5,0.7117,hs:841451,Fan Pallet Free All Freightprepaid Including Destination Charges
+catalogue,Filter tray mesh,1,0.7536,hs:732020,Filter Tray Mesh
+catalogue,Filter tray mesh,2,0.642,hs:960350,Front Debris Brushbar Assy
+catalogue,Filter tray mesh,3,0.6363,hs:853650,Activated Carbon Filter Retail
+catalogue,Filter tray mesh,4,0.6341,hs:850990,Dirty Tank Lid Assy
+catalogue,Filter tray mesh,5,0.6266,hs:380210,Activated Carbon Filter Retail
+catalogue,Floorcare items,1,0.7843,hs:392490,Floorcare
+catalogue,Floorcare items,2,0.7396,hs:960329,Dyson Round Brush
+catalogue,Floorcare items,3,0.7315,hs:960390,Said Motorbar Cleanerhead Delivery Ups West Chester Saint West Chester Usa
+catalogue,Floorcare items,4,0.7227,hs:960350,Front Debris Brushbar Assy
+catalogue,Floorcare items,5,0.721,hs:850980,Dyson Wash Hard Floor Wet Cleane
+catalogue,Front debris brushbar assembly,1,0.8182,hs:960350,Front Debris Brushbar Assy
+catalogue,Front debris brushbar assembly,2,0.7271,hs:960390,Said Motorbar Cleanerhead Delivery Ups West Chester Saint West Chester Usa
+catalogue,Front debris brushbar assembly,3,0.719,hs:960329,Dyson Round Brush
+catalogue,Front debris brushbar assembly,4,0.6602,hs:850990,Dirty Tank Lid Assy
+catalogue,Front debris brushbar assembly,5,0.6519,hs:853710,Vacuum Cleaners Dyson Wash Hard Floor Wet Cleaner After Assembly Process Delivery Address Ups West Chester Saint Drwest Chesterohusa
+catalogue,Hair care products,1,0.7405,hs:330499,Hair Care
+catalogue,Hair care products,2,0.7041,hs:851632,Airwrap Styler Hair Styler Delivery Address Logistics Blvdwaltonky
+catalogue,Hair care products,3,0.6844,hs:960329,Dyson Round Brush
+catalogue,Hair care products,4,0.6708,hs:392690,Electronics Spare Accessories Vacuum Cleaner Hair Dryer Fan
+catalogue,Hair care products,5,0.67,hs:851631,Vacuum Cleaner
+catalogue,Hand dryer,1,0.7442,hs:841459,Hand Dryer
+catalogue,Hand dryer,2,0.698,hs:960329,Dyson Round Brush
+catalogue,Hand dryer,3,0.6976,hs:851631,Vacuum Cleaner
+catalogue,Hand dryer,4,0.6905,hs:845129,Electronics Spare Accessories Vacuum Cleaner Hair Dryer
+catalogue,Hand dryer,5,0.6866,hs:960390,Said Motorbar Cleanerhead Delivery Ups West Chester Saint West Chester Usa
+catalogue,Motor bucket assembly,1,0.7468,hs:843149,Motor Bucket Assy
+catalogue,Motor bucket assembly,2,0.699,hs:847950,Big Bodybig Cyc Svc Assy Nkrd
+catalogue,Motor bucket assembly,3,0.6988,hs:960350,Front Debris Brushbar Assy
+catalogue,Motor bucket assembly,4,0.6959,hs:850990,Dirty Tank Lid Assy
+catalogue,Motor bucket assembly,5,0.6954,hs:960390,Said Motorbar Cleanerhead Delivery Ups West Chester Saint West Chester Usa
+catalogue,Motorbar cleaner head,1,0.7581,hs:960390,Said Motorbar Cleanerhead Delivery Ups West Chester Saint West Chester Usa
+catalogue,Motorbar cleaner head,2,0.7279,hs:960350,Front Debris Brushbar Assy
+catalogue,Motorbar cleaner head,3,0.6962,hs:960329,Dyson Round Brush
+catalogue,Motorbar cleaner head,4,0.6899,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+catalogue,Motorbar cleaner head,5,0.6709,hs:850980,Dyson Wash Hard Floor Wet Cleane
+catalogue,No product named (delivery address only),1,0.7189,hs:401110,Addressed Delivery Address Ups Walton Dyson Logistics Blvd Walton Usa
+catalogue,No product named (delivery address only),2,0.7144,hs:080610,Said Vacuum Cleaner Delivery Dyson Ups Logistics Blvd Walton Contact Person Rob Stewart Add Rlstewart Ups Contact Contact Person Nerissa Alred Add Nerissa Alred Expeditors Phx Dyson Expeditors Contact
+catalogue,No product named (delivery address only),3,0.7011,hs:950300,Said Long Bnk Bco Air Wrap Styler Delivery Ups Walton Dyson Logistics Blvd Walton Usa
+catalogue,No product named (delivery address only),4,0.6885,hs:858011,Said Vacuum Cleaner Delivery Expeditors Contact Person Add Nerissa Alred Expeditors Expeditors Contact
+catalogue,No product named (delivery address only),5,0.6879,hs:851632,Airwrap Styler Hair Styler Delivery Address Logistics Blvdwaltonky
+catalogue,"Plastic spares for vacuum cleaners, hair dryers and fans",1,0.8165,hs:392690,Electronics Spare Accessories Vacuum Cleaner Hair Dryer Fan
+catalogue,"Plastic spares for vacuum cleaners, hair dryers and fans",2,0.7667,hs:841490,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,"Plastic spares for vacuum cleaners, hair dryers and fans",3,0.764,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+catalogue,"Plastic spares for vacuum cleaners, hair dryers and fans",4,0.7627,hs:850870,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,"Plastic spares for vacuum cleaners, hair dryers and fans",5,0.739,hs:850760,Sna Spare Vacuum Cleaner
+catalogue,Power cord assembly,1,0.7449,hs:842199,Powercord Assy
+catalogue,Power cord assembly,2,0.728,hs:854449,Sensor Harness Assy
+catalogue,Power cord assembly,3,0.7109,hs:853710,Vacuum Cleaners Dyson Wash Hard Floor Wet Cleaner After Assembly Process Delivery Address Ups West Chester Saint Drwest Chesterohusa
+catalogue,Power cord assembly,4,0.6888,hs:854442,Without Batteries Electronics Electronic Appliances Audio Video Equipment Telecommunication Equipment
+catalogue,Power cord assembly,5,0.6887,hs:853650,Activated Carbon Filter Retail
+catalogue,Round brush,1,0.7812,hs:960329,Dyson Round Brush
+catalogue,Round brush,2,0.761,hs:960350,Front Debris Brushbar Assy
+catalogue,Round brush,3,0.7147,hs:960390,Said Motorbar Cleanerhead Delivery Ups West Chester Saint West Chester Usa
+catalogue,Round brush,4,0.6308,hs:330499,Hair Care
+catalogue,Round brush,5,0.6306,hs:851631,Vacuum Cleaner
+catalogue,Sensor harness assembly,1,0.7954,hs:854449,Sensor Harness Assy
+catalogue,Sensor harness assembly,2,0.6684,hs:850990,Dirty Tank Lid Assy
+catalogue,Sensor harness assembly,3,0.6598,hs:960350,Front Debris Brushbar Assy
+catalogue,Sensor harness assembly,4,0.6547,hs:870899,Electronics Spare Accessories Fan
+catalogue,Sensor harness assembly,5,0.6523,hs:847950,Big Bodybig Cyc Svc Assy Nkrd
+catalogue,Spare vacuum cleaner battery (lithium-ion),1,0.8107,hs:850760,Sna Spare Vacuum Cleaner
+catalogue,Spare vacuum cleaner battery (lithium-ion),2,0.7419,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+catalogue,Spare vacuum cleaner battery (lithium-ion),3,0.7024,hs:850870,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Spare vacuum cleaner battery (lithium-ion),4,0.698,hs:392690,Electronics Spare Accessories Vacuum Cleaner Hair Dryer Fan
+catalogue,Spare vacuum cleaner battery (lithium-ion),5,0.689,hs:841490,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Spares for vacuum cleaners and hair dryers,1,0.8144,hs:850870,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Spares for vacuum cleaners and hair dryers,2,0.8078,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+catalogue,Spares for vacuum cleaners and hair dryers,3,0.7979,hs:841490,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Spares for vacuum cleaners and hair dryers,4,0.7974,hs:845129,Electronics Spare Accessories Vacuum Cleaner Hair Dryer
+catalogue,Spares for vacuum cleaners and hair dryers,5,0.7969,hs:392690,Electronics Spare Accessories Vacuum Cleaner Hair Dryer Fan
+catalogue,Table and floor lighting,1,0.7697,hs:940521,Table Floor Lighting
+catalogue,Table and floor lighting,2,0.7312,hs:940360,Tablefloor Lighting Plastic Pallet All Including Destination Charges
+catalogue,Table and floor lighting,3,0.6681,hs:392490,Floorcare
+catalogue,Table and floor lighting,4,0.6262,hs:853710,Vacuum Cleaners Dyson Wash Hard Floor Wet Cleaner After Assembly Process Delivery Address Ups West Chester Saint Drwest Chesterohusa
+catalogue,Table and floor lighting,5,0.6195,hs:851629,Fan Heater Pallet Fre All Including Destination Charges
+catalogue,Vacuum cleaner,1,0.7967,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+catalogue,Vacuum cleaner,2,0.7577,hs:850870,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Vacuum cleaner,3,0.753,hs:858011,Said Vacuum Cleaner Delivery Expeditors Contact Person Add Nerissa Alred Expeditors Expeditors Contact
+catalogue,Vacuum cleaner,4,0.7491,hs:853710,Vacuum Cleaners Dyson Wash Hard Floor Wet Cleaner After Assembly Process Delivery Address Ups West Chester Saint Drwest Chesterohusa
+catalogue,Vacuum cleaner,5,0.7491,hs:850760,Sna Spare Vacuum Cleaner
+catalogue,Vacuum cleaner and hair dryer spares,1,0.8018,hs:850870,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Vacuum cleaner and hair dryer spares,2,0.7963,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+catalogue,Vacuum cleaner and hair dryer spares,3,0.7802,hs:841490,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Vacuum cleaner and hair dryer spares,4,0.7797,hs:845129,Electronics Spare Accessories Vacuum Cleaner Hair Dryer
+catalogue,Vacuum cleaner and hair dryer spares,5,0.7786,hs:392690,Electronics Spare Accessories Vacuum Cleaner Hair Dryer Fan
+catalogue,Vacuum cleaner and hair dryer spares (fan and compressor parts),1,0.8007,hs:841490,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Vacuum cleaner and hair dryer spares (fan and compressor parts),2,0.7885,hs:850870,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Vacuum cleaner and hair dryer spares (fan and compressor parts),3,0.7842,hs:392690,Electronics Spare Accessories Vacuum Cleaner Hair Dryer Fan
+catalogue,Vacuum cleaner and hair dryer spares (fan and compressor parts),4,0.7783,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+catalogue,Vacuum cleaner and hair dryer spares (fan and compressor parts),5,0.7705,hs:841459,Hand Dryer
+catalogue,Vacuum cleaner motorbar,1,0.7658,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+catalogue,Vacuum cleaner motorbar,2,0.7371,hs:960390,Said Motorbar Cleanerhead Delivery Ups West Chester Saint West Chester Usa
+catalogue,Vacuum cleaner motorbar,3,0.7263,hs:960350,Front Debris Brushbar Assy
+catalogue,Vacuum cleaner motorbar,4,0.7221,hs:610110,Vacuum Cleaner Motorbar Snk Comm Intended Transhipment Cma Cgm Virginia Gvl Vacuum Cleaner Eori Subject Change Without Prior Notice
+catalogue,Vacuum cleaner motorbar,5,0.7209,hs:850870,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Vacuum cleaners and vacuum spares,1,0.8164,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
+catalogue,Vacuum cleaners and vacuum spares,2,0.794,hs:850870,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Vacuum cleaners and vacuum spares,3,0.7784,hs:850760,Sna Spare Vacuum Cleaner
+catalogue,Vacuum cleaners and vacuum spares,4,0.7699,hs:841490,Electronics Spare Accessorieshs Vacuum Cleaner Hairdryer Spare
+catalogue,Vacuum cleaners and vacuum spares,5,0.76,hs:858011,Said Vacuum Cleaner Delivery Expeditors Contact Person Add Nerissa Alred Expeditors Expeditors Contact
+catalogue,Wall Global (unclear),1,0.6947,hs:848180,Wall Global
+catalogue,Wall Global (unclear),2,0.6141,hs:940360,Tablefloor Lighting Plastic Pallet All Including Destination Charges
+catalogue,Wall Global (unclear),3,0.6133,hs:401110,Addressed Delivery Address Ups Walton Dyson Logistics Blvd Walton Usa
+catalogue,Wall Global (unclear),4,0.6132,hs:847950,Big Bodybig Cyc Svc Assy Nkrd
+catalogue,Wall Global (unclear),5,0.6093,hs:851629,Fan Heater Pallet Fre All Including Destination Charges
+catalogue,Wash hard floor wet cleaner,1,0.7368,hs:850980,Dyson Wash Hard Floor Wet Cleane
+catalogue,Wash hard floor wet cleaner,2,0.7066,hs:853710,Vacuum Cleaners Dyson Wash Hard Floor Wet Cleaner After Assembly Process Delivery Address Ups West Chester Saint Drwest Chesterohusa
+catalogue,Wash hard floor wet cleaner,3,0.7018,hs:960390,Said Motorbar Cleanerhead Delivery Ups West Chester Saint West Chester Usa
+catalogue,Wash hard floor wet cleaner,4,0.6997,hs:392490,Floorcare
+catalogue,Wash hard floor wet cleaner,5,0.6693,hs:850811,Electronics Spare Accessories Vacuum Cleaner Spare
