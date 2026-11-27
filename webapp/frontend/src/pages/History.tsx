@@ -6,8 +6,9 @@
  * share; C1 not found, wrong scope, uncited claims), ranked candidates and tokens.
  * Human-labelled measures (B2, C2, D1) come from the labelling sheets and are not shown.
  *
- * Sources: runs made in the app, pilot runs (runs/pilot/, made with the batch runner
- * before the evaluation) and evaluation runs (runs/evaluation/).
+ * Two groups: pilot runs (trial runs before the evaluation, made by hand in the app or
+ * with the batch runner) and evaluation runs (runs/evaluation/, the evaluation itself).
+ * Runs saved before the current pipeline (R26, 27 Nov) are hidden unless asked for.
  */
 import { useQuery } from '@tanstack/react-query'
 import { History as HistoryIcon, Info } from 'lucide-react'
@@ -17,6 +18,7 @@ import { StatusBadge } from '@/components/ask/parts'
 import { AssessStatusBadge } from '@/components/assess/History'
 import { PageContainer } from '@/components/layout/AppShell'
 import { ArmBadge } from '@/components/models/ModelPicker'
+import { Checkbox } from '@/components/ui/checkbox'
 import { Skeleton } from '@/components/ui/skeleton'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { getJson } from '@/lib/api'
@@ -26,13 +28,15 @@ import { dateLabel, fmt } from '@/lib/format'
 import { ARM_TONE, type ArmId, type ArmInfo } from '@/lib/models'
 import { cn } from '@/lib/utils'
 
-type Source = 'app' | 'pilot' | 'evaluation'
+type Source = 'pilot' | 'evaluation'
 type Kind = 'assess' | 'ask'
 
 interface RunRow {
   run_id: string
   kind: Kind
   source: Source
+  made_by: 'app' | 'runner'
+  current_pipeline: boolean
   started_at: string | null
   status: string
   error: string | null
@@ -62,7 +66,7 @@ interface RunRow {
 }
 
 const ARMS: ArmId[] = ['M1', 'M2', 'M3']
-const SOURCE_LABEL: Record<Source, string> = { app: 'App', pilot: 'Pilot', evaluation: 'Evaluation' }
+const SOURCE_LABEL: Record<Source, string> = { pilot: 'Pilot', evaluation: 'Evaluation' }
 
 const useHistory = () =>
   useQuery({
@@ -235,6 +239,8 @@ function RunsTable({ runs }: { runs: RunRow[] }) {
                 <td className="px-3 py-1.5"><ArmBadge arm={r.arm} model={r.model} /></td>
                 <td className="px-3 py-1.5 text-xs">
                   {SOURCE_LABEL[r.source]}
+                  {r.source === 'pilot' && <span className="text-muted-foreground"> · {r.made_by === 'app' ? 'in the app' : 'runner'}</span>}
+                  {!r.current_pipeline && <span className="text-amber-700 dark:text-amber-400"> · older pipeline</span>}
                   {r.set && <span className="text-muted-foreground"> · {r.set}{r.repeat ? ` r${r.repeat}` : ''}</span>}
                 </td>
                 <td className="max-w-96 px-3 py-1.5">
@@ -267,17 +273,20 @@ function RunsTable({ runs }: { runs: RunRow[] }) {
 export default function History() {
   const q = useHistory()
   const [kind, setKind] = useState<Kind>('assess')
-  // App runs include runs from before the current pipeline (e.g. the 16 Nov Cypher-LLM runs), so they are off by default.
   const [sources, setSources] = useState<Source[]>(['pilot', 'evaluation'])
+  // Runs from before the current pipeline (e.g. the 16 Nov runs, whose candidates came from an
+  // LLM-written query) would skew the comparison, so they are hidden by default.
+  const [showOlder, setShowOlder] = useState(false)
   const [arms, setArms] = useState<ArmId[]>(ARMS)
 
   const all = useMemo(() => q.data?.runs ?? [], [q.data])
   const counts = useMemo(() => {
-    const c: Record<Source, number> = { app: 0, pilot: 0, evaluation: 0 }
-    for (const r of all) c[r.source] += 1
+    const c: Record<Source, number> = { pilot: 0, evaluation: 0 }
+    for (const r of all) if (showOlder || r.current_pipeline) c[r.source] += 1
     return c
-  }, [all])
-  const runs = all.filter((r) => r.kind === kind && sources.includes(r.source) && (!r.arm || arms.includes(r.arm)))
+  }, [all, showOlder])
+  const older = all.filter((r) => !r.current_pipeline).length
+  const runs = all.filter((r) => r.kind === kind && sources.includes(r.source) && (showOlder || r.current_pipeline) && (!r.arm || arms.includes(r.arm)))
   const shownArms = ARMS.filter((a) => arms.includes(a))
 
   return (
@@ -303,7 +312,7 @@ export default function History() {
           <div className="space-y-1">
             <div className="text-xs font-medium text-muted-foreground">Where the runs come from</div>
             <ToggleGroup type="multiple" variant="outline" size="sm" value={sources} onValueChange={(v) => setSources(v as Source[])}>
-              {(['app', 'pilot', 'evaluation'] as Source[]).map((s) => (
+              {(['pilot', 'evaluation'] as Source[]).map((s) => (
                 <ToggleGroupItem key={s} value={s}>{SOURCE_LABEL[s]} <span className="text-muted-foreground tabular">{counts[s]}</span></ToggleGroupItem>
               ))}
             </ToggleGroup>
@@ -316,6 +325,12 @@ export default function History() {
               ))}
             </ToggleGroup>
           </div>
+          {older > 0 && (
+            <label className="flex max-w-64 items-start gap-2 text-xs text-muted-foreground">
+              <Checkbox checked={showOlder} onCheckedChange={(v) => setShowOlder(v === true)} className="mt-0.5" />
+              <span>Show {older} older run{older === 1 ? '' : 's'} from before the current pipeline (product matching, 27 Nov)</span>
+            </label>
+          )}
         </div>
 
         {q.isPending && <div className="space-y-3"><Skeleton className="h-40 w-full" /><Skeleton className="h-64 w-full" /></div>}
@@ -348,9 +363,10 @@ export default function History() {
             <div className="flex gap-2 rounded-md border bg-muted/30 px-3 py-2 text-xs text-muted-foreground">
               <Info className="mt-0.5 size-3.5 shrink-0" />
               <p>
-                Pilot runs were made with the evaluation runner before the evaluation started, to test each model; they are not
-                evaluation results. App runs are off by default: some were made before the current pipeline (product matching, R26). Runs made in the app before the model picker existed are matched to a model by the model name
-                they recorded.
+                Pilot runs are trial runs made before the evaluation, to check that every model and every step works: some by hand in
+                the app, some with the evaluation runner on queries from the evaluation sample. They are not results. Only Evaluation
+                runs are the evaluation. Pilot runs made before the model picker existed are matched to a model by the model name they
+                recorded.
               </p>
             </div>
           </>

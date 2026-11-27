@@ -2,10 +2,13 @@
 
     GET /api/models    the model arms (M1-M3) and whether each has a key; never the key
     GET /api/history   every saved run, summarised by the automatic measures of the
-                       evaluation plan, from three places:
-                         app         runs/assess/, runs/ask/ (made in the web app)
-                         pilot       runs/pilot/ (trial runs made with the runner)
+                       evaluation plan, in two groups:
+                         pilot       trial runs before the evaluation: runs made by hand
+                                     in the web app (runs/assess/, runs/ask/; made_by
+                                     "app") and with the runner (runs/pilot/; "runner")
                          evaluation  runs/evaluation/ (the evaluation runs)
+                       `current_pipeline` is false for Risk Assessment parts-list runs
+                       saved before candidate retrieval by embeddings (R26, 27 Nov).
 
 The summaries hold only what the run files already record (EVALUATION_PLAN §2.2):
 status, refusals forced by the pipeline (R7) versus by the model, citation checks
@@ -83,10 +86,14 @@ def summarise(run: dict[str, Any], source: str) -> dict[str, Any]:
     kind = run.get("kind") or ("ask" if "question" in run else "assess")
     body = _ask_summary(run) if kind == "ask" else _assess_summary(run)
     served = sorted((usage.get("by_model") or {}).keys())
+    made_by = "app" if source == "app" else "runner"
+    current = kind == "ask" or run.get("mode") == "describe" or "retrieval" in run
     return {
         "run_id": run["run_id"],
         "kind": kind,
-        "source": source,
+        "source": "pilot" if source == "app" else source,
+        "made_by": made_by,
+        "current_pipeline": current,
         "started_at": run.get("started_at"),
         "status": run.get("status"),
         "error": run.get("error"),
@@ -107,7 +114,7 @@ def _summary_of(path: Path, source: str) -> dict[str, Any] | None:
     except OSError:
         return None
     hit = _cache.get(path)
-    if hit and hit[0] == mtime and hit[1]["source"] == source:
+    if hit and hit[0] == mtime and hit[1]["made_by"] == ("app" if source == "app" else "runner"):
         return hit[1]
     try:
         s = summarise(json.loads(path.read_text(encoding="utf-8")), source)

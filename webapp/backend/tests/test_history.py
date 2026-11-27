@@ -40,6 +40,8 @@ class HistoryTests(unittest.TestCase):
         self.assertEqual((s["arm"], s["status"], s["answered_by"], s["ranked"]), ("M2", "answered", "llm", [2]))
         self.assertEqual(s["citations"], {"total": 10, "verified": 8, "not_found": 2, "with_note": 1, "uncited": 1})
         self.assertEqual(summarise(assess("assess-2"), "app")["arm"], "M1")  # inferred from the model name
+        self.assertFalse(summarise(assess("assess-3"), "app")["current_pipeline"])  # no R26 retrieval settings
+        self.assertTrue(summarise({**assess("assess-4"), "retrieval": {"method": "embedding"}}, "app")["current_pipeline"])
 
     def test_batch_runs_follow_the_manifest(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -57,8 +59,9 @@ class HistoryTests(unittest.TestCase):
                 w.writerow({"file": "assess/assess-infra.json", "set": "main", "query_id": "s01", "arm": "M3", "repeat": 0, "infra_error": "RateLimitError"})
                 w.writerow({"file": "assess/assess-ok.json", "set": "main", "query_id": "s01", "arm": "M3", "repeat": 0, "infra_error": ""})
             runs = all_runs([app], {"pilot": root})
-            self.assertEqual(sorted((r["run_id"], r["source"]) for r in runs), [("assess-a", "app"), ("assess-ok", "pilot")])
-            pilot = next(r for r in runs if r["source"] == "pilot")
+            self.assertEqual(sorted((r["run_id"], r["source"], r["made_by"]) for r in runs),
+                             [("assess-a", "pilot", "app"), ("assess-ok", "pilot", "runner")])
+            pilot = next(r for r in runs if r["made_by"] == "runner")
             self.assertEqual((pilot["arm"], pilot["query_id"], pilot["set"]), ("M3", "s01", "main"))
 
 
