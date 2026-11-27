@@ -1,0 +1,38 @@
+query_id,set,n,item_text,source,product_id,in_scope,goal,as_of_date,date_mode,date_reason,notes
+s01,main,1,Vacuum cleaner,catalogue,hs:851631,yes,Best supplier per item,2025-02-07,random,seed 20261127 draw 1,
+s02,main,1,Air purifier,catalogue,hs:731815,yes,Best supplier per item,2026-08-30,random,seed 20261127 draw 2,single supplier node (Ihastek Malaysia reported CN)
+s03,main,1,Hand dryer,catalogue,hs:841459,yes,Best supplier per item,2025-09-25,random,seed 20261127 draw 3,
+s04,main,1,Fan,catalogue,hs:841451,yes,Best supplier per item,2025-11-06,random,seed 20261127 draw 4,
+s05,main,1,Table and floor lighting,catalogue,hs:940521,yes,Best supplier per item,2026-07-09,random,seed 20261127 draw 5,
+s06,main,1,Motorbar cleaner head,catalogue,hs:960390,yes,Best supplier per item,2025-05-31,random,seed 20261127 draw 6,
+s06,main,2,Vacuum cleaner and hair dryer spares,catalogue,hs:850870,yes,Best supplier per item,2025-05-31,random,seed 20261127 draw 6,
+s07,main,1,Wash hard floor wet cleaner,catalogue,hs:850980,yes,Best supplier per item,2025-06-20,random,seed 20261127 draw 7,
+s07,main,2,"Plastic spares for vacuum cleaners, hair dryers and fans",catalogue,hs:392690,yes,Best supplier per item,2025-06-20,random,seed 20261127 draw 7,first shipment 2025-11-05 is after the date: expect 'not yet supplying' (R14)
+s08,main,1,hair curling tool,typed,,yes,Best supplier per item,2025-10-18,random,seed 20261127 draw 8,
+s09,main,1,bladeless fan,typed,,yes,Best supplier per item,2026-02-08,random,seed 20261127 draw 9,
+s10,main,1,purifier filter cartridge,typed,,yes,Best supplier per item,2025-08-31,random,seed 20261127 draw 10,filter products first ship 2026-01; may have no supplier by the date (R14)
+s11,main,1,cleaner head for a vacuum,typed,,yes,Best supplier per item,2025-10-02,random,seed 20261127 draw 11,
+s12,main,1,Airwrap hair styler,catalogue,hs:851632,yes,Best supplier per item,2025-03-30,random,seed 20261127 draw 12,
+s12,main,2,hair dryer spare parts,typed,,yes,Best supplier per item,2025-03-30,random,seed 20261127 draw 12,
+s13,main,1,Fan,catalogue,hs:841451,yes,Best supplier per item,2025-06-15,random,seed 20261127 draw 13,
+s13,main,2,plastic housing parts,typed,,yes,Best supplier per item,2025-06-15,random,seed 20261127 draw 13,
+s14,main,1,Activated carbon filter,catalogue,hs:380210,yes,Best supplier per item,2026-04-21,random,seed 20261127 draw 14,
+s14,main,2,wiring harness,typed,,yes,Best supplier per item,2026-04-21,random,seed 20261127 draw 14,
+c01,main,1,Airwrap hair styler,catalogue,hs:851632,yes,Best supplier per item,2025-08-15,chosen,two weeks after the US reciprocal tariffs on PH/MY/TW/SG (TARIFF-2025-US-*-RECIPROCAL; published 2025-07-31),suppliers mostly PH
+c02,main,1,Vacuum cleaners and vacuum spares,catalogue,hs:850811,yes,Best supplier per item,2025-10-01,chosen,after Typhoon Ragasa port closures in China (PORT-2025-CN-RAGASA-001; 2025-09-22) and the Suez/Red Sea diversion report (ROUTE-2025-SUEZ-001; 2025-09-24),suppliers in CN/MY/PH
+c02,main,2,upright vacuum,typed,,yes,Best supplier per item,2025-10-01,chosen,as above,
+c03,main,1,Electronic spares and accessories,catalogue,hs:842139,yes,Best supplier per item,2025-11-15,chosen,after the Tanjung Pelepas port disruption and the Malaysian vessel fire (PORT-2025-MY-PTP-001; VESSEL-2025-MY-001; 2025-11-07),suppliers mostly MY
+c03,main,2,Power cord assembly,catalogue,hs:842199,yes,Best supplier per item,2025-11-15,chosen,as above,
+c04,main,1,hard floor mop,typed,,yes,Best supplier per item,2026-01-05,chosen,after the Taiwan Strait military drills (ROUTE-2025-TW-DRILLS-001; GEO-2025-TW-002; 2025-12-29),wet cleaner supplier Hi P has a TW-reported node (L2)
+c05,main,1,Fan heater,catalogue,hs:851629,yes,Best supplier per item,2026-04-10,chosen,after VS Industry distress and operations records (FINANCE-2026-MY-VS-002; OPERATIONS-2026-PH-VS-001) and the Kaohsiung port disruption (PORT-2026-TW-KAOHSIUNG-001; 2026-04-01),only supplier is VS Industrial Berhad (MY/SG)
+c06,main,1,lithium battery pack for vacuums,typed,,yes,Best supplier per item,2026-09-05,chosen,after the Shanghai and Ningbo typhoon closures (PORT-2026-CN-SAUDEL-*; 2026-08-26) and the strait vessel fire (VESSEL-2026-STRAIT-001; 2026-08-23),
+c06,main,2,mains lead,typed,,yes,Best supplier per item,2026-09-05,chosen,as above,
+o01,out_of_scope,1,washing machine drum,typed,,no,Best supplier per item,2025-02-04,random,seed 20261127 draw 15,near-domain; 'washing' appears in some HS descriptions (hand dryer lines)
+o02,out_of_scope,1,robot lawnmower blade,typed,,no,Best supplier per item,2025-06-17,random,seed 20261127 draw 16,near-domain
+o03,out_of_scope,1,electric toothbrush head,typed,,no,Best supplier per item,2025-07-28,random,seed 20261127 draw 17,near-domain; HS 9603 (brushes) covers toothbrushes and Dyson brush lines
+o04,out_of_scope,1,smartphone OLED screen,typed,,no,Best supplier per item,2025-02-11,random,seed 20261127 draw 18,near-domain electronics
+o05,out_of_scope,1,car windscreen,typed,,no,Best supplier per item,2026-08-22,random,seed 20261127 draw 19,graph has HS 8708 (motor vehicle parts) and a car cleaning kit line
+o06,out_of_scope,1,olive oil,typed,,no,Best supplier per item,2026-05-17,random,seed 20261127 draw 20,unrelated
+o07,out_of_scope,1,yoga mats,typed,,no,Best supplier per item,2025-06-04,random,seed 20261127 draw 21,unrelated
+o08,out_of_scope,1,Airwrap hair styler,catalogue,hs:851632,yes,Best supplier per item,2025-01-29,random,seed 20261127 draw 22,mixed run: item 1 in scope
+o08,out_of_scope,2,espresso machine,typed,,no,Best supplier per item,2025-01-29,random,seed 20261127 draw 22,mixed run: item 2 should be refused per item

@@ -25,6 +25,20 @@ def main() -> None:
     try:
         with GOLD.open(newline="") as f:
             for row in csv.DictReader(f):
+                if row["compare"] == "refusal":
+                    # Unanswerable questions (option F). The optional proof query
+                    # shows the graph has no such data: it must return n = 0.
+                    if not row["reference_cypher"].strip():
+                        print(f"{row['id']}  refusal  (no proof query: the graph has no such property)")
+                        continue
+                    result = run_query(client, row["reference_cypher"])
+                    n = result["rows"][0].get("n") if result["ok"] and result["rows"] else None
+                    if n == 0:
+                        print(f"{row['id']}  refusal  ok  proof query returns n = 0")
+                    else:
+                        failed += 1
+                        print(f"{row['id']}  REFUSAL PROOF FAILED  {result.get('error') or f'n = {n}'}")
+                    continue
                 check = check_cypher(client, row["reference_cypher"])
                 if not check.ok:
                     failed += 1

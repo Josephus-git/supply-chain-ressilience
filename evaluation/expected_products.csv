@@ -1,0 +1,12 @@
+query_id,n,item_text,accepted_product_ids,neutral_product_ids,notes,status
+s08,1,hair curling tool,hs:851632;hs:950300,hs:960329,Both Airwrap stylers curl hair. The round brush styles but does not curl: neutral,DRAFT 2026-11-27: to be checked by the author
+s09,1,bladeless fan,hs:841451;hs:851629,,Dyson fan heaters are bladeless fans with heating,DRAFT 2026-11-27: to be checked by the author
+s10,1,purifier filter cartridge,hs:380210;hs:853650;hs:847990,hs:732020,Two activated carbon filters and the electrostatic filter. Filter tray mesh is a filter part of unclear use: neutral,DRAFT 2026-11-27: to be checked by the author
+s11,1,cleaner head for a vacuum,hs:960390;hs:610110;hs:960350,,Motorbar cleaner head; motorbar; front debris brushbar assembly,DRAFT 2026-11-27: to be checked by the author
+s12,2,hair dryer spare parts,hs:850870;hs:841490;hs:845129;hs:392690;hs:851690,,Every spares line naming hair dryers or hair appliances. Five accepted: recall is counted against the top 3 (see EVALUATION_PLAN §4),DRAFT 2026-11-27: to be checked by the author
+s13,2,plastic housing parts,hs:392690,hs:392490,Plastic spares. Floorcare items (HS 3924.90 plastic household articles) is unclear: neutral,DRAFT 2026-11-27: to be checked by the author
+s14,2,wiring harness,hs:854449,hs:842199;hs:854442,Sensor harness assembly. Power cord assembly and the unspecified HS 8544.42 line are cable assemblies but not harnesses: neutral,DRAFT 2026-11-27: to be checked by the author
+c02,2,upright vacuum,hs:851631;hs:080610;hs:858011;hs:850811,,Every line named as a vacuum cleaner. 850811 also includes spares,DRAFT 2026-11-27: to be checked by the author
+c04,1,hard floor mop,hs:850980;hs:853710,hs:392490,Both wash hard floor wet cleaners. Floorcare items is generic: neutral,DRAFT 2026-11-27: to be checked by the author
+c06,1,lithium battery pack for vacuums,hs:850760,,Only battery line,DRAFT 2026-11-27: to be checked by the author
+c06,2,mains lead,hs:842199,hs:854442,Power cord assembly. Unspecified HS 8544.42 line (insulated conductors): neutral,DRAFT 2026-11-27: to be checked by the author
