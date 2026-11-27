@@ -47,6 +47,15 @@ def load_run(directory: Path, run_id: str) -> dict[str, Any] | None:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def find_run(directories: list[Path], run_id: str) -> dict[str, Any] | None:
+    """The first stored run with this id in any of the folders."""
+    for d in directories:
+        run = load_run(d, run_id)
+        if run is not None:
+            return run
+    return None
+
+
 def list_runs(directory: Path, limit: int = 50) -> list[dict[str, Any]]:
     """Newest first. Unreadable files are skipped."""
     if not directory.is_dir():

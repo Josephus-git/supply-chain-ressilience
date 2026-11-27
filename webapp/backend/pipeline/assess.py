@@ -186,6 +186,7 @@ async def assess(
     report_model: str = REPORT_MODEL,
     graph_off: bool = ASSESS_GRAPH_OFF,
     embedder: Embedder | None = None,
+    arm: str | None = None,
 ) -> AsyncIterator[Event]:
     """`graph_off=True` is the D11 no-graph baseline: no Cypher LLM, no vector search, no
     graph profiles or matches. Countries come only from the request text, and the risk
@@ -210,6 +211,7 @@ async def assess(
             "embedding": EMBEDDING_MODEL if mode == "parts" and not graph_off else None,
         },
         "graph_off": graph_off,
+        "arm": arm,
         "retrieval": {"method": "none"} if graph_off else (retrieval_settings() if mode == "parts" else {"method": "cypher_llm"}),
         "started_at": now_iso(),
         "finished_at": None,
@@ -225,7 +227,7 @@ async def assess(
         "error": None,
         "failed_step": None,
     }
-    header_keys = ("run_id", "kind", "mode", "items", "goal", "as_of_date", "date_mode", "rerun_of", "models", "graph_off", "retrieval", "started_at")
+    header_keys = ("run_id", "kind", "mode", "items", "goal", "as_of_date", "date_mode", "rerun_of", "models", "graph_off", "arm", "retrieval", "started_at")
     yield {"event": "run", "run": {k: run[k] for k in header_keys}}
 
     usage: dict[str, Any] = {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0, "reasoning_tokens": 0, "by_model": {}}

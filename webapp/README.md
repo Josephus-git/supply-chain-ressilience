@@ -55,6 +55,7 @@ The backend only looks for `webapp/frontend/dist` at startup, so restart it afte
 | `evidence_api.py` | Risk Library endpoints (`/api/evidence`, `/api/evidence/{id}`) |
 | `products_api.py` | Product catalogue with counts up to a date (`/api/products`) |
 | `ask/` | Ask the Graph: `pipeline.py` (generate → check → run → retry → answer), `safety.py` (read-only and schema checks), `prompts.py`, `llm.py` (built through `llm_factory.py`, which maps the output cap, timeout and context window per provider), `schema.txt` (the schema shown to the LLM), `example_questions.json`, `api.py` (`/api/ask`, streamed as Server-Sent Events) |
+| `arms.py`, `history_api.py` | The model arms M1–M3 (one list for the app's model picker and the evaluation runner) and the Run History endpoints (`/api/models`, `/api/history`) |
 | `pipeline/` | Risk Assessment: `assess.py` (find candidates → profiles → evidence → report), `candidates.py` (parts-list candidates: catalogue product ids or vector search, then a fixed supplier query; no LLM), `profiles.py` (fixed, date-filtered exposure queries), `evidence.py` (risk engine calls), `report.py` (prompt sections and citation check), `prompts.py` (prompts and output schema), `llm.py` (the risk LLM), `retrieve.py` (vector search over product embeddings), `api.py` (`/api/assess`, `/api/runs`) |
 | `runs_store.py`, `usage.py` | Saving runs to `runs/` and tracking daily token use |
 | `reference/` | `locations.json` (map coordinates for suppliers, Dyson sites and ports without lat/lon) and `product_categories.json` (the product catalogue) |

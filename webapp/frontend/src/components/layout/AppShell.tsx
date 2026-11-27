@@ -1,5 +1,5 @@
 import {
-  BookOpenText, Gauge, Home, Menu, MessagesSquare, Monitor, Moon, Network, Sun,
+  BookOpenText, Gauge, History, Home, Menu, MessagesSquare, Monitor, Moon, Network, Sun,
 } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 import { NavLink, Outlet, useLocation } from 'react-router-dom'
@@ -20,6 +20,7 @@ export const NAV = [
   { to: '/ask', label: 'Ask the Graph', icon: MessagesSquare },
   { to: '/evidence', label: 'Risk Library', icon: BookOpenText },
   { to: '/assess', label: 'Risk Assessment', icon: Gauge },
+  { to: '/history', label: 'Run History', icon: History },
 ]
 
 function NavItems({ onNavigate }: { onNavigate?: () => void }) {

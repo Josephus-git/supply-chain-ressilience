@@ -428,7 +428,7 @@ class ApiTests(unittest.TestCase):
         self.r_llm.responses = [report_from_prompt()]
         body = {
             "mode": "parts", "items": [{"text": "Airwrap", "source": "typed"}], "goal": "",
-            "as_of_date": "2026-04-01", "date_mode": "random",
+            "as_of_date": "2026-04-01", "date_mode": "random", "arm": "M2",
         }
         with self.http.stream("POST", "/api/assess", json=body) as r:
             self.assertEqual(r.status_code, 200)
@@ -436,6 +436,7 @@ class ApiTests(unittest.TestCase):
         events = [json.loads(m) for m in re.findall(r"^data: (.*)$", text, re.M)]
         run = events[-1]["run"]
         self.assertEqual(run["date_mode"], "random")
+        self.assertEqual(run["arm"], "M2")  # the chosen arm is recorded (fakes stand in for the model)
         self.assertEqual(run["goal"], "Assess supplier risk for these items.")
         runs = self.http.get("/api/runs").json()["runs"]
         self.assertEqual(runs[0]["run_id"], run["run_id"])
@@ -459,6 +460,7 @@ class ApiTests(unittest.TestCase):
         base = {"mode": "parts", "items": [{"text": "fan"}], "as_of_date": "2026-01-01"}
         self.assertEqual(self.http.post("/api/assess", json={**base, "as_of_date": "2027-01-01"}).status_code, 422)
         self.assertEqual(self.http.post("/api/assess", json={**base, "items": []}).status_code, 422)
+        self.assertEqual(self.http.post("/api/assess", json={**base, "arm": "M9"}).status_code, 422)
         self.assertEqual(self.http.post("/api/assess", json={**base, "items": [{"text": "x"}] * 21}).status_code, 422)
         self.assertEqual(self.http.post("/api/assess", json={"mode": "describe", "description": "", "as_of_date": "2026-01-01"}).status_code, 422)
         self.assertEqual(self.http.get("/api/runs/assess-nope").status_code, 404)

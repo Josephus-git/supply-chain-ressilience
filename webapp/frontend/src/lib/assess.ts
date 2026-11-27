@@ -7,6 +7,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { getJson } from './api'
 import { postSSE, type CheckStep, type Feedback, type RunStep } from './ask'
+import type { ArmId } from './models'
 
 export const STUDY_START = '2025-01-01'
 export const STUDY_END = '2026-09-30'
@@ -303,6 +304,8 @@ export interface AssessRun {
   models: { cypher: string | null; report: string; embedding?: string | null }
   /** Absent in runs saved before R26. */
   retrieval?: RetrievalSettings
+  /** The model arm chosen for the run (M1-M3); absent in runs saved before the model picker. */
+  arm?: ArmId | null
   started_at: string
   finished_at: string | null
   status: AssessStatus
@@ -322,7 +325,7 @@ export interface LiveAssess extends AssessRun {
   pending: { step: AssessStep; attempt: number | null } | null
 }
 
-type Header = Pick<AssessRun, 'run_id' | 'kind' | 'mode' | 'items' | 'goal' | 'as_of_date' | 'date_mode' | 'rerun_of' | 'models' | 'retrieval' | 'started_at'>
+type Header = Pick<AssessRun, 'run_id' | 'kind' | 'mode' | 'items' | 'goal' | 'as_of_date' | 'date_mode' | 'rerun_of' | 'models' | 'retrieval' | 'arm' | 'started_at'>
 
 export type AssessEvent =
   | { event: 'run'; run: Header }
@@ -338,6 +341,7 @@ export interface AssessRequest {
   as_of_date: string
   date_mode: DateMode
   rerun_of: string | null
+  arm: ArmId
 }
 
 // ---------------------------------------------------------------------------- reducer
@@ -444,6 +448,7 @@ export interface AssessSummary {
   summary: string | null
   tokens: number | null
   models: { cypher: string | null; report: string; embedding?: string | null } | null
+  arm?: ArmId | null
 }
 
 export const useAssessRuns = (mode: AssessMode | null) =>

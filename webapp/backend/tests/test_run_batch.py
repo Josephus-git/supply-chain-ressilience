@@ -47,9 +47,12 @@ class PlanTests(unittest.TestCase):
         self.assertEqual({j.query_id for j in go}, {j.query_id for j in rb.plan_jobs("main", SAMPLE, GOLD)})
 
     def test_arms(self):
-        self.assertEqual(rb.arm_for("M1"), rb.Arm("M1", "openai", "gpt-5.2", "OPENAI_API_KEY"))
-        self.assertEqual(rb.arm_for("M3").model, "claude-sonnet-5-5")
-        self.assertEqual(rb.arm_for("M2"), rb.Arm("M2", "deepseek", "deepseek-flash", "DEEPSEEK_API_KEY"))
+        m1, m2, m3 = rb.arm_for("M1"), rb.arm_for("M2"), rb.arm_for("M3")
+        self.assertEqual((m1.provider, m1.model, m1.key_env), ("openai", "gpt-5.2", "OPENAI_API_KEY"))
+        self.assertEqual((m2.provider, m2.model, m2.key_env), ("deepseek", "deepseek-flash", "DEEPSEEK_API_KEY"))
+        self.assertEqual((m3.provider, m3.model, m3.key_env), ("anthropic", "claude-sonnet-5-5", "ANTHROPIC_API_KEY"))
+        with self.assertRaises(SystemExit):
+            rb.arm_for("M9")
 
     def test_graph_off_is_m1_only(self):
         with self.assertRaises(SystemExit):
@@ -153,7 +156,7 @@ class EndToEndTests(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.out = Path(self.tmp.name)
-        self.arm = rb.Arm("M1", "openai", "gpt-5.2", None)
+        self.arm = rb.Arm("M1", "openai", "gpt-5.2", None)  # no key check in tests
 
     def batch(self, jobs, cypher_llm, report_llm, **kw):
         from webapp.backend.tests.test_assess import low_vector

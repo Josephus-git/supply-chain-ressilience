@@ -57,6 +57,8 @@ from webapp.backend.config import (
     CANDIDATE_MIN_SCORE, CANDIDATE_TOP_K, CYPHER_MAX_TOKENS, CYPHER_TIMEOUT_S, EMBEDDING_MODEL,
     LLM_MAX_RETRIES, REPO_ROOT, REPORT_MAX_TOKENS, REPORT_TIMEOUT_S, RUNS_DIR,
 )
+from webapp.backend.arms import Arm
+from webapp.backend.arms import arm_for as _arm_for
 from webapp.backend.llm_factory import model_kwargs, structured_method
 from webapp.backend.runs_store import now_iso, save_run
 
@@ -83,22 +85,12 @@ INFRA_ERRORS = (
 )
 
 
-@dataclass(frozen=True)
-class Arm:
-    name: str
-    provider: str
-    model: str
-    key_env: str | None
-
-
 def arm_for(name: str) -> Arm:
-    if name == "M1":
-        return Arm("M1", "openai", "gpt-5.2", "OPENAI_API_KEY")
-    if name == "M2":
-        return Arm("M2", "deepseek", "deepseek-flash", "DEEPSEEK_API_KEY")
-    if name == "M3":
-        return Arm("M3", "anthropic", "claude-sonnet-5-5", "ANTHROPIC_API_KEY")
-    raise SystemExit(f"Unknown arm {name!r}: use M1, M2 or M3")
+    """The arm from the shared list (webapp/backend/arms.py)."""
+    try:
+        return _arm_for(name)
+    except ValueError as e:
+        raise SystemExit(str(e)) from None
 
 
 # ------------------------------------------------------------------------------ the plan
@@ -297,7 +289,7 @@ async def run_job(
     if job.kind == "ask":
         from webapp.backend.ask.pipeline import ask
 
-        async for ev in ask(job.gold["question"], client=client, llm=cypher_llm, model_name=arm.model, runs_dir=None):
+        async for ev in ask(job.gold["question"], client=client, llm=cypher_llm, model_name=arm.model, runs_dir=None, arm=arm.name):
             if ev["event"] == "done":
                 run = ev["run"]
         assert run is not None
@@ -323,6 +315,7 @@ async def run_job(
         report_model=arm.model,
         graph_off=job.graph_off,
         embedder=embedder,
+        arm=arm.name,
     ):
         if ev["event"] == "done":
             run = ev["run"]

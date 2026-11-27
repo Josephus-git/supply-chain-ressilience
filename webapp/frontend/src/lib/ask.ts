@@ -4,6 +4,7 @@
  * events, so a live run and a reopened one render through the same components.
  */
 import { useQuery } from '@tanstack/react-query'
+import type { ArmId } from './models'
 import { getJson } from './api'
 import type { NodeKind } from './kinds'
 import type { GEdge, GNode } from './types'
@@ -74,6 +75,8 @@ export interface AskRun {
   kind?: 'ask'
   question: string
   model: string
+  /** The model arm chosen for the run (M1-M3); absent in runs saved before the model picker. */
+  arm?: ArmId | null
   started_at: string
   finished_at: string | null
   status: RunStatus
@@ -100,6 +103,7 @@ export interface RunSummary {
   question: string
   status: RunStatus
   model: string
+  arm?: ArmId | null
   started_at: string
   attempts: number
   row_count: number | null
@@ -158,8 +162,8 @@ export function reduceEvent(state: LiveRun | null, e: AskEvent): LiveRun | null 
 // ---------------------------------------------------------------------------- SSE over POST
 
 /** POST the question and call `onEvent` for each Server-Sent Event until the stream ends. */
-export function streamAsk(question: string, onEvent: (e: AskEvent) => void, signal: AbortSignal): Promise<void> {
-  return postSSE('/api/ask', { question }, onEvent, signal)
+export function streamAsk(question: string, arm: ArmId, onEvent: (e: AskEvent) => void, signal: AbortSignal): Promise<void> {
+  return postSSE('/api/ask', { question, arm }, onEvent, signal)
 }
 
 /** POST a JSON body and call `onEvent` for each Server-Sent Event until the stream ends. */

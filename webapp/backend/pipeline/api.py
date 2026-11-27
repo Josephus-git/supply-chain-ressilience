@@ -1,8 +1,9 @@
 """Risk Assessment endpoints.
 
     POST /api/assess          run one assessment; Server-Sent Events, one per step
+                              (optional `arm`: M1, M2 or M3, the model arm; see arms.py)
     GET  /api/runs            stored assessment runs, newest first (summaries; ?mode=)
-    GET  /api/runs/{run_id}   one stored run with its full trace
+    GET  /api/runs/{run_id}   one stored run with its full trace (app runs, then batch runs)
 
 Only one assessment runs at a time (API credit safety): a second request
 while one is running gets 409.
@@ -19,9 +20,10 @@ from fastapi import APIRouter, HTTPException, Query, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field, model_validator
 
+from ..arms import arm_for, available, llms_for
 from ..ask.llm import cypher_llm
-from ..config import STUDY_END, STUDY_START
-from ..runs_store import list_runs, load_run, valid_run_id
+from ..config import BATCH_RUN_ROOTS, STUDY_END, STUDY_START
+from ..runs_store import find_run, list_runs, valid_run_id
 from .assess import MAX_ITEMS, assess, evidence_view
 from .llm import report_llm
 
@@ -44,6 +46,7 @@ class AssessRequest(BaseModel):
     as_of_date: date
     date_mode: Literal["chosen", "random"] = "chosen"
     rerun_of: str | None = None
+    arm: Literal["M1", "M2", "M3"] | None = None
 
     @model_validator(mode="after")
     def _check(self) -> "AssessRequest":
@@ -74,8 +77,17 @@ async def run_assessment(body: AssessRequest, request: Request) -> StreamingResp
         items = [{"text": body.description.strip(), "source": "typed", "product_id": None}]
     else:
         items = [{"text": i.text.strip(), "source": i.source, "product_id": i.product_id} for i in body.items]
-    c_llm = getattr(state, "assess_cypher_llm", None) or cypher_llm()
-    r_llm = getattr(state, "assess_report_llm", None) or report_llm()
+    c_llm = getattr(state, "assess_cypher_llm", None)
+    r_llm = getattr(state, "assess_report_llm", None)
+    models: dict[str, str] = {}
+    if body.arm and not (c_llm or r_llm):  # test fakes take precedence
+        arm = arm_for(body.arm)
+        if not available(arm):
+            raise HTTPException(422, f"{arm.label} ({arm.name}) has no API key in .env ({arm.key_env}).")
+        c_llm, r_llm = llms_for(arm.name)
+        models = {"cypher_model": arm.model, "report_model": arm.model}
+    c_llm = c_llm or cypher_llm()
+    r_llm = r_llm or report_llm()
     view = evidence_view(state.evidence_db, state.assess_cache)
 
     async def stream() -> AsyncIterator[str]:
@@ -94,6 +106,8 @@ async def run_assessment(body: AssessRequest, request: Request) -> StreamingResp
                 report_llm=r_llm,
                 runs_dir=state.assess_runs_dir,
                 embedder=getattr(state, "assess_embedder", None),
+                arm=body.arm,
+                **models,
             ):
                 yield _sse(event)
 
@@ -130,6 +144,7 @@ def _summary(run: dict[str, Any]) -> dict[str, Any]:
         "summary": _summary_text(report),
         "tokens": (run.get("usage") or {}).get("total_tokens"),
         "models": run.get("models"),
+        "arm": run.get("arm"),
     }
 
 
@@ -147,7 +162,8 @@ def assess_runs(
 
 @assess_router.get("/runs/{run_id}")
 def assess_run(run_id: str, request: Request) -> dict[str, Any]:
-    run = load_run(request.app.state.assess_runs_dir, run_id)
+    dirs = [request.app.state.assess_runs_dir, *(root / "assess" for root in BATCH_RUN_ROOTS.values())]
+    run = find_run(dirs, run_id)
     if run is None:
         raise HTTPException(404, f"No stored assessment run {run_id!r}")
     return run

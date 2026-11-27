@@ -11,11 +11,15 @@ from __future__ import annotations
 import json
 from typing import Any, AsyncIterator
 
+from typing import Literal
+
 from fastapi import APIRouter, HTTPException, Query, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
-from ..runs_store import list_runs, load_run
+from ..arms import arm_for, available, llms_for
+from ..config import ASK_CYPHER_MODEL, BATCH_RUN_ROOTS
+from ..runs_store import find_run, list_runs
 from .llm import cypher_llm
 from .pipeline import ask, load_examples
 
@@ -24,6 +28,7 @@ ask_router = APIRouter(prefix="/api/ask", tags=["ask"])
 
 class AskRequest(BaseModel):
     question: str = Field(min_length=3, max_length=500)
+    arm: Literal["M1", "M2", "M3"] | None = None
 
 
 def _sse(event: dict[str, Any]) -> str:
@@ -41,10 +46,17 @@ async def ask_question(body: AskRequest, request: Request) -> StreamingResponse:
     if len(question) < 3:
         raise HTTPException(422, "Ask a question of at least 3 characters.")
     state = request.app.state
-    llm = getattr(state, "ask_llm", None) or cypher_llm()
+    llm = getattr(state, "ask_llm", None)
+    model_name = ASK_CYPHER_MODEL
+    if body.arm and llm is None:  # a test fake takes precedence
+        arm = arm_for(body.arm)
+        if not available(arm):
+            raise HTTPException(422, f"{arm.label} ({arm.name}) has no API key in .env ({arm.key_env}).")
+        llm, model_name = llms_for(arm.name)[0], arm.model
+    llm = llm or cypher_llm()
 
     async def stream() -> AsyncIterator[str]:
-        async for event in ask(question, client=state.neo4j, llm=llm, runs_dir=state.ask_runs_dir):
+        async for event in ask(question, client=state.neo4j, llm=llm, model_name=model_name, runs_dir=state.ask_runs_dir, arm=body.arm):
             yield _sse(event)
 
     return StreamingResponse(
@@ -61,6 +73,7 @@ def _summary(run: dict[str, Any]) -> dict[str, Any]:
         "question": run.get("question"),
         "status": run.get("status"),
         "model": run.get("model"),
+        "arm": run.get("arm"),
         "started_at": run.get("started_at"),
         "attempts": len(run.get("attempts") or []),
         "row_count": (used or {}).get("run", {}).get("row_count"),
@@ -74,7 +87,8 @@ def ask_runs(request: Request, limit: int = Query(50, ge=1, le=500)) -> dict[str
 
 @ask_router.get("/runs/{run_id}")
 def ask_run(run_id: str, request: Request) -> dict[str, Any]:
-    run = load_run(request.app.state.ask_runs_dir, run_id)
+    dirs = [request.app.state.ask_runs_dir, *(root / "ask" for root in BATCH_RUN_ROOTS.values())]
+    run = find_run(dirs, run_id)
     if run is None:
         raise HTTPException(404, f"No stored Ask the Graph run {run_id!r}")
     return run

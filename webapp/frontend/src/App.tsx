@@ -5,6 +5,7 @@ import Ask from '@/pages/Ask'
 import Assess from '@/pages/Assess'
 import Evidence from '@/pages/Evidence'
 import Explorer from '@/pages/Explorer'
+import History from '@/pages/History'
 import Home from '@/pages/Home'
 import { Placeholder } from '@/pages/Placeholder'
 
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="ask" element={<Ask />} />
         <Route path="evidence/:id?" element={<Evidence />} />
         <Route path="assess" element={<Assess />} />
+        <Route path="history" element={<History />} />
         {/* Run History is now a tab inside Risk Assessment. */}
         <Route path="runs" element={<Navigate to="/assess" replace />} />
         <Route path="*" element={<Placeholder title="Not found" icon={Gauge} points={['No page at this address.']} />} />

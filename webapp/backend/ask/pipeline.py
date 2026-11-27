@@ -346,6 +346,7 @@ async def ask(
     model_name: str = ASK_CYPHER_MODEL,
     runs_dir: Path | None = ASK_RUNS_DIR,
     max_attempts: int = MAX_ATTEMPTS,
+    arm: str | None = None,
 ) -> AsyncIterator[Event]:
     question = question.strip()
     run: dict[str, Any] = {
@@ -353,6 +354,7 @@ async def ask(
         "kind": "ask",
         "question": question,
         "model": model_name,
+        "arm": arm,
         "started_at": now_iso(),
         "finished_at": None,
         "status": "running",
@@ -365,7 +367,7 @@ async def ask(
     usage = UsageMetadataCallbackHandler()
     llm_config = {"callbacks": [usage]}
     calls = 0
-    yield {"event": "run", "run": {k: run[k] for k in ("run_id", "question", "model", "started_at", "max_rows")}}
+    yield {"event": "run", "run": {k: run[k] for k in ("run_id", "question", "model", "arm", "started_at", "max_rows")}}
 
     try:
         previous: dict[str, Any] | None = None

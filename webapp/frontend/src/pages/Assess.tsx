@@ -25,6 +25,7 @@ import { ItemsEditor } from '@/components/assess/ItemsEditor'
 import { Report } from '@/components/assess/Report'
 import { Timeline } from '@/components/assess/Timeline'
 import { PageContainer } from '@/components/layout/AppShell'
+import { ArmBadge, ModelPicker } from '@/components/models/ModelPicker'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -37,6 +38,7 @@ import {
   type AssessMode, type DateMode, type Item, type LiveAssess,
 } from '@/lib/assess'
 import { dateLabel, fmt } from '@/lib/format'
+import { useArm } from '@/lib/models'
 import { cn } from '@/lib/utils'
 
 function Chips({ options, onPick, disabled }: { options: string[]; onPick: (s: string) => void; disabled?: boolean }) {
@@ -84,6 +86,7 @@ export default function Assess() {
   const [asOf, setAsOf] = useState('')
   const [dateMode, setDateMode] = useState<DateMode>('chosen')
   const [rerunOf, setRerunOf] = useState<string | null>(null)
+  const [arm, setArm] = useArm()
 
   const [live, setLive] = useState<LiveAssess | null>(null)
   const [busy, setBusy] = useState(false)
@@ -137,6 +140,7 @@ export default function Assess() {
           as_of_date: asOf,
           date_mode: dateMode,
           rerun_of: rerunOf,
+          arm,
         },
         (e) => {
           setLive((s) => reduceAssess(s, e))
@@ -158,7 +162,7 @@ export default function Assess() {
       qc.invalidateQueries({ queryKey: ['assess', 'runs'] })
       qc.invalidateQueries({ queryKey: ['health'] })
     }
-  }, [ready, busy, mode, items, goal, description, asOf, dateMode, rerunOf, setParams, qc])
+  }, [ready, busy, mode, items, goal, description, asOf, dateMode, rerunOf, arm, setParams, qc])
 
   const showInTrace = (id: string) => {
     setTraceOpen(true)
@@ -174,8 +178,9 @@ export default function Assess() {
         <div className="space-y-1">
           <h2 className="text-xl font-semibold tracking-tight">Risk Assessment</h2>
           <p className="max-w-3xl text-sm text-muted-foreground">
-            Give a parts list or describe what you need, and pick a date. One LLM finds candidate suppliers in the knowledge graph; fixed
-            queries and the risk engine gather what was known on that date; a second LLM compares and ranks. Every claim cites its source.
+            Give a parts list or describe what you need, pick a date and a model. Candidate suppliers come from the knowledge graph (product
+            matching for a parts list, an LLM-written query for a description); fixed queries and the risk engine gather what was known on
+            that date; the chosen model compares and ranks. Every claim cites its source.
           </p>
         </div>
 
@@ -265,6 +270,7 @@ export default function Assess() {
                     </Button>
                   </div>
                 </div>
+                <ModelPicker value={arm} onChange={setArm} disabled={busy} />
                 <p className="max-w-sm text-[11px] leading-snug text-muted-foreground">
                   Study window {dateLabel(STUDY_START)} to {dateLabel(STUDY_END)}. Nothing after the date is used: not shipments, not evidence. The LLMs never choose it.
                   {asOf && !inWindow(asOf) && <span className="block text-red-600 dark:text-red-400">Pick a date inside the study window.</span>}
@@ -296,6 +302,7 @@ export default function Assess() {
                   <div className="space-y-1 border-b pb-3">
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                       <h3 className="min-w-0 flex-1 text-base font-medium">{run.mode === 'parts' ? (run.goal ?? requestTitle(run)) : requestTitle(run)}</h3>
+                      <ArmBadge arm={run.arm} model={run.models?.report} />
                       <AssessStatusBadge status={busy && run.status === 'running' ? 'running' : run.status} />
                       {runFinished && (
                         <Button variant="outline" size="sm" className="h-7 text-xs" onClick={() => setParams({ rerun: run.run_id })}>

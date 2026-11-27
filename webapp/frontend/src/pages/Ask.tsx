@@ -12,6 +12,7 @@ import { toast } from 'sonner'
 import { StatusBadge } from '@/components/ask/parts'
 import { Trace } from '@/components/ask/Trace'
 import { PageContainer } from '@/components/layout/AppShell'
+import { ArmBadge, ModelPicker } from '@/components/models/ModelPicker'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Textarea } from '@/components/ui/textarea'
@@ -19,6 +20,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import {
   reduceEvent, streamAsk, useAskExamples, useAskRun, useAskRuns, type LiveRun,
 } from '@/lib/ask'
+import { useArm } from '@/lib/models'
 import { cn } from '@/lib/utils'
 
 function timeAgo(iso: string): string {
@@ -78,6 +80,7 @@ export default function Ask() {
   const abort = useRef<AbortController | null>(null)
   const qc = useQueryClient()
   const examples = useAskExamples()
+  const [arm, setArm] = useArm()
 
   // A stored run is fetched only when the URL points at a run other than the live one.
   const stored = useAskRun(runParam, !!runParam && runParam !== live?.run_id)
@@ -99,6 +102,7 @@ export default function Ask() {
       try {
         await streamAsk(
           text,
+          arm,
           (e) => {
             setLive((s) => reduceEvent(s, e))
             if (e.event === 'run') setParams({ run: e.run.run_id }, { replace: true })
@@ -118,7 +122,7 @@ export default function Ask() {
         qc.invalidateQueries({ queryKey: ['ask', 'runs'] })
       }
     },
-    [busy, qc, setParams],
+    [busy, arm, qc, setParams],
   )
 
   const reset = () => {
@@ -162,6 +166,7 @@ export default function Ask() {
               aria-label="Question"
             />
             <div className="mt-2 flex items-center gap-2">
+              <ModelPicker value={arm} onChange={setArm} disabled={busy} compact />
               <span className="text-[11px] text-muted-foreground">Enter to ask · Shift+Enter for a new line</span>
               {busy ? (
                 <Button type="button" variant="outline" size="sm" className="ml-auto" onClick={() => abort.current?.abort()}>
@@ -219,6 +224,7 @@ export default function Ask() {
             <section className="space-y-4" aria-live="polite">
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b pb-3">
                 <h3 className="min-w-0 flex-1 text-base font-medium">{run.question}</h3>
+                <ArmBadge arm={run.arm} model={run.model} />
                 <StatusBadge status={busy && run.status === 'running' ? 'running' : run.status} />
                 <span className="font-mono text-[10px] text-muted-foreground">{run.model} · {run.run_id}</span>
               </div>

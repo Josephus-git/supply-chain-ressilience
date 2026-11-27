@@ -28,6 +28,7 @@ from .evidence_api import evidence_router
 from .graph_api import graph_router, home_router
 from .neo4j_client import ReadOnlyNeo4j
 from .pipeline.api import assess_router
+from .history_api import history_router
 from .products_api import products_router
 from .usage import openai_status, tokens_today
 
@@ -71,6 +72,7 @@ def create_app(
     app.include_router(evidence_router)
     app.include_router(products_router)
     app.include_router(assess_router)
+    app.include_router(history_router)
 
     @app.get("/api/health", tags=["meta"])
     def health() -> dict[str, Any]:

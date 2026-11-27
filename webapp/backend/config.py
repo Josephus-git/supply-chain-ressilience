@@ -41,6 +41,9 @@ REPORT_PROVIDER = os.getenv("REPORT_PROVIDER") or "openai"
 ASSESS_GRAPH_OFF = (os.getenv("ASSESS_GRAPH_OFF") or "").strip() == "1"
 ASK_RUNS_DIR = RUNS_DIR / "ask"
 ASSESS_RUNS_DIR = RUNS_DIR / "assess"
+# Batch runs (evaluation/run_batch.py): each folder holds ask/, assess/ and manifest.csv.
+# "pilot" holds trial runs made before the evaluation, kept apart from its results.
+BATCH_RUN_ROOTS = {"evaluation": RUNS_DIR / "evaluation", "pilot": RUNS_DIR / "pilot"}
 
 
 def _int_env(name: str, default: int) -> int:
