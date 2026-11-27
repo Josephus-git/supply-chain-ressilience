@@ -47,7 +47,7 @@ every run so that discussion has data to work with.
     plus plain Python orchestrates the workflow. LangGraph is not used.
   - `init_chat_model("gpt-5.2", model_provider="openai")`. Embeddings use
     `text-embedding-3-small` against the vector index `embedding` on `Product.embedding`,
-    the same model as `rag/update_embeddings.py`.
+    the same model as `neo4j_base/update_embeddings.py`.
 - **Frontend:** React, Vite and TypeScript, Tailwind CSS with shadcn/ui (professional
   components), TanStack Query, and **Cytoscape.js** for the graph (MIT licence, click and
   select events, many layouts).
@@ -188,7 +188,7 @@ runs/       one JSON file per assessment run (payload, retrieved context, Cypher
      - **No exploded parts drawing:** the data has no parts breakdown, so a drawing would
        suggest parts the graph does not have, and Dyson's drawings are copyrighted.
      - **Categories and cleaned names** come from a hand-reviewed
-       `reference/product_categories.json` (drafted by Claude, reviewed by the user), like
+       `reference/product_categories.json`, like
        `locations.json`, because the HS codes are unreliable (see L5 in
        METHODOLOGY_NOTES.md). The graph is not changed.
      - `GET /api/products` reads the products live from Neo4j, with shipment and supplier
@@ -526,7 +526,8 @@ the Cypher LLM's keyword matching (`toLower(...) CONTAINS ...`).
 
 **Questions to settle before building**
 - Check that every `Product` node still has an embedding (the script that filled them,
-  `rag/update_embeddings.py`, was deleted).
+  `rag/update_embeddings.py`, was deleted on 15 Nov by mistake and restored on 27 Nov as
+  `neo4j_base/update_embeddings.py`).
 - Where it plugs in: replace the Cypher LLM's candidate query, run alongside it and merge,
   or act only as a fallback when the Cypher query returns no rows.
 - A score threshold (`min_score`) and `top_k`, and how they are chosen.

@@ -1,5 +1,5 @@
 {
-  "_status": "FINAL 2026-11-27. One row per Product node (43). Names and categories were drafted by Claude on 2026-11-16 from the node descriptions and are kept unchanged by the author on purpose, so they stay traceable to the raw customs descriptions (see _basis). The graph is not changed.",
+  "_status": "FINAL 2026-11-27. One row per Product node (43). Names and categories were drafted on 2026-11-16 from the node descriptions and are kept unchanged on purpose, so they stay traceable to the raw customs descriptions (see _basis). The graph is not changed.",
   "_basis": "Category and cleaned name follow the product description, not the HS code, because HS codes are sometimes misdeclared (L5 in METHODOLOGY_NOTES.md). 'note' records the HS code meaning and any doubt.",
   "categories": [
     {
