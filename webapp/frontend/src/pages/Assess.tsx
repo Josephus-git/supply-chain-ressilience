@@ -32,7 +32,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { useHealth } from '@/lib/api'
 import {
-  DESCRIBE_EXAMPLES, GOAL_EXAMPLES, inWindow, MAX_ITEMS, randomStudyDate, reduceAssess, requestTitle, scrollToAnchor,
+  DESCRIBE_EXAMPLES, GOAL_EXAMPLES, inWindow, MAX_ITEMS, modelsLabel, randomStudyDate, reduceAssess, requestTitle, scrollToAnchor,
   STEP_LABEL, streamAssess, STUDY_END, STUDY_START, useAssessRun,
   type AssessMode, type DateMode, type Item, type LiveAssess,
 } from '@/lib/assess'
@@ -311,7 +311,7 @@ export default function Assess() {
                       {run.rerun_of && (
                         <button type="button" className="hover:text-foreground hover:underline" onClick={() => setParams({ run: run.rerun_of! })}>re-run of {run.rerun_of}</button>
                       )}
-                      <span className="ml-auto font-mono text-[10px]">{run.models.cypher} + {run.models.report} · {run.run_id}</span>
+                      <span className="ml-auto font-mono text-[10px]">{modelsLabel(run.models)} · {run.run_id}</span>
                     </div>
                   </div>
 

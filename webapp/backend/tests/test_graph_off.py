@@ -61,6 +61,40 @@ class GraphOffTests(unittest.TestCase):
         self.assertEqual(run_record["attempts"], [])
         self.assertEqual(run_record["status"], "insufficient_data", run_record.get("error"))
 
+    def test_parts_mode_skips_vector_search(self):
+        """R26 must not bypass D11: no embedding call and no graph access in parts mode."""
+
+        def no_embedding(_text):
+            raise AssertionError("embedder called")
+
+        async def run():
+            return [
+                ev
+                async for ev in assess(
+                    mode="parts",
+                    items=[{"text": "cordless vacuum battery", "source": "typed", "product_id": None},
+                           {"text": "Airwrap hair styler", "source": "catalogue", "product_id": "hs:851632"}],
+                    goal=None,
+                    as_of=date(2026, 6, 30),
+                    date_mode="chosen",
+                    rerun_of=None,
+                    client=_NoGraph(),
+                    db=DB,
+                    view=VIEW,
+                    cypher_llm=FakeStructuredLLM([]),
+                    report_llm=FakeStructuredLLM([]),
+                    runs_dir=None,
+                    graph_off=True,
+                    embedder=no_embedding,
+                )
+            ]
+
+        run_record = asyncio.run(run())[-1]["run"]
+        self.assertIsNone(run_record["retrieval_trace"])
+        self.assertEqual(run_record["retrieval"], {"method": "none"})
+        self.assertIsNone(run_record["models"]["embedding"])
+        self.assertEqual(run_record["status"], "insufficient_data", run_record.get("error"))
+
 
 if __name__ == "__main__":
     unittest.main()

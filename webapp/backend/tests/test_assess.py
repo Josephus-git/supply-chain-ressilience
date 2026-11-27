@@ -131,6 +131,17 @@ def report_from_prompt(bogus: str = "FAKE-EVIDENCE-999") -> Callable[[str], dict
     return build
 
 
+def low_vector(_text: str) -> list[float]:
+    """Scores about 0.5 against every product: below the R27 threshold."""
+    return [1.0] + [0.0] * 1535
+
+
+def stored_embedder(product_id: str) -> Callable[[str], list[float]]:
+    """Embeds any text as the stored embedding of `product_id` (no OpenAI call)."""
+    vector = _live().read("MATCH (p:Product {product_id: $pid}) RETURN p.embedding AS e", {"pid": product_id})[0]["e"]
+    return lambda _text: vector
+
+
 def collect(gen) -> list[dict[str, Any]]:
     async def run():
         return [e async for e in gen]
@@ -264,22 +275,29 @@ class PipelineTests(unittest.TestCase):
             rerun_of=None,
         )
         args.update(kw)
+        args.setdefault("embedder", low_vector)
         return collect(assess(client=_live(), db=DB, view=VIEW, cypher_llm=cypher_llm, report_llm=report_llm, runs_dir=Path(self.tmp.name), **args))
 
     def test_full_run(self):
-        c_llm = FakeStructuredLLM([candidate(AIRWRAP_QUERY)])
+        c_llm = FakeStructuredLLM([])  # R26: parts mode never calls the Cypher LLM
         r_llm = FakeStructuredLLM([report_from_prompt()])
         events = self.run_assess(c_llm, r_llm)
         steps = [(e["step"], e["status"]) for e in events if e["event"] == "step" and e["status"] != "running"]
         self.assertEqual(
             [s for s, _ in steps],
-            ["generate_cypher", "check_cypher", "run_query", "build_profiles", "lookup_evidence", "write_report", "check_citations"],
+            ["retrieve_candidates", "build_profiles", "lookup_evidence", "write_report", "check_citations"],
         )
         run = events[-1]["run"]
         self.assertEqual(run["status"], "answered")
-        self.assertEqual(len(run["attempts"]), 1)
-        # Catalogue items reach the Cypher LLM with their product id.
-        self.assertIn("[catalogue product_id: hs:851632]", c_llm.prompts[0])
+        self.assertEqual(run["attempts"], [])
+        self.assertEqual(c_llm.prompts, [])
+        self.assertIsNone(run["models"]["cypher"])
+        self.assertEqual(run["retrieval"]["min_score"], 0.69)
+        # A catalogue item matches its own product id only.
+        trace = run["retrieval_trace"]["items"][0]
+        self.assertEqual((trace["method"], trace["product_ids"]), ("catalogue", ["hs:851632"]))
+        for c in run["candidates"]["by_item"]["1"]:
+            self.assertEqual(c["product_ids"], ["hs:851632"])
         # Profiles and the report prompt only use shipments up to the date.
         for p in run["profiles"]["profiles"].values():
             self.assertLessEqual(p["footprint_window"]["last_arrival"], "2026-04-01")
@@ -288,30 +306,59 @@ class PipelineTests(unittest.TestCase):
         cit = run["citations"]
         self.assertEqual(cit["not_found"], 1)
         self.assertIn("FAKE-EVIDENCE-999", json.dumps(run["report"]["parsed"]))
-        self.assertEqual(run["usage"]["calls"], 2)
+        self.assertEqual(run["usage"]["calls"], 1)
         stored = load_run(Path(self.tmp.name), run["run_id"])
         self.assertEqual(stored["status"], "answered")
         self.assertEqual(stored["items"][0]["source"], "catalogue")
+        self.assertEqual(stored["retrieval_trace"]["items"][0]["method"], "catalogue")
+
+    def test_typed_item_uses_vector_search(self):
+        r_llm = FakeStructuredLLM([report_from_prompt()])
+        items = [{"text": "hair styler", "source": "typed", "product_id": None}]
+        run = self.run_assess(FakeStructuredLLM([]), r_llm, items=items, embedder=stored_embedder("hs:851632"))[-1]["run"]
+        trace = run["retrieval_trace"]["items"][0]
+        self.assertEqual(trace["method"], "vector")
+        self.assertEqual(trace["results"][0]["product_id"], "hs:851632")
+        self.assertTrue(set(trace["product_ids"]) <= {r["product_id"] for r in trace["results"]})
+        self.assertLessEqual(len(trace["product_ids"]), 3)
+        matched = {pid for c in run["candidates"]["by_item"]["1"] for pid in c["product_ids"]}
+        self.assertTrue(matched <= set(trace["product_ids"]))
+        self.assertEqual(run["models"]["embedding"], "text-embedding-3-small")
+        self.assertEqual(run["status"], "answered")
 
     def test_retry_after_write_clause(self):
+        """Describe mode keeps the Cypher LLM and its one retry."""
         c_llm = FakeStructuredLLM([candidate("MATCH (n) DETACH DELETE n RETURN 1 AS item"), candidate(AIRWRAP_QUERY)])
         r_llm = FakeStructuredLLM([report_from_prompt()])
-        run = self.run_assess(c_llm, r_llm)[-1]["run"]
+        run = self.run_assess(c_llm, r_llm, mode="describe", items=[{"text": "Who supplies Airwrap stylers?", "source": "typed", "product_id": None}], goal=None)[-1]["run"]
         self.assertEqual(len(run["attempts"]), 2)
         self.assertFalse(run["attempts"][0]["check"]["ok"])
         self.assertIn("Write or admin clause", c_llm.prompts[1])
         self.assertEqual(run["status"], "answered")
 
     def test_nothing_found_skips_report_llm(self):
-        """R7: no rows, no countries -> the fixed answer, and the risk LLM is never called."""
-        c_llm = FakeStructuredLLM([candidate(NO_ROWS_QUERY), candidate(NO_ROWS_QUERY)])
+        """R27 + R7: no product above the threshold, no countries -> the fixed answer, no LLM call."""
+        c_llm = FakeStructuredLLM([])
         r_llm = FakeStructuredLLM([])
         run = self.run_assess(c_llm, r_llm, items=[{"text": "flux capacitor", "source": "typed", "product_id": None}])[-1]["run"]
         self.assertEqual(r_llm.prompts, [])
+        self.assertEqual(run["retrieval_trace"]["items"][0]["product_ids"], [])
+        self.assertEqual(run["candidates"]["by_item"], {})
         self.assertEqual(run["report"]["source"], "pipeline")
         self.assertEqual(run["report"]["parsed"]["summary"]["text"], INSUFFICIENT)
         self.assertEqual(run["status"], "insufficient_data")
+        self.assertEqual(run["usage"]["calls"], 0)
+
+    def test_nothing_found_in_describe_mode(self):
+        """R7 in describe mode: the Cypher LLM's two attempts return no rows."""
+        c_llm = FakeStructuredLLM([candidate(NO_ROWS_QUERY), candidate(NO_ROWS_QUERY)])
+        r_llm = FakeStructuredLLM([])
+        run = self.run_assess(c_llm, r_llm, mode="describe", items=[{"text": "Who makes flux capacitors?", "source": "typed", "product_id": None}], goal=None)[-1]["run"]
+        self.assertEqual(r_llm.prompts, [])
+        self.assertEqual(run["status"], "insufficient_data")
         self.assertEqual(run["usage"]["calls"], 2)
+        self.assertIsNone(run["retrieval_trace"])
+        self.assertEqual(run["retrieval"], {"method": "cypher_llm"})
 
     def test_country_fallback_from_suggestion(self):
         def country_report(text: str) -> dict[str, Any]:
@@ -341,7 +388,7 @@ class PipelineTests(unittest.TestCase):
 
                 return RunnableLambda(fail)
 
-        run_events = self.run_assess(FakeStructuredLLM([candidate(AIRWRAP_QUERY)]), Boom([]))
+        run_events = self.run_assess(FakeStructuredLLM([]), Boom([]))
         err = [e for e in run_events if e["event"] == "error"][0]
         self.assertEqual(err["step"], "write_report")
         run = run_events[-1]["run"]
@@ -367,6 +414,7 @@ class ApiTests(unittest.TestCase):
             create_app(
                 neo4j_client=_live(), evidence_db=DB, assess_cypher_llm=cls.c_llm, assess_report_llm=cls.r_llm,
                 assess_runs_dir=Path(cls.tmp.name), ask_runs_dir=Path(cls.tmp.name) / "ask", check_openai=False,
+                assess_embedder=stored_embedder("hs:851632"),
             )
         )
         cls.http.__enter__()
@@ -377,7 +425,6 @@ class ApiTests(unittest.TestCase):
         cls.tmp.cleanup()
 
     def test_sse_and_history(self):
-        self.c_llm.responses = [candidate(AIRWRAP_QUERY)]
         self.r_llm.responses = [report_from_prompt()]
         body = {
             "mode": "parts", "items": [{"text": "Airwrap", "source": "typed"}], "goal": "",
@@ -392,11 +439,10 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(run["goal"], "Assess supplier risk for these items.")
         runs = self.http.get("/api/runs").json()["runs"]
         self.assertEqual(runs[0]["run_id"], run["run_id"])
-        self.assertEqual(runs[0]["tokens"], 240)
+        self.assertEqual(runs[0]["tokens"], 120)  # one LLM call: the Cypher LLM is not used in parts mode
         self.assertEqual(self.http.get("/api/runs", params={"mode": "describe"}).json()["runs"], [])
         self.assertEqual(self.http.get(f"/api/runs/{run['run_id']}").json()["status"], "answered")
         # Re-run: a new record linked to the original.
-        self.c_llm.responses = [candidate(AIRWRAP_QUERY)]
         self.r_llm.responses = [report_from_prompt()]
         with self.http.stream("POST", "/api/assess", json={**body, "as_of_date": "2025-09-01", "rerun_of": run["run_id"]}) as r:
             text = "".join(r.iter_text())
@@ -405,7 +451,8 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(rerun["rerun_of"], run["run_id"])
         # Health counts today's tokens from the stored runs.
         health = self.http.get("/api/health").json()
-        self.assertEqual(health["tokens_today"]["used"], 480)
+        self.assertEqual(health["tokens_today"]["used"], 240)
+        self.assertEqual(self.c_llm.prompts, [])
         self.assertEqual(health["openai"]["status"], "not_checked")
 
     def test_validation(self):

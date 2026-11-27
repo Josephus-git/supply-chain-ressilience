@@ -106,7 +106,7 @@ The evaluation scores the app's saved outputs; it does not re-run the app. The p
 .venv/bin/python -m evaluation.calibrate_embedding_threshold
 ```
 
-**Status (27 Nov 2026):** the evaluation design and inputs are fixed. Still to build: embedding-based candidate retrieval for Risk Assessment, a batch runner that writes `runs/evaluation/` with a manifest, the labelling-sheet generator, and the notebook (`jupyter_notebooks/evaluation.ipynb`).
+**Status (27 Nov 2026):** the evaluation design and inputs are fixed. Embedding-based candidate retrieval for Risk Assessment's parts list is built (top 3 products per typed item, minimum score 0.69). Still to build: a batch runner that writes `runs/evaluation/` with a manifest, the labelling-sheet generator, and the notebook (`jupyter_notebooks/evaluation.ipynb`).
 
 ## Tests
 

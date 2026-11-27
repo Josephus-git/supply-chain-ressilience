@@ -17,6 +17,7 @@ export type AssessMode = 'parts' | 'describe'
 export type DateMode = 'chosen' | 'random'
 export type AssessStatus = 'running' | 'answered' | 'country_level' | 'insufficient_data' | 'failed' | 'cancelled'
 export type AssessStep =
+  | 'retrieve_candidates'
   | 'generate_cypher' | 'check_cypher' | 'run_query'
   | 'build_profiles' | 'lookup_evidence' | 'write_report' | 'check_citations'
 export type DecidingFactor = 'match' | 'risk' | 'track_record'
@@ -47,6 +48,57 @@ export interface CandAttempt {
   run: RunStep | null
   problem?: string | null
   retry_of?: Feedback | null
+}
+
+/** How candidates were found (run header). Parts mode: vector search (R26, R27). */
+export type RetrievalSettings =
+  | { method: 'embedding'; embedding_model: string; index: string; top_k: number; min_score: number; score_scale: string }
+  | { method: 'cypher_llm' }
+  | { method: 'none' }
+
+export interface RetrievedResult {
+  product_id: string
+  product_description: string | null
+  hs_code: number | null
+  hs_code_description: string | null
+  score: number
+  shipments: number
+  suppliers: number
+  passed: boolean
+}
+
+export interface ItemRetrieval {
+  item: number
+  text: string
+  source: 'catalogue' | 'typed' | null
+  method: 'catalogue' | 'vector'
+  query_text: string | null
+  top_k: number | null
+  threshold: number | null
+  results: RetrievedResult[]
+  product_ids: string[]
+  elapsed_ms: number
+}
+
+export interface RetrievalTrace {
+  method: 'embedding'
+  embedding_model: string
+  index: string
+  top_k: number
+  min_score: number
+  score_scale: string
+  items: ItemRetrieval[]
+  supplier_query: {
+    cypher: string
+    targets: { item: number; product_id: string }[]
+    columns: string[]
+    rows: Record<string, unknown>[]
+    row_count: number
+    elapsed_ms: number
+  }
+  queries: QueryLog[]
+  embedding_calls: number
+  elapsed_ms: number
 }
 
 export interface MatchedProduct {
@@ -247,11 +299,15 @@ export interface AssessRun {
   as_of_date: string
   date_mode: DateMode
   rerun_of: string | null
-  models: { cypher: string; report: string }
+  /** cypher is null when the Cypher LLM is not used (parts mode, R26); embedding is absent in older runs. */
+  models: { cypher: string | null; report: string; embedding?: string | null }
+  /** Absent in runs saved before R26. */
+  retrieval?: RetrievalSettings
   started_at: string
   finished_at: string | null
   status: AssessStatus
   attempts: CandAttempt[]
+  retrieval_trace?: RetrievalTrace | null
   candidates: Candidates | null
   profiles: Profiles | null
   evidence: Evidence | null
@@ -266,7 +322,7 @@ export interface LiveAssess extends AssessRun {
   pending: { step: AssessStep; attempt: number | null } | null
 }
 
-type Header = Pick<AssessRun, 'run_id' | 'kind' | 'mode' | 'items' | 'goal' | 'as_of_date' | 'date_mode' | 'rerun_of' | 'models' | 'started_at'>
+type Header = Pick<AssessRun, 'run_id' | 'kind' | 'mode' | 'items' | 'goal' | 'as_of_date' | 'date_mode' | 'rerun_of' | 'models' | 'retrieval' | 'started_at'>
 
 export type AssessEvent =
   | { event: 'run'; run: Header }
@@ -289,7 +345,7 @@ export interface AssessRequest {
 export function reduceAssess(state: LiveAssess | null, e: AssessEvent): LiveAssess | null {
   if (e.event === 'run') {
     return {
-      ...e.run, finished_at: null, status: 'running', attempts: [], candidates: null, profiles: null, evidence: null,
+      ...e.run, finished_at: null, status: 'running', attempts: [], retrieval_trace: null, candidates: null, profiles: null, evidence: null,
       report: null, citations: null, usage: null, error: null, failed_step: null, pending: null,
     }
   }
@@ -318,6 +374,7 @@ export function reduceAssess(state: LiveAssess | null, e: AssessEvent): LiveAsse
     if (e.step === 'write_report') s.report = { source: 'llm', prompt: (d.prompt as string) ?? null, raw: null, parsed: null, parsing_error: null, elapsed_ms: null }
     return s
   }
+  if (e.step === 'retrieve_candidates') s.retrieval_trace = d as unknown as RetrievalTrace
   if (e.step === 'build_profiles') {
     const { candidates, ...profiles } = d as unknown as Profiles & { candidates: Candidates }
     s.candidates = candidates
@@ -386,7 +443,7 @@ export interface AssessSummary {
   goal: string | null
   summary: string | null
   tokens: number | null
-  models: { cypher: string; report: string } | null
+  models: { cypher: string | null; report: string; embedding?: string | null } | null
 }
 
 export const useAssessRuns = (mode: AssessMode | null) =>
@@ -406,6 +463,7 @@ export const useAssessRun = (runId: string | null, enabled = true) =>
 // ---------------------------------------------------------------------------- labels and helpers
 
 export const STEP_LABEL: Record<AssessStep, string> = {
+  retrieve_candidates: 'Find candidates (vector search and a fixed query, no LLM)',
   generate_cypher: 'Cypher LLM: find candidates',
   check_cypher: 'Check the query',
   run_query: 'Run on Neo4j (read-only)',
@@ -498,6 +556,12 @@ export function supplierName(run: AssessRun, sid: string): string {
     if (c?.supplier_name) return c.supplier_name
   }
   return sid
+}
+
+/** The models a run used, in pipeline order, e.g. "text-embedding-3-small + gpt-5.2". */
+export function modelsLabel(models: AssessRun['models'] | null | undefined): string {
+  if (!models) return ''
+  return [models.cypher, models.embedding, models.report].filter(Boolean).join(' + ')
 }
 
 export function requestTitle(run: Pick<AssessRun, 'mode' | 'items' | 'goal'>): string {

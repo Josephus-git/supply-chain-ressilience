@@ -93,6 +93,7 @@ async def run_assessment(body: AssessRequest, request: Request) -> StreamingResp
                 cypher_llm=c_llm,
                 report_llm=r_llm,
                 runs_dir=state.assess_runs_dir,
+                embedder=getattr(state, "assess_embedder", None),
             ):
                 yield _sse(event)
 

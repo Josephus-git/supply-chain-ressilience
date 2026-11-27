@@ -1,7 +1,8 @@
 /**
  * Layer 3, "How this answer was reached": the timeline of one run in pipeline
- * order. Cypher LLM (query, checks, rows, any retry, any labelled country
- * suggestion) -> fixed profile queries -> risk engine evidence -> risk LLM ->
+ * order. Candidate finding (parts list: catalogue ids or vector search, then a
+ * fixed supplier query; describe: Cypher LLM query, checks, rows, any retry, any
+ * labelled country suggestion) -> fixed profile queries -> risk engine evidence -> risk LLM ->
  * citation check. Each step appears as it starts and fills in when done; the
  * finished timeline is exactly what the risk LLM was given. "Reasoning" here
  * means that input, not the model's hidden reasoning.
@@ -13,7 +14,7 @@ import { CypherBlock, Disclosure, ms, PromptText, StepIcon } from '@/components/
 import { RowsGraphView, RowsTable } from '@/components/ask/RowsView'
 import {
   anchor, explorerSupplierHref, scrollToAnchor, STEP_LABEL, supplierName, supplierNodeId,
-  type AssessStep, type CandAttempt, type EngineLink, type LiveAssess, type Profile,
+  type AssessStep, type CandAttempt, type EngineLink, type LiveAssess, type Profile, type RetrievalTrace,
 } from '@/lib/assess'
 import { dateLabel, fmt } from '@/lib/format'
 import { cn } from '@/lib/utils'
@@ -124,6 +125,72 @@ function attemptSteps(run: LiveAssess, a: CandAttempt, n: number, highlight: str
   return { nodes: out, next: n }
 }
 
+function RetrievalBody({ t, run }: { t: RetrievalTrace; run: LiveAssess }) {
+  const q = t.supplier_query
+  return (
+    <>
+      <p className="text-xs text-muted-foreground">
+        No LLM in this step. A catalogue item matches its own product id. A typed item is embedded with {t.embedding_model} and
+        compared with every product's stored embedding; the top {t.top_k} are kept if their score is at least{' '}
+        <span className="font-medium text-foreground tabular">{t.min_score}</span> (scores are Neo4j's {t.score_scale}).
+        An item with nothing above the threshold gets no candidates.
+      </p>
+      <div className="space-y-1.5">
+        {t.items.map((it) => (
+          <div key={it.item} className="rounded-md border px-3 py-2 text-xs">
+            <div className="flex flex-wrap items-baseline gap-x-2">
+              <span className="font-medium">{it.item}. {it.text}</span>
+              <span className="text-muted-foreground">{it.method === 'catalogue' ? 'catalogue product' : 'vector search'}</span>
+              {it.method === 'vector' && it.product_ids.length === 0 && (
+                <span className="rounded bg-amber-500/15 px-1.5 text-[10px] font-medium text-amber-800 dark:text-amber-300">nothing above {it.threshold}</span>
+              )}
+            </div>
+            {it.method === 'catalogue' ? (
+              <div className="mt-0.5 font-mono text-[11px]">{it.product_ids.join(', ')}</div>
+            ) : (
+              <table className="mt-1 w-full text-left">
+                <thead className="text-[10.5px] text-muted-foreground">
+                  <tr><th className="font-normal">product</th><th className="font-normal">description</th><th className="text-right font-normal">score</th><th className="text-right font-normal">shipments by the date</th><th className="text-right font-normal">kept</th></tr>
+                </thead>
+                <tbody>
+                  {it.results.map((r) => (
+                    <tr key={r.product_id} className={cn(!r.passed && 'text-muted-foreground')}>
+                      <td className="pr-2 font-mono text-[11px]">{r.product_id}</td>
+                      <td className="pr-2">{r.product_description ?? r.hs_code_description ?? ''}</td>
+                      <td className="text-right tabular">{r.score.toFixed(4)}</td>
+                      <td className="text-right tabular">{fmt(r.shipments)}</td>
+                      <td className={cn('text-right font-semibold', r.passed ? 'text-emerald-600 dark:text-emerald-400' : 'text-muted-foreground')}>{r.passed ? '✓' : '✕'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        ))}
+      </div>
+      {q.targets.length === 0 ? (
+        <p className="text-xs text-muted-foreground">No product was kept, so the supplier query did not run.</p>
+      ) : (
+        <>
+          <p className="text-xs text-muted-foreground">Fixed query: every supplier that shipped a kept product ({q.row_count} rows). Dates are applied in the next step.</p>
+          <RowsTable result={{ ok: true, columns: q.columns, rows: q.rows, row_count: q.row_count, truncated: false, elapsed_ms: q.elapsed_ms }} fileName={`${run.run_id}-candidates`} />
+        </>
+      )}
+      <Disclosure title={`The ${t.queries.length} fixed queries of this step`}>
+        <div className="space-y-3">
+          {t.queries.map((x, i) => (
+            <div key={i} className="space-y-1">
+              <div className="flex gap-2 text-[11px] text-muted-foreground"><span className="font-mono">{x.name}</span><span>{x.row_count} rows</span><span>{ms(x.elapsed_ms)}</span></div>
+              <CypherBlock cypher={x.cypher} />
+              <div className="font-mono text-[10.5px] text-muted-foreground">params: {JSON.stringify(x.params)}</div>
+            </div>
+          ))}
+        </div>
+      </Disclosure>
+    </>
+  )
+}
+
 function ProfileCard({ p, run }: { p: Profile; run: LiveAssess }) {
   const fw = p.footprint_window
   const list = (xs: { name?: string; code?: string; shipments: number }[], max = 4) =>
@@ -173,6 +240,14 @@ export function Timeline({ run }: { run: LiveAssess }) {
   const blocks: ReactNode[] = []
   let n = 1
   const highlight = Object.values(run.candidates?.by_item ?? {}).flat().map((c) => supplierNodeId(c.supplier_id))
+  const rt = run.retrieval_trace
+  if (rt || isPending(run, 'retrieve_candidates') || run.failed_step === 'retrieve_candidates') {
+    blocks.push(
+      <Step key="v" n={n++} step="retrieve_candidates" state={stateOf(run, 'retrieve_candidates', !!rt)} elapsed={rt?.elapsed_ms}>
+        {rt && <RetrievalBody t={rt} run={run} />}
+      </Step>,
+    )
+  }
   for (const a of run.attempts) {
     const r = attemptSteps(run, a, n, highlight)
     blocks.push(...r.nodes)

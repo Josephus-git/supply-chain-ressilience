@@ -23,6 +23,10 @@ from supplier_risk_engine.engine.reference import STUDY_END, STUDY_START  # noqa
 EMBEDDING_MODEL = "text-embedding-3-small"
 VECTOR_INDEX = "embedding"
 CHAT_MODEL = "gpt-5.2"
+# R26/R27 (METHODOLOGY_NOTES.md): parts-list candidates come from vector search.
+# Fixed values, not read from .env, so every evaluation run uses the same settings.
+CANDIDATE_TOP_K = 3
+CANDIDATE_MIN_SCORE = 0.69  # R27, chosen 27 Nov 2026 from evaluation/calibrate_embedding_threshold.py
 
 load_dotenv(REPO_ROOT / ".env")
 

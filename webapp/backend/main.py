@@ -41,9 +41,10 @@ def create_app(
     assess_cypher_llm: Any = None,
     assess_report_llm: Any = None,
     assess_runs_dir: Path | None = None,
+    assess_embedder: Any = None,
     check_openai: bool = True,
 ) -> FastAPI:
-    """The LLM and runs-dir arguments let tests swap in fake chat models and temp folders;
+    """The LLM, embedder and runs-dir arguments let tests swap in fakes and temp folders;
     `check_openai=False` keeps the health check from calling OpenAI."""
     @asynccontextmanager
     async def lifespan(app: FastAPI):
@@ -55,6 +56,7 @@ def create_app(
         app.state.assess_cypher_llm = assess_cypher_llm  # None: cypher_llm() on first run
         app.state.assess_report_llm = assess_report_llm  # None: report_llm() on first run
         app.state.assess_runs_dir = assess_runs_dir or ASSESS_RUNS_DIR
+        app.state.assess_embedder = assess_embedder  # None: the OpenAI embedding model (R26)
         app.state.assess_cache = {}
         try:
             yield

@@ -1,6 +1,9 @@
 """Risk Assessment as a plain async generator.
 
-    find_candidates (Cypher LLM: generate -> check -> run, one retry)
+    find_candidates
+        parts mode:    retrieve_candidates (no LLM: catalogue product_id or vector
+                       search, then a fixed supplier query; R26, R27)
+        describe mode: Cypher LLM (generate -> check -> run, one retry)
     -> build_profiles (fixed Cypher, as_of_date filter)
     -> lookup_evidence (risk engine, fixed as_of_date; country lookups)
     -> write_report (risk LLM, structured output, no tools)
@@ -17,7 +20,7 @@ Event shapes (all JSON objects with an `event` key):
     {"event": "error", "message": "...", "step": <name>|None}
 
 The LLMs never choose the date (R12); the Cypher LLM writes only the
-candidate-finding query.
+candidate-finding query, and only in describe mode.
 """
 
 from __future__ import annotations
@@ -32,17 +35,19 @@ from langchain_core.language_models import BaseChatModel
 from supplier_risk_engine.loader import LoadedDatabase
 
 from ..ask.pipeline import check_cypher, run_query, schema_text
-from ..config import ASK_CYPHER_MODEL, ASSESS_GRAPH_OFF, ASSESS_RUNS_DIR, REPORT_MODEL
+from ..config import ASK_CYPHER_MODEL, ASSESS_GRAPH_OFF, ASSESS_RUNS_DIR, EMBEDDING_MODEL, REPORT_MODEL
 from ..evidence_api import EvidenceView
 from ..neo4j_client import ReadOnlyNeo4j
 from ..runs_store import new_run_id, now_iso, save_run
 from ..usage import message_usage
+from .candidates import retrieval_settings, retrieve_candidates
 from .evidence import lookup_evidence, mentioned_countries
 from .profiles import build_profiles, match_products
 from .prompts import (
     CANDIDATE_EXAMPLE, CANDIDATE_RETRY, INSUFFICIENT, AssessmentReport, CandidateQuery, candidate_prompt, report_prompt,
 )
 from .report import check_citations, fixed_insufficient_report, has_support, report_inputs
+from .retrieve import Embedder
 
 MAX_ITEMS = 20
 MAX_ATTEMPTS = 2
@@ -179,10 +184,14 @@ async def assess(
     cypher_model: str = ASK_CYPHER_MODEL,
     report_model: str = REPORT_MODEL,
     graph_off: bool = ASSESS_GRAPH_OFF,
+    embedder: Embedder | None = None,
 ) -> AsyncIterator[Event]:
-    """`graph_off=True` is the D11 no-graph baseline: no Cypher LLM, no graph profiles or
-    matches. Countries come only from the request text, and the risk LLM sees only
-    country-level engine evidence (the R4 path)."""
+    """`graph_off=True` is the D11 no-graph baseline: no Cypher LLM, no vector search, no
+    graph profiles or matches. Countries come only from the request text, and the risk
+    LLM sees only country-level engine evidence (the R4 path).
+
+    In parts mode the Cypher LLM is not called (R26): `cypher_llm` is unused and the
+    run records no Cypher model. `embedder` replaces the OpenAI embedding model (tests)."""
     items = [{**it, "n": i} for i, it in enumerate(items[:MAX_ITEMS], start=1)]
     goal = (goal or "").strip() or (None if mode == "describe" else DEFAULT_GOAL)
     run: dict[str, Any] = {
@@ -194,12 +203,18 @@ async def assess(
         "as_of_date": as_of.isoformat(),
         "date_mode": date_mode,
         "rerun_of": rerun_of,
-        "models": {"cypher": cypher_model, "report": report_model},
+        "models": {
+            "cypher": cypher_model if mode == "describe" else None,
+            "report": report_model,
+            "embedding": EMBEDDING_MODEL if mode == "parts" and not graph_off else None,
+        },
         "graph_off": graph_off,
+        "retrieval": {"method": "none"} if graph_off else (retrieval_settings() if mode == "parts" else {"method": "cypher_llm"}),
         "started_at": now_iso(),
         "finished_at": None,
         "status": "running",
         "attempts": [],
+        "retrieval_trace": None,
         "candidates": None,
         "profiles": None,
         "evidence": None,
@@ -209,7 +224,7 @@ async def assess(
         "error": None,
         "failed_step": None,
     }
-    header_keys = ("run_id", "kind", "mode", "items", "goal", "as_of_date", "date_mode", "rerun_of", "models", "graph_off", "started_at")
+    header_keys = ("run_id", "kind", "mode", "items", "goal", "as_of_date", "date_mode", "rerun_of", "models", "graph_off", "retrieval", "started_at")
     yield {"event": "run", "run": {k: run[k] for k in header_keys}}
 
     usage: dict[str, Any] = {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0, "reasoning_tokens": 0, "by_model": {}}
@@ -220,9 +235,20 @@ async def assess(
 
     try:
         # ---------------------------------------------------------------- 1. find candidates
+        retrieved_rows: list[dict[str, Any]] = []
+        if mode == "parts" and not graph_off:
+            # R26: no Cypher LLM; catalogue product ids or vector search, then a fixed query.
+            step = "retrieve_candidates"
+            yield {"event": "step", "step": step, "attempt": None, "status": "running", "data": {}}
+            trace = await asyncio.to_thread(retrieve_candidates, client, items, as_of, embedder=embedder)
+            run["retrieval_trace"] = trace
+            retrieved_rows = trace["supplier_query"]["rows"]
+            yield {"event": "step", "step": step, "attempt": None, "status": "done", "data": trace}
+
         previous: dict[str, Any] | None = None
         final: dict[str, Any] | None = None
-        for n in range(1, (0 if graph_off else MAX_ATTEMPTS) + 1):
+        llm_attempts = MAX_ATTEMPTS if mode == "describe" and not graph_off else 0
+        for n in range(1, llm_attempts + 1):
             attempt: dict[str, Any] = {"attempt": n, "generate": None, "check": None, "run": None, "problem": None}
             run["attempts"].append(attempt)
 
@@ -258,7 +284,7 @@ async def assess(
 
         # The labelled suggestions of the attempt that was used (or the last one).
         used_gen = (final or {}).get("generate") or (run["attempts"][-1]["generate"] if run["attempts"] else None) or {}
-        rows = (final or {}).get("result", {}).get("rows") or []
+        rows = (final or {}).get("result", {}).get("rows") or retrieved_rows
         cand = candidates_from_rows(rows, len(items))
 
         # ---------------------------------------------------------------- 2. build profiles

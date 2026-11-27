@@ -508,9 +508,9 @@ The OpenAI account gets 250,000 free tokens a day, so the app warns before that 
 - Existing engine tests still pass:
   `python -m unittest discover -s supplier_risk_engine/tests -t .`
 
-## Deferred: embedding-based product matching (recorded 2026-11-25, not started)
+## Embedding-based product matching (recorded 2026-11-25, built 2026-11-27)
 
-**Status:** brought forward on 2026-11-25 for parts-list mode, before the evaluation runs (agreed design: option (i) in the private evaluation plan, §2.14). Describe mode keeps the Cypher LLM. Top 3 products per typed item above a calibrated minimum score; catalogue items match their own `product_id`. Calibrate with `evaluation/calibrate_embedding_threshold.py`. The questions below are answered there.
+**Status:** built on 2026-11-27 in `webapp/backend/pipeline/candidates.py` (minimum score 0.69, fixed in `config.py`). Brought forward on 2026-11-25 for parts-list mode, before the evaluation runs (agreed design: option (i) in the private evaluation plan, §2.14). Describe mode keeps the Cypher LLM. Top 3 products per typed item above a calibrated minimum score; catalogue items match their own `product_id`. Calibrate with `evaluation/calibrate_embedding_threshold.py`. The questions below are answered there.
 
 **Idea (the original plan):** when a user types a product, picks one, or describes a product
 in free text, the graph should find similar products through embeddings, not only through
