@@ -101,17 +101,19 @@ The evaluation scores the app's saved outputs; it does not re-run the app. The p
 | `evaluation/check_gold_set.py` | Runs every reference query against the graph and reports failures |
 | `evaluation/calibrate_embedding_threshold.py` | Produces the calibration scores |
 | `evaluation/run_batch.py` | Runs a set of evaluation inputs through the app for one model arm and writes `runs/evaluation/` with a manifest |
+| `evaluation/make_labelling_sheets.py` | Builds one blind labelling round from the finished runs: rater sheets, one readable output per run, and the key that maps blind ids back to runs |
 
 ```bash
 .venv/bin/python -m evaluation.check_gold_set
 .venv/bin/python -m evaluation.calibrate_embedding_threshold
 .venv/bin/python -m evaluation.run_batch --arm M1 --set main --dry-run   # list what would run
 .venv/bin/python -m evaluation.run_batch --arm M1 --set main --limit 5
+.venv/bin/python -m evaluation.make_labelling_sheets --sets main --author AA --classmate BB   # after all main runs
 ```
 
-Arms: `M1` is OpenAI gpt-5.2, `M2` DeepSeek `deepseek-flash` with thinking mode off (needs `DEEPSEEK_API_KEY`), `M3` claude-sonnet-5-5 (needs `ANTHROPIC_API_KEY`). Every arm uses the OpenAI embedding model for parts-list candidates, so every Risk Assessment run also needs `OPENAI_API_KEY`. Sets: `main`, `out_of_scope`, `stability`, `graph_off` (M1 only) and `ask_gold`. A run already in the manifest is never repeated; a run that failed because the service could not be used stops the batch and runs again next time. The runner refuses uncommitted changes unless `--allow-dirty`.
+Arms: `M1` is OpenAI gpt-5.2, `M2` DeepSeek `deepseek-flash` with thinking mode off (needs `DEEPSEEK_API_KEY`), `M3` claude-sonnet-5-5 with thinking off and JSON-schema structured output (needs `ANTHROPIC_API_KEY`). Every arm uses the OpenAI embedding model for parts-list candidates, so every Risk Assessment run also needs `OPENAI_API_KEY`. Sets: `main`, `out_of_scope`, `stability`, `graph_off` (M1 only) and `ask_gold`. A run already in the manifest is never repeated; a run that failed because the service could not be used stops the batch and runs again next time. The runner refuses uncommitted changes unless `--allow-dirty`.
 
-**Status (27 Nov 2026):** the evaluation design and inputs are fixed. Embedding-based candidate retrieval for Risk Assessment's parts list is built (top 3 products per typed item, minimum score 0.69). The batch runner is built. Still to build: the labelling-sheet generator, and the notebook (`jupyter_notebooks/evaluation.ipynb`).
+**Status (27 Nov 2026):** the evaluation design and inputs are fixed. Embedding-based candidate retrieval for Risk Assessment's parts list is built (top 3 products per typed item, minimum score 0.69). The batch runner and the labelling-sheet generator are built. Still to build: the notebook (`jupyter_notebooks/evaluation.ipynb`).
 
 ## Tests
 

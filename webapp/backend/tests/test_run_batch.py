@@ -88,6 +88,27 @@ class ModelSettingsTests(unittest.TestCase):
         self.assertEqual((kw["max_tokens"], kw["timeout"], kw["max_retries"]), (16_000, 300, LLM_MAX_RETRIES))
         self.assertNotIn("extra_body", model_kwargs("openai", max_tokens=1, timeout=1))
 
+    def test_claude_has_thinking_off_and_json_schema(self):
+        import os
+        from unittest import mock
+
+        from webapp.backend.llm_factory import structured, structured_method
+        from webapp.backend.pipeline.llm import make_report_llm
+        from webapp.backend.pipeline.prompts import AssessmentReport
+
+        kw = model_kwargs("anthropic", max_tokens=16_000, timeout=300)
+        self.assertEqual(kw["thinking"], {"type": "between_tools"})
+        self.assertNotIn("thinking", model_kwargs("openai", max_tokens=1, timeout=1))
+        with mock.patch.dict(os.environ, {"ANTHROPIC_API_KEY": "test-key-not-used"}):
+            c = make_report_llm("claude-sonnet-5-5", "anthropic")
+        self.assertEqual((c.thinking, c.max_tokens), ({"type": "between_tools"}, 16_000))
+        self.assertEqual(structured_method(c), "json_schema")
+        bound = structured(c, AssessmentReport)  # no forced tool choice: Anthropic structured outputs
+        self.assertNotIn("tool_choice", repr(bound))
+        self.assertIn("output_config", repr(bound))
+        # Other providers keep LangChain's default, called exactly as before.
+        self.assertIsNone(structured_method(make_report_llm("gpt-5.2", "openai")))
+
     def test_ollama_gets_its_own_names(self):
         kw = model_kwargs("ollama", max_tokens=16_000, timeout=300, stream_usage=True)
         self.assertEqual(kw, {"num_predict": 16_000, "num_ctx": OLLAMA_NUM_CTX, "client_kwargs": {"timeout": 300}})

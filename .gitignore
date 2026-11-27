@@ -4,3 +4,8 @@ __pycache__/
 
 # Assessment and Ask the Graph runs: kept local until curated for the research
 runs/
+
+# Labelling keys (blind id -> run, model, graph setting): commit only after both raters
+# finish labelling (EVALUATION_PLAN §2.9). Remove these lines then.
+evaluation/labelling/*/blind_map.csv
+evaluation/labelling/*/units_map.csv

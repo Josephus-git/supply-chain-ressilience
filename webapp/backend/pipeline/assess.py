@@ -37,6 +37,7 @@ from supplier_risk_engine.loader import LoadedDatabase
 from ..ask.pipeline import check_cypher, run_query, schema_text
 from ..config import ASK_CYPHER_MODEL, ASSESS_GRAPH_OFF, ASSESS_RUNS_DIR, EMBEDDING_MODEL, REPORT_MODEL
 from ..evidence_api import EvidenceView
+from ..llm_factory import structured
 from ..neo4j_client import ReadOnlyNeo4j
 from ..runs_store import new_run_id, now_iso, save_run
 from ..usage import message_usage
@@ -95,7 +96,7 @@ async def generate_candidates(
     values = {"request": request, "example": CANDIDATE_EXAMPLE, "schema": schema_text(), "feedback": feedback}
     prompt_text = candidate_prompt.format(**values)
     started = time.perf_counter()
-    out = await (candidate_prompt | llm.with_structured_output(CandidateQuery, include_raw=True)).ainvoke(values)
+    out = await (candidate_prompt | structured(llm, CandidateQuery)).ainvoke(values)
     message_usage(usage, out.get("raw"))
     parsed: CandidateQuery | None = out.get("parsed")
     return {
@@ -359,7 +360,7 @@ async def assess(
             yield {"event": "step", "step": step, "attempt": None, "status": "running", "data": {"prompt": prompt_text}}
             started = time.perf_counter()
             calls += 1
-            out = await (report_prompt | report_llm.with_structured_output(AssessmentReport, include_raw=True)).ainvoke(values)
+            out = await (report_prompt | structured(report_llm, AssessmentReport)).ainvoke(values)
             message_usage(usage, out.get("raw"))
             parsed = _dump_model(out.get("parsed"))
             run["report"] = {

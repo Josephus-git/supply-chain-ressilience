@@ -15,7 +15,7 @@ Sets (inputs are fixed files in evaluation/):
 Arms (§2.11; METHODOLOGY_NOTES M1-M3). The same model plays both LLM roles:
     M1  openai     gpt-5.2
     M2  deepseek   deepseek-flash (DeepSeek-V4.1-Flash), open weights, through DeepSeek's API; thinking mode off
-    M3  anthropic  claude-sonnet-5-5
+    M3  anthropic  claude-sonnet-5-5, thinking off; structured output by JSON schema
 Parts-list candidates always use the OpenAI embedding model (R26), whatever the arm.
 
 Output: runs/evaluation/assess/, runs/evaluation/ask/ and runs/evaluation/manifest.csv.
@@ -57,7 +57,7 @@ from webapp.backend.config import (
     CANDIDATE_MIN_SCORE, CANDIDATE_TOP_K, CYPHER_MAX_TOKENS, CYPHER_TIMEOUT_S, EMBEDDING_MODEL,
     LLM_MAX_RETRIES, REPO_ROOT, REPORT_MAX_TOKENS, REPORT_TIMEOUT_S, RUNS_DIR,
 )
-from webapp.backend.llm_factory import model_kwargs
+from webapp.backend.llm_factory import model_kwargs, structured_method
 from webapp.backend.runs_store import now_iso, save_run
 
 EVAL_DIR = Path(__file__).resolve().parent
@@ -229,7 +229,8 @@ def eval_block(
     job: Job, arm: Arm, *, commit: str, dirty: bool, input_file: Path, input_sha: str,
     cypher_llm: Any, report_llm: Any, served: list[str],
 ) -> dict[str, Any]:
-    extra = model_kwargs(arm.provider, max_tokens=0, timeout=0).get("extra_body")
+    kw = model_kwargs(arm.provider, max_tokens=0, timeout=0)
+    extra = {k: kw[k] for k in ("extra_body", "thinking") if k in kw} or None
     block: dict[str, Any] = {
         "set": job.set,
         "query_id": job.query_id,
@@ -241,7 +242,8 @@ def eval_block(
         "provider": arm.provider,
         "model_requested": arm.model,
         "models_served": served,  # model names the provider reported in its replies
-        "request_extra": extra,  # sent with every request, e.g. DeepSeek's thinking switch
+        "request_extra": extra,  # sent with every request: DeepSeek's and Claude's thinking switch
+        "structured_output": structured_method(report_llm if job.kind == "assess" else cypher_llm) or "langchain default",
         "temperature": {
             "cypher": _temperature(cypher_llm),
             "report": _temperature(report_llm) if job.kind == "assess" else None,
