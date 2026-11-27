@@ -33,7 +33,7 @@ load_dotenv(REPO_ROOT / ".env")
 # Ask the Graph has its own Cypher-writing model; Risk Assessment will use REPORT_MODEL.
 ASK_CYPHER_MODEL = os.getenv("ASK_CYPHER_MODEL") or CHAT_MODEL
 REPORT_MODEL = os.getenv("REPORT_MODEL") or CHAT_MODEL
-# LangChain provider for each model (e.g. "openai", "anthropic", "ollama"). Changing a
+# LangChain provider for each model (e.g. "openai", "anthropic", "deepseek", "ollama"). Changing a
 # model's provider is a methodology change: see METHODOLOGY_NOTES.md (M1-M3).
 ASK_CYPHER_PROVIDER = os.getenv("ASK_CYPHER_PROVIDER") or "openai"
 REPORT_PROVIDER = os.getenv("REPORT_PROVIDER") or "openai"
@@ -64,6 +64,10 @@ CYPHER_TIMEOUT_S = _float_env("CYPHER_TIMEOUT_S", 120)
 REPORT_MAX_TOKENS = _int_env("REPORT_MAX_TOKENS", 16_000)
 REPORT_TIMEOUT_S = _float_env("REPORT_TIMEOUT_S", 300)
 LLM_MAX_RETRIES = 1
+# Ollama context window in tokens (only used when a provider is "ollama"). Ollama's default
+# is smaller than a risk-LLM prompt plus its output, and it drops the start of a prompt
+# that does not fit, so it is set explicitly.
+OLLAMA_NUM_CTX = _int_env("OLLAMA_NUM_CTX", 16_384)
 # The OpenAI free-token allowance per day, and the share at which the app warns.
 DAILY_FREE_TOKENS = _int_env("DAILY_FREE_TOKENS", 250_000)
 TOKEN_WARN_FRACTION = _float_env("TOKEN_WARN_FRACTION", 0.8)

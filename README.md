@@ -58,7 +58,7 @@ cd webapp/frontend && npm install
 |---|---|
 | `NEO4J_URI`, `NEO4J_USERNAME`, `NEO4J_PASSWORD`, `NEO4J_DATABASE` | Everything that reads the graph |
 | `OPENAI_API_KEY` | LLM calls and embeddings |
-| `ASK_CYPHER_PROVIDER`, `ASK_CYPHER_MODEL`, `REPORT_PROVIDER`, `REPORT_MODEL` | Optional: change the model for the Cypher step or the risk LLM (providers `openai`, `ollama`, `anthropic`; default `openai` with `gpt-5.2`). `anthropic` also needs `ANTHROPIC_API_KEY`; `ollama` needs a local Ollama server |
+| `ASK_CYPHER_PROVIDER`, `ASK_CYPHER_MODEL`, `REPORT_PROVIDER`, `REPORT_MODEL` | Optional: change the model for the Cypher step or the risk LLM (providers `openai`, `deepseek`, `anthropic`, `ollama`; default `openai` with `gpt-5.2`). `deepseek` also needs `DEEPSEEK_API_KEY` and `anthropic` needs `ANTHROPIC_API_KEY`; `ollama` needs a local Ollama server (`OLLAMA_NUM_CTX` sets its context window, default 16384) |
 | `ASSESS_GRAPH_OFF=1` | Optional: no-graph baseline for the evaluation, where the risk LLM gets only country-level evidence. Default off |
 
 ## Running the app
@@ -100,13 +100,18 @@ The evaluation scores the app's saved outputs; it does not re-run the app. The p
 | `evaluation/embedding_calibration.csv` | Similarity scores used to set the minimum score for product matching |
 | `evaluation/check_gold_set.py` | Runs every reference query against the graph and reports failures |
 | `evaluation/calibrate_embedding_threshold.py` | Produces the calibration scores |
+| `evaluation/run_batch.py` | Runs a set of evaluation inputs through the app for one model arm and writes `runs/evaluation/` with a manifest |
 
 ```bash
 .venv/bin/python -m evaluation.check_gold_set
 .venv/bin/python -m evaluation.calibrate_embedding_threshold
+.venv/bin/python -m evaluation.run_batch --arm M1 --set main --dry-run   # list what would run
+.venv/bin/python -m evaluation.run_batch --arm M1 --set main --limit 5
 ```
 
-**Status (27 Nov 2026):** the evaluation design and inputs are fixed. Embedding-based candidate retrieval for Risk Assessment's parts list is built (top 3 products per typed item, minimum score 0.69). Still to build: a batch runner that writes `runs/evaluation/` with a manifest, the labelling-sheet generator, and the notebook (`jupyter_notebooks/evaluation.ipynb`).
+Arms: `M1` is OpenAI gpt-5.2, `M2` DeepSeek `deepseek-flash` with thinking mode off (needs `DEEPSEEK_API_KEY`), `M3` claude-sonnet-5-5 (needs `ANTHROPIC_API_KEY`). Every arm uses the OpenAI embedding model for parts-list candidates, so every Risk Assessment run also needs `OPENAI_API_KEY`. Sets: `main`, `out_of_scope`, `stability`, `graph_off` (M1 only) and `ask_gold`. A run already in the manifest is never repeated; a run that failed because the service could not be used stops the batch and runs again next time. The runner refuses uncommitted changes unless `--allow-dirty`.
+
+**Status (27 Nov 2026):** the evaluation design and inputs are fixed. Embedding-based candidate retrieval for Risk Assessment's parts list is built (top 3 products per typed item, minimum score 0.69). The batch runner is built. Still to build: the labelling-sheet generator, and the notebook (`jupyter_notebooks/evaluation.ipynb`).
 
 ## Tests
 

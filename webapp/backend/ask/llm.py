@@ -15,19 +15,17 @@ from __future__ import annotations
 
 from functools import lru_cache
 
-from langchain.chat_models import init_chat_model
 from langchain_core.language_models import BaseChatModel
 
-from ..config import ASK_CYPHER_MODEL, ASK_CYPHER_PROVIDER, CYPHER_MAX_TOKENS, CYPHER_TIMEOUT_S, LLM_MAX_RETRIES
+from ..config import ASK_CYPHER_MODEL, ASK_CYPHER_PROVIDER, CYPHER_MAX_TOKENS, CYPHER_TIMEOUT_S
+from ..llm_factory import build_chat_model
+
+
+def make_cypher_llm(model: str, provider: str) -> BaseChatModel:
+    """The Cypher LLM for any arm (the evaluation runner builds M1-M3 with this)."""
+    return build_chat_model(model, provider, max_tokens=CYPHER_MAX_TOKENS, timeout=CYPHER_TIMEOUT_S, stream_usage=True)
 
 
 @lru_cache(maxsize=1)
 def cypher_llm() -> BaseChatModel:
-    return init_chat_model(
-        ASK_CYPHER_MODEL,
-        model_provider=ASK_CYPHER_PROVIDER,
-        max_tokens=CYPHER_MAX_TOKENS,
-        timeout=CYPHER_TIMEOUT_S,
-        max_retries=LLM_MAX_RETRIES,
-        stream_usage=True,
-    )
+    return make_cypher_llm(ASK_CYPHER_MODEL, ASK_CYPHER_PROVIDER)

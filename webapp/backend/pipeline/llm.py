@@ -10,18 +10,17 @@ from __future__ import annotations
 
 from functools import lru_cache
 
-from langchain.chat_models import init_chat_model
 from langchain_core.language_models import BaseChatModel
 
-from ..config import LLM_MAX_RETRIES, REPORT_MAX_TOKENS, REPORT_MODEL, REPORT_PROVIDER, REPORT_TIMEOUT_S
+from ..config import REPORT_MAX_TOKENS, REPORT_MODEL, REPORT_PROVIDER, REPORT_TIMEOUT_S
+from ..llm_factory import build_chat_model
+
+
+def make_report_llm(model: str, provider: str) -> BaseChatModel:
+    """The risk LLM for any arm (the evaluation runner builds M1-M3 with this)."""
+    return build_chat_model(model, provider, max_tokens=REPORT_MAX_TOKENS, timeout=REPORT_TIMEOUT_S)
 
 
 @lru_cache(maxsize=1)
 def report_llm() -> BaseChatModel:
-    return init_chat_model(
-        REPORT_MODEL,
-        model_provider=REPORT_PROVIDER,
-        max_tokens=REPORT_MAX_TOKENS,
-        timeout=REPORT_TIMEOUT_S,
-        max_retries=LLM_MAX_RETRIES,
-    )
+    return make_report_llm(REPORT_MODEL, REPORT_PROVIDER)

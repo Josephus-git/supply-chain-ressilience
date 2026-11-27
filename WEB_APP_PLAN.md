@@ -531,7 +531,7 @@ the Cypher LLM's keyword matching (`toLower(...) CONTAINS ...`).
 - Where it plugs in: replace the Cypher LLM's candidate query, run alongside it and merge,
   or act only as a fallback when the Cypher query returns no rows.
 - A score threshold (`min_score`) and `top_k`, and how they are chosen.
-- The embedding model is OpenAI. In the M2 (Ollama) and M3 (Claude) arms, candidate
+- The embedding model is OpenAI. In the M2 (DeepSeek) and M3 (Claude) arms, candidate
   finding would still use an OpenAI embedding, which must be stated.
 
 **Effect on the evaluation**
